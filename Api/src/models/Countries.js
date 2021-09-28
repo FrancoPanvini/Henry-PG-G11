@@ -4,7 +4,7 @@ module.exports = sequelize => {
   class Countries extends Model {}
   Countries.init(
     {
-      name: { name: DataTypes.STRING, allowNull: false },
+      name: { type: DataTypes.STRING, allowNull: false },
     },
     { sequelize: sequelize, modelName: "Countries", timestamps: false }
   );
