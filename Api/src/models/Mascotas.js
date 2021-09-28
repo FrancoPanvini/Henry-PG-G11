@@ -1,42 +1,25 @@
-const { DataTypes } = require('sequelize');
-// Exportamos una funcion que define el modelo
-// Luego le injectamos la conexion a sequelize.
-module.exports = (sequelize) => {
-  // defino el modelo
-  sequelize.define('Mascotas', { 
-    name: {
-      type: DataTypes.STRING,
-      allowNull: false,
-    },
-    type: {
-      type: DataTypes.STRING,
-      allowNull: false,
-    },
-    sex: {
-      type: DataTypes.STRING,
-      allowNull: true,
-    },
-    age: {
-      type: DataTypes.STRING,
-      allowNull: true,
-    },
-    description: {
-      type: DataTypes.STRING,
-      allowNull: true,
-    },
-    //dudoso
-    photo: {
-      type: DataTypes.STRING,
-      allowNull: true,
-    },
-    location: {
-      type: DataTypes.STRING,
-      allowNull: false,
-    },
-    adopted: {
-      type: DataTypes.BOOLEAN,
-      allowNull: false,
-    },
+const { Model, DataTypes } = require('sequelize');
 
+
+module.exports = sequelize => {
+  class Pets extends Model {}
+  Pets.init(
+    {
+      name: { type: DataTypes.STRING, allowNull: false },
+      sex: { type: DataTypes.STRING, allowNull: true },
+      age: { type: DataTypes.STRING, allowNull: true },
+      size: { type: DataTypes.STRING, allowNull: true },
+      description: { type: DataTypes.STRING, allowNull: true },
+      adopted: { type: DataTypes.BOOLEAN, allowNull: false },
+    },
+    { sequelize: sequelize, modelName: "Pets", timestamps: true, paranoid: true }
+  )
+
+  Pets.beforeCreate(function (event) {
+    event.name = event.name.toLowerCase();
+    event.age = event.age.toLowerCase();
+    event.description = event.description.toLowerCase();
+    return event;
   });
-};
+  }
+
