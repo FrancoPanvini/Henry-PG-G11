@@ -8,8 +8,8 @@ const server = express();
 
 server.name = "API";
 
-app.use(express.urlencoded({ extended: false, limit: "50mb" }));
-app.use(express.json({ limit: "50mb" }));
+server.use(express.urlencoded({ extended: false, limit: "50mb" }));
+server.use(express.json({ limit: "50mb" }));
 
 server.use(morgan("dev"));
 
