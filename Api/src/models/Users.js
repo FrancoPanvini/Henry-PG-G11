@@ -1,8 +1,8 @@
-const { DataTypes } = require("sequelize");
+const { Model , DataTypes } = require("sequelize");
 
 module.exports = (sequelize) => {
-    // defino el modelo
-    sequelize.define('User', {
+    class User extends Model {}
+   User.init({
         id: {
             type: DataTypes.INTEGER,
             primaryKey: true,
@@ -29,12 +29,17 @@ module.exports = (sequelize) => {
         },
 
         phone: {
-            type: DataTypes.INTEGER,
+            type: DataTypes.STRING,
+            allowNull: false
+        },
+
+        direction: {
+            type: DataTypes.STRING,
             allowNull: false
         },
 
         location: {
-            type: DataTypes.TEXT,
+            type: DataTypes.INTEGER,
             allowNull: false
         },
 
@@ -70,5 +75,6 @@ module.exports = (sequelize) => {
         link_donaciones: {
             type: DataTypes.STRING
         },
-    })
+    },
+    {sequelize: sequelize, paranoid:true})
 }
