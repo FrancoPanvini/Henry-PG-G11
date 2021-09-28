@@ -5,10 +5,10 @@ const fs = require("fs");
 const path = require("path");
 
 const sequelize = new Sequelize(`postgres://${DB_USER}:${DB_PASSWORD}@${DB_HOST}/Pets`, {
-  logging: console.log, // set to console.log to see the raw SQL queries
+  logging: false, // set to console.log to see the raw SQL queries
   native: false, // lets Sequelize know we can use pg-native for ~30% more speed
   define: {
-    freezeTableName: true, //? Fijo el nombre de las tablas sin plurales
+    freezeTableName: true,
   },
 });
 
@@ -26,13 +26,45 @@ fs.readdirSync(path.join(__dirname, "/models"))
 // Injectamos la conexion (sequelize) a todos los modelos
 modelDefiners.forEach(model => model(sequelize));
 
-
 // En sequelize.models están todos los modelos importados como propiedades
-// Para relacionarlos hacemos un destructuring
-// const { Modelos } = sequelize.models;
+const { Pets, Users, Events, Adoptions, Cities, Provinces, Countries, PetsType, UsersType, PetsPics } = sequelize.models;
 
-// Aca vendrian las relaciones
+//Relaciones
+Pets.belongsTo(PetsType);
+PetsType.hasMany(Pets);
 
+PetsPics.belongsTo(Pets);
+Pets.hasMany(PetsPics);
+
+Users.belongsTo(UsersType);
+UsersType.hasMany(Users);
+
+Provinces.belongsTo(Countries);
+Countries.hasMany(Provinces);
+
+Cities.belongsTo(Provinces);
+Provinces.hasMany(Cities);
+
+Pets.belongsTo(Cities);
+Cities.hasMany(Pets);
+
+Users.belongsTo(Cities);
+Cities.hasMany(Users);
+
+Events.belongsTo(Cities);
+Cities.hasMany(Events);
+
+Events.belongsTo(Users);
+Users.hasMany(Events);
+
+Pets.belongsTo(Users, { foreignKey: "Adopterid" });
+Users.hasMany(Pets, { foreignKey: "Adopterid" });
+
+Pets.belongsTo(Users, { foreignKey: "Ownerid" });
+Users.hasMany(Pets, { foreignKey: "Ownerid" });
+
+Pets.belongsToMany(Users, { through: Adoptions });
+Users.belongsToMany(Pets, { through: Adoptions });
 
 module.exports = {
   ...sequelize.models, // para poder importar los modelos así: const { Product, User } = require('./db.js');
