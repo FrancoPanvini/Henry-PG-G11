@@ -9,7 +9,7 @@ module.exports = sequelize => {
       sex: { type: DataTypes.STRING, allowNull: true, validate: { isIn: ["m", "h"] } },
       age: { type: DataTypes.INTEGER, allowNull: true },
       description: { type: DataTypes.TEXT, allowNull: true },
-      adopted: { type: DataTypes.BOOLEAN, allowNull: false },
+      adopted: { type: DataTypes.BOOLEAN, allowNull: false, defaultValue: false },
     },
     { sequelize: sequelize, modelName: "Pets", timestamps: true, paranoid: true }
   );

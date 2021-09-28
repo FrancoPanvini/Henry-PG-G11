@@ -57,10 +57,10 @@ Cities.hasMany(Events);
 Events.belongsTo(Users);
 Users.hasMany(Events);
 
-Pets.belongsTo(Users, { foreignKey: "Adopterid" });
+Pets.belongsTo(Users, { as: "Adopter", foreignKey: "Adopterid" });
 Users.hasMany(Pets, { foreignKey: "Adopterid" });
 
-Pets.belongsTo(Users, { foreignKey: "Ownerid" });
+Pets.belongsTo(Users, { as: "Owner", foreignKey: "Ownerid" });
 Users.hasMany(Pets, { foreignKey: "Ownerid" });
 
 Pets.belongsToMany(Users, { through: Adoptions });
