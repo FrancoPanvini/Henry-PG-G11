@@ -14,8 +14,9 @@ module.exports = sequelize => {
     { sequelize: sequelize, modelName: "Pets", timestamps: true, paranoid: true }
   );
 
-  Pets.beforeCreate(function (event) {
-    event.name = event.name.toLowerCase();
-    return event;
+  Pets.beforeCreate(function (pet) {
+    pet.name = pet.name.toLowerCase();
+    pet.description = pet.description.toLowerCase();
+    return pet;
   });
 };

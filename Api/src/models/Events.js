@@ -16,6 +16,7 @@ module.exports = sequelize => {
   Events.beforeCreate(function (event) {
     event.name = event.name.toLowerCase();
     event.direction = event.direction.toLowerCase();
+    event.description = event.description.toLowerCase();
     return event;
   });
 };

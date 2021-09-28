@@ -25,6 +25,7 @@ module.exports = sequelize => {
     user.mail = user.mail.toLowerCase();
     user.direction = user.direction.toLowerCase();
     user.responsable = user.responsable.toLowerCase();
+    user.description = user.description.toLowerCase();
     return user;
   });
 };
