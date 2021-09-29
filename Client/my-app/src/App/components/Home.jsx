@@ -7,8 +7,12 @@ function Home() {
     return (
         <div>
             <Onboarding/>
-            <ContenedorCard title='ADOPCION' className=""/>
-            <ContenedorCard title='EXTRAVIADOS' className='bg-secondary'/>
+            <br />
+            <ContenedorCard title='ADOPCION'/>
+            <br />
+            <ContenedorCard title='EXTRAVIADOS'/>
+            <br />
+
             <ContenedorCard title='REFUGIOS'/>
         </div>
     )
