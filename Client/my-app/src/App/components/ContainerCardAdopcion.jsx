@@ -2,12 +2,12 @@ import React from "react";
 import Card from "./Card";
 //import './Card.module.css'
 
-function ContenedorCard({className}) {
+function ContenedorCard({className , title}) {
   return (
     <div className={`justify-center ${className} p-32 h-full text-left`}>
        
        <div className='mb-20 bg-gradient-to-r from-thirty to-fourty items-center text-white'>
-          <h1 className='text-white text-6xl font-bold grid justify-items-center'>DISPONIBLES PARA ADOPCION</h1> 
+          <h1 className='text-white text-6xl font-bold grid justify-items-center'>{title}</h1> 
        </div>
        
        <div>FILTROS</div>

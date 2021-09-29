@@ -15,12 +15,12 @@ function Card({ photo }) {
       <ReactCardFlip isFlipped={isFlipped} flipDirection="horizontal">
         <div className="card">
           <img src={photo} alt="" className="w-full" onClick={handleClick}/>
-          <h3 className='grid justify-items-center font-bold text-white bg-primary'>Nombre Mascota</h3>
+          <h3 className='grid justify-items-center font-bold text-white bg-primary p-8'>Nombre Mascota</h3>
         </div>
 
         <div>
           <div className="card px-6 py-4 h-full w-full bg-secondary" onClick={handleClick}>
-            <div className="font-bold text-xl mb-2">Nombre Mascota</div>
+            <div className="font-bold text-xl p-12s">Nombre Mascota</div>
             <p className="text-gray-700 text-xs">
               Lorem ipsum dolor sit amet, consectetur adipisicing elit.
               Voluptatibus quia, nulla! Maiores et perferendis eaque,

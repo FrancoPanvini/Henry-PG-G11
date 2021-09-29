@@ -4,8 +4,8 @@ import ContainerCardAdopcion from './ContainerCardAdopcion'
 
 function Adopciones() {
     return (
-        <div className=''>
-            <ContainerCardAdopcion/>
+        <div className='bg-secondary'>
+            <ContainerCardAdopcion title="Adopciones"/>
         </div>
     )
 }
