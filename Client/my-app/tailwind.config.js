@@ -18,13 +18,32 @@ module.exports = {
       '2xl': '1536px',
       // => @media (min-width: 1536px) { ... }
     },
+    height: { 
+      screen80: "60vh",
+    },
     extend: {
       colors: {
 
-        primary: '#E08F62',
-        secondary: '#FFCFBB',
-        tercero: '#CF410B',
-        background: '#DED7B1',
+        primary: '#316B83',
+        secondary: '#F3EAC2',
+        thirty: '#F5B461',
+        fourty: '#EC524B',
+        // pallete1a: '#9AD3BC',
+        // pallete1b: '#F3EAC2',
+        // pallete1c: '#F5B461',
+        // pallete1d: '#EC524B',
+        // pallete4a: '#297F87',
+        // pallete4b: '#FFF7AE',
+        // pallete4c: '#F6D167',
+        // pallete4d: '#DF2E2E',
+        // pallete2a: '#316B83',
+        // pallete2b: '#6D8299',
+        // pallete2c: '#8CA1A5',
+        // pallete2d: '#D5BFBF',
+        // pallete3a: '#FAF1E6',
+        // pallete3b: '#FFC074',
+        // pallete3c: '#B6C867',
+        // pallete3d: '#01937C',
       },
       backgroundImage: {
         'cachorroWeb': "url('https://images.unsplash.com/photo-1560807707-8cc77767d783?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=435&q=80')",
