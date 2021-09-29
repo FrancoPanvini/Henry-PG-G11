@@ -29,7 +29,6 @@ function App() {
         <Route path="/perfil" exact component={Perfil}/>
         <Route path="/nosotros" exact component={Nosotros}/>
         <Route path="/faq" exact component={FAQ}/>
-
       </Switch>
       <Footer/>
     </Router>

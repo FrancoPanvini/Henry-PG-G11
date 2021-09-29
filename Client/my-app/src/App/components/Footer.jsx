@@ -4,9 +4,9 @@ import { NavLink } from 'react-router-dom'
 
 function Footer() {
     return (
-      <div className="flex justify-between px-4 bg-gradient-to-r from-thirty to-fourty items-center text-white border-t border-white">
+      <div className="flex justify-between px-4 bg-thirty text-white items-center">
             <NavLink to="/" className="text-xl flex items-center">AD<FaPaw/>GTAME</NavLink>
-            <p className="text-left w-4/5 ml-4">© 2021 Adogtame — Todos los derechos reservados.</p>
+            <p className="text-left w-4/5 ml-4">© 2021 Adogtame — Todos los derechos reservados</p>
           <div className="flex  text-center items-center ">
             <NavLink to="/nosotros" className="p-4 text-center focus:text-tercero hover:text-tercero">NOSOTROS</NavLink>
             <NavLink to="/faq" className="p-4  text-center focus:text-tercero hover:text-tercero">FAQ</NavLink>  
