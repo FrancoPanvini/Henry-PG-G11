@@ -20,6 +20,10 @@ module.exports = {
     },
     extend: {
       colors: {
+
+        primary: '#E08F62',
+        secondary: '#FFCFBB',
+        tercero: '#CF410B',
         background: '#DED7B1',
       },
       backgroundImage: {
@@ -34,6 +38,7 @@ module.exports = {
   },
   variants: {
     extend: {
+     
     },
   },
   plugins: [],
