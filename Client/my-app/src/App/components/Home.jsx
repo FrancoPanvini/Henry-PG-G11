@@ -12,6 +12,7 @@ function Home() {
             <br />
             <ContenedorCard title='EXTRAVIADOS'/>
             <br />
+
             <ContenedorCard title='REFUGIOS'/>
         </div>
     )

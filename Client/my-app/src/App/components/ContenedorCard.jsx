@@ -2,9 +2,9 @@ import React from "react";
 import Card from "./Card";
 //import './Card.module.css'
 
-function ContenedorCard({title}) {
+function ContenedorCard({title, className}) {
   return (
-    <div className="justify-center">
+    <div className={`justify-center ${className} p-2`}>
       <div className='grid justify-items-center'>
         <h1>{title}</h1>
       </div>
