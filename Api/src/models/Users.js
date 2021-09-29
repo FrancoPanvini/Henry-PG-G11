@@ -26,6 +26,8 @@ module.exports = sequelize => {
     user.direction = user.direction.toLowerCase();
     if(user.responsable){
       user.responsable = user.responsable.toLowerCase();
+    }
+    if(user.description){
       user.description = user.description.toLowerCase();
     }
     return user;
