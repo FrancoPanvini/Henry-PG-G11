@@ -11,7 +11,7 @@ function Card({ photo }) {
   };
 
   return (
-    <div >
+    <div className='w-60 '>
       <ReactCardFlip isFlipped={isFlipped} flipDirection="horizontal">
         <div className="card">
           <img src={photo} alt="" className="w-full" onClick={handleClick}/>

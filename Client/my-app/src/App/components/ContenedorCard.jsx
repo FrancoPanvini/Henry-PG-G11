@@ -9,14 +9,17 @@ function ContenedorCard({title, className}) {
         <h1>{title}</h1>
       </div>
 
-      <div className="my-3 flex flex-wrap mx-2">
-        <div className="w-full sm:w-1/2 md:w-1/3 px-2 my-2">
+      <div className="my-3 flex flex-wrap items-center mx-2">
+        <div className="w-full sm:w-1/2 md:w-1/4 px-2 my-2 grid justify-items-center">
           <Card photo="https://picsum.photos/id/237/300/200" />
         </div>
-        <div className="w-full sm:w-1/2 md:w-1/3 px-2 my-2">
+        <div className="w-full sm:w-1/2 md:w-1/4 px-2 my-2 grid justify-items-center">
           <Card photo="https://picsum.photos/id/237/300/200" />
         </div>
-        <div className="w-full sm:w-1/2 md:w-1/3 px-2 my-2">
+        <div className="w-full sm:w-1/2 md:w-1/4 px-2 my-2 grid justify-items-center">
+          <Card photo="https://picsum.photos/id/237/300/200" />
+        </div>
+        <div className="w-full sm:w-1/2 md:w-1/4 px-2 my-2 grid justify-items-center">
           <Card photo="https://picsum.photos/id/237/300/200" />
         </div>
       </div>
