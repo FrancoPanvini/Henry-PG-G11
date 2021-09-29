@@ -5,7 +5,7 @@ function Card({photo}) {
   //var photo = "https://www.hola.com/imagenes/estar-bien/20201105178590/perro-maltipoo-raza-pequena/0-937-760/maltipoo-perro-t.jpg";
 
   return (
-    <div className="card">
+    <div className="card bg-white ">
       <img src={photo} alt="" className="w-full" />
       <div className="px-6 py-4">
         <div className="font-bold text-xl mb-2">Nombre Mascota</div>
@@ -15,7 +15,7 @@ function Card({photo}) {
           nihil.
         </p>
       </div>
-      <div className="px-6 py-4 bg-red-400">
+      <div className="px-6 py-4 bg-primary">
         <span className="inline-block bg-gray-200 rounded-full px-1 py-1 text-xs font-semibold text-gray-700 mr-2">
           Buenos Aires
         </span>
