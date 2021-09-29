@@ -6,8 +6,8 @@ function ContenedorCard({className}) {
   return (
     <div className={`justify-center ${className} p-32 h-full text-left`}>
        
-       <div className='mb-20'>
-          <h1 className='text-primary text-6xl font-bold grid justify-items-center'>DISPONIBLES PARA ADOPCION</h1> 
+       <div className='mb-20 bg-gradient-to-r from-thirty to-fourty items-center text-white'>
+          <h1 className='text-white text-6xl font-bold grid justify-items-center'>DISPONIBLES PARA ADOPCION</h1> 
        </div>
        
        <div>FILTROS</div>
