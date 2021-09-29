@@ -4,9 +4,9 @@ import Card from "./Card";
 
 function ContenedorCard({title, className}) {
   return (
-    <div className={`justify-center ${className} p-2`}>
-      <div className='grid justify-items-center'>
-        <h1>{title}</h1>
+    <div className={`justify-center ${className} p-32 h-full text-left`}>
+        <h1 className="ml-4 text-xl font-bold">{title}</h1>
+      <div className='grid justify-items-center '>
       </div>
 
       <div className="my-3 flex flex-wrap items-center mx-2">

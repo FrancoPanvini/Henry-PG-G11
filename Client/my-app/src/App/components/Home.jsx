@@ -1,19 +1,17 @@
 import React from 'react'
 import ContenedorCard from './ContenedorCard'
 import Onboarding from './Onboarding'
+import Things from './Things'
 //import './Card.module.css'
 
 function Home() {
     return (
-        <div>
+        <div className="">
             <Onboarding/>
-            <br />
-            <ContenedorCard title='ADOPCION'/>
-            <br />
-            <ContenedorCard title='EXTRAVIADOS'/>
-            <br />
-
-            <ContenedorCard title='REFUGIOS'/>
+            <Things/>
+            <ContenedorCard title='ADOPCION' className="bg-gradient-to-r from-thirty to-fourty path text-white"/>
+            <ContenedorCard title='EXTRAVIADOS' className="path"/>
+            <ContenedorCard title='REFUGIOS' className="bg-gradient-to-r from-thirty to-fourty path2 text-white"/>
         </div>
     )
 }
