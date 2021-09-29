@@ -1,12 +1,7 @@
 const { Users, Events, Cities} = require("../../../../db")
 
 const getEvents = async (req, res) => {
-    const { id } = req.params
-    if(id){
-        console.log(id)
-       let eventid = await Events.findByPk(id)
-       res.status(200).json(eventid)
-    }
+    
     const query = {
         where:{},
         attributes: ["id", "name","description", "initDate", "endDate", "direction"],
