@@ -7,6 +7,7 @@ const lostPetsRouter = require ('./sub-routes/lost_pets')
 const formsRouter = require ('./sub-routes/forms')
 const userRouter = require ('./sub-routes/user')
 const photosRouter = require ('./sub-routes/photos')
+const locationRouter = require ('./sub-routes/locations')
 
 const router = Router()
 
@@ -17,6 +18,7 @@ router.use('/lostpets', lostPetsRouter)
 router.use('/forms', formsRouter)
 router.use('/users', userRouter)
 router.use('/photos', photosRouter)
+router.use('/locations', locationRouter)
 
 
 module.exports = router;
