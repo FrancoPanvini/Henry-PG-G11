@@ -30,7 +30,7 @@ const postLocations = async (req, res) => {
 module.exports = postLocations;
 
 //* Data expected
-//* Params
+//* Query
 // localhost:3001/location?country=argentina
 //* body
 /*  [
