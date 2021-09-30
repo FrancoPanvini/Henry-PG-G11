@@ -1,20 +1,20 @@
 const { Model, DataTypes } = require("sequelize");
 
 module.exports = sequelize => {
-  class Pets extends Model {}
-  Pets.init(
+  class LostPets extends Model {}
+  LostPets.init(
     {
       name: { type: DataTypes.STRING, allowNull: false },
       size: { type: DataTypes.STRING, allowNull: true, validate: { isIn: [["g", "m", "c"]] } },
       sex: { type: DataTypes.STRING, allowNull: true, validate: { isIn: [["m", "h"]] } },
       age: { type: DataTypes.INTEGER, allowNull: true },
       description: { type: DataTypes.TEXT, allowNull: true },
-      adopted: { type: DataTypes.BOOLEAN, allowNull: false, defaultValue: false },
+      found: { type: DataTypes.BOOLEAN, allowNull: false, defaultValue: false },
     },
-    { sequelize: sequelize, modelName: "Pets", timestamps: true, paranoid: true }
+    { sequelize: sequelize, modelName: "LostPets", timestamps: true, paranoid: true }
   );
 
-  Pets.beforeCreate(function (pet) {
+  LostPets.beforeCreate(function (pet) {
     pet.name = pet.name.toLowerCase();
     pet.description = pet.description.toLowerCase();
     return pet;

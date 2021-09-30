@@ -27,7 +27,7 @@ fs.readdirSync(path.join(__dirname, "/models"))
 modelDefiners.forEach(model => model(sequelize));
 
 // En sequelize.models están todos los modelos importados como propiedades
-const { Pets, Users, Events, Adoptions, Cities, Provinces, Countries, PetsType, UsersType, PetsPics } = sequelize.models;
+const { Pets, Users, Events, Adoptions, Cities, Provinces, Countries, PetsType, UsersType, PetsPics, LostPets } = sequelize.models;
 
 //Relaciones
 Pets.belongsTo(PetsType);
@@ -65,6 +65,12 @@ Users.hasMany(Pets, { foreignKey: "Ownerid" });
 
 Pets.belongsToMany(Users, { through: Adoptions });
 Users.belongsToMany(Pets, { through: Adoptions });
+
+LostPets.belongsTo(Cities);
+Cities.hasMany(LostPets);
+
+LostPets.belongsTo(Users);
+Users.hasMany(LostPets);
 
 module.exports = {
   ...sequelize.models, // para poder importar los modelos así: const { Product, User } = require('./db.js');
