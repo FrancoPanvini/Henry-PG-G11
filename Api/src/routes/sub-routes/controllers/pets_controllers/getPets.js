@@ -1,12 +1,13 @@
 const { where, Op } = require("sequelize");
-const { Pets, Users, PetsType, Cities, Provinces, Countries } = require("../../../../db");
+const { Pets, Users, PetsType, Cities, Provinces, Countries, PetsPics } = require("../../../../db");
 
 const getPets = async (req, res) => {
-  const { type, gender, size, agemin, agemax, city, province, country, owner, adopter, adopted } = req.query;
+  const { type, gender, size, agemin, agemax, city, province, country, owner, adopter, adopted, paglimit, pagnumber } = req.query;
 
   let query = {
     where: {},
-    attributes: ["id", "name", "size", "sex", "age", "PetsTypeId", "createdAt"],
+    attributes: ["id", "name", "size", "sex", "age", "createdAt"],
+    order: ["createdAt"],
     include: [
       {
         model: Cities,
@@ -15,8 +16,9 @@ const getPets = async (req, res) => {
         include: { model: Provinces, attributes: ["name", "CountryId"], required: true, where: {}, include: { model: Countries, required: true, attributes: ["name"] } },
       },
       { model: PetsType, attributes: ["type"] },
-      { model: Users, as: "Owner", attributes: ["name"] },
-      { model: Users, as: "Adopter", attributes: ["name"] },
+      { model: Users, as: "Owner", attributes: [] },
+      { model: Users, as: "Adopter", attributes: [] },
+      { model: PetsPics, attributes: ["url"], limit: 1 },
     ],
   };
 
@@ -56,21 +58,31 @@ const getPets = async (req, res) => {
   //* Add filter by adopter of pet
   if (adopted) query.where = { ...query.where, adopted: adopted };
 
-  let pets = await Pets.findAll(query);
+  //* Obtain number of rows without pagination
+  let pets = await Pets.findAndCountAll(query);
 
-  pets = pets.map(pet => {
+  //* Add data for pagination
+  if (paglimit && pagnumber) {
+    query.limit = paglimit;
+    query.offset = (pagnumber - 1) * paglimit;
+
+    pets.rows = await Pets.findAll(query);
+  }
+
+  //* Transform res object to fix wanted format
+  pets.rows = pets.rows.map(pet => {
     pet = {
       ...pet.dataValues,
       country: pet.dataValues.City.Province.Country.name,
       province: pet.dataValues.City.Province.name,
       city: pet.dataValues.City.name,
-      adopter: pet.dataValues.Adopter?.name,
-      owner: pet.dataValues.Owner.name,
       type: pet.PetsType.type,
+      petPic: pet.PetsPics[0]?.url,
     };
-    const { PetsType, PetsTypeId, City, Owner, Adopter, ...rest } = pet;
+    const { PetsType, City, Owner, Adopter, PetsPics, ...rest } = pet;
     return rest;
   });
+  pets = { ...pets, paglimit: paglimit, pagnumber: pagnumber };
 
   res.status(200).json(pets);
 };
@@ -90,5 +102,30 @@ module.exports = getPets;
   owner=[Ownerid]
   adopter=[Adopterid]
   adopted =[true/false]
+  paglimit=[number of pets per page]
+  pagnumber=[number of page startting in 1]
+*/
 
+/*
+  ?JSON respond
+  {
+    "count": 4,
+    "rows": [
+        {
+            "id": 44,
+            "name": "Pipita",
+            "size": "g",
+            "sex": "h",
+            "age": 8,
+            "createdAt": "2021-09-29T16:16:42.564Z",
+            "country": "argentina",
+            "province": "córdoba",
+            "city": "córdoba",
+            "type": "Gato",
+            "petsPic": "url"
+        }
+    ],
+    "paglimit": "3",
+    "pagnumber": "2"
+}
 */

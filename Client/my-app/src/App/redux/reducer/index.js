@@ -1,7 +1,7 @@
 //import prueba from './debug'
 
 const initialState = {
-    prueba : []
+    prueba : [] 
   };
 
 

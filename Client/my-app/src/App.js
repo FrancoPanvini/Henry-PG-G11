@@ -1,14 +1,41 @@
-import React from 'react';
-import './App.css';
-import {BrowserRouter as Router} from 'react-router-dom';
-import Normalize from 'react-normalize';
+import React from "react";
+import "./App.css";
+import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
+import Navbar from "./App/components/Navbar";
+import Footer from "./App/components/Footer";
+import Home from "./App/components/Home";
+import Login from "./App/components/Login";
+import Registro from "./App/components/Registro";
+import Adopciones from "./App/components/Adopciones";
+import Perdidos from "./App/components/Perdidos";
+import Refugios from "./App/components/Refugios";
+import Perfil from "./App/components/Perfil";
+import Nosotros from "./App/components/Nosotros";
+import FAQ from "./App/components/FAQ";
+
 
 function App() {
   return (
     <Router>
-      <Normalize/>
-      <div className="bg-gray-200 text-center">
-        <h1>A<span className="text-purple-400">dog</span>tame</h1>
+      <div>
+        <div className="sticky top-0 z-40">
+          <Navbar />
+        </div>
+        <div className='z-0'>
+        <Switch>
+          <Route path="/" exact component={Home} />
+          <Route path="/login" exact component={Login} />
+          <Route path="/registro" exact component={Registro} />
+          <Route path="/adopciones" exact component={Adopciones} />
+          <Route path="/perdidos" exact component={Perdidos} />
+          <Route path="/refugios" exact component={Refugios} />
+          <Route path="/perfil" exact component={Perfil} />
+          <Route path="/nosotros" exact component={Nosotros} />
+          <Route path="/faq" exact component={FAQ} />
+        </Switch>
+        <Footer />
+        </div>
+        
       </div>
     </Router>
   );
