@@ -16,13 +16,21 @@ const getCountries = async(req, res) => {
     let promises = countries.map(el => axios.post('https://countriesnow.space/api/v0.1/countries/states',{"country": el}).then(country => countryMaker(country.data.data)))
     const allLocations = await Promise.all(promises)
     const countryNames = allLocations.map(el => ({"name": el.name}))
-    countriesAux = await Countries.bulkCreate(countryNames)
-    provincesAux = allLocations.map(el => {
+    let countriesAux = await Countries.bulkCreate(countryNames)
+    let provincesAux = allLocations.map(el => {
       const indexCountry = countries.indexOf(el.name)+1
       return Provinces.bulkCreate(el.states).then(res => res.map(el=> el.setCountry(indexCountry)))
     })
     await Promise.all(provincesAux)
-    const prov = await Provinces.findAll()
+    let prov = await Provinces.findAll({
+      include: Countries
+    })
+    prov = prov.map(el => {
+      return {
+        state: el.name,
+        country: el.Country ? el.Country.name : "kuxTrolo"
+      }
+    })
     res.json(prov)
     
 }
