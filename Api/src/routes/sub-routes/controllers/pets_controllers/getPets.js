@@ -7,6 +7,7 @@ const getPets = async (req, res) => {
   let query = {
     where: {},
     attributes: ["id", "name", "size", "sex", "age", "PetsTypeId", "createdAt"],
+    order: ["createdAt"],
     include: [
       {
         model: Cities,
@@ -63,7 +64,6 @@ const getPets = async (req, res) => {
   if (paglimit && pagnumber) {
     query.limit = paglimit;
     query.offset = (pagnumber - 1) * paglimit;
-    query.order = ["id"];
 
     pets.rows = await Pets.findAll(query);
   }
