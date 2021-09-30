@@ -6,7 +6,7 @@ const getPets = async (req, res) => {
 
   let query = {
     where: {},
-    attributes: ["id", "name", "size", "sex", "age", "PetsTypeId", "createdAt"],
+    attributes: ["id", "name", "size", "sex", "age", "createdAt"],
     order: ["createdAt"],
     include: [
       {
@@ -69,7 +69,7 @@ const getPets = async (req, res) => {
     pets.rows = await Pets.findAll(query);
   }
 
-  //* Transform res object to fir wanted format
+  //* Transform res object to fix wanted format
   pets.rows = pets.rows.map(pet => {
     pet = {
       ...pet.dataValues,
@@ -79,7 +79,7 @@ const getPets = async (req, res) => {
       type: pet.PetsType.type,
       petPic: pet.PetsPics[0]?.url,
     };
-    const { PetsType, PetsTypeId, City, Owner, Adopter, PetsPics, ...rest } = pet;
+    const { PetsType, City, Owner, Adopter, PetsPics, ...rest } = pet;
     return rest;
   });
   pets = { ...pets, paglimit: paglimit, pagnumber: pagnumber };
