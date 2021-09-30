@@ -2,6 +2,52 @@
 @tailwind components;
 @tailwind utilities;
 
+.btn {
+  @apply border-b-2 shadow-md transition-all;
+}
+
+.btn-nav {
+  @apply rounded-md;
+}
+
+.btn-lg {
+  @apply px-4 py-2 text-xl rounded-lg;
+}
+
+.btn:hover {
+  @apply shadow-lg filter brightness-110;
+}
+
+
+.path {
+  clip-path: circle(50.0% at 50% 1%);;
+}
+.path2 {
+  clip-path: polygon(0 6%, 100% 0, 100% 100%, 0% 100%);
+}
+
+
+
+/* .btn-action {
+  @apply bg-yellow-600 text-white border-yellow-700;
+} */
+
+.onboarding-transparency-right::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  background: linear-gradient(90deg, rgba(0,0,0,0) 80%, #4b8591 100%);
+}
+
+.onboarding-transparency-left::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  background: linear-gradient(90deg, #4F768E 0%, rgba(0,0,0,0) 20%);
+}
+
 /*body {
   margin: 0;
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
@@ -15,3 +61,7 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }*/
+
+.card {
+  @apply rounded overflow-hidden shadow-lg;
+}
