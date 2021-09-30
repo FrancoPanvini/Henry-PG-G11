@@ -5,8 +5,8 @@ module.exports = sequelize => {
   Pets.init(
     {
       name: { type: DataTypes.STRING, allowNull: false },
-      size: { type: DataTypes.STRING, allowNull: true, validate: { isIn: ["g", "m", "c"] } },
-      sex: { type: DataTypes.STRING, allowNull: true, validate: { isIn: ["m", "h"] } },
+      size: { type: DataTypes.STRING, allowNull: true, validate: { isIn: [["g", "m", "c"]] } },
+      sex: { type: DataTypes.STRING, allowNull: true, validate: { isIn: [["m", "h"]] } },
       age: { type: DataTypes.INTEGER, allowNull: true },
       description: { type: DataTypes.TEXT, allowNull: true },
       adopted: { type: DataTypes.BOOLEAN, allowNull: false, defaultValue: false },

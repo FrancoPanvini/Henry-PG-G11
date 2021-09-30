@@ -1,6 +1,6 @@
 const express = require('express');
 const router = express.Router();
-const { } = require('./controllers/pets_controllers');
+/* const { } = require('./controllers/pets_controllers'); */
 
 
 //ver todos los animales (con filters(zona,fecha))
