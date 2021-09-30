@@ -38,8 +38,7 @@ module.exports = {
         'center-bottomish': '50% 80%',
       },
       boxShadow: {
-        'activeNavBar': '0px -4px 0 0 #8CA1A5 inset;',
-        'similBorderWhite': '0 0 0 2px #FFF6 inset;',
+        'activeNavBar': '0px -4px 0 0 #8CA1A5 inset;'
       }
     },
   },
