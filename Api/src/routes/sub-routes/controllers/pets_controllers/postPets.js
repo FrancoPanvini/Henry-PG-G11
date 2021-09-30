@@ -13,7 +13,7 @@ const postPets = async(req, res) => {
     await petCreated.setOwner(Ownerid);
     await petCreated.setCity(Cityid);
     await petCreated.setPetsType(PetsTypeid)
-    res.status(200).send(petCreated);
+    res.status(200).json(petCreated);
   } catch (err) {
     res.status(409).send(err)
   }
