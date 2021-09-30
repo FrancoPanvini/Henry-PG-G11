@@ -6,7 +6,7 @@ const getPetDetail = async (req, res) => {
 
   let query = {
     where: { id },
-    attributes: ["id", "name", "size", "sex", "age", "createdAt"],
+    attributes: ["id", "name", "size", "sex", "age", "createdAt", "adopted"],
     include: [
       {
         model: Cities,
@@ -31,10 +31,12 @@ const getPetDetail = async (req, res) => {
     size: pet.size,
     sex: pet.sex,
     age: pet.age,
+    description: description,
     createdAt: pet.createdAt,
     country: pet.dataValues.City.Province.Country.name,
     province: pet.dataValues.City.Province.name,
     city: pet.dataValues.City.name,
+    adopted: pet.adopted,
     adopter: pet.dataValues.Adopter?.name,
     owner: pet.dataValues.Owner.name,
     type: pet.PetsType.type,
