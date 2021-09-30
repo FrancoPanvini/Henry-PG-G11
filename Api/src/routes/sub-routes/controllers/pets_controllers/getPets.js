@@ -2,7 +2,7 @@ const { where, Op } = require("sequelize");
 const { Pets, Users, PetsType, Cities, Provinces, Countries } = require("../../../../db");
 
 const getPets = async (req, res) => {
-  const { type, gender, size, agemin, agemax, city, province, country, owner, adopter, adopted } = req.query;
+  const { type, gender, size, agemin, agemax, city, province, country, owner, adopter, adopted, paglimit, pagnumber } = req.query;
 
   let query = {
     where: {},
@@ -56,9 +56,20 @@ const getPets = async (req, res) => {
   //* Add filter by adopter of pet
   if (adopted) query.where = { ...query.where, adopted: adopted };
 
-  let pets = await Pets.findAll(query);
+  //* Obtain number of rows without pagination
+  let pets = await Pets.findAndCountAll(query);
 
-  pets = pets.map(pet => {
+  //* Add data for pagination
+  if (paglimit && pagnumber) {
+    query.limit = paglimit;
+    query.offset = (pagnumber - 1) * paglimit;
+    query.order = ["id"];
+
+    pets.rows = await Pets.findAll(query);
+  }
+
+  //* Transform res object to fir wanted format
+  pets.rows = pets.rows.map(pet => {
     pet = {
       ...pet.dataValues,
       country: pet.dataValues.City.Province.Country.name,
@@ -71,6 +82,7 @@ const getPets = async (req, res) => {
     const { PetsType, PetsTypeId, City, Owner, Adopter, ...rest } = pet;
     return rest;
   });
+  pets = { ...pets, paglimit: paglimit, pagnumber: pagnumber };
 
   res.status(200).json(pets);
 };
@@ -90,5 +102,31 @@ module.exports = getPets;
   owner=[Ownerid]
   adopter=[Adopterid]
   adopted =[true/false]
+  paglimit=[number of pets per page]
+  pagnumber=[number of page startting in 1]
 
+*/
+
+/*
+  ?JSON respond
+  {
+    "count": 4,
+    "rows": [
+        {
+            "id": 44,
+            "name": "Pipita",
+            "size": "g",
+            "sex": "h",
+            "age": 8,
+            "createdAt": "2021-09-29T16:16:42.564Z",
+            "country": "argentina",
+            "province": "córdoba",
+            "city": "córdoba",
+            "owner": "santiago petri",
+            "type": "Gato"
+        }
+    ],
+    "paglimit": "3",
+    "pagnumber": "2"
+}
 */
