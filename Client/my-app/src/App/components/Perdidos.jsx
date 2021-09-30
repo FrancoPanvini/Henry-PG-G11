@@ -1,9 +1,10 @@
 import React from 'react'
+import ContainerCardAdopcion from './ContainerCardAdopcion'
 
 function Perdidos() {
     return (
-        <div>
-            SOY PERDIDOS
+        <div className='bg-secondary'>
+            <ContainerCardAdopcion title="Perdidos"/>
         </div>
     )
 }
