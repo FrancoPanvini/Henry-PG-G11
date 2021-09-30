@@ -41,7 +41,9 @@ const postPets = async (req, res) => {
 
     res.status(200).json(newPet);
   } catch (error) {
-    deletePetDB(newPet.dataValues.id);
+    if (created) {
+      deletePetDB(newPet.dataValues.id);
+    }
     res.status(409).send(error.message);
   }
 };
