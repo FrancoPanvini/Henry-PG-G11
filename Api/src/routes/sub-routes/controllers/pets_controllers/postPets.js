@@ -13,7 +13,7 @@ const postPets = async(req, res) => {
     await petCreated.setOwner(Ownerid);
     await petCreated.setCity(Cityid);
     await petCreated.setPetsType(PetsTypeid)
-    res.status(200).send("Creado con exito");
+    res.status(200).send(petCreated);
   } catch (err) {
     res.status(409).send(err)
   }
