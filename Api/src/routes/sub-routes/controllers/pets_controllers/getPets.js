@@ -1,5 +1,5 @@
 const { where, Op } = require("sequelize");
-const { Pets, Users, PetsType, Cities, Provinces, Countries } = require("../../../../db");
+const { Pets, Users, PetsType, Cities, Provinces, Countries, PetsPics } = require("../../../../db");
 
 const getPets = async (req, res) => {
   const { type, gender, size, agemin, agemax, city, province, country, owner, adopter, adopted, paglimit, pagnumber } = req.query;
@@ -16,8 +16,9 @@ const getPets = async (req, res) => {
         include: { model: Provinces, attributes: ["name", "CountryId"], required: true, where: {}, include: { model: Countries, required: true, attributes: ["name"] } },
       },
       { model: PetsType, attributes: ["type"] },
-      { model: Users, as: "Owner", attributes: ["name"] },
-      { model: Users, as: "Adopter", attributes: ["name"] },
+      { model: Users, as: "Owner", attributes: [] },
+      { model: Users, as: "Adopter", attributes: [] },
+      { model: PetsPics, attributes: ["url"], limit: 1 },
     ],
   };
 
@@ -75,11 +76,10 @@ const getPets = async (req, res) => {
       country: pet.dataValues.City.Province.Country.name,
       province: pet.dataValues.City.Province.name,
       city: pet.dataValues.City.name,
-      adopter: pet.dataValues.Adopter?.name,
-      owner: pet.dataValues.Owner.name,
       type: pet.PetsType.type,
+      petPic: pet.PetsPics[0]?.url,
     };
-    const { PetsType, PetsTypeId, City, Owner, Adopter, ...rest } = pet;
+    const { PetsType, PetsTypeId, City, Owner, Adopter, PetsPics, ...rest } = pet;
     return rest;
   });
   pets = { ...pets, paglimit: paglimit, pagnumber: pagnumber };
@@ -104,7 +104,6 @@ module.exports = getPets;
   adopted =[true/false]
   paglimit=[number of pets per page]
   pagnumber=[number of page startting in 1]
-
 */
 
 /*
@@ -122,8 +121,8 @@ module.exports = getPets;
             "country": "argentina",
             "province": "córdoba",
             "city": "córdoba",
-            "owner": "santiago petri",
-            "type": "Gato"
+            "type": "Gato",
+            "petsPic": "url"
         }
     ],
     "paglimit": "3",
