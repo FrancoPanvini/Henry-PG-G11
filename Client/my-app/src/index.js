@@ -2,13 +2,13 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
-import  store  from './App/store/index.js';
+import  store  from './App/redux/store/index.js';
 import { Provider } from 'react-redux';
 
 ReactDOM.render(
   <React.StrictMode>
     <Provider store={store}>
-      <App />
+      <App className="min-h-screen" />
     </Provider>
   </React.StrictMode>,
   document.getElementById('root')

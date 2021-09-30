@@ -25,10 +25,10 @@ module.exports = {
       },
       colors: {
 
-        thirty: '#A4B9B2',
-        fourty: '#4F6961',
-        primary: '#4F6A61',
-        secondary: '#EBDBAF',
+        // thirty: '#A4B9B2',
+        // fourty: '#4F6961',
+        // primary: '#4F6A61',
+        // secondary: '#EBDBAF',
         //primary: '#9AD3BC',
         //secondary: '#F3EAC2',
         // pallete1c: '#F5B461',
@@ -37,10 +37,10 @@ module.exports = {
         // pallete4b: '#FFF7AE',
         // pallete4c: '#F6D167',
         // pallete4d: '#DF2E2E',
-        // fourty: '#316B83',
-        // thirty: '#6D8299',
-        //primary: '#8CA1A5',
-        // secondary: '#D5BFBF',
+        fourty: '#316B83',
+        thirty: '#6D8299',
+        primary: '#8CA1A5',
+        secondary: '#D5BFBF',
         //primary: '#FAF1E6',
         // primary: '#FFC074',
         // fourty: '#B6C867',
@@ -49,10 +49,6 @@ module.exports = {
         // thirty: '#FACE7F',
         // primary: '#EC524B',
         // secondary: '#FCF0C8',
-
-      },
-      height: { 
-        screen80: "60vh",
       },
       backgroundImage: {
         'cachorroWeb': "url('https://images.unsplash.com/photo-1560807707-8cc77767d783?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=435&q=80')",
@@ -61,6 +57,9 @@ module.exports = {
       backgroundPosition: {
         'leftish-center': '30% 50%',
         'center-bottomish': '50% 80%',
+      },
+      boxShadow: {
+        'activeNavBar': '0px -20px 0 0px white inset;'
       }
     },
   },

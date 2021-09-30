@@ -1,5 +1,4 @@
 import React from "react";
-import Card from "./Card";
 import Slider from './Slider'
 //import './Card.module.css'
 

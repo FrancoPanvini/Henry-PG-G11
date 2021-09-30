@@ -19,7 +19,7 @@ function Card({ photo }) {
         </div>
 
         <div>
-          <div className="card px-6 py-4 h-full w-full bg-secondary" onClick={handleClick}>
+          <div className="card  h-full w-full bg-secondary " onClick={handleClick}>
             <div className="font-bold text-xl p-12">Nombre Mascota</div>
             <p className="text-gray-700 text-xs">
               Lorem ipsum dolor sit amet, consectetur adipisicing elit.

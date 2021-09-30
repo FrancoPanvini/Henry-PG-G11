@@ -9,8 +9,6 @@ function ContenedorCard({className , title}) {
        <div className='mb-20 bg-gradient-to-r from-thirty to-fourty items-center text-white'>
           <h1 className='text-white text-6xl font-bold grid justify-items-center'>{title}</h1> 
        </div>
-       
-       <div>FILTROS</div>
 
       <div className="my-3 flex flex-wrap items-center mx-2">
         <div className="w-full sm:w-1/2 md:w-1/4 px-2 my-2 grid justify-items-center">

@@ -9,9 +9,9 @@ function Home() {
         <div className="">
             <Onboarding/>
             <Things/>
-            <ContenedorCard title='ADOPCION' className=" bg-thirty text-white"/>
-            <ContenedorCard title='EXTRAVIADOS' className=" bg-secondary text-primary"/>
-            <ContenedorCard title='REFUGIOS' className=" bg-thirty text-white"/>
+            <ContenedorCard title='ADOPCION' className=" bg-gradient-to-r from-thirty to-fourty text-white"/>
+            <ContenedorCard title='EXTRAVIADOS' className=" bg-gray-200 text-primary"/>
+            <ContenedorCard title='REFUGIOS' className=" bg-gradient-to-r from-thirty to-fourty text-white"/>
         </div>
     )
 }

@@ -28,7 +28,7 @@ function Login() {
   };
 
   return (
-    <div className="h-screen85 flex items-center justify-between bg-gradient-to-r from-thirty to-fourty">
+    <div className="h-screen flex items-center justify-between bg-gradient-to-r from-thirty to-fourty">
       {/* DOS VERSIONES, para funcionar una debe estar comentada y la otra activada, porque una remplazaría a la otra  */}
 
       {/* ↓ Versión 1: "Coherente" con la foto de gatitos de Home ↓ */}

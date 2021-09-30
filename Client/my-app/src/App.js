@@ -23,7 +23,7 @@ function App() {
           <Navbar />
         </div>
         <div className='z-0'>
-          <Switch>
+        <Switch>
           <Route path="/" exact component={Home} />
           <Route path="/login" exact component={Login} />
           <Route path="/registro" exact component={Registro} />
