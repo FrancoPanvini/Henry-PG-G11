@@ -57,7 +57,7 @@ function Login() {
 
       {/* ↓ Versión 2: Foto dentro de un círculo ↓ */}
       <div className="w-1/2">
-        <div className="bg-cachorroWeb bg-bottom bg-cover relative h-96 w-96 rounded-full mr-12 ml-auto shadow-xl border-2 border-opacity-25 border-white" />
+        <div className="bg-cachorroWeb bg-bottom bg-cover relative h-96 w-96 rounded-full mr-12 ml-auto shadow-similBorderWhite floorShadowCircle" />
       </div>
       <div className="flex justify-center items-center w-1/2 z-10">
         <form className="flex flex-col ml-12 mr-auto bg-thirty py-12 px-8 rounded-lg w-2/5 min-w-min h-96 shadow-xl border-2 border-fourty border-opacity-50">
