@@ -26,7 +26,7 @@ module.exports = {
       colors: {
         fourty: '#316B83',
         thirty: '#6D8299',
-        primary: '#8CA1A5',
+        primary: '#f5b461',
         secondary: '#D5BFBF',
       },
       backgroundImage: {
@@ -38,7 +38,8 @@ module.exports = {
         'center-bottomish': '50% 80%',
       },
       boxShadow: {
-        'activeNavBar': '0px -4px 0 0 #8CA1A5 inset;'
+        'activeNavBar': '0px -4px 0 0 #8CA1A5 inset;',
+        'similBorderWhite': '0 20px 25px -5px #0003, 0 0 3px 3px #FFF6 inset;',
       }
     },
   },
