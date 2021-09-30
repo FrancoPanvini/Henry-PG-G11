@@ -1,6 +1,5 @@
 import React from "react";
 import Card from "./Card";
-//import './Card.module.css'
 
 function ContenedorCard({className , title}) {
   return (

@@ -1,6 +1,5 @@
 import React from "react";
 import Slider from './Slider'
-//import './Card.module.css'
 
 function ContenedorCard({title, className}) {
   return (

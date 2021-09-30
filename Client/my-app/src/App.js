@@ -12,12 +12,11 @@ import Refugios from "./App/components/Refugios";
 import Perfil from "./App/components/Perfil";
 import Nosotros from "./App/components/Nosotros";
 import FAQ from "./App/components/FAQ";
-//import Normalize from 'react-normalize';
+
 
 function App() {
   return (
     <Router>
-      {/* <Normalize /> */}
       <div>
         <div className="sticky top-0 z-40">
           <Navbar />

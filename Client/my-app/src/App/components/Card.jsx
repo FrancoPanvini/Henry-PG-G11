@@ -2,7 +2,6 @@ import React, { useState } from "react";
 import ReactCardFlip from "react-card-flip";
 
 function Card({ photo }) {
-  //var photo = "https://www.hola.com/imagenes/estar-bien/20201105178590/perro-maltipoo-raza-pequena/0-937-760/maltipoo-perro-t.jpg";
 
   const [isFlipped, setIsFlipped] = useState(false);
 

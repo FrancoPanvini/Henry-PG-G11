@@ -2,7 +2,7 @@ import React from 'react'
 import ContenedorCard from './ContenedorCard'
 import Onboarding from './Onboarding'
 import Things from './Things'
-//import './Card.module.css'
+
 
 function Home() {
     return (

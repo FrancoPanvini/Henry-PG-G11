@@ -1,7 +1,6 @@
 import React from "react";
 import Carousel from "react-elastic-carousel";
 import Card from "./Card";
-//import "./styles.css";
 
 const breakPoints = [
   { width: 1, itemsToShow: 1 },
