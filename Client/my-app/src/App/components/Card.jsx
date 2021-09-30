@@ -11,17 +11,18 @@ function Card({ photo }) {
   };
 
   return (
-    <div className='w-70'>
-      <ReactCardFlip isFlipped={isFlipped} flipDirection="horizontal">
-        <div className="card">
-          <img src={photo} alt="" className="w-full" onClick={handleClick}/>
-          <h3 className='grid justify-items-center font-bold text-white bg-primary p-8'>Nombre Mascota</h3>
+    <div className='w-auto h-5/6'>
+      <ReactCardFlip isFlipped={isFlipped} flipDirection="vertical">
+        <div className="card w-70 h-full">
+          <img src={photo} alt="" className="w-full"/>
+          <h3 onClick={handleClick} className='grid justify-items-center font-bold text-white bg-primary p-8'>Nombre Mascota</h3>
         </div>
 
         <div>
           <div className="card  h-full w-full bg-secondary " onClick={handleClick}>
+
             <div className="font-bold text-xl p-12">Nombre Mascota</div>
-            <p className="text-gray-700 text-xs">
+            <p className="text-gray-700 text-xs" onClick={handleClick}>
               Lorem ipsum dolor sit amet, consectetur adipisicing elit.
               Voluptatibus quia, nulla! Maiores et perferendis eaque,
               exercitationem praesentium nihil.
