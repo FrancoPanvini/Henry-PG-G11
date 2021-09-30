@@ -1,30 +1,47 @@
 import React, { useState } from 'react';
-import { FaPaw } from "react-icons/fa"
+import { FaPaw, FaExclamationCircle } from 'react-icons/fa';
 
 function Login() {
   const [usuario, setUsuario] = useState({
     email: '',
     contraseña: '',
   });
+  const [errors, setErrors] = useState({
+    email: '',
+    contraseña: '',
+  });
 
-  const handleDisabled = () => {
-    // controlo si e-mail es válido y contraseña es mayor de ¿8? caracteres, en cuyo caso devuelvo false
-    if (usuario.email.includes('@' && '.') && usuario.contraseña.length >= 8) {
-      return false;
+  const validate = ({ email, contraseña }) => {
+    let errors = {};
+    if (!email || !email.includes('@') || !email.includes('.')) {
+      errors.email = 'Debe ser un email válido';
     }
-    // caso contrario:
-    return true;
+    if (!contraseña || contraseña.length < 8) {
+      errors.contraseña = 'La contraseña debe tener al menos 8 caracteres';
+    }
+    return errors;
   };
 
   const handleUsuario = e => {
-    setUsuario({
+    let newUser = {
       ...usuario,
       [e.target.name]: e.target.value,
-    });
+    };
+    setUsuario(newUser);
+    setErrors(validate(newUser));
   };
 
+  // ↓ Desactivo el botón Sign-in si email o contraseña son inválidos
+  const handleDisabled = () => {
+    if (usuario.email.includes('@') && usuario.email.includes('.') && usuario.contraseña.length >= 8) {
+      return false;
+    }
+    return true;
+  };
+
+  // ↓ Log in handler, completar !!!!!!!!!!!!!!!
   const handleLogIn = e => {
-    console.log('a ver si funciona'); // ELIM ELIM ELIM
+    console.log('Botón de Log-in activado y clickeado'); // ELIM ELIM ELIM !!!!!!!!!!!!
     e.preventDefault();
   };
 
@@ -45,18 +62,26 @@ function Login() {
       <div className="flex justify-center items-center w-1/2 z-10">
         <form className="flex flex-col ml-12 mr-auto bg-thirty py-12 px-8 rounded-lg w-2/5 min-w-min h-96 shadow-xl border-2 border-fourty border-opacity-50">
           {/* ↑ FIN versión 2 */}
-         
+
           {/* <img
               src={process.env.PUBLIC_URL + '/cachorro.png'}
               alt="logo"
               className="mx-auto bg-fourty rounded-full w-20 h-20"
             /> */}
 
-          <div className="flex justify-center mx-auto bg-fourty rounded-full w-20 h-20 items-center"><FaPaw className="text-white text-3xl"/></div>  
-          
-          
+          <div className="mx-auto flex justify-center items-center bg-fourty w-20 h-20 rounded-full">
+            <FaPaw className="text-white text-3xl" />
+          </div>
+
           <br />
-          <label className="text-white">E-mail:</label>
+          <label className="text-white">
+            E-mail:{' '}
+            {errors.email && (
+              <span title={errors.email}>
+                <FaExclamationCircle className="inline text-primary align-baseline" />
+              </span>
+            )}
+          </label>
           <input
             type="text"
             name="email"
@@ -64,7 +89,14 @@ function Login() {
             className="rounded-md px-2"
           />
           <br />
-          <label className="text-white">Contraseña:</label>
+          <label className="text-white">
+            Contraseña:{' '}
+            {errors.contraseña && (
+              <span title={errors.contraseña}>
+                <FaExclamationCircle className="inline text-primary align-baseline" />
+              </span>
+            )}
+          </label>
           <input
             type="password"
             name="contraseña"
