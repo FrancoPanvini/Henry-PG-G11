@@ -1,7 +1,7 @@
-const { Users } = require("../../../../db");
+const { Users, Cities, Provinces, Countries, UsersType } = require("../../../../db");
 
 const postUser = async ( req, res) => {
-  const {name, mail, phone, direction, password, photo, responsable, dni, description, link_web, link_instagram, link_facebook, link_donaciones} = req.body;
+  const {name, mail, phone, direction, password, photo, responsable, dni, description, link_web, link_instagram, link_facebook, link_donaciones, Cityid, UsersTypeId} = req.body;
     try {
         if(responsable != undefined) {
             const newUser = await Users.create({
@@ -19,6 +19,9 @@ const postUser = async ( req, res) => {
                 link_facebook,
                 link_donaciones
             })
+            await newUser.setCity(Cityid)
+            await newUser.setUsersType(UsersTypeId)
+
         res.status(200).json(newUser);
         }
         else {
@@ -33,6 +36,9 @@ const postUser = async ( req, res) => {
                 link_instagram,
                 link_facebook,
             })
+            await newUser.setCity(Cityid)
+            await newUser.setUsersType(UsersTypeId)
+
             res.status(200).json(newUser);
         }
     }

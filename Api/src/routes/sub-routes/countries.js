@@ -1,18 +1,18 @@
 const express = require("express");
 const router = express.Router();
 const getCountries = require('./controllers/countries_controllers/getCountries');
-/* const getCountry = require("./controllers/countries_controllers/getCountry"); */
+const getCountry = require("./controllers/countries_controllers/getCountry");
 
 
 
-//Traer todos los paises
+//Traer todos los paises y por query de nombre(includes)
 
-router.post('/', getCountries)
+router.get('/', getCountries)
 
 
 //Traer un pais
 
-/* router.get("/:id", getCountry) */
+router.get("/:id", getCountry)
 
 
 module.exports = router

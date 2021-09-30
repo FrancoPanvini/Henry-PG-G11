@@ -4,12 +4,12 @@ const { Op } = require("sequelize");
 const getShelter = async (req, res) => {
   const { id } = req.params;
   const query = {
-    where: { id: id, responsable: { [Op.not]: null } },
+    where: { id: id, UsersTypeId: "r" },
     attributes: ["id", "name", "mail", "phone", "direction", "password", "photo", "responsable", "dni", "description", "link_web", "link_instagram", "link_facebook", "link_donaciones"],
     include: [
-      /* { model: Cities }, */
-      /* { model: Pets }, */
-      /* { model: Events }, */
+      {model:Cities, include:[{model: Provinces, include:[{model:Countries, attributes:["name", "code"]}]}]},
+      { model: Pets },
+      { model: Events },
     ],
   };
   try {

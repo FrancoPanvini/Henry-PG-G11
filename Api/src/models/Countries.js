@@ -5,6 +5,7 @@ module.exports = sequelize => {
   Countries.init(
     {
       name: { type: DataTypes.STRING, allowNull: false },
+      code: { type: DataTypes.STRING, allowNull: false },
     },
     { sequelize: sequelize, modelName: "Countries", timestamps: false }
   );
