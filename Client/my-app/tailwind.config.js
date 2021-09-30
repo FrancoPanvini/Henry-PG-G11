@@ -18,10 +18,14 @@ module.exports = {
       '2xl': '1536px',
       // => @media (min-width: 1536px) { ... }
     },
-    height: { 
-      screen80: "60vh",
-    },
+    // height: { 
+    //   screen80: "60vh",
+    // },
     extend: {
+      height: { 
+        screen80: "60vh",
+        screen85: "85vh",
+      },
       colors: {
 
         thirty: '#316B83',
