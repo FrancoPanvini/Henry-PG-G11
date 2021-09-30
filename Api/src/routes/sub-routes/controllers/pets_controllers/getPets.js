@@ -1,4 +1,4 @@
-const { where, Op} = require("sequelize");
+const { where, Op } = require("sequelize");
 const { Pets, Users, PetsType, Cities, Provinces, Countries } = require("../../../../db");
 
 const getPets = async (req, res) => {
