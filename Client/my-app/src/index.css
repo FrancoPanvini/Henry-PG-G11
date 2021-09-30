@@ -37,7 +37,7 @@
   position: absolute;
   inset: 0;
   z-index: 1;
-  background: linear-gradient(90deg, rgba(0,0,0,0) 80%, #F3EAC2 100%);
+  background: linear-gradient(90deg, rgba(0,0,0,0) 80%, #4b8591 100%);
 }
 
 .onboarding-transparency-left::after {

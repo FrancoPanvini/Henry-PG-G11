@@ -19,6 +19,10 @@ module.exports = {
       // => @media (min-width: 1536px) { ... }
     },
     extend: {
+      height: { 
+        screen80: "60vh",
+        screen85: "85vh",
+      },
       colors: {
 
         thirty: '#A4B9B2',
