@@ -12,6 +12,7 @@ import Refugios from "./App/components/Refugios";
 import Perfil from "./App/components/Perfil";
 import Nosotros from "./App/components/Nosotros";
 import FAQ from "./App/components/FAQ";
+import FormularioPosteo from "./App/components/FormularioPosteo";
 
 
 function App() {
@@ -32,6 +33,7 @@ function App() {
           <Route path="/perfil" exact component={Perfil} />
           <Route path="/nosotros" exact component={Nosotros} />
           <Route path="/faq" exact component={FAQ} />
+          <Route path="/adopciones/ofrecer" exact component={FormularioPosteo} />
         </Switch>
         <Footer />
         </div>
