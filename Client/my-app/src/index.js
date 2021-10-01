@@ -12,6 +12,7 @@ ReactDOM.render(
   <React.StrictMode>
     <Provider store={store}>
       <App className="min-h-screen" />
+      <div id='portal'></div>
     </Provider>
   </React.StrictMode>,
   document.getElementById('root')

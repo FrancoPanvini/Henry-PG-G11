@@ -1,25 +1,43 @@
 import React, { useState } from "react";
 import ReactCardFlip from "react-card-flip";
+import Modal from "./pop-up/modal";
+
 
 function Card({ photo, name, age, size, country, province, city, sex }) {
 
   const [isFlipped, setIsFlipped] = useState(false);
+  const [isOpen, setIsOpen] = useState(false);
 
   const handleClick = () => {
     setIsFlipped(!isFlipped);
   };
 
   return (
-    <div className='w-auto h-5/6'>
+    <div className="w-auto h-5/6">
       <ReactCardFlip isFlipped={isFlipped} flipDirection="vertical">
         <div className="card w-70 h-full">
-          <img src={photo} alt="" className="w-full"/>
-          <h3 onClick={handleClick} className='grid justify-items-center font-bold text-white bg-primary p-8'>{name}</h3>
+
+          <img src={photo} alt="" className="w-full" />
+          <h3
+            onClick={handleClick}
+            className="grid justify-items-center font-bold text-white bg-primary p-8"
+          >
+            Nombre Mascota
+          </h3>
+          <button onClick={() => setIsOpen(true)}>Open Modal</button>
+
+          <Modal open={isOpen} onClose={() => setIsOpen(false)}>
+            
+          </Modal>
+
         </div>
 
 
 
         <div>
+
+         
+
           <div className="card  h-full w-full bg-secondary " onClick={handleClick}>
 
           <div className="font-bold text-xl p-12">{name}</div>
@@ -36,6 +54,7 @@ function Card({ photo, name, age, size, country, province, city, sex }) {
 
 
             {/* <div className="font-bold text-xl p-12">Nombre Mascota</div>
+
             <p className="text-gray-700 text-xs" onClick={handleClick}>
               Lorem ipsum dolor sit amet, consectetur adipisicing elit.
               Voluptatibus quia, nulla! Maiores et perferendis eaque,
