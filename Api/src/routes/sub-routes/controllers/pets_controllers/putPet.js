@@ -1,4 +1,5 @@
 const { Pets } = require("../../../../db");
+
 async function putPet(req, res) {
   const { id } = req.params;
   const { name, size, sex, age, description, PetsTypeId, CityId } = req.body;

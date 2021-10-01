@@ -21,7 +21,7 @@ const getPetDetail = async (req, res) => {
     ],
   };
 
-  //* Obtain number of rows without pagination
+  //* Obtain pet by id
   let pet = await Pets.findOne(query);
 
   //* Transform res object to fix wanted format
