@@ -3,9 +3,9 @@ import jwt from "jsonwebtoken"
 /* import { setUser } from '../redux/actions'; */
 
 
-export const getPetsAdop = () => {
+export const getPetsAdop = (num) => {
     return function(dispatch) {
-        axios.get("http://localhost:3001/pets?adopted=false")
+        axios.get(`http://localhost:3001/pets?adopted=false&paglimit=6&pagnumber=${num}`)
          .then(data => {
            dispatch({ type: "GET_PETS", payload: data });
          });
