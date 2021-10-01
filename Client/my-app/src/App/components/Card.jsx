@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import ReactCardFlip from "react-card-flip";
 
-function Card({ photo }) {
+function Card({ photo, name, age, size, country, province, city, sex }) {
 
   const [isFlipped, setIsFlipped] = useState(false);
 
@@ -14,13 +14,28 @@ function Card({ photo }) {
       <ReactCardFlip isFlipped={isFlipped} flipDirection="vertical">
         <div className="card w-70 h-full">
           <img src={photo} alt="" className="w-full"/>
-          <h3 onClick={handleClick} className='grid justify-items-center font-bold text-white bg-primary p-8'>Nombre Mascota</h3>
+          <h3 onClick={handleClick} className='grid justify-items-center font-bold text-white bg-primary p-8'>{name}</h3>
         </div>
+
+
 
         <div>
           <div className="card  h-full w-full bg-secondary " onClick={handleClick}>
 
-            <div className="font-bold text-xl p-12">Nombre Mascota</div>
+          <div className="font-bold text-xl p-12">{name}</div>
+          <h3>{age}</h3>
+          <h3>{size}</h3>
+          <h3>{sex}</h3>
+          <h3>{country}</h3>
+          <h3>{province}</h3>
+          <h3>{city}</h3>
+
+          <button className="btn bg-yellow-600 text-white border-yellow-700">
+                Postulate
+          </button>
+
+
+            {/* <div className="font-bold text-xl p-12">Nombre Mascota</div>
             <p className="text-gray-700 text-xs" onClick={handleClick}>
               Lorem ipsum dolor sit amet, consectetur adipisicing elit.
               Voluptatibus quia, nulla! Maiores et perferendis eaque,
@@ -30,9 +45,9 @@ function Card({ photo }) {
               <button className="btn bg-yellow-600 text-white border-yellow-700">
                 Contactame
               </button>
-            </p>
-          </div>
-        </div>
+           </p> */}
+          </div> 
+        </div> 
       </ReactCardFlip>
     </div>
   );

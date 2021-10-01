@@ -1,15 +1,21 @@
 //import prueba from './debug'
 
 const initialState = {
-    prueba : [],
+    petsAdop : [],
+    petsFilter: [],
     user: {},
     isLogged: false
   };
 
 
 function rootReducer(state = initialState, action) {
-
   switch(action.type){
+    case "GET_PETS": 
+        return {
+          ...state,
+          petsAdop : action.payload.data.rows
+        };
+    
     case "POST_USER":
         return{
           ...state
