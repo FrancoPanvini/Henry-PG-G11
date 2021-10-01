@@ -18,6 +18,9 @@
   @apply shadow-lg filter brightness-110;
 }
 
+.navButtonActive {
+  @apply opacity-50;
+}
 
 .path {
   clip-path: circle(50.0% at 50% 1%);;

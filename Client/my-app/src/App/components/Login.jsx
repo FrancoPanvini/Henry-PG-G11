@@ -1,48 +1,58 @@
 import React, { useState } from 'react';
+import { logInUsers } from '../redux/actions/index';
+import { Link, useHistory } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
 import { FaPaw, FaExclamationCircle } from 'react-icons/fa';
+/* import axios from 'axios'
+import jwt from "jsonwebtoken" */
 
 function Login() {
+  const dispatch = useDispatch();
+  const history = useHistory();
   const [usuario, setUsuario] = useState({
-    email: '',
-    contraseña: '',
+    mail: '',
+    password: '',
   });
   const [errors, setErrors] = useState({
-    email: '',
-    contraseña: '',
+    mail: '',
+    password: '',
   });
 
-  const validate = ({ email, contraseña }) => {
-    let errors = {};
-    if (!email || !email.includes('@') || !email.includes('.')) {
-      errors.email = 'Debe ser un email válido';
-    }
-    if (!contraseña || contraseña.length < 8) {
-      errors.contraseña = 'La contraseña debe tener al menos 8 caracteres';
-    }
-    return errors;
-  };
-
-  const handleUsuario = e => {
-    let newUser = {
-      ...usuario,
-      [e.target.name]: e.target.value,
-    };
-    setUsuario(newUser);
-    setErrors(validate(newUser));
-  };
-
-  // ↓ Desactivo el botón Sign-in si email o contraseña son inválidos
+  // ↓ deshabilito el botón LogIn si aún no pusieron info válida
   const handleDisabled = () => {
-    if (usuario.email.includes('@') && usuario.email.includes('.') && usuario.contraseña.length >= 8) {
+    if (usuario.mail.includes('@') && usuario.mail.includes('.') && usuario.password.length >= 8) {
       return false;
     }
     return true;
   };
 
-  // ↓ Log in handler, completar !!!!!!!!!!!!!!!
-  const handleLogIn = e => {
-    console.log('Botón de Log-in activado y clickeado'); // ELIM ELIM ELIM !!!!!!!!!!!!
-    e.preventDefault();
+  // ↓ detecto e informo al usuario si detecto errorres.
+  const validate = ({mail, password}) => {
+    let errors = {};
+    if (!mail || !mail.includes('@') || !mail.includes('.')) {
+      errors.mail = "Debe ser un email válido"
+    }
+    if (!password || password.length < 8) {
+      errors.password = "Debe tener al menos 8 caracteres"
+    };
+    return errors;
+  };
+
+  // ↓ actualizo el input
+  const handleUsuario = e => {
+    let nuevoInput = {
+      ...usuario,
+      [e.target.name]: e.target.value,
+    };
+    setUsuario(nuevoInput);
+    setErrors(validate(nuevoInput));
+  };
+
+  // ↓ log in handler
+  const handleSubmit = e => {
+    e.preventDefault(e);
+    dispatch(logInUsers(usuario));
+    history.push('/');
   };
 
   return (
@@ -60,7 +70,10 @@ function Login() {
         <div className="bg-cachorroWeb bg-bottom bg-cover relative h-96 w-96 rounded-full mr-12 ml-auto shadow-similBorderWhite floorShadowCircle" />
       </div>
       <div className="flex justify-center items-center w-1/2 z-10">
-        <form className="flex flex-col ml-12 mr-auto bg-thirty py-12 px-8 rounded-lg w-2/5 min-w-min h-96 shadow-xl border-2 border-fourty border-opacity-50">
+        <form
+          onSubmit={e => handleSubmit(e)}
+          className="flex flex-col ml-12 mr-auto bg-thirty py-12 px-8 rounded-lg w-2/5 min-w-sign shadow-xl border-2 border-fourty border-opacity-50"
+        >
           {/* ↑ FIN versión 2 */}
 
           {/* <img
@@ -76,41 +89,45 @@ function Login() {
           <br />
           <label className="text-white">
             E-mail:{' '}
-            {errors.email && (
-              <span title={errors.email}>
+            {errors.mail && (
+              <span title={errors.mail}>
                 <FaExclamationCircle className="inline text-primary align-baseline" />
               </span>
             )}
           </label>
           <input
             type="text"
-            name="email"
+            name="mail"
+            value={usuario.mail}
             onChange={handleUsuario}
             className="rounded-md px-2"
           />
           <br />
           <label className="text-white">
             Contraseña:{' '}
-            {errors.contraseña && (
-              <span title={errors.contraseña}>
+            {errors.password && (
+              <span title={errors.password}>
                 <FaExclamationCircle className="inline text-primary align-baseline" />
               </span>
             )}
           </label>
           <input
             type="password"
-            name="contraseña"
+            name="password"
+            value={usuario.password} // ← creo que esto es innecesario.
             onChange={handleUsuario}
             className="rounded-md px-2"
           />
           <br />
           <button
             disabled={handleDisabled()}
-            onClick={handleLogIn}
-            className="btn btn-nav bg-primary text-white border-yellow-600"
+            type="submit"
+            className="btn btn-lg bg-primary text-white border-yellow-600"
           >
             Log in
           </button>
+          <br />
+          <span className="text-center text-white hover:underline"><Link to="/registro">¿No tienes una cuenta? Registrate</Link></span>
         </form>
       </div>
     </div>

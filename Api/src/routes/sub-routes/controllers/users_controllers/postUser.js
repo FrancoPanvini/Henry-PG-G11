@@ -1,7 +1,11 @@
-const { Users, Cities, Provinces, Countries, UsersType } = require("../../../../db");
+const { Users } = require("../../../../db");
+const bcrypt = require("bcrypt");
 
 const postUser = async ( req, res) => {
-  const {name, mail, phone, direction, password, photo, responsable, dni, description, link_web, link_instagram, link_facebook, link_donaciones, Cityid, UsersTypeId} = req.body;
+  const {name, mail, phone, direction, password, photo, responsable, dni, description, link_web, link_instagram, link_facebook, link_donaciones, CityId, UsersTypeId} = req.body;
+
+  const encryptedPass = bcrypt.hashSync(password, 10);
+
     try {
         if(responsable != undefined) {
             const newUser = await Users.create({
@@ -9,19 +13,18 @@ const postUser = async ( req, res) => {
                 mail,
                 phone,
                 direction,
-                password,
+                password: encryptedPass,
                 photo,
                 responsable,
-                dni,
+                /* dni, */
                 description,
                 link_web,
                 link_instagram,
                 link_facebook,
                 link_donaciones
             })
-            await newUser.setCity(Cityid)
-            await newUser.setUsersType(UsersTypeId)
-
+            /* await newUser.setUserTypeId(UsersTypeId) */
+            await newUser.setCity(CityId);
         res.status(200).json(newUser);
         }
         else {
@@ -30,20 +33,19 @@ const postUser = async ( req, res) => {
                 mail,
                 phone,
                 direction,
-                password,
-                photo,
+                password: encryptedPass,
+                /* photo,
                 dni,
                 link_instagram,
-                link_facebook,
+                link_facebook, */
             })
-            await newUser.setCity(Cityid)
-            await newUser.setUsersType(UsersTypeId)
-
+           /*  await newUser.setUserTypeId(UsersTypeId) */
+            await newUser.setCity(CityId);
             res.status(200).json(newUser);
         }
     }
     catch (error) {
-        res.status(409).send(error.message);
+        res.status(409).send(error);
     }
 };
 module.exports = postUser;
