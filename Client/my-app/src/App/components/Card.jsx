@@ -2,7 +2,9 @@ import React, { useState } from "react";
 import ReactCardFlip from "react-card-flip";
 import Modal from "./pop-up/modal";
 
-function Card({ photo }) {
+
+function Card({ photo, name, age, size, country, province, city, sex }) {
+
   const [isFlipped, setIsFlipped] = useState(false);
   const [isOpen, setIsOpen] = useState(false);
 
@@ -14,6 +16,7 @@ function Card({ photo }) {
     <div className="w-auto h-5/6">
       <ReactCardFlip isFlipped={isFlipped} flipDirection="vertical">
         <div className="card w-70 h-full">
+
           <img src={photo} alt="" className="w-full" />
           <h3
             onClick={handleClick}
@@ -26,14 +29,32 @@ function Card({ photo }) {
           <Modal open={isOpen} onClose={() => setIsOpen(false)}>
             
           </Modal>
+
         </div>
 
+
+
         <div>
-          <div
-            className="card  h-full w-full bg-secondary "
-            onClick={handleClick}
-          >
-            <div className="font-bold text-xl p-12">Nombre Mascota</div>
+
+         
+
+          <div className="card  h-full w-full bg-secondary " onClick={handleClick}>
+
+          <div className="font-bold text-xl p-12">{name}</div>
+          <h3>{age}</h3>
+          <h3>{size}</h3>
+          <h3>{sex}</h3>
+          <h3>{country}</h3>
+          <h3>{province}</h3>
+          <h3>{city}</h3>
+
+          <button className="btn bg-yellow-600 text-white border-yellow-700">
+                Postulate
+          </button>
+
+
+            {/* <div className="font-bold text-xl p-12">Nombre Mascota</div>
+
             <p className="text-gray-700 text-xs" onClick={handleClick}>
               Lorem ipsum dolor sit amet, consectetur adipisicing elit.
               Voluptatibus quia, nulla! Maiores et perferendis eaque,
@@ -43,9 +64,9 @@ function Card({ photo }) {
               <button className="btn bg-yellow-600 text-white border-yellow-700">
                 Contactame
               </button>
-            </p>
-          </div>
-        </div>
+           </p> */}
+          </div> 
+        </div> 
       </ReactCardFlip>
     </div>
   );

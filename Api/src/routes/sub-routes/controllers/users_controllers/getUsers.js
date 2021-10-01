@@ -1,11 +1,11 @@
-const { Users, Cities, Provinces, Countries, Pets, Events } = require("../../../../db");
+const { Users, Cities, Provinces, Countries, UsersType } = require("../../../../db");
 const { Op } = require("sequelize");
 
-const getAllShelters = async (req, res) => {
-  const { city, province, country } = req.query
+const getUsers = async (req, res) => {
+  const { city, province, country, userTypeId } = req.query
   const query = {
-    where: { UsersTypeId: "r" },
-    attributes: ["id", "name", "mail", "phone", "direction", "password", "photo", "responsable", "dni", "description", "link_web", "link_instagram", "link_facebook", "link_donaciones"],
+    where: {},
+    attributes: ["id", "name", "mail", "phone", "direction", "password", "photo", "responsable", "dni", "description", "link_web", "link_instagram", "link_facebook", "link_donaciones", "CityId", "UsersTypeId"],
     include: [
       {
         model: Cities,
@@ -13,11 +13,17 @@ const getAllShelters = async (req, res) => {
         required: true,
         include: { model: Provinces, attributes: ["name", "CountryId"], required: true, where: {}, include: { model: Countries, required: true, attributes: ["name", "code"] } },
       },
-      { model: Pets },
-      { model: Events },
+      {model:UsersType}
+      /* { model: Pets }, */
+      /* { model: Events }, */
+      /* { model: Adoptions }, */
     ],
   };
   try {
+      //Add filter by UserType
+  
+    if (userTypeId) query.where = { ...query.where, "UsersTypeId": userTypeId }
+    
         //* Add filter by city
     if (city) query.where = { ...query.where, CityId: city };
 
@@ -36,4 +42,4 @@ const getAllShelters = async (req, res) => {
     res.status(409).send(error.message);
   }
 };
-module.exports = getAllShelters;
+module.exports = getUsers;
