@@ -2,9 +2,7 @@ import React, { useState } from "react";
 import ReactCardFlip from "react-card-flip";
 import Modal from "./pop-up/modal";
 
-
 function Card({ photo, name, age, size, country, province, city, sex }) {
-
   const [isFlipped, setIsFlipped] = useState(false);
   const [isOpen, setIsOpen] = useState(false);
 
@@ -16,7 +14,6 @@ function Card({ photo, name, age, size, country, province, city, sex }) {
     <div className="w-auto h-5/6">
       <ReactCardFlip isFlipped={isFlipped} flipDirection="vertical">
         <div className="card w-70 h-full">
-
           <img src={photo} alt="" className="w-full" />
           <h3
             onClick={handleClick}
@@ -26,32 +23,25 @@ function Card({ photo, name, age, size, country, province, city, sex }) {
           </h3>
           <button onClick={() => setIsOpen(true)}>Open Modal</button>
 
-          <Modal open={isOpen} onClose={() => setIsOpen(false)}>
-            
-          </Modal>
-
+          <Modal open={isOpen} onClose={() => setIsOpen(false)}></Modal>
         </div>
 
-
-
         <div>
+          <div
+            className="card  h-full w-full bg-secondary "
+            onClick={handleClick}
+          >
+            <div className="font-bold text-xl p-12">{name}</div>
+            <h3>{age}</h3>
+            <h3>{size}</h3>
+            <h3>{sex}</h3>
+            <h3>{country}</h3>
+            <h3>{province}</h3>
+            <h3>{city}</h3>
 
-         
-
-          <div className="card  h-full w-full bg-secondary " onClick={handleClick}>
-
-          <div className="font-bold text-xl p-12">{name}</div>
-          <h3>{age}</h3>
-          <h3>{size}</h3>
-          <h3>{sex}</h3>
-          <h3>{country}</h3>
-          <h3>{province}</h3>
-          <h3>{city}</h3>
-
-          <button className="btn bg-yellow-600 text-white border-yellow-700">
-                Postulate
-          </button>
-
+            <button className="btn bg-yellow-600 text-white border-yellow-700">
+              Postulate
+            </button>
 
             {/* <div className="font-bold text-xl p-12">Nombre Mascota</div>
 
@@ -65,8 +55,8 @@ function Card({ photo, name, age, size, country, province, city, sex }) {
                 Contactame
               </button>
            </p> */}
-          </div> 
-        </div> 
+          </div>
+        </div>
       </ReactCardFlip>
     </div>
   );
