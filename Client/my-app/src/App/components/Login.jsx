@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { logInUsers } from '../redux/actions/index';
-import { useHistory } from 'react-router-dom';
+import { Link, useHistory } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import { FaPaw, FaExclamationCircle } from 'react-icons/fa';
 /* import axios from 'axios'
@@ -72,7 +72,7 @@ function Login() {
       <div className="flex justify-center items-center w-1/2 z-10">
         <form
           onSubmit={e => handleSubmit(e)}
-          className="flex flex-col ml-12 mr-auto bg-thirty py-12 px-8 rounded-lg w-2/5 min-w-min h-96 shadow-xl border-2 border-fourty border-opacity-50"
+          className="flex flex-col ml-12 mr-auto bg-thirty py-12 px-8 rounded-lg w-2/5 min-w-sign shadow-xl border-2 border-fourty border-opacity-50"
         >
           {/* ↑ FIN versión 2 */}
 
@@ -122,10 +122,12 @@ function Login() {
           <button
             disabled={handleDisabled()}
             type="submit"
-            className="btn btn-nav bg-primary text-white border-yellow-600"
+            className="btn btn-lg bg-primary text-white border-yellow-600"
           >
             Log in
           </button>
+          <br />
+          <span className="text-center text-white hover:underline"><Link to="/registro">¿No tienes una cuenta? Registrate</Link></span>
         </form>
       </div>
     </div>
