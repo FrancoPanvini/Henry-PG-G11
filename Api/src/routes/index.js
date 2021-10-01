@@ -8,6 +8,10 @@ const formsRouter = require ('./sub-routes/forms')
 const userRouter = require ('./sub-routes/user')
 const photosRouter = require ('./sub-routes/photos')
 const locationRouter = require ('./sub-routes/locations')
+const loginRouter = require('./sub-routes/login')
+const citiesRouter = require ('./sub-routes/cities')
+const provincesRouter = require ('./sub-routes/provinces')
+const countriesRouter = require ('./sub-routes/countries')
 
 const router = Router()
 
@@ -19,6 +23,10 @@ router.use('/forms', formsRouter)
 router.use('/users', userRouter)
 router.use('/photos', photosRouter)
 router.use('/locations', locationRouter)
+router.use('/login', loginRouter)
+/* router.use('/cities', citiesRouter) */
+router.use('/provinces', provincesRouter)
+router.use('/countries', countriesRouter)
 
 
 module.exports = router;
