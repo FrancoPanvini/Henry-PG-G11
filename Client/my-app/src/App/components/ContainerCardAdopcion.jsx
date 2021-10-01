@@ -19,6 +19,7 @@ function ContenedorCard({className , title}) {
           <Card 
           photo="https://picsum.photos/id/237/300/200"
           name={p.name}
+          age={p.age}
           size={p.size}
           sex={p.sex}
           country={p.country}
