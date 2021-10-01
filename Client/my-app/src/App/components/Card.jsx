@@ -1,10 +1,12 @@
 import React, { useState } from "react";
+import { useSelector } from "react-redux";
 import ReactCardFlip from "react-card-flip";
 import Modal from "./pop-up/modal";
 
 function Card({ photo, name, age, size, country, province, city, sex }) {
   const [isFlipped, setIsFlipped] = useState(false);
   const [isOpen, setIsOpen] = useState(false);
+  const isLogged = useSelector(state => state.isLogged);
 
   const handleClick = () => {
     setIsFlipped(!isFlipped);
@@ -27,8 +29,8 @@ function Card({ photo, name, age, size, country, province, city, sex }) {
           
         </div>
 
-        <div className="card h-full w-full bg-secondary ">
-          <div className="grid justify-items-center">
+        <div className="card h-full w-80 bg-secondary ">
+          <div className="grid justify-items-center w-full">
             <div className="font-bold text-xl p-6 text-fourty cursor-pointer hover:text-white" onClick={handleClick}>{name}</div>
             <h3 className="p-1 text-white font-bold">
               Edad: <span className="text-fourty ">{age}</span>
@@ -51,8 +53,6 @@ function Card({ photo, name, age, size, country, province, city, sex }) {
             <h3 className="pt-1 pb-4 text-white font-bold">
               Ciudad: <span className="text-fourty">{city}</span>
             </h3>
-
-            <button className="btn bg-yellow-600 text-white border-yellow-700 rounded-md"></button>
 
             <button
               className="btn bg-yellow-600 text-white border-yellow-700 rounded-md"
