@@ -13,48 +13,55 @@ function Card({ photo, name, age, size, country, province, city, sex }) {
   return (
     <div className="w-auto h-5/6">
       <ReactCardFlip isFlipped={isFlipped} flipDirection="vertical">
-        <div className="card w-70 h-full">
+        <div className="card w-70 h-full grid justify-items-center">
           <img src={photo} alt="" className="w-full" />
-          <h3
+          <h3 className="font-bold text-white bg-primary p-8 w-full grid justify-items-center">
+            {name}
+            <div className='pt-3'><button
             onClick={handleClick}
-            className="grid justify-items-center font-bold text-white bg-primary p-8"
+            className="btn bg-yellow-600 text-white border-yellow-700 rounded-md"
           >
-            Nombre Mascota
+            <h2 className="p-2">Ver mas</h2>
+          </button></div>
           </h3>
-          <button onClick={() => setIsOpen(true)}>Open Modal</button>
-
-          <Modal open={isOpen} onClose={() => setIsOpen(false)}></Modal>
+          
         </div>
 
-        <div>
-          <div
-            className="card  h-full w-full bg-secondary "
-            onClick={handleClick}
-          >
-            <div className="font-bold text-xl p-12">{name}</div>
-            <h3>{age}</h3>
-            <h3>{size}</h3>
-            <h3>{sex}</h3>
-            <h3>{country}</h3>
-            <h3>{province}</h3>
-            <h3>{city}</h3>
+        <div className="card h-full w-full bg-secondary ">
+          <div className="grid justify-items-center">
+            <div className="font-bold text-xl p-6 text-fourty cursor-pointer hover:text-white" onClick={handleClick}>{name}</div>
+            <h3 className="p-1 text-white font-bold">
+              Edad: <span className="text-fourty ">{age}</span>
+            </h3>
+            <h3 className="p-1 text-white font-bold">
+              Tamano: <span className="text-fourty">{size}</span>
+            </h3>
+            <h3 className="p-1 text-white font-bold">
+              Sexo <span className="text-fourty">: {sex}</span>
+            </h3>
 
-            <button className="btn bg-yellow-600 text-white border-yellow-700">
-              Postulate
+            <h3 className="p-1 text-white font-bold">
+              Pais: <span className="text-fourty">{country}</span>
+            </h3>
+
+            <h3 className="p-1 text-white font-bold">
+              Provincia:<span className="text-fourty"> {province}</span>
+            </h3>
+
+            <h3 className="pt-1 pb-4 text-white font-bold">
+              Ciudad: <span className="text-fourty">{city}</span>
+            </h3>
+
+            <button className="btn bg-yellow-600 text-white border-yellow-700 rounded-md"></button>
+
+            <button
+              className="btn bg-yellow-600 text-white border-yellow-700 rounded-md"
+              onClick={() => setIsOpen(true)}
+            >
+              <h2 className="p-2">Postulate</h2>
             </button>
 
-            {/* <div className="font-bold text-xl p-12">Nombre Mascota</div>
-
-            <p className="text-gray-700 text-xs" onClick={handleClick}>
-              Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-              Voluptatibus quia, nulla! Maiores et perferendis eaque,
-              exercitationem praesentium nihil.
-              <br />
-              <br />
-              <button className="btn bg-yellow-600 text-white border-yellow-700">
-                Contactame
-              </button>
-           </p> */}
+            <Modal open={isOpen} onClose={() => setIsOpen(false)}></Modal>
           </div>
         </div>
       </ReactCardFlip>

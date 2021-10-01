@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import UploadImage from './cargue-fotos/UploadImage';
 
 function FormularioPosteo() {
   const [mascota, setMascota] = useState({
@@ -26,6 +27,7 @@ function FormularioPosteo() {
 
   return (
     <div className="py-12">
+      <UploadImage/>
       <form className="flex flex-col w-4/5 max-w-3xl mx-auto p-8 rounded-lg bg-secondary">
         <label>Nombre de la mascota:</label>
         <input
