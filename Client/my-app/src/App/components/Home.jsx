@@ -1,10 +1,19 @@
-import React from 'react'
+import React, { useEffect } from 'react'
+import { useDispatch } from 'react-redux'
+import { getPetsAdop } from '../redux/actions'
 import ContenedorCard from './ContenedorCard'
 import Onboarding from './Onboarding'
 import Things from './Things'
 
 
 function Home() {
+
+    const dispatch = useDispatch();
+
+    useEffect(() => {
+    dispatch(getPetsAdop());
+    }, [dispatch])
+
     return (
         <div className="">
             <Onboarding/>
