@@ -13,9 +13,8 @@ function rootReducer(state = initialState, action) {
     case "GET_PETS": 
         return {
           ...state,
-          petsAdop : action.payload.data.rows
+          petsAdop : action.payload.data
         };
-    
     case "POST_USER":
         return{
           ...state
