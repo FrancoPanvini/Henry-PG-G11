@@ -27,6 +27,8 @@ module.exports = {
         fourty: '#316B83',
         thirty: '#6D8299',
         primary: '#f5b461',
+        primaryLight: '#f7c380',
+        primaryDark: '#c4904d',
         secondary: '#D5BFBF',
       },
       backgroundImage: {
