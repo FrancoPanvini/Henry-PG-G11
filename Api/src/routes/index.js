@@ -24,7 +24,7 @@ router.use('/users', userRouter)
 router.use('/photos', photosRouter)
 router.use('/locations', locationRouter)
 router.use('/login', loginRouter)
-/* router.use('/cities', citiesRouter) */
+router.use('/cities', citiesRouter)
 router.use('/provinces', provincesRouter)
 router.use('/countries', countriesRouter)
 
