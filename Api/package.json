@@ -3,13 +3,10 @@
   "version": "1.0.0",
   "main": "index.js",
   "dependencies": {
-<<<<<<< HEAD
     "bcrypt": "^5.0.1",
     "cookie-parser": "^1.4.5",
     "cors": "^2.8.5",
-=======
     "axios": "^0.21.4",
->>>>>>> 887a9723ef08a52173111e06c88df08023c2b665
     "dotenv": "^10.0.0",
     "express": "^4.17.1",
     "jsonwebtoken": "^8.5.1",
