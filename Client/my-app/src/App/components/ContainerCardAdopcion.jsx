@@ -23,10 +23,8 @@ function ContenedorCard({className , title}) {
     paginationPages.push(i +1);
   }
 
-  console.log(pages)
   const handleChangePage = (e) => {
     e.preventDefault();
-    console.log(e.target);
     setCurrentPage(parseInt(e.target.value))
     dispatch(getPetsAdop(e.target.value));
   }

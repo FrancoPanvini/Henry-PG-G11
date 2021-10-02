@@ -11,7 +11,6 @@ function FiltersBar() {
 
     const handleActiveFilter = (e) => {
         e.preventDefault();
-        console.log(e.target);
 
         filterActive[e.target.id] === true ? setFilterActive({
             ...filterActive,
