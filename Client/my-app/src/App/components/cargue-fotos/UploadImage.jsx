@@ -1,7 +1,7 @@
 import React, {useState} from 'react'
 import { storage } from "./firebase/index";
 
-function UploadImage() {
+function UploadImage({photo}) {
 
     const [image, setImage] = useState(null);
 
@@ -34,7 +34,7 @@ function UploadImage() {
 
     return (
         <div>
-            <input type="file" onChange={handleChange}/>
+            <input name={photo} type="file" onChange={handleChange}/>
             <button onClick={handleUpload} className="bg-primary btn w-20 rounded-xl border-b-fourty mr-2" activeClassName="navButtonActive">Upload</button>
         </div>
     )

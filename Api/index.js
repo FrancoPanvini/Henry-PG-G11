@@ -3,7 +3,7 @@ const { conn, Pets, PetsType, UsersType, Users, Events } = require("./src/db.js"
 const countryLoader = require("./utils/Countries&ProvincesArray");
 
 //* Descomentar esta línea para restartear la DB
-/* conn.sync({ force: true }).then(() => { */
+//conn.sync({ force: true }).then(() => { 
 //* Descomentar esta línea para NO restartear la DB
 conn
   .sync()

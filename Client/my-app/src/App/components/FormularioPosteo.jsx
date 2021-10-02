@@ -1,14 +1,21 @@
 import React, { useState } from 'react';
+import { useDispatch } from 'react-redux';
 import UploadImage from './cargue-fotos/UploadImage';
+import {postPets} from '../redux/actions/index';
 
 function FormularioPosteo() {
+const dispatch = useDispatch();
+
+
+
   const [mascota, setMascota] = useState({
+    photo: '',
     name: '',
     size: '',
     sex: '',
     age: null,
     description: '',
-    // Ownerid: null,
+    Ownerid: localStorage.getItem('userId'),
     PetTypeid: '',
     Cityid: null,
   });
@@ -21,14 +28,16 @@ function FormularioPosteo() {
   };
 
   const handlePublicar = e => {
-    console.log('a ver si funciona');
+    console.log(mascota);
     e.preventDefault();
+    dispatch(postPets(mascota))
   };
 
   return (
     <div className="py-12">
       <UploadImage/>
       <form className="flex flex-col w-4/5 max-w-3xl mx-auto p-8 rounded-lg bg-secondary">
+      
         <label>Nombre de la mascota:</label>
         <input
           name="name"

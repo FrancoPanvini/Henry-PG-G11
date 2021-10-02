@@ -12,6 +12,7 @@ export const getPetsAdop = (num) => {
      };
 }
 
+
 export const getPetsAdopFilter = (filters) => {
     let url = "http://localhost:3001/pets?adopted=false"
     filters.forEach( f => {
@@ -62,6 +63,17 @@ export function postUsers(payload) {
      }
      
  }
+
+ export function postPets(payload) {
+  // console.log(payload)
+   return async function (dispatch){
+       const response = await axios.post("pets/", payload)
+       console.log(response);
+       return response;
+   }
+   
+}
+
 export function setUser(user) {
     return async dispatch => {
         dispatch({
@@ -91,6 +103,33 @@ export function logInUsers(payload) {
          return response;
      }
      
+}
+
+export const getCountries = () => {
+  return function(dispatch) {
+      axios.get("http://localhost:3001/countries")
+       .then(data => {
+         dispatch({ type: "GET_COUNTRIES", payload: data });
+       });
+   };
+}
+
+export const getProvinces = () => {
+  return function(dispatch) {
+      axios.get("http://localhost:3001/provinces")
+       .then(data => {
+         dispatch({ type: "GET_PROVINCES", payload: data });
+       });
+   };
+}
+
+export const getCities = () => {
+  return function(dispatch) {
+      axios.get("http://localhost:3001/cities")
+       .then(data => {
+         dispatch({ type: "GET_CITIES", payload: data });
+       });
+   };
 }
 
 
