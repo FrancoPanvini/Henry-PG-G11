@@ -31,7 +31,7 @@ function Navbar() {
               <NavLink to="/perfil" className="bg-primary btn btn-nav w-full border-b-fourty mr-2" activeClassName="navButtonActive" >
                 Perfil
               </NavLink>
-              <button className="bg-fourty btn btn-nav w-full border-b-0" >
+              <button className="bg-fourtyDark btn btn-nav w-full border-b-0" >
                 Cerrar sesión
               </button>
             </div>
@@ -40,7 +40,7 @@ function Navbar() {
             <NavLink to="/login" className="bg-primary btn btn-nav w-full border-b-fourty mr-2" activeClassName="navButtonActive" >
               Login
             </NavLink>
-            <NavLink to="/registro" className="bg-fourty btn btn-nav w-full" activeClassName="navButtonActive" >
+            <NavLink to="/registro" className="bg-fourtyDark btn btn-nav w-full" activeClassName="navButtonActive" >
               Registro
             </NavLink>
             {/* <NavLink to="/registro" className="hover:text-tercero focus:text-tercero">Registrarse</NavLink> */}
