@@ -1,4 +1,5 @@
 import React from "react";
+import { useSelector } from "react-redux";
 import Carousel from "react-elastic-carousel";
 import Card from "./Card";
 
@@ -10,27 +11,30 @@ const breakPoints = [
 ];
 
 export default function Slider() {
+  const pets = useSelector((state) => state.petsAdop);
+
   return (
     <>
-     
       <div className="pt-10">
         <Carousel breakPoints={breakPoints}>
-          
-            <div className='p-2'>
-              <Card photo="https://picsum.photos/id/237/300/200" />
-            </div>
-            <div className='p-2'>
-              <Card photo="https://picsum.photos/id/237/300/200" />
-            </div>
-            <div className="p-2">
-              <Card photo="https://picsum.photos/id/237/300/200" />
-            </div>
-            <div className="p-2">
-              <Card photo="https://picsum.photos/id/237/300/200" />
-            </div>
-            
-          
-          
+          {pets &&
+            pets.map((p) => {
+              return (
+                <div key={p.id} className="">
+                  <Card
+                    photo="https://picsum.photos/id/237/300/200"
+                    name={p.name}
+                    age={p.age}
+                    size={p.size}
+                    sex={p.sex}
+                    country={p.country}
+                    province={p.province}
+                    city={p.city}
+                  />
+                </div>
+              );
+            })}
+
           {/* <Card photo="https://picsum.photos/id/237/300/200"/>
           <Card photo="https://picsum.photos/id/237/300/200"/>
           <Card photo="https://picsum.photos/id/237/300/200"/>

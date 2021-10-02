@@ -11,7 +11,7 @@ const MODAL_STYLES = {
   zIndex: 1000,
 };
 
-export default function Modal({ open, children, onClose }) {
+export default function Modal({ open, onClose }) {
   if (!open) return null;
 
   return ReactDom.createPortal(
@@ -23,6 +23,10 @@ export default function Modal({ open, children, onClose }) {
             <h1 className="font-bold grid justify-items-center pb-10">Formulario de adopcion</h1>
             <label htmlFor="">Nombre</label>
             <input type="text" className="border-green bg-gray-200" />
+            <br />
+            <br />
+            <label htmlFor="">Pais</label>
+            <select type="text" className="border-green bg-gray-200" />
             <br />
             <br />
             <label htmlFor="">Pais</label>
