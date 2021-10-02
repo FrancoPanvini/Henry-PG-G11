@@ -5,7 +5,7 @@ import FiltersBar from './FiltersBar'
 
 function Perdidos() {
     return (
-        <div className='flex justify-between items-start bg-gray-200'>
+        <div className='flex justify-between items-center bg-gray-200'>
             <FiltersBar/>
             <ContainerCardAdopcion title="Perdidos"/>
         </div>

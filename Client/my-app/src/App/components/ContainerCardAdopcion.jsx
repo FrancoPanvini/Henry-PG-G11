@@ -23,10 +23,10 @@ function ContenedorCard({className , title}) {
     paginationPages.push(i +1);
   }
 
-  console.log(paginationPages);
-
+  console.log(pages)
   const handleChangePage = (e) => {
     e.preventDefault();
+    console.log(e.target);
     setCurrentPage(parseInt(e.target.value))
     dispatch(getPetsAdop(e.target.value));
   }
@@ -55,16 +55,16 @@ function ContenedorCard({className , title}) {
 
   
   return (
-    <div className={`justify-center ${className} p-32 h-full text-left w-full`}>
+    <div className={` ${className} p-12 h-full text-left w-full`}>
        
-       <div className='mb-20 bg-gradient-to-r from-thirty to-fourty items-center text-white w-full'>
-          <h1 className='text-white text-6xl font-bold grid justify-items-center'>{title}</h1> 
+       <div className='mb-20 p-4 bg-gradient-to-r from-thirty to-fourty items-center  w-full'>
+          <h1 className="text-6xl font-bold grid justify-items-center  text-gray-200">{title}</h1> 
        </div>
 
       <div className="flex items-center justify-center p-8 ">
-        <HiArrowCircleLeft className="mr-4 cursor-pointer text-3xl text-primary" onClick={handlePrev}/>
+        {currentPage > 1 && <HiArrowCircleLeft className="mr-4 cursor-pointer text-3xl text-primary" onClick={handlePrev}/>}
         {pagination}
-        <HiArrowCircleRight className="ml-4 cursor-pointer text-3xl text-primary" onClick={handleNext}/>
+        {currentPage === pages ? null : <HiArrowCircleRight className="ml-4 cursor-pointer text-3xl text-primary" onClick={handleNext}/>}
       </div>
       <div className='grid grid-cols-3 gap-4 items-center  justify-center w-full'>
       { pets && pets.map( p => {

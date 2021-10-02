@@ -12,19 +12,11 @@ conn.sync().then(() => {
     });
   })
    .then(() => {
-<<<<<<< HEAD
-    /* countryLoader() */
-    /* PetsType.bulkCreate(petsTypesArray); */
-     /* UsersType.bulkCreate(usersTypesArray);  */
-    /* Pets.bulkCreate(petsArray); */
-  /*   Users.bulkCreate(userArray); */
-=======
-    countryLoader()
+    //countryLoader()
     //PetsType.bulkCreate(petsTypesArray);
     //UsersType.bulkCreate(usersTypesArray);
     //Pets.bulkCreate(petsArray);
     //Users.bulkCreate(userArray);
->>>>>>> 887a9723ef08a52173111e06c88df08023c2b665
     //Events.bulkCreate(eventsArray)
   });
 

@@ -7,9 +7,9 @@ import { Link } from 'react-router-dom';
 function Adopciones() {
     return (
     <div>
-        <div className='flex justify-between items-start bg-gray-200'>
+        <div className='flex justify-between items-center bg-gray-200'>
             <FiltersBar/>
-            <ContainerCardAdopcion title="Adopciones"/>
+            <ContainerCardAdopcion title="ADOPCIONES"/>
         </div>
         <div className="flex justify-center py-12 bg-gray-200">
             <Link to="/adopciones/ofrecer" className="mx-auto" >
