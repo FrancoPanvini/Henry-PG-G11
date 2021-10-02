@@ -1,28 +1,41 @@
 import React, {useState} from 'react'
+import { storage } from "./firebase/index";
 
 function UploadImage() {
 
-    const [file, setFile] = useState(null);
+    const [image, setImage] = useState(null);
 
-    const handleUpload = (e) =>{
-        setFile(e.target.files[0])
-    }
-
-    const handlerSend = () => {
-        if(!file){
-            alert('Debes cargar una Imagen')
-            return
+    const handleChange = e => {
+        if (e.target.files[0]) {
+          setImage(e.target.files[0]);
         }
+      };
 
-        const formdata = new FormData()
-        formdata.append('image', file)
-    }
+    const handleUpload = () => {
+        const uploadTask = storage.ref(`images/${image.name}`).put(image);
+        uploadTask.on(
+          "state_changed",
+          snapshot => {},
+          error => {
+            console.log(error);
+          },
+          () => {
+            storage
+              .ref("images")
+              .child(image.name)
+              .getDownloadURL()
+              .then(url => {
+                console.log(url)
+              });
+          }
+        );
+      };
 
 
     return (
         <div>
-            <input type="file" onChange={handleUpload}/>
-            <button onClick={handlerSend} className="bg-primary btn w-20 rounded-xl border-b-fourty mr-2" activeClassName="navButtonActive">Upload</button>
+            <input type="file" onChange={handleChange}/>
+            <button onClick={handleUpload} className="bg-primary btn w-20 rounded-xl border-b-fourty mr-2" activeClassName="navButtonActive">Upload</button>
         </div>
     )
 }
