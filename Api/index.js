@@ -45,14 +45,14 @@ const usersTypesArray = [
 ];
 
 const eventsArray = [
-  { name: "evento 1", description: "asd1", initDate: "2020-09-29", endDate: "2020-09-30", direction: "calle 123", CityId: 1, UserId: 2 },
-  { name: "evento 2", description: "asd2", initDate: "2020-10-01", endDate: "2020-10-02", direction: "calle 123", CityId: 2, UserId: 1 },
-  { name: "evento 3", description: "asd3", initDate: "2020-10-05", endDate: "2020-10-06", direction: "calle 123", CityId: 1, UserId: 3 },
+  { name: "evento 1", description: "asd1", initDate: "2020-09-29", endDate: "2020-09-30", direction: "calle 123", Cityid: 1, UserId: 2 },
+  { name: "evento 2", description: "asd2", initDate: "2020-10-01", endDate: "2020-10-02", direction: "calle 123", Cityid: 2, UserId: 1 },
+  { name: "evento 3", description: "asd3", initDate: "2020-10-05", endDate: "2020-10-06", direction: "calle 123", Cityid: 1, UserId: 3 },
 ];
 
 const petsArray = [
-  { name: "Juancho", PetsTypeId: "p", CityId: 1, sex: "m", size: "c", age: 0, Ownerid: 1 },
-  { name: "Juana", PetsTypeId: "g", CityId: 1, sex: "h", size: "m", age: 2, Ownerid: 2 },
-  { name: "Renato", PetsTypeId: "p", CityId: 1, sex: "m", size: "g", age: 3, Ownerid: 3 },
-  { name: "Pipita", PetsTypeId: "g", CityId: 1, sex: "h", size: "g", age: 8, Ownerid: 2 },
+  { name: "Juancho", PetsTypeId: "p", Cityid: 1, sex: "m", size: "c", age: 0, Ownerid: 1 },
+  { name: "Juana", PetsTypeId: "g", Cityid: 2, sex: "h", size: "m", age: 2, Ownerid: 2 },
+  { name: "Renato", PetsTypeId: "p", Cityid: 3, sex: "m", size: "g", age: 3, Ownerid: 3 },
+  { name: "Pipita", PetsTypeId: "g", Cityid: 2, sex: "h", size: "g", age: 8, Ownerid: 2 },
 ];
