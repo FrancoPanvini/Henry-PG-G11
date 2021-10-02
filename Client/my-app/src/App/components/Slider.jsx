@@ -11,7 +11,7 @@ const breakPoints = [
 ];
 
 export default function Slider() {
-  const pets = useSelector((state) => state.petsAdop);
+  const pets = useSelector((state) => state.petsAdop.rows);
 
   return (
     <>
