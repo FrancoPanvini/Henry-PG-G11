@@ -53,7 +53,7 @@ const getUsers = async (req, res) => {
       city: user.dataValues.City.name,
       type: user.dataValues.UsersType?.type,
     };
-    const { UsersType, City, deletedAt, UsersTypeId, CityId, password, ...rest } = user;
+    const { UsersType, City, updatedAt, UsersTypeId, CityId, password, ...rest } = user;
     return rest;
   });
   users = { ...users, paglimit: paglimit, pagnumber: pagnumber };
