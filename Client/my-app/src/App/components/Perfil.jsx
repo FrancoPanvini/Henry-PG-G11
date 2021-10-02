@@ -6,17 +6,14 @@ import { FaPaw } from 'react-icons/fa';
 function Perfil() {
   const userId = localStorage.getItem('userId');
   const [user, setUser] = useState(null);
-  const [url, setUrl] = useState(''); // ← ¿para qué se usa esto?
 
   const initialUser = () => {
     axios
       .get(`users/${userId}`)
       .then(res => {
-        console.log(res);
         setUser(res.data);
         return res.data;
       })
-      .then(res => setUrl(res.image)) // ← ¿qué es esto de image?
       .catch(err => console.log(err));
   };
   useEffect(initialUser, [userId, user]);
@@ -29,21 +26,22 @@ function Perfil() {
           <> Loading... </>
         ) : (
           <>
-            {/* ↑↑↑ DELETE ... o restructurar ↑↑↑ */}
+        {/* ↑↑↑ DELETE ... o restructurar ↑↑↑ */}
 
             <div className="flex justify-center items-center">
-              <div className="mr-8 flex justify-center items-center bg-fourty w-20 h-20 rounded-full">
-                <FaPaw className="text-white text-3xl" />
-              </div>
-
-              {/* ↓ si los perfiles tienen foto, usar este div para ello */}
-              {/* <div className="bg-fourty h-32 w-32 rounded-lg overflow-hidden shadow-similBorderWhite">
+              {user.photo === null ? (
+                <div className="bg-fourty w-20 h-20 rounded-full mr-8 flex justify-center items-center ">
+                  <FaPaw className="text-white text-3xl" />
+                </div>
+              ) : (
+                <div className="bg-fourty h-32 w-32 rounded-lg mr-8 overflow-hidden shadow-similBorderWhite">
                   <img
-                    src={url}
+                    src={user.photo}
                     alt="foto"
                     className="z-0 h-full w-full object-cover"
                   />
-                </div> */}
+                </div>
+              )}
 
               <div>
                 <div>¡Hola {user.name}!</div>
@@ -57,22 +55,16 @@ function Perfil() {
 
             {/* ↓ botones que para la primer demo estarán invisibles */}
             <div /* className="invisible" */>
-              <button className="btn btn-nav mx-2 px-4 bg-primaryDark">
-                Mis publicaciones
-              </button>
-              <button className="btn btn-nav mx-2 px-4 bg-primaryDark">
-                Cerrar sesión
-              </button>
-              <button className="btn btn-nav mx-2 px-4 bg-primaryDark">
-                Borrar mi cuenta
-              </button>
+              <button className="btn btn-nav mx-2 px-4 bg-primaryDark">Mis publicaciones</button>
+              <button className="btn btn-nav mx-2 px-4 bg-primaryDark">Cerrar sesión</button>
+              <button className="btn btn-nav mx-2 px-4 bg-primaryDark">Borrar mi cuenta</button>
             </div>
 
-          {/* ↓ si se borra lo de la línea 41-45, borrar esto tmb  */}
+        {/* ↓ si se borra lo de la línea 26-31, borrar esto tmb  */}
           </>
-          /* ↑ borrar */
-
         )}
+        {/* ↑ borrar */}
+
       </div>
     </div>
   );
