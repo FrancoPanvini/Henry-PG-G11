@@ -1,34 +1,33 @@
 const server = require("./src/app.js");
 const { conn, Pets, PetsType, UsersType, Users, Events } = require("./src/db.js");
-const countryLoader = require("./utils/Countries&ProvincesArray")
-
+const countryLoader = require("./utils/Countries&ProvincesArray");
 
 //* Descomentar esta línea para restartear la DB
 /* conn.sync({ force: true }).then(() => { */
 //* Descomentar esta línea para NO restartear la DB
-conn.sync().then(() => {
+conn
+  .sync()
+  .then(() => {
     server.listen(3001, () => {
       console.log("Server listening at 3001");
     });
   })
-   .then(() => {
-<<<<<<< HEAD
-    /* countryLoader() */
-    /* PetsType.bulkCreate(petsTypesArray); */
-     /* UsersType.bulkCreate(usersTypesArray);  */
-    /* Pets.bulkCreate(petsArray); */
-  /*   Users.bulkCreate(userArray); */
-=======
-    countryLoader()
+  .then(() => {
+    // countryLoader()
+  })
+  .then(() => {
     //PetsType.bulkCreate(petsTypesArray);
     //UsersType.bulkCreate(usersTypesArray);
-    //Pets.bulkCreate(petsArray);
+  })
+  .then(() => {
     //Users.bulkCreate(userArray);
->>>>>>> 887a9723ef08a52173111e06c88df08023c2b665
+  })
+  .then(() => {
+    //Pets.bulkCreate(petsArray);
     //Events.bulkCreate(eventsArray)
   });
 
- const petsTypesArray = [
+const petsTypesArray = [
   { id: "p", type: "Perro" },
   { id: "g", type: "Gato" },
 ];
@@ -45,14 +44,15 @@ const usersTypesArray = [
   { id: "a", type: "Admin" },
 ];
 
-/* const eventsArray = [
-  {name: "evento 1", description: "asd1", initDate: "2020-09-29", endDate: "2020-09-30", direction: "calle 123", CityId: 1, UserId: 2 },
-  {name: "evento 2", description: "asd2", initDate: "2020-10-01", endDate: "2020-10-02", direction: "calle 123", CityId: 2, UserId: 1 },
-  {name: "evento 3", description: "asd3", initDate: "2020-10-05", endDate: "2020-10-06", direction: "calle 123", CityId: 1, UserId: 3 }
-] */
+const eventsArray = [
+  { name: "evento 1", description: "asd1", initDate: "2020-09-29", endDate: "2020-09-30", direction: "calle 123", CityId: 1, UserId: 2 },
+  { name: "evento 2", description: "asd2", initDate: "2020-10-01", endDate: "2020-10-02", direction: "calle 123", CityId: 2, UserId: 1 },
+  { name: "evento 3", description: "asd3", initDate: "2020-10-05", endDate: "2020-10-06", direction: "calle 123", CityId: 1, UserId: 3 },
+];
+
 const petsArray = [
-  { name: "Juancho", PetsTypeId: "p", CityId: 1, sex: "m", size: "c", age: 0, Ownerid: 22 },
-  { name: "Juana", PetsTypeId: "g", CityId: 1, sex: "h", size: "m", age: 2, Ownerid: 22 },
-  { name: "Renato", PetsTypeId: "p", CityId: 1, sex: "m", size: "g", age: 3, Ownerid: 23 },
-  { name: "Pipita", PetsTypeId: "g", CityId: 1, sex: "h", size: "g", age: 8, Ownerid: 24 },
-];  
+  { name: "Juancho", PetsTypeId: "p", CityId: 1, sex: "m", size: "c", age: 0, Ownerid: 1 },
+  { name: "Juana", PetsTypeId: "g", CityId: 1, sex: "h", size: "m", age: 2, Ownerid: 2 },
+  { name: "Renato", PetsTypeId: "p", CityId: 1, sex: "m", size: "g", age: 3, Ownerid: 3 },
+  { name: "Pipita", PetsTypeId: "g", CityId: 1, sex: "h", size: "g", age: 8, Ownerid: 2 },
+];
