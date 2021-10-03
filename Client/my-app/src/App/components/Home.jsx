@@ -11,7 +11,7 @@ function Home() {
     const dispatch = useDispatch();
 
     useEffect(() => {
-    dispatch(getPetsAdop(1));
+    dispatch(getPetsAdop());
     }, [dispatch])
 
     return (

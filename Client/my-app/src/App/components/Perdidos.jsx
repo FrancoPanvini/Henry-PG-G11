@@ -5,9 +5,9 @@ import FiltersBar from './FiltersBar'
 
 function Perdidos() {
     return (
-        <div className='flex justify-between items-center bg-gray-200'>
-            <FiltersBar/>
-            <ContainerCardAdopcion title="Perdidos"/>
+        <div className='grid grid-cols-7 place-items-center bg-gray-200'>
+           <FiltersBar className='place-self-center'/>
+            <ContainerCardAdopcion title="PERDIDOS" className="col-span-6"/>
         </div>
     )
 }
