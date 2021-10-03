@@ -16,7 +16,7 @@ function FormularioPosteo() {
     PetsTypeid: '',
     Cityid: localStorage.getItem('userCityid'),
   });
-  const [url, setUrl] = useState('');
+  const [url, setUrl] = useState([]);
 
   const handleChange = e => {
     setMascota({
@@ -29,10 +29,11 @@ function FormularioPosteo() {
     e.preventDefault();
     let newMascota = {
       ...mascota,
-      photo: [url],
+      photo: url,
     }
     console.log(newMascota);
     dispatch(postPets(newMascota));
+    setUrl([])
   };
 
   return (
