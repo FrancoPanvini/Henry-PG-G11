@@ -24,7 +24,7 @@ export const getPetsAdopFilter = (filters) => {
     return function(dispatch) {
         axios.get(url)
          .then(data => {
-           dispatch({ type: "GET_PETS_FILTRED", payload: data });
+           dispatch({ type: "GET_PETS_FILTERED", payload: data });
          });
      };
 }

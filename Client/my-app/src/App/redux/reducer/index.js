@@ -15,7 +15,7 @@ function rootReducer(state = initialState, action) {
           petsAdop : action.payload.data
         };
 
-    case "GET_PETS_FILTRED":
+    case "GET_PETS_FILTERED":
       return {
         ...state,
         petsAdop : action.payload.data
