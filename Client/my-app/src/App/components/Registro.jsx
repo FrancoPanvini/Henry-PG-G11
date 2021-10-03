@@ -1,44 +1,66 @@
-import React, { useState } from 'react';
-import { useDispatch } from 'react-redux';
-import { Link } from 'react-router-dom';
-import { FaPaw, FaExclamationCircle } from 'react-icons/fa';
-import { postUsers } from '../redux/actions/index';
-/* import { useHistory } from "react-router-dom"; */
+import React, { useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { Link } from "react-router-dom";
+import { FaPaw, FaExclamationCircle } from "react-icons/fa";
+import { postUsers } from "../redux/actions/index";
+import { useHistory } from "react-router-dom";
 
 function Registro() {
   const dispatch = useDispatch();
-  /* const history = useHistory(); */
+  const pais = useSelector((state) => state.countries);
+  const provincia = useSelector((state) => state.provinces);
+  const [countryId, setCountryId] = useState(null);
+  const [provinceId, setProvinceId] = useState(null);
+  const history = useHistory();
+
   const [input, setInput] = useState({
-    name: '',
-    mail: '',
-    phone: '',
-    direction: '',
-    password: '',
-    /* CityId: '', */
+    name: "",
+    mail: "",
+    phone: "",
+    direction: "",
+    password: "",
+    pais: "",
+    provinces: "",
+    Cityid: 4, // ← hardcodeado, revisar !!!
+    UsersTypeid: "i", // ← hardcodeado, revisar !!!
   });
   const [errors, setErrors] = useState({});
 
-  const validate = input => {
+  const validate = ({
+    name,
+    mail,
+    phone,
+    direction,
+    password,
+    // Cityid,
+    // UsersTypeid,
+  }) => {
     let errors = {};
-    if (!input.name) {
-      errors.name = 'Ingresa tu nombre y apellido';
+    if (!name) {
+      errors.name = "Ingresa tu nombre y apellido";
     }
-    if (!input.mail || !input.mail.includes('@') || !input.mail.includes('.')) {
-      errors.mail = 'Debe ser un email válido';
+    if (!mail || !mail.includes("@") || !mail.includes(".")) {
+      errors.mail = "Debe ser un email válido";
     }
-    if (!input.phone) {
-      errors.phone = 'Ingresa tu número de contacto';
+    if (!phone) {
+      errors.phone = "Ingresa tu número de contacto";
     }
-    if (!input.direction) {
-      errors.direction = 'Ingresa tu domicilio';
+    if (!direction) {
+      errors.direction = "Ingresa tu domicilio";
     }
-    if (!input.password) {
-      errors.password = 'Debes ingresar una contraseña';
+    if (!password || password.length < 8) {
+      errors.password = "Debe tener al menos 8 caracteres";
     }
+    /* if (!UsersTypeid) {
+      errors.UsersTypeid = "Selecciona un tipo de usuario";
+    } 
+    if (!Cityid) {
+      errors.Cityid = "Selecciona tu ciudad";
+    } */
     return errors;
   };
 
-  const handleOnChange = e => {
+  const handleOnChange = (e) => {
     e.preventDefault();
     const newInput = {
       ...input,
@@ -49,23 +71,26 @@ function Registro() {
   };
 
   const handleDisabled = () => {
-    if (input.name !== '' && Object.keys(errors).length === 0) {
+    if (input.name !== "" && Object.keys(errors).length === 0) {
       return false;
     }
     return true;
-  }
+  };
 
-  const handleSubmit = e => {
+  const handleSubmit = (e) => {
     console.log(input); // DELETE DELETE DELETE
     e.preventDefault();
     dispatch(postUsers(input));
-    setInput({
-      name: '',
-      mail: '',
-      phone: '',
-      direction: '',
-      password: '',
+    setInput({ // ← esto está de más me parece, total al recargar la página se borra todo de todas formas...
+      ...input,
+      name: "",
+      mail: "",
+      phone: "",
+      direction: "",
+      password: "",
     });
+    alert("¡Registro exitoso! ahora puede iniciar sesión");
+    history.push("/login");
   };
 
   return (
@@ -83,8 +108,9 @@ function Registro() {
         <div className="bg-cachorroWeb bg-bottom bg-cover relative h-96 w-96 rounded-full mr-12 ml-auto shadow-similBorderWhite floorShadowCircle" />
       </div>
       <div className="flex justify-center items-center w-1/2 z-10">
+        <div className="flex justify-center items-center w-1/2 z-10"></div>
         <form
-          onSubmit={e => handleSubmit(e)}
+          onSubmit={(e) => handleSubmit(e)}
           className="flex flex-col ml-12 mr-auto bg-thirty py-12 px-8 rounded-lg w-2/5 min-w-sign shadow-xl border-2 border-fourty border-opacity-50"
         >
           <div className="mx-auto flex justify-center items-center bg-fourty w-20 h-20 rounded-full">
@@ -93,7 +119,7 @@ function Registro() {
           <br />
 
           <label className="text-white">
-            Nombre y apellido:{' '}
+            Nombre y apellido:{" "}
             {errors.name && (
               <span title={errors.name}>
                 <FaExclamationCircle className="inline text-primary align-baseline" />
@@ -110,7 +136,7 @@ function Registro() {
           />
           <br />
           <label className="text-white">
-            E-mail:{' '}
+            E-mail:{" "}
             {errors.mail && (
               <span title={errors.mail}>
                 <FaExclamationCircle className="inline text-primary align-baseline" />
@@ -127,7 +153,7 @@ function Registro() {
           />
           <br />
           <label className="text-white">
-            Teléfono:{' '}
+            Teléfono:{" "}
             {errors.phone && (
               <span title={errors.phone}>
                 <FaExclamationCircle className="inline text-primary align-baseline" />
@@ -144,7 +170,7 @@ function Registro() {
           />
           <br />
           <label className="text-white">
-            Dirección:{' '}
+            Dirección:{" "}
             {errors.direction && (
               <span title={errors.direction}>
                 <FaExclamationCircle className="inline text-primary align-baseline" />
@@ -161,7 +187,89 @@ function Registro() {
           />
           <br />
           <label className="text-white">
-            Contraseña:{' '}
+            Pais:{" "}
+            {errors.pais && (
+              <span title={errors.pais}>
+                <FaExclamationCircle className="inline text-primary align-baseline" />
+              </span>
+            )}
+          </label>
+          {/*  <input
+            type="datalist"
+            id="pais"
+            list='paises'
+            name="pais"
+            value={input.pais}
+            onChange={handleOnChange}
+            
+          /> */}
+          <select
+            onChange={(e) => setCountryId(e.target.value)}
+            /* id="paises" */ className="rounded-md px-1"
+          >
+            {pais &&
+              pais.map((e) => (
+                <option key={e.id} name={e.id} value={e.id}>
+                  {e.name}
+                </option>
+              ))}
+          </select>
+          <br />
+          <label className="text-white">
+            Provincia/Departamento:{" "}
+            {errors.provinces && (
+              <span title={errors.provinces}>
+                <FaExclamationCircle className="inline text-primary align-baseline" />
+              </span>
+            )}
+          </label>
+          {/*   <input
+            type="datalist"
+            id="provincia"
+            list='provincias'
+            name="provinces"
+            value={input.provinces}
+            onChange={handleOnChange}
+            className="rounded-md px-1"
+          /> */}
+          <select
+            onChange={(e) => setProvinceId(e.target.value)}
+            className="rounded-md px-1" /* id="provincias" */
+          >
+            {provincia &&
+              provincia
+                .filter((p) => p.CountryId == countryId)
+                .map((e) => (
+                  <option key={e.id} value={e.id}>
+                    {e.name}
+                  </option>
+                ))}
+          </select>
+          <br />
+          <label className="text-white">
+            Ciudad:{" "}
+            {errors.Cityid && (
+              <span title={errors.Cityid}>
+                <FaExclamationCircle className="inline text-primary align-baseline" />
+              </span>
+            )}
+          </label>
+          <select
+            onChange={(e) => setProvinceId(e.target.value)}
+            className="rounded-md px-1" /* id="provincias" */
+          >
+            {provincia &&
+              provincia
+                .filter((p) => p.CountryId == countryId)
+                .map((e) => (
+                  <option key={e.id} value={e.id}>
+                    {e.name}
+                  </option>
+                ))}
+          </select>
+          <br />
+          <label className="text-white">
+            Contraseña:{" "}
             {errors.password && (
               <span title={errors.password}>
                 <FaExclamationCircle className="inline text-primary align-baseline" />

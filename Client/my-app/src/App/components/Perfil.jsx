@@ -16,7 +16,7 @@ function Perfil() {
       })
       .catch(err => console.log(err));
   };
-  useEffect(initialUser, [userId, user]);
+  useEffect(initialUser, [userId]);
 
   return (
     <div className="bg-gradient-to-r from-thirty to-fourty flex justify-center items-center h-screen85">
