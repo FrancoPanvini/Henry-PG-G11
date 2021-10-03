@@ -57,6 +57,13 @@ function rootReducer(state = initialState, action) {
     case "GET_CITIES":
       return { ...state, cities: action.payload.data };
 
+    case "LOG_OUT_USER":
+      return {
+        ...state,
+        user: {},
+        isLogged:  false
+      }
+
     default:
       return state;
   }

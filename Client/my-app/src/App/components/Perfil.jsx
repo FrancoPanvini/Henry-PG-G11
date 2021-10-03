@@ -2,8 +2,11 @@ import React from 'react';
 import axios from 'axios';
 import { useState, useEffect } from 'react';
 import { FaPaw } from 'react-icons/fa';
+import {useDispatch} from 'react-redux'
+import {logOutUser} from '../redux/actions/index'
 
 function Perfil() {
+  const dispatch = useDispatch();
   const userId = localStorage.getItem('userId');
   const [user, setUser] = useState(null);
 
@@ -17,6 +20,11 @@ function Perfil() {
       .catch(err => console.log(err));
   };
   useEffect(initialUser, [userId]);
+
+  const handleLogOut = () => {
+    dispatch(logOutUser())
+    window.location = '/'
+  }
 
   return (
     <div className="bg-gradient-to-r from-thirty to-fourty flex justify-center items-center h-screen85">
@@ -55,9 +63,15 @@ function Perfil() {
 
             {/* ↓ botones que para la primer demo estarán invisibles */}
             <div /* className="invisible" */>
-              <button className="btn btn-nav mx-2 px-4 bg-primaryDark">Mis publicaciones</button>
-              <button className="btn btn-nav mx-2 px-4 bg-primaryDark">Cerrar sesión</button>
-              <button className="btn btn-nav mx-2 px-4 bg-primaryDark">Borrar mi cuenta</button>
+              <button className="btn btn-nav mx-2 px-4 bg-primaryDark">
+                Mis publicaciones
+              </button>
+              <button className="btn btn-nav mx-2 px-4 bg-primaryDark" onClick={handleLogOut}>
+                Cerrar sesión
+              </button>
+              <button className="btn btn-nav mx-2 px-4 bg-primaryDark">
+                Borrar mi cuenta
+              </button>
             </div>
 
         {/* ↓ si se borra lo de la línea 26-31, borrar esto tmb  */}
