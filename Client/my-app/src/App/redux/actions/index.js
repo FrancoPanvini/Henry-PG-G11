@@ -135,4 +135,14 @@ export const getCities = () => {
    };
 }
 
+export function logOutUser(){
+  return dispatch => {
+    localStorage.removeItem('token')
+    localStorage.removeItem('userId')
+    dispatch({
+      type: "LOG_OUT_USER"
+    })
+  }
+}
+
 

@@ -25,7 +25,7 @@ function App() {
     let token = localStorage.getItem("token");
     if (token) {
       const user = jwt.decode(token);
-      if (user.email) {
+      if (user.mail) {
         dispatch(setUser(user));
         axios.defaults.headers.common["Authorization"] = `Bearer ${token}`;
       }
