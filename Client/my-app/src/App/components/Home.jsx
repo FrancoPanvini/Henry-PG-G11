@@ -11,10 +11,10 @@ function Home() {
     const dispatch = useDispatch();
 
     useEffect(() => {
-    dispatch(getPetsAdop(1));
     dispatch(getCountries());
     dispatch(getProvinces()); 
     dispatch(getCities());  
+    dispatch(getPetsAdop());
     }, [dispatch])
 
     return (

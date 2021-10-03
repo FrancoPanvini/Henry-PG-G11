@@ -17,7 +17,7 @@ function Card({ photo, name, age, size, country, province, city, sex }) {
       <ReactCardFlip isFlipped={isFlipped} flipDirection="vertical">
         <div className="card w-70 h-full grid justify-items-center">
           <img src={photo} alt="" className="w-full" />
-          <h3 className="font-bold text-white bg-primary p-8 w-full grid justify-items-center">
+          <h3 className="font-bold text-white bg-primary p-4 w-full grid justify-items-center">
             {name}
             <div className="pt-3">
               <button

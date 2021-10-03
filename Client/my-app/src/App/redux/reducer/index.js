@@ -23,6 +23,11 @@ function rootReducer(state = initialState, action) {
         ...state,
       };
 
+    case "GET_PETS_FILTERED":
+      return {
+        ...state,
+        petsAdop: action.payload.data,
+      };
     case "POST_USER":
       return {
         ...state,
