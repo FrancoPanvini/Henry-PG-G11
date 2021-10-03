@@ -1,7 +1,7 @@
 import React, {useState} from 'react'
 import { storage } from "./firebase/index";
 
-function UploadImage({photo}) {
+function UploadImage({ photo, setUrl }) {
 
     const [image, setImage] = useState(null);
 
@@ -11,7 +11,8 @@ function UploadImage({photo}) {
         }
       };
 
-    const handleUpload = () => {
+    const handleUpload = (e) => {
+        e.preventDefault();
         const uploadTask = storage.ref(`images/${image.name}`).put(image);
         uploadTask.on(
           "state_changed",
@@ -25,7 +26,7 @@ function UploadImage({photo}) {
               .child(image.name)
               .getDownloadURL()
               .then(url => {
-                console.log(url)
+                setUrl(url);
               });
           }
         );
@@ -33,9 +34,10 @@ function UploadImage({photo}) {
 
 
     return (
-        <div>
+        <div className="text-center">
             <input name={photo} type="file" onChange={handleChange}/>
-            <button onClick={handleUpload} className="bg-primary btn w-20 rounded-xl border-b-fourty mr-2" activeClassName="navButtonActive">Upload</button>
+            <br />
+            <button onClick={handleUpload} className={image === null ? "mt-1 w-32 px-2 invisible" : "btn btn-nav bg-primary w-32 px-2 rounded-xl border-b-fourty mr-2 mt-1"}>Subir foto</button>
         </div>
     )
 }
