@@ -2,7 +2,6 @@
 
 const initialState = {
     petsAdop : [],
-    petsFilter: [],
     user: {},
     isLogged: false
   };
@@ -15,6 +14,12 @@ function rootReducer(state = initialState, action) {
           ...state,
           petsAdop : action.payload.data
         };
+
+    case "GET_PETS_FILTRED":
+      return {
+        ...state,
+        petsAdop : action.payload.data
+      }
     case "POST_USER":
         return{
           ...state

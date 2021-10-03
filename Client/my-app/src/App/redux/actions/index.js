@@ -3,9 +3,9 @@ import jwt from "jsonwebtoken"
 /* import { setUser } from '../redux/actions'; */
 
 
-export const getPetsAdop = (num) => {
+export const getPetsAdop = () => {
     return function(dispatch) {
-        axios.get(`http://localhost:3001/pets?adopted=false&paglimit=6&pagnumber=${num}`)
+        axios.get(`http://localhost:3001/pets?adopted=false`)
          .then(data => {
            dispatch({ type: "GET_PETS", payload: data });
          });
@@ -14,10 +14,12 @@ export const getPetsAdop = (num) => {
 
 export const getPetsAdopFilter = (filters) => {
     let url = "http://localhost:3001/pets?adopted=false"
-    filters.forEach( f => {
-        url.concat("&");
-        url.concat(f);
-    })
+    let keys = Object.keys(filters);
+    let values = Object.values(filters);
+
+    for (let i = 0; i < keys.length; i++) {
+      url = url + '&' + keys[i] + "=" + values[i];
+    }
 
     return function(dispatch) {
         axios.get(url)
