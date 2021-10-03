@@ -81,6 +81,7 @@ export function setUser(user) {
             payload: user,
         })
         localStorage.setItem('userId', user.id)
+        localStorage.setItem('userCityid', user.CityId); // ← OJO que ""CityId"" está con mayúscula acá, pero en minúscula en la DB !!! REVISAR!!!!
     }
 }
 export function logInUsers(payload) {

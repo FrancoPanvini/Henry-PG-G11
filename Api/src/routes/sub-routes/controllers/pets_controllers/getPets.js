@@ -76,7 +76,7 @@ const getPets = async (req, res) => {
       country: pet.dataValues.City.Province.Country.name,
       province: pet.dataValues.City.Province.name,
       city: pet.dataValues.City.name,
-      type: pet.PetsType.type,
+      type: pet.PetsType?.type, // ← esto me tiraba error al hacer un GET a /pets, por eso agregué el signo de pregunta, pero segurísimo hay que revisar
       petPic: pet.PetsPics[0]?.url,
     };
     const { PetsType, City, Owner, Adopter, PetsPics, ...rest } = pet;

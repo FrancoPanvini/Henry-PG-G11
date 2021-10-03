@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import { FaPaw, FaExclamationCircle } from "react-icons/fa";
 import { postUsers } from "../redux/actions/index";
-/* import { useHistory } from "react-router-dom"; */
+import { useHistory } from "react-router-dom";
 
 function Registro() {
   const dispatch = useDispatch();
@@ -11,8 +11,8 @@ function Registro() {
   const provincia = useSelector((state) => state.provinces);
   const [countryId, setCountryId] = useState(null);
   const [provinceId, setProvinceId] = useState(null);
+  const history = useHistory();
 
-  /* const history = useHistory(); */
   const [input, setInput] = useState({
     name: "",
     mail: "",
@@ -21,8 +21,8 @@ function Registro() {
     password: "",
     pais: "",
     provinces: "",
-    Cityid: 4,
-    UsersTypeid: "i",
+    Cityid: 4, // ← hardcodeado, revisar !!!
+    UsersTypeid: "i", // ← hardcodeado, revisar !!!
   });
   const [errors, setErrors] = useState({});
 
@@ -32,8 +32,8 @@ function Registro() {
     phone,
     direction,
     password,
-    pais,
-    provinces,
+    // Cityid,
+    // UsersTypeid,
   }) => {
     let errors = {};
     if (!name) {
@@ -51,11 +51,11 @@ function Registro() {
     if (!password || password.length < 8) {
       errors.password = "Debe tener al menos 8 caracteres";
     }
-    /* if (!pais) {
-      errors.pais = "Ingresa tu Pais";
-    }
-    if (!provinces) {
-      errors.provinces = "Ingresa tu Provincia";
+    /* if (!UsersTypeid) {
+      errors.UsersTypeid = "Selecciona un tipo de usuario";
+    } 
+    if (!Cityid) {
+      errors.Cityid = "Selecciona tu ciudad";
     } */
     return errors;
   };
@@ -81,18 +81,16 @@ function Registro() {
     console.log(input); // DELETE DELETE DELETE
     e.preventDefault();
     dispatch(postUsers(input));
-    setInput({
+    setInput({ // ← esto está de más me parece, total al recargar la página se borra todo de todas formas...
+      ...input,
       name: "",
       mail: "",
       phone: "",
       direction: "",
       password: "",
-      pais: "",
-      provinces: "",
-      Cityid: 4,
-      UsersTypeid: "i",
     });
-    alert("registro exitoso");
+    alert("¡Registro exitoso! ahora puede iniciar sesión");
+    history.push("/login");
   };
 
   return (
