@@ -84,7 +84,6 @@ function Registro() {
   };
   
   const handleSubmit = (e) => {
-    console.log(input); // DELETE DELETE DELETE
     e.preventDefault();
     dispatch(postUsers(input));
     setInput({ // ← esto está de más me parece, total al recargar la página se borra todo de todas formas...

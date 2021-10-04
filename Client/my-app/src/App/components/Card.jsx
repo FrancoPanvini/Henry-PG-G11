@@ -15,8 +15,8 @@ function Card({ photo, name, age, size, country, province, city, sex }) {
   return (
     <div className="w-auto h-5/6">
       <ReactCardFlip isFlipped={isFlipped} flipDirection="vertical">
-        <div className="card w-70 h-full grid justify-items-center">
-          <img src={photo} alt="" className="w-full" />
+        <div className="card w-80 h-96 grid justify-items-center">
+          <img src={photo} alt="" className="w-full h-72 object-cover" />
           <h3 className="font-bold text-white bg-primary p-4 w-full grid justify-items-center">
             {name.replace(/\b\w/g, function(l){ return l.toUpperCase() })}
             <div className="pt-3">
@@ -30,7 +30,7 @@ function Card({ photo, name, age, size, country, province, city, sex }) {
           </h3>
         </div>
 
-        <div className="card h-full w-80 bg-secondary ">
+        <div className="card h-96 w-80 bg-secondary ">
           <div className="grid justify-items-center w-full">
             <div
               className="font-bold text-xl p-6 text-fourty cursor-pointer hover:text-white"
