@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react'
 import { useDispatch } from 'react-redux'
-import { getCities, getCountries, getLostPetsHome, getPetsAdopHome, getProvinces } from '../redux/actions'
+import { getCities, getCountries, getLostPetsHome, getPetsAdopHome, getProvinces, getShelters } from '../redux/actions'
 import ContenedorCard from './ContenedorCard'
 import ContenedorCardLost from './ContenedorCardLost'
 import Onboarding from './Onboarding'
@@ -17,6 +17,7 @@ function Home() {
     dispatch(getCities());  
     dispatch(getPetsAdopHome());
     dispatch(getLostPetsHome());
+    dispatch(getShelters())
     }, [dispatch])
 
     return (
