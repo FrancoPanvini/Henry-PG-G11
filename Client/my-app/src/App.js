@@ -1,57 +1,64 @@
-import React from 'react';
-import logo from './logo.svg';
-import { Counter } from './features/counter/Counter';
-import './App.css';
+import React, {useEffect} from "react";
+import "./App.css";
+import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
+import Navbar from "./App/components/Navbar";
+import Footer from "./App/components/Footer";
+import Home from "./App/components/Home";
+import Login from "./App/components/Login";
+import Registro from "./App/components/Registro";
+import Adopciones from "./App/components/Adopciones";
+import Perdidos from "./App/components/Perdidos";
+import Refugios from "./App/components/Refugios";
+import Perfil from "./App/components/Perfil";
+import Nosotros from "./App/components/Nosotros";
+import FAQ from "./App/components/FAQ";
+import FormularioPosteo from "./App/components/FormularioPosteo";
+import {useDispatch} from 'react-redux'
+import jwt from "jsonwebtoken"
+import { setUser } from "./App/redux/actions/index";
+import axios from 'axios'
 
 function App() {
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    let token = localStorage.getItem("token");
+    if (token) {
+      const user = jwt.decode(token);
+      if (user.mail) {
+        dispatch(setUser(user));
+        axios.defaults.headers.common["Authorization"] = `Bearer ${token}`;
+      }
+    }
+  }, [dispatch]);
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <Counter />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <span>
-          <span>Learn </span>
-          <a
-            className="App-link"
-            href="https://reactjs.org/"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            React
-          </a>
-          <span>, </span>
-          <a
-            className="App-link"
-            href="https://redux.js.org/"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Redux
-          </a>
-          <span>, </span>
-          <a
-            className="App-link"
-            href="https://redux-toolkit.js.org/"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Redux Toolkit
-          </a>
-          ,<span> and </span>
-          <a
-            className="App-link"
-            href="https://react-redux.js.org/"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            React Redux
-          </a>
-        </span>
-      </header>
-    </div>
+    <Router>
+      <div>
+        <div className="sticky top-0 z-40">
+          <Navbar />
+        </div>
+        <div className="z-0">
+          <Switch>
+            <Route path="/" exact component={Home} />
+            <Route path="/login" exact component={Login} />
+            <Route path="/registro" exact component={Registro} />
+            <Route path="/adopciones" exact component={Adopciones} />
+            <Route path="/perdidos" exact component={Perdidos} />
+            <Route path="/refugios" exact component={Refugios} />
+            <Route path="/perfil" exact component={Perfil} />
+            <Route path="/nosotros" exact component={Nosotros} />
+            <Route path="/faq" exact component={FAQ} />
+            <Route
+              path="/adopciones/ofrecer"
+              exact
+              component={FormularioPosteo}
+            />
+          </Switch>
+          <Footer />
+        </div>
+      </div>
+    </Router>
   );
 }
 
