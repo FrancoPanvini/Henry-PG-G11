@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { useHistory } from 'react-router-dom';
 import UploadImage from './cargue-fotos/UploadImage';
 import { postPets } from '../redux/actions/index';
+import { FaExclamationCircle } from 'react-icons/fa';
 
 
 function FormularioPosteo() {
@@ -17,13 +18,37 @@ function FormularioPosteo() {
     Cityid: localStorage.getItem('userCityid'),
   });
   const [url, setUrl] = useState([]);
+  const [errors, setErrors] = useState({});
+
+  const validate = ({name, PetsTypeid}) => {
+    let errors = {};
+    if (!name) {
+      errors.name = "Tu mascota debe tener un nombre"
+    }
+    if (PetsTypeid === '') {
+      errors.PetsTypeid = "Debes seleccionar si tu mascota es perro o gato"
+    }
+    // if (Cityid === '') {
+    //   errors.Cityid = "Debes seleccionar la ciudad donde está tu mascota"
+    // }
+    return errors;
+  }
 
   const handleChange = e => {
-    setMascota({
+    const newMascota = {
       ...mascota,
       [e.target.name]: e.target.value,
-    });
+    };
+    setMascota(newMascota);
+    setErrors(validate(newMascota));
   };
+
+  const handleDisabled = () => {
+    if (mascota.name !== '' && Object.keys(errors).length === 0) {
+      return false;
+    }
+    return true;
+  }
 
   const handlePublicar = e => {
     e.preventDefault();
@@ -33,14 +58,14 @@ function FormularioPosteo() {
     }
     postPets(newMascota);
     setUrl([]);
-    alert("¡Ofreciste exitosamente una mascota en adopción!");
+    alert("¡Listo!");
     history.push('/adopciones');
   };
 
   return (
     <div className="py-16 bg-gradient-to-r from-thirty to-fourty">
       <form className="flex flex-col w-4/5 max-w-3xl mx-auto p-8 rounded-lg bg-gradient-to-l from-secondary to-secondaryDark border-2 border-white border-opacity-50">
-        <label>Nombre de la mascota:</label>
+        <label>Nombre de la mascota: {errors.name && <FaExclamationCircle title={errors.name} className="inline text-fourtyLight align-baseline" />}</label>
         <input
           name="name"
           onChange={handleChange}
@@ -50,7 +75,7 @@ function FormularioPosteo() {
 
         <div className="flex justify-evenly">
           <div className="text-center w-2/5 rounded-2xl bg-secondaryDark px-4 py-2">
-            <label>Especie:</label>
+            <label>Especie: {errors.PetsTypeid && <FaExclamationCircle title={errors.PetsTypeid} className="inline text-fourtyLight align-baseline" />}</label>
             <div className="flex justify-evenly items-center">
               <label htmlFor="gato">
                 <input
@@ -193,7 +218,7 @@ function FormularioPosteo() {
         <br />
 
         <button
-          // disabled={true}
+          disabled={handleDisabled()}
           onClick={handlePublicar}
           className="btn btn-lg bg-thirty text-white border-fourty"
         >
