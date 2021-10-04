@@ -1,9 +1,11 @@
 import React, { useState } from 'react';
+import { useHistory } from 'react-router-dom';
 import UploadImage from './cargue-fotos/UploadImage';
 import { postPets } from '../redux/actions/index';
 
-function FormularioPosteo() {
 
+function FormularioPosteo() {
+  const history = useHistory();
   const [mascota, setMascota] = useState({
     name: '',
     size: '',
@@ -31,7 +33,9 @@ function FormularioPosteo() {
     }
     console.log(newMascota);
     postPets(newMascota);
-    setUrl([])
+    setUrl([]);
+    alert("¡Ofreciste exitosamente una mascota en adopción!");
+    history.push('/adopciones');
   };
 
   return (

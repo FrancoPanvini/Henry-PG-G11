@@ -120,7 +120,7 @@ const handlePrev= () => {
         return (
           <div key={p.id} className="" >
           <Card 
-          photo="https://picsum.photos/id/237/300/200"
+          photo={p.petPic ? p.petPic : "https://drpp-ny.org/wp-content/uploads/2014/07/sorry-image-not-available.png"}
           name={p.name}
           age={p.age}
           size={p.size}
