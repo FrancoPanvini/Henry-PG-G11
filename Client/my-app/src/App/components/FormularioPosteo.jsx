@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
-import { useHistory } from 'react-router-dom';
+import { Link, useHistory } from 'react-router-dom';
 import UploadImage from './cargue-fotos/UploadImage';
 import { postPets } from '../redux/actions/index';
-import { FaExclamationCircle } from 'react-icons/fa';
+import { FaExclamationCircle, FaWindowClose } from 'react-icons/fa';
 
 
 function FormularioPosteo() {
@@ -64,7 +64,8 @@ function FormularioPosteo() {
 
   return (
     <div className="py-16 bg-gradient-to-r from-thirty to-fourty">
-      <form className="flex flex-col w-4/5 max-w-3xl mx-auto p-8 rounded-lg bg-gradient-to-l from-secondary to-secondaryDark border-2 border-white border-opacity-50">
+      <form className="flex flex-col w-4/5 max-w-3xl mx-auto p-8 rounded-lg bg-gradient-to-l from-secondary to-secondaryDark border-2 border-white border-opacity-50 relative">
+        <Link to="/adopciones" ><FaWindowClose title="Volver a Adopciones" className="absolute text-2xl right-2 top-2 text-fourtyLight transition-all hover:text-fourty" /></Link>
         <label>Nombre de la mascota: {errors.name && <FaExclamationCircle title={errors.name} className="inline text-fourtyLight align-baseline" />}</label>
         <input
           name="name"
