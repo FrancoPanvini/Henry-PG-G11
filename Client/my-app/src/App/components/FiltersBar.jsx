@@ -23,9 +23,8 @@ function FiltersBar() {
     
     let location = useLocation();
     const [urlFilter, setUrlFilter] = useState({type: "", gender: "", size: "", agemin: "", agemax: "", country: "", province: "", city: ""});
-    const [urlFilterLost, setUrlFilterLost] = useState({type: "", gender: "", size: "", agemin: "", agemax: "", country: "", province: "", city: ""});
+    const [urlFilterLost, setUrlFilterLost] = useState({country: "", province: "", city: ""});
     let currentLocation = location.pathname;
-
 
     const  handleSetUrl =  (e) => {
         e.preventDefault();
@@ -46,9 +45,8 @@ function FiltersBar() {
             ...urlFilterLost,
             [e.target.name] : e.target.value
         }  
-        
-        setUrlFilterLost(updateFilter);
 
+        setUrlFilterLost(updateFilter);
         sendFilters(updateFilter);
     }
 
@@ -77,7 +75,7 @@ function FiltersBar() {
     const handleResetFilters = (e) => {
         e.preventDefault();
         currentLocation === "/adopciones" ? setUrlFilter({type: "", gender: "", size: "", agemin: "", agemax: "", country: "", province: "", city: ""})
-       : setUrlFilterLost({type: "", gender: "", size: "", agemin: "", agemax: "", country: "", province: "", city: ""});
+       : setUrlFilterLost({country: "", province: "", city: ""});
         currentLocation === "/adopciones" ? dispatch(getPetsAdop()) : dispatch(getLostPets());
     }
 
@@ -116,6 +114,7 @@ function FiltersBar() {
             <select
             onChange={handleFilterUbication}
             name="country"
+            value={urlFilter.country}
             /* id="paises" */ className="w-full my-2 rounded-md px-1"
           >
               <option>Seleccionar</option>
@@ -131,6 +130,7 @@ function FiltersBar() {
             onChange={handleFilterUbication}
             className="w-full rounded-md px-1 my-2" /* id="provincias" */
             name="province"
+            value={urlFilter.province}
           >
               <option>Seleccionar</option>
             {provincia &&
@@ -147,6 +147,7 @@ function FiltersBar() {
             onChange={handleSetUrl}
             className="w-full rounded-md px-1 my-2" /* id="provincias" */
             name="city"
+            value={urlFilter.city}
           >
               <option>Seleccionar</option>
             {ciudad &&
@@ -164,8 +165,8 @@ function FiltersBar() {
 
         <div className="p-1 mb-2 flex flex-wrap justify-between items-center ">
             <label className="w-1/2 pr-8  font-bold">Edad</label>
-            <input type="number" name="agemin" min={0} max={20} placeholder="Edad min:"  className="w-3/4 mb-2" onChange={handleSetAge}/>
-            <input type="number"  name="agemax" min={0} max={20} placeholder="Edad max:"  className="w-3/4 mb-4" onChange={handleSetAge}/>
+            <input type="number" name="agemin" min={0} max={20} placeholder="Edad min:" value={urlFilter.agemin} className="w-3/4 mb-2" onChange={handleSetAge}/>
+            <input type="number"  name="agemax" min={0} max={20} placeholder="Edad max:"  className="w-3/4 mb-4" value={urlFilter.agemax} onChange={handleSetAge}/>
             <button type="submit" className="btn bg-primary p-1 rounded-lg disabled:opacity-50 mb-2" onClick={handleSend} disabled={setDisabled()}>Send</button>
         </div>
             
@@ -194,6 +195,7 @@ function FiltersBar() {
                 <select
             onChange={handleFilterUbication}
             name="country"
+            value={urlFilterLost.country}
             /* id="paises" */ className="w-full my-2 rounded-md px-1"
           >
               <option>Seleccionar</option>
@@ -209,6 +211,7 @@ function FiltersBar() {
             onChange={handleFilterUbication}
             className="w-full rounded-md px-1 my-2" /* id="provincias" */
             name="province"
+            value={urlFilterLost.province}
           >
               <option>Seleccionar</option>
             {provincia &&
@@ -225,6 +228,7 @@ function FiltersBar() {
             onChange={handleSetUrl}
             className="w-full rounded-md px-1 my-2" /* id="provincias" */
             name="city"
+            value={urlFilterLost.city}
           >
               <option>Seleccionar</option>
             {ciudad &&
