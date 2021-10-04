@@ -31,7 +31,6 @@ function FormularioPosteo() {
       ...mascota,
       photo: url,
     }
-    console.log(newMascota);
     postPets(newMascota);
     setUrl([]);
     alert("¡Ofreciste exitosamente una mascota en adopción!");
