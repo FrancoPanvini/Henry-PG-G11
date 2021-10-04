@@ -4,6 +4,7 @@ const initialState = {
   petsAdop: [],
   petsHome: [],
   user: {},
+  shelters: {},
   isLogged: false,
   countries: [],
   provinces: [],
@@ -50,6 +51,12 @@ function rootReducer(state = initialState, action) {
         },
         isLogged: true,
       };
+
+    case "GET_SHELTERS":
+      return{
+        ...state,
+        shelters: action.payload.data
+      }  
 
     case "LOGIN":
       return {
