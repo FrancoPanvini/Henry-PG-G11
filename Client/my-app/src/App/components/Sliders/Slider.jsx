@@ -1,7 +1,7 @@
 import React from "react";
 import { useSelector } from "react-redux";
 import Carousel from "react-elastic-carousel";
-import Card from "./Card";
+import Card from "../Cards/Card";
 
 const breakPoints = [
   { width: 1, itemsToShow: 1 },

@@ -1,20 +1,23 @@
 import React, { useEffect, useState }  from "react";
 import { useDispatch } from "react-redux";
 import { useSelector } from "react-redux";
-import { getPetsAdop } from "../redux/actions";
-import Card from "./Card";
-//import { HiArrowCircleLeft, HiArrowCircleRight } from "react-icons/hi";
+import { getLostPets, getPetsAdop, getShelters } from "../redux/actions";
+import Card from "./Cards/Card";
+import CardLost from './Cards/CardLost'
+import CardRefugio from './Cards/CardRefugio'
 import { BiChevronsRight, BiChevronsLeft } from "react-icons/bi";
 
 function ContenedorCard({className , title}) {
   const dispatch = useDispatch();
- 
-  useEffect(() => {
-  dispatch(getPetsAdop());
-  }, [dispatch])
+
   
  
-  const pets = useSelector(state => state.petsAdop.rows);
+  useEffect(() => {
+    dispatch(title === "ADOPCIONES" ? getPetsAdop() : title === "PERDIDOS" ? getLostPets() : getShelters());
+  }, [dispatch, title])
+  
+ 
+  const items = useSelector(state => title === "ADOPCIONES" ? state.petsAdop.rows : title === "PERDIDOS" ? state.lostPets.rows : state.shelters.rows );
   const [currentPage, setCurrentPage] = useState(1);
   const [itemsPerPage] = useState(6);
   const [pageNumberLimit] = useState(3);
@@ -27,13 +30,13 @@ function ContenedorCard({className , title}) {
 
 const pages = [];
 
-for (let i = 1; i <= Math.ceil(pets?.length/itemsPerPage); i++) {
+for (let i = 1; i <= Math.ceil(items?.length/itemsPerPage); i++) {
     pages.push(i);
 }
 
 const indexOfLastItem = currentPage * itemsPerPage;
 const indexOfFirstItem = indexOfLastItem - itemsPerPage;
-let currentItems =  pets?.slice(indexOfFirstItem, indexOfLastItem);
+let currentItems =  items?.slice(indexOfFirstItem, indexOfLastItem);
 
 
 const renderPagesNumber = pages.map(p => {
@@ -63,41 +66,6 @@ const handlePrev= () => {
     }
 }
 
-/*   let paginationPages = [];
-  
-  for(let i = 0; i < pages; i++) {
-    paginationPages.push(i +1);
-  } */
-
-/*   const handleChangePage = (e) => {
-    e.preventDefault();
-    setCurrentPage(parseInt(e.target.value))
-    dispatch(getPetsAdop(e.target.value));
-  }
- 
-  const handlePrev = (e) => {
-    e.preventDefault();
-    if(currentPage > 1) setCurrentPage(currentPage - 1);
-    dispatch(getPetsAdop(currentPage - 1));
-  }
-
-  const handleNext = (e) => {
-    e.preventDefault();
-    if(currentPage < pages) setCurrentPage(currentPage + 1);
-    dispatch(getPetsAdop(currentPage + 1));
-  }
-
-
-
-  const pagination = paginationPages.map( p => {
-    let btnActive = "bg-primaryLigth";
-    return ( 
-      <button key={p} id={p} value={p} className={`p-2 btn m-2 bg-primary font-bold text-white rounded-2xl focus:bg-primaryLight ${currentPage ===  parseInt(p) && btnActive}`}  onClick={handleChangePage}>{p}</button>
-   )}
-   ) */
-
-
-  
   return (
     <div className={` ${className} p-12 h-full text-left w-full`}>
        
@@ -116,6 +84,7 @@ const handlePrev= () => {
       { currentItems && currentItems.map( p => {
         return (
           <div key={p.id} className="" >
+        {  title === "ADOPCIONES" ? 
           <Card 
           photo={p.petPic ? p.petPic : "https://drpp-ny.org/wp-content/uploads/2014/07/sorry-image-not-available.png"}
           name={p.name}
@@ -126,7 +95,36 @@ const handlePrev= () => {
           province={p.province}
           city={p.city}
           description={p.description}
+          /> : title === "PERDIDOS" ? 
+
+          <CardLost
+          photo={p.photo ? p.photo : "https://drpp-ny.org/wp-content/uploads/2014/07/sorry-image-not-available.png"}
+          name={p.name}
+          size={p.size}
+          country={p.country}
+          province={p.province}
+          city={p.city}
+          /> : 
+
+          <CardRefugio 
+          photo={
+            p.photo
+              ? p.photo
+              : "https://drpp-ny.org/wp-content/uploads/2014/07/sorry-image-not-available.png"
+          }
+          name={p.name}
+          phone={p.phone}
+          country={p.country}
+          province={p.province}
+          city={p.city}
+          description={p.description}
+          responsable={p.responsable}
+          socialNet={p.link_web}
+          instagram={p.link_instagram}
+          facebook={p.link_facebook}
+          donaciones={p.link_donaciones}
           />
+        }
         </div>
         )
       })}

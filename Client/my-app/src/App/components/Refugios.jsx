@@ -1,12 +1,12 @@
 import React from 'react'
-import ContainerCardRefugios from './ContainerCardRefugios'
+import ContainerCardAdopcion from './ContainerCardAdopcion'
 import FiltersBar from './FiltersBar'
 
 function Refugios() {
     return (
         <div className='grid grid-cols-7 place-items-center bg-gray-200'>
             <FiltersBar className='place-self-center'/>
-            <ContainerCardRefugios title="REFUGIOS" className="col-span-6"/>
+            <ContainerCardAdopcion title="REFUGIOS" className="col-span-6"/>
         </div>
     )
 }

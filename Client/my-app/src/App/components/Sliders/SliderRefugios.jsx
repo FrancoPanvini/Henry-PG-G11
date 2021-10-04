@@ -1,7 +1,7 @@
 import React from "react";
 import { useSelector } from "react-redux";
 import Carousel from "react-elastic-carousel";
-import CardRefugio from "./CardRefugio";
+import CardRefugio from "../Cards/CardRefugio";
 
 const breakPoints = [
   { width: 1, itemsToShow: 1 },

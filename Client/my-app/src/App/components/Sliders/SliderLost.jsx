@@ -1,7 +1,7 @@
 import React from "react";
 import { useSelector } from "react-redux";
 import Carousel from "react-elastic-carousel";
-import CardLost from "./CardLost";
+import CardLost from "../Cards/CardLost";
 
 const breakPoints = [
   { width: 1, itemsToShow: 1 },

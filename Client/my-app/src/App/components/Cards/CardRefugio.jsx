@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { useSelector } from "react-redux";
 import ReactCardFlip from "react-card-flip";
-import Modal from "./pop-up/modal";
+import Modal from "../pop-up/modal";
 import {FaFacebookSquare, FaInstagram, FaGlobe, FaDonate} from "react-icons/fa"
 
 function Card({ photo, name, phone, country, province, city, description, socialNet, responsable, instagram, facebook, donaciones }) {
