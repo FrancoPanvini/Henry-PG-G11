@@ -1,15 +1,29 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
+import { useSelector } from 'react-redux';
 import { useDispatch } from 'react-redux';
 import { useLocation } from 'react-router';
-import { getPetsAdop, getPetsAdopFilter } from '../redux/actions';
+import { getCities, getCountries, getLostPets, getLostPetsFilter, getPetsAdop, getPetsAdopFilter, getProvinces } from '../redux/actions';
 
 
 function FiltersBar() {
 
     const dispatch = useDispatch();
 
+    useEffect(() => {
+        dispatch(getCountries());
+        dispatch(getProvinces()); 
+        dispatch(getCities());  
+    }, [dispatch])
+
+    const pais = useSelector((state) => state.countries); 
+    const provincia = useSelector((state) => state.provinces); 
+    const ciudad = useSelector((state) => state.cities); 
+    const [countryId, setCountryId] = useState(null);
+    const [provinceId, setProvinceId] = useState(null);
+    
     let location = useLocation();
     const [urlFilter, setUrlFilter] = useState({type: "", gender: "", size: "", agemin: "", agemax: "", country: "", province: "", city: ""});
+    const [urlFilterLost, setUrlFilterLost] = useState({type: "", gender: "", size: "", agemin: "", agemax: "", country: "", province: "", city: ""});
     let currentLocation = location.pathname;
 
 
@@ -21,6 +35,19 @@ function FiltersBar() {
         }  
         
         setUrlFilter(updateFilter);
+
+        sendFilters(updateFilter);
+    }
+
+    
+    const  handleSetUrlLost =  (e) => {
+        e.preventDefault();
+        let updateFilter = {
+            ...urlFilterLost,
+            [e.target.name] : e.target.value
+        }  
+        
+        setUrlFilterLost(updateFilter);
 
         sendFilters(updateFilter);
     }
@@ -49,8 +76,9 @@ function FiltersBar() {
 
     const handleResetFilters = (e) => {
         e.preventDefault();
-        setUrlFilter({type: "", gender: "", size: "", agemin: "", agemax: "", country: "", province: "", city: ""});
-        dispatch(getPetsAdop(1))
+        currentLocation === "/adopciones" ? setUrlFilter({type: "", gender: "", size: "", agemin: "", agemax: "", country: "", province: "", city: ""})
+       : setUrlFilterLost({type: "", gender: "", size: "", agemin: "", agemax: "", country: "", province: "", city: ""});
+        currentLocation === "/adopciones" ? dispatch(getPetsAdop()) : dispatch(getLostPets());
     }
 
     const sendFilters = (filters) => {
@@ -65,10 +93,14 @@ function FiltersBar() {
         cleanFilter.city === "" && delete cleanFilter.city;
         cleanFilter.province === "" && delete cleanFilter.province;
 
-       dispatch(getPetsAdopFilter(cleanFilter));
+       currentLocation === "/adopciones" ? dispatch(getPetsAdopFilter(cleanFilter)) : dispatch(getLostPetsFilter(cleanFilter));
 
     }
 
+    const handleFilterUbication = (e) => {
+       currentLocation === "/adopciones" ? handleSetUrl(e) : handleSetUrlLost(e);
+        e.target.name === "country" ? setCountryId(e.target.value) : setProvinceId(e.target.value);
+    }
 
     return (
         <>
@@ -81,7 +113,52 @@ function FiltersBar() {
 
         <div className="p-1 mb-2 flex flex-wrap justify-between items-center ">
             <label className="w-1/2 pr-8  font-bold">Ubicacion</label>
-            <span>Estoy activo</span>   
+            <select
+            onChange={handleFilterUbication}
+            name="country"
+            /* id="paises" */ className="w-full my-2 rounded-md px-1"
+          >
+              <option>Seleccionar</option>
+            {pais &&
+              pais.map((e) => (
+                <option key={e.id} name={e.id} value={e.id}>
+                  {e.name}
+                </option>
+              ))}
+          </select>
+          <br/>
+          <select
+            onChange={handleFilterUbication}
+            className="w-full rounded-md px-1 my-2" /* id="provincias" */
+            name="province"
+          >
+              <option>Seleccionar</option>
+            {provincia &&
+              provincia
+                .filter((p) => parseInt(p.CountryId) === parseInt(countryId))
+                .map((e) => (
+                  <option key={e.id} value={e.id} name="city" onClick={e.target}>
+                    {e.name}
+                  </option>
+                ))}
+          </select>
+          <br/>
+          <select
+            onChange={handleSetUrl}
+            className="w-full rounded-md px-1 my-2" /* id="provincias" */
+            name="city"
+          >
+              <option>Seleccionar</option>
+            {ciudad &&
+              ciudad
+                .filter((p) => parseInt(p.ProvinceId) === parseInt(provinceId))
+                .map((e) => (
+                  <option key={e.id} value={e.id} >
+                    {e.name}
+                  </option>
+                ))}
+          </select>
+             
         </div>
 
 
@@ -107,29 +184,58 @@ function FiltersBar() {
             <button value="h" name="gender" onClick={handleSetUrl} className="w-1/3 hover:underline focus:underline">Hembra</button>
         </div>
         
-       {/*  <div className="p-1 mb-4 flex flex-wrap justify-between items-center">
-            <label className="w-1/2 pr-8  font-bold">Fecha</label>
-            {filterActive.fecha === false ? <button className={classBtn} id="fecha" onClick={handleActiveFilter}>+</button> :  <button className={classBtn} id="fecha" onClick={handleActiveFilter}>-</button> }
-           
-        </div>
-            {filterActive.fecha === true && <select className="w-full mb-4">
-                                                <option>Select</option>
-                                                <option value="m">Macho</option>    
-                                                <option value="h">Hembra</option>    
-                                            </select>} */}
 
-            <button className="btn bg-primary p-1 rounded-lg" onClick={handleResetFilters}>Reset Filters</button>
+        <button className="btn bg-primary p-1 rounded-lg" onClick={handleResetFilters}>Reset Filters</button>
 
         </div> : currentLocation === "/perdidos" ? <div className="border-r border-gray-800 p-8 ml-4 bg-transparent rounded-sm">
-        <div className="p-1 mb-2 flex flex-col justify-start">
-            <label className="w-full pr-8  font-bold">Especie</label>
-            <button value="p" name="type" onClick={handleSetUrl} className="w-1/3 hover:underline focus:underline">Perro</button>
-            <button value="g" name="type" onClick={handleSetUrl} className="w-1/3 hover:underline focus:underline">Gato</button>
-        </div>
 
             <div className="p-1 mb-2 flex flex-wrap justify-between items-center ">
                 <label className="w-1/2 pr-8  font-bold">Ubicacion</label>
-                <span>Estoy activo</span>   
+                <select
+            onChange={handleFilterUbication}
+            name="country"
+            /* id="paises" */ className="w-full my-2 rounded-md px-1"
+          >
+              <option>Seleccionar</option>
+            {pais &&
+              pais.map((e) => (
+                <option key={e.id} name={e.id} value={e.id}>
+                  {e.name}
+                </option>
+              ))}
+          </select>
+          <br/>
+          <select
+            onChange={handleFilterUbication}
+            className="w-full rounded-md px-1 my-2" /* id="provincias" */
+            name="province"
+          >
+              <option>Seleccionar</option>
+            {provincia &&
+              provincia
+                .filter((p) => parseInt(p.CountryId) === parseInt(countryId))
+                .map((e) => (
+                  <option key={e.id} value={e.id} name="city" onClick={e.target}>
+                    {e.name}
+                  </option>
+                ))}
+          </select>
+          <br/>
+          <select
+            onChange={handleSetUrl}
+            className="w-full rounded-md px-1 my-2" /* id="provincias" */
+            name="city"
+          >
+              <option>Seleccionar</option>
+            {ciudad &&
+              ciudad
+                .filter((p) => parseInt(p.ProvinceId) === parseInt(provinceId))
+                .map((e) => (
+                  <option key={e.id} value={e.id} >
+                    {e.name}
+                  </option>
+                ))}
+          </select>
             </div>
                                             
             <button className="btn bg-primary p-1 rounded-lg" onClick={handleResetFilters}>Reset Filters</button>

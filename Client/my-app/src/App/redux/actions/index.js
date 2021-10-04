@@ -151,4 +151,38 @@ export function logOutUser(){
   }
 }
 
+export const getLostPets = () => {
+  return function(dispatch) {
+    axios.get(`http://localhost:3001/lostpets?found=false`)
+     .then(data => {
+       dispatch({ type: "GET_LOST_PETS", payload: data });
+     });
+ };
+}
+
+export const getLostPetsFilter = (filters) => {
+  let url = "http://localhost:3001/lostpets?found=false"
+    let keys = Object.keys(filters);
+    let values = Object.values(filters);
+
+    for (let i = 0; i < keys.length; i++) {
+      url = url + '&' + keys[i] + "=" + values[i];
+    }
+
+    return function(dispatch) {
+        axios.get(url)
+         .then(data => {
+           dispatch({ type: "GET_LOST_PETS_FILTERED", payload: data });
+         });
+     };
+}
+
+export const getLostPetsHome = () => {
+  return function(dispatch) {
+      axios.get(`http://localhost:3001/lostpets?found=false&paglimit=6&pagnumber=1`)
+       .then(data => {
+         dispatch({ type: "GET_LOST_PETS_HOME", payload: data });
+       });
+   };
+}
 
