@@ -8,6 +8,8 @@ const initialState = {
   countries: [],
   provinces: [],
   cities: [],
+  lostPets: [],
+  lostPetsHome: []
 };
 
 function rootReducer(state = initialState, action) {
@@ -69,6 +71,21 @@ function rootReducer(state = initialState, action) {
         user: {},
         isLogged:  false
       }
+    
+    case "GET_LOST_PETS":
+      return {...state, lostPets:action.payload.data}
+
+    case "GET_LOST_PETS_FILTERED":
+      return {
+        ...state,
+        lostPets: action.payload.data,
+      };
+
+    case "GET_LOST_PETS_HOME":
+      return {
+        ...state,
+        lostPets: action.payload.data,
+      };
 
     default:
       return state;

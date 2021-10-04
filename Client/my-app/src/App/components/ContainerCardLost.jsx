@@ -1,8 +1,8 @@
 import React, { useEffect, useState }  from "react";
 import { useDispatch } from "react-redux";
 import { useSelector } from "react-redux";
-import { getPetsAdop } from "../redux/actions";
-import Card from "./Card";
+import { getLostPets } from "../redux/actions";
+import CardLost from "./CardLost";
 //import { HiArrowCircleLeft, HiArrowCircleRight } from "react-icons/hi";
 import { BiChevronsRight, BiChevronsLeft } from "react-icons/bi";
 
@@ -10,13 +10,13 @@ function ContenedorCard({className , title}) {
   const dispatch = useDispatch();
  
   useEffect(() => {
-  dispatch(getPetsAdop());
+  dispatch(getLostPets());
   }, [dispatch])
   
  
-  const pets = useSelector(state => state.petsAdop.rows);
+  const pets = useSelector(state => state.lostPets.rows);
   const [currentPage, setCurrentPage] = useState(1);
-  const [itemsPerPage] = useState(6);
+  const [itemsPerPage] = useState(3);
   const [pageNumberLimit] = useState(3);
   const [maxPageNumberList, setMaxPageNumberList] = useState(3);
   const [minPageNumberList, setMinPageNumberList] = useState(0);
@@ -111,17 +111,18 @@ const handlePrev= () => {
                             {renderPagesNumber}
                             
                                 <button className=" btn bg-primary text-white rounded-full p-1 mr-1" onClick={handleNext} disabled={ currentPage === pages[pages.length - 1] ? true : false}><BiChevronsRight/></button>
+        {/* {currentPage > 1 && <HiArrowCircleLeft className="mr-4 cursor-pointer text-3xl text-primary" onClick={handlePrev}/>}
+        {pagination}
+        {currentPage === pages ? null : <HiArrowCircleRight className="ml-4 cursor-pointer text-3xl text-primary" onClick={handleNext}/>} */}
       </div>
       <div className='grid grid-cols-3 gap-4 items-center  justify-center w-full'>
       { currentItems && currentItems.map( p => {
         return (
           <div key={p.id} className="" >
-          <Card 
-          photo={p.petPic ? p.petPic : "https://drpp-ny.org/wp-content/uploads/2014/07/sorry-image-not-available.png"}
+          <CardLost
+          photo={p.photo ? p.photo : "https://drpp-ny.org/wp-content/uploads/2014/07/sorry-image-not-available.png"}
           name={p.name}
-          age={p.age}
           size={p.size}
-          sex={p.sex}
           country={p.country}
           province={p.province}
           city={p.city}
