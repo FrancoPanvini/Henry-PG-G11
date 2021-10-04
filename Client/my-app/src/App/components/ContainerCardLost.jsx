@@ -16,7 +16,7 @@ function ContenedorCard({className , title}) {
  
   const pets = useSelector(state => state.lostPets.rows);
   const [currentPage, setCurrentPage] = useState(1);
-  const [itemsPerPage] = useState(3);
+  const [itemsPerPage] = useState(6);
   const [pageNumberLimit] = useState(3);
   const [maxPageNumberList, setMaxPageNumberList] = useState(3);
   const [minPageNumberList, setMinPageNumberList] = useState(0);
