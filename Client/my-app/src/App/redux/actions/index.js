@@ -3,26 +3,29 @@ import jwt from "jsonwebtoken"
 /* import { setUser } from '../redux/actions'; */
 
 
-export const getPetsAdop = (num) => {
+export const getPetsAdop = () => {
     return function(dispatch) {
-        axios.get(`http://localhost:3001/pets?adopted=false&paglimit=6&pagnumber=${num}`)
+        axios.get(`http://localhost:3001/pets?adopted=false`)
          .then(data => {
            dispatch({ type: "GET_PETS", payload: data });
          });
      };
 }
 
+
 export const getPetsAdopFilter = (filters) => {
     let url = "http://localhost:3001/pets?adopted=false"
-    filters.forEach( f => {
-        url.concat("&");
-        url.concat(f);
-    })
+    let keys = Object.keys(filters);
+    let values = Object.values(filters);
+
+    for (let i = 0; i < keys.length; i++) {
+      url = url + '&' + keys[i] + "=" + values[i];
+    }
 
     return function(dispatch) {
         axios.get(url)
          .then(data => {
-           dispatch({ type: "GET_PETS_FILTRED", payload: data });
+           dispatch({ type: "GET_PETS_FILTERED", payload: data });
          });
      };
 }
@@ -62,6 +65,17 @@ export function postUsers(payload) {
      }
      
  }
+
+ export function postPets(payload) {
+  // console.log(payload)
+   return async function (dispatch){
+       const response = await axios.post("pets/", payload)
+       console.log(response);
+       return response;
+   }
+   
+}
+
 export function setUser(user) {
     return async dispatch => {
         dispatch({
@@ -69,6 +83,7 @@ export function setUser(user) {
             payload: user,
         })
         localStorage.setItem('userId', user.id)
+        localStorage.setItem('userCityid', user.CityId); // ← OJO que ""CityId"" está con mayúscula acá, pero en minúscula en la DB !!! REVISAR!!!!
     }
 }
 export function logInUsers(payload) {
@@ -91,6 +106,43 @@ export function logInUsers(payload) {
          return response;
      }
      
+}
+
+export const getCountries = () => {
+  return function(dispatch) {
+      axios.get("http://localhost:3001/countries")
+       .then(data => {
+         dispatch({ type: "GET_COUNTRIES", payload: data });
+       });
+   };
+}
+
+export const getProvinces = () => {
+  return function(dispatch) {
+      axios.get("http://localhost:3001/provinces")
+       .then(data => {
+         dispatch({ type: "GET_PROVINCES", payload: data });
+       });
+   };
+}
+
+export const getCities = () => {
+  return function(dispatch) {
+      axios.get("http://localhost:3001/cities")
+       .then(data => {
+         dispatch({ type: "GET_CITIES", payload: data });
+       });
+   };
+}
+
+export function logOutUser(){
+  return dispatch => {
+    localStorage.removeItem('token')
+    localStorage.removeItem('userId')
+    dispatch({
+      type: "LOG_OUT_USER"
+    })
+  }
 }
 
 

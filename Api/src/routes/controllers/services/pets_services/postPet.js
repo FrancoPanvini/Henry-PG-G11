@@ -1,8 +1,8 @@
-const { Pets } = require("../../../../db");
+const { Pets, PetsPics } = require("../../../../db");
 const { deletePetDB } = require("./deletePet");
 
 const postPets = async (req, res) => {
-  const { name, size, sex, age, description, Ownerid, PetsTypeid, Cityid } = req.body;
+  const { name, size, sex, age, description, Ownerid, PetsTypeid, Cityid, photo } = req.body;
 
   //* Create new Pet
   let newPet, created;
@@ -37,6 +37,16 @@ const postPets = async (req, res) => {
       await newPet.setCity(Cityid);
     } catch (error) {
       throw new Error("Problems setting City of pet");
+    }
+
+    //* Set Photos
+    try {
+      if(photo){
+        let promises = photo.map(el => PetsPics.create({"url":el}).then(res => res.setPet(newPet.dataValues.id)))
+        await Promise.all(promises)
+      }
+    } catch (error) {
+      throw new Error("Problems setting Photos of pet");
     }
 
     res.status(200).json(newPet);

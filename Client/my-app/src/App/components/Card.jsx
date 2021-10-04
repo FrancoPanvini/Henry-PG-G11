@@ -6,7 +6,7 @@ import Modal from "./pop-up/modal";
 function Card({ photo, name, age, size, country, province, city, sex }) {
   const [isFlipped, setIsFlipped] = useState(false);
   const [isOpen, setIsOpen] = useState(false);
-  const isLogged = useSelector(state => state.isLogged);
+  const isLogged = useSelector((state) => state.isLogged);
 
   const handleClick = () => {
     setIsFlipped(!isFlipped);
@@ -17,21 +17,27 @@ function Card({ photo, name, age, size, country, province, city, sex }) {
       <ReactCardFlip isFlipped={isFlipped} flipDirection="vertical">
         <div className="card w-70 h-full grid justify-items-center">
           <img src={photo} alt="" className="w-full" />
-          <h3 className="font-bold text-white bg-primary p-8 w-full grid justify-items-center">
+          <h3 className="font-bold text-white bg-primary p-4 w-full grid justify-items-center">
             {name}
-            <div className='pt-3'><button
-            onClick={handleClick}
-            className="btn bg-yellow-600 text-white border-yellow-700 rounded-md"
-          >
-            <h2 className="p-2">Ver mas</h2>
-          </button></div>
+            <div className="pt-3">
+              <button
+                onClick={handleClick}
+                className="btn bg-yellow-600 text-white border-yellow-700 rounded-md"
+              >
+                <h2 className="p-2">Ver mas</h2>
+              </button>
+            </div>
           </h3>
-          
         </div>
 
         <div className="card h-full w-80 bg-secondary ">
           <div className="grid justify-items-center w-full">
-            <div className="font-bold text-xl p-6 text-fourty cursor-pointer hover:text-white" onClick={handleClick}>{name}</div>
+            <div
+              className="font-bold text-xl p-6 text-fourty cursor-pointer hover:text-white"
+              onClick={handleClick}
+            >
+              {name}
+            </div>
             <h3 className="p-1 text-white font-bold">
               Edad: <span className="text-fourty ">{age}</span>
             </h3>
@@ -53,15 +59,18 @@ function Card({ photo, name, age, size, country, province, city, sex }) {
             <h3 className="pt-1 pb-4 text-white font-bold">
               Ciudad: <span className="text-fourty">{city}</span>
             </h3>
+            {isLogged ? (
+              <div>
+                <button
+                  className="btn bg-yellow-600 text-white border-yellow-700 rounded-md"
+                  onClick={() => setIsOpen(true)}
+                >
+                  <h2 className="p-2">Postulate</h2>
+                </button>
 
-            <button
-              className="btn bg-yellow-600 text-white border-yellow-700 rounded-md"
-              onClick={() => setIsOpen(true)}
-            >
-              <h2 className="p-2">Postulate</h2>
-            </button>
-
-            <Modal open={isOpen} onClose={() => setIsOpen(false)}></Modal>
+                <Modal open={isOpen} onClose={() => setIsOpen(false)}></Modal>
+              </div>
+            ) : null}
           </div>
         </div>
       </ReactCardFlip>

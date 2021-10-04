@@ -1,10 +1,17 @@
 import React from 'react';
-import { useSelector } from 'react-redux';
+import { useSelector,useDispatch } from 'react-redux';
 import { NavLink, Link } from 'react-router-dom';
 import { FaPaw } from 'react-icons/fa';
+import { logOutUser } from '../redux/actions/index'
+
 
 function Navbar() {
+  const dispatch = useDispatch()
   const isLogged = useSelector(state => state.isLogged);
+
+  const handleLogOut = () => {
+    dispatch(logOutUser())
+  }
 
   return (
     <div className=" flex justify-between px-4 bg-gradient-to-r from-thirty to-fourty items-center text-white ">
@@ -31,7 +38,7 @@ function Navbar() {
               <NavLink to="/perfil" className="bg-primary btn btn-nav w-full border-b-fourty mr-2" activeClassName="navButtonActive" >
                 Perfil
               </NavLink>
-              <button className="bg-fourty btn btn-nav w-full border-b-0" >
+              <button className="bg-fourtyDark btn btn-nav w-full border-b-0" onClick={handleLogOut} >
                 Cerrar sesión
               </button>
             </div>
@@ -40,7 +47,7 @@ function Navbar() {
             <NavLink to="/login" className="bg-primary btn btn-nav w-full border-b-fourty mr-2" activeClassName="navButtonActive" >
               Login
             </NavLink>
-            <NavLink to="/registro" className="bg-fourty btn btn-nav w-full" activeClassName="navButtonActive" >
+            <NavLink to="/registro" className="bg-fourtyDark btn btn-nav w-full" activeClassName="navButtonActive" >
               Registro
             </NavLink>
             {/* <NavLink to="/registro" className="hover:text-tercero focus:text-tercero">Registrarse</NavLink> */}

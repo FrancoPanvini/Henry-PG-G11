@@ -1,41 +1,52 @@
 import React, {useState} from 'react'
 import { storage } from "./firebase/index";
 
-function UploadImage() {
+function UploadImage({ photo, setUrl }) {
 
-    const [image, setImage] = useState(null);
+    const [image, setImage] = useState([]);
+    const [progress, setProgress] = useState(0);
 
     const handleChange = e => {
         if (e.target.files[0]) {
-          setImage(e.target.files[0]);
+          setImage(Object.values(e.target.files));
         }
       };
 
-    const handleUpload = () => {
-        const uploadTask = storage.ref(`images/${image.name}`).put(image);
-        uploadTask.on(
-          "state_changed",
-          snapshot => {},
-          error => {
-            console.log(error);
-          },
-          () => {
-            storage
+    const handleUpload = (e) => {
+        e.preventDefault();
+        image.forEach(el => {
+          const uploadTask = storage.ref(`images/${el.name}`).put(el);
+          uploadTask.on(
+            "state_changed",
+            snapshot => {
+              const progress = Math.round(
+                (snapshot.bytesTransferred / snapshot.totalBytes) * 100
+              );
+              setProgress(progress);
+            },
+            error => {
+              console.log(error);
+            },
+            () => {
+              storage
               .ref("images")
-              .child(image.name)
+              .child(el.name)
               .getDownloadURL()
               .then(url => {
-                console.log(url)
+                setUrl(prevUrl => [...prevUrl, url]);
               });
-          }
-        );
+            }
+            );
+        })
       };
-
+          //Comentar el div de progress si hace mal a la vista
 
     return (
-        <div>
-            <input type="file" onChange={handleChange}/>
-            <button onClick={handleUpload} className="bg-primary btn w-20 rounded-xl border-b-fourty mr-2" activeClassName="navButtonActive">Upload</button>
+        <div className="text-center">
+            <div><progress value={progress} max="100" /></div> 
+            <input name={photo} type="file" multiple onChange={handleChange}/>
+            <br />
+            <button onClick={handleUpload} className={image === null ? "mt-1 w-32 px-2 invisible" : "btn btn-nav bg-primary w-32 px-2 rounded-xl border-b-fourty mr-2 mt-1"}>Subir foto</button>
         </div>
     )
 }
