@@ -169,6 +169,7 @@ export function logOutUser(){
   return dispatch => {
     localStorage.removeItem('token')
     localStorage.removeItem('userId')
+    localStorage.removeItem('userCityid')
     dispatch({
       type: "LOG_OUT_USER"
     })
