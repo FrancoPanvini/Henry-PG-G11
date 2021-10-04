@@ -12,6 +12,15 @@ export const getPetsAdop = () => {
      };
 }
 
+export const getPetsAdopHome = () => {
+    return function(dispatch) {
+        axios.get(`http://localhost:3001/pets?adopted=false&paglimit=6&pagnumber=1`)
+         .then(data => {
+           dispatch({ type: "GET_PETS_HOME", payload: data });
+         });
+     };
+}
+
 
 export const getPetsAdopFilter = (filters) => {
     let url = "http://localhost:3001/pets?adopted=false"
@@ -66,14 +75,11 @@ export function postUsers(payload) {
      
  }
 
- export function postPets(payload) {
-  // console.log(payload)
-   return async function (dispatch){
-       const response = await axios.post("pets/", payload)
+ export async function postPets(payload) {
+  // console.log(payload){
+       const response = await axios.post("http://localhost:3001/pets", payload)
        console.log(response);
        return response;
-   }
-   
 }
 
 export function setUser(user) {
