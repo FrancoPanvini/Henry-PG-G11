@@ -1,10 +1,8 @@
 import React, { useState } from 'react';
-import { useDispatch } from 'react-redux';
 import UploadImage from './cargue-fotos/UploadImage';
 import { postPets } from '../redux/actions/index';
 
 function FormularioPosteo() {
-  const dispatch = useDispatch();
 
   const [mascota, setMascota] = useState({
     name: '',
@@ -32,7 +30,7 @@ function FormularioPosteo() {
       photo: url,
     }
     console.log(newMascota);
-    dispatch(postPets(newMascota));
+    postPets(newMascota);
     setUrl([])
   };
 

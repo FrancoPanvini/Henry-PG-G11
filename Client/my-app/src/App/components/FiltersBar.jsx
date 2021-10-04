@@ -9,22 +9,9 @@ function FiltersBar() {
     const dispatch = useDispatch();
 
     let location = useLocation();
-    const [filterActive, setFilterActive] = useState({especie: false, ubicacion: false, edad: false, tamaño: false, sexo: false, fecha: false});
     const [urlFilter, setUrlFilter] = useState({type: "", gender: "", size: "", agemin: "", agemax: "", country: "", province: "", city: ""});
     let currentLocation = location.pathname;
 
-    const handleActiveFilter = (e) => {
-        e.preventDefault();
-
-        filterActive[e.target.id] === true ? setFilterActive({
-            ...filterActive,
-            [e.target.id] : false
-        }) : setFilterActive({
-            ...filterActive,
-            [e.target.id] : true
-        })
-        
-    }
 
     const  handleSetUrl =  (e) => {
         e.preventDefault();
@@ -51,10 +38,7 @@ function FiltersBar() {
 
     const handleSend = (e) => {
         e.preventDefault();
-        if(urlFilter.agemin >= urlFilter.agemax) {
-            alert("La edad minima debe ser menor a la maxima");
-        }else sendFilters(urlFilter)
-            
+       sendFilters(urlFilter)      
     }
 
     const setDisabled = () => {
@@ -66,7 +50,6 @@ function FiltersBar() {
     const handleResetFilters = (e) => {
         e.preventDefault();
         setUrlFilter({type: "", gender: "", size: "", agemin: "", agemax: "", country: "", province: "", city: ""});
-        setFilterActive({especie: false, ubicacion: false, edad: false, tamaño: false, sexo: false, fecha: false});
         dispatch(getPetsAdop(1))
     }
 
@@ -89,7 +72,7 @@ function FiltersBar() {
 
     return (
         <>
-       { currentLocation === "/adopciones" ?  <div className="border-r w-full  border-gray-800 p-8 ml-4 bg-transparent rounded-sm ">
+       { currentLocation === "/adopciones" ?  <div className="r w-full  p-8 ml-4 bg-transparent rounded-sm ">
         <div className="p-1 mb-2 flex flex-col justify-start">
             <label className="w-full pr-8  font-bold">Especie</label>
             <button value="p" name="type" onClick={handleSetUrl} className="w-1/3 hover:underline focus:underline">Perro</button>

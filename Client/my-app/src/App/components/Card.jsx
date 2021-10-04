@@ -18,7 +18,7 @@ function Card({ photo, name, age, size, country, province, city, sex }) {
         <div className="card w-70 h-full grid justify-items-center">
           <img src={photo} alt="" className="w-full" />
           <h3 className="font-bold text-white bg-primary p-4 w-full grid justify-items-center">
-            {name}
+            {name.replace(/\b\w/g, function(l){ return l.toUpperCase() })}
             <div className="pt-3">
               <button
                 onClick={handleClick}
@@ -36,16 +36,16 @@ function Card({ photo, name, age, size, country, province, city, sex }) {
               className="font-bold text-xl p-6 text-fourty cursor-pointer hover:text-white"
               onClick={handleClick}
             >
-              {name}
+              {name.replace(/\b\w/g, function(l){ return l.toUpperCase() })}
             </div>
             <h3 className="p-1 text-white font-bold">
               Edad: <span className="text-fourty ">{age}</span>
             </h3>
             <h3 className="p-1 text-white font-bold">
-              Tamano: <span className="text-fourty">{size}</span>
+              Tamano: <span className="text-fourty">{size === "c" ? "pequeño" : size === "m" ? "mediano" : "grande"}</span>
             </h3>
             <h3 className="p-1 text-white font-bold">
-              Sexo <span className="text-fourty">: {sex}</span>
+              Sexo <span className="text-fourty">: {sex === "h" ? "hembra" : "macho"}</span>
             </h3>
 
             <h3 className="p-1 text-white font-bold">

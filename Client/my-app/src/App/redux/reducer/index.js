@@ -2,7 +2,7 @@
 
 const initialState = {
   petsAdop: [],
-  petsFilter: [],
+  petsHome: [],
   user: {},
   isLogged: false,
   countries: [],
@@ -13,6 +13,12 @@ const initialState = {
 function rootReducer(state = initialState, action) {
   switch (action.type) {
     case "GET_PETS":
+      return {
+        ...state,
+        petsAdop: action.payload.data,
+      };
+    
+    case "GET_PETS_HOME":
       return {
         ...state,
         petsAdop: action.payload.data,

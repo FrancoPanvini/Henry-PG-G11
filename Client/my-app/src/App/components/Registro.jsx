@@ -1,17 +1,25 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import { FaPaw, FaExclamationCircle } from "react-icons/fa";
-import { postUsers } from "../redux/actions/index";
+import { getCities, getCountries, getProvinces, postUsers } from "../redux/actions/index";
 import { useHistory } from "react-router-dom";
 
 function Registro() {
   const dispatch = useDispatch();
   const pais = useSelector((state) => state.countries);
   const provincia = useSelector((state) => state.provinces);
+  const ciudad = useSelector((state) => state.cities);
   const [countryId, setCountryId] = useState(null);
   const [provinceId, setProvinceId] = useState(null);
+  // const [cityId, setCityId] = useState(null);
   const history = useHistory();
+
+    useEffect(() => {
+    dispatch(getCountries());
+    dispatch(getProvinces()); 
+    dispatch(getCities());  
+    }, [dispatch])
 
   const [input, setInput] = useState({
     name: "",
@@ -19,9 +27,7 @@ function Registro() {
     phone: "",
     direction: "",
     password: "",
-    pais: "",
-    provinces: "",
-    Cityid: 4, // ← hardcodeado, revisar !!!
+    Cityid: "", // ← hardcodeado, revisar !!!
     UsersTypeid: "i", // ← hardcodeado, revisar !!!
   });
   const [errors, setErrors] = useState({});
@@ -32,7 +38,7 @@ function Registro() {
     phone,
     direction,
     password,
-    // Cityid,
+    Cityid,
     // UsersTypeid,
   }) => {
     let errors = {};
@@ -53,10 +59,10 @@ function Registro() {
     }
     /* if (!UsersTypeid) {
       errors.UsersTypeid = "Selecciona un tipo de usuario";
-    } 
+    } */
     if (!Cityid) {
       errors.Cityid = "Selecciona tu ciudad";
-    } */
+    } 
     return errors;
   };
 
@@ -76,7 +82,7 @@ function Registro() {
     }
     return true;
   };
-
+  
   const handleSubmit = (e) => {
     console.log(input); // DELETE DELETE DELETE
     e.preventDefault();
@@ -94,7 +100,7 @@ function Registro() {
   };
 
   return (
-    <div className="h-screen flex items-center justify-between bg-gradient-to-r from-thirty to-fourty">
+    <div className="h-full flex items-center justify-around bg-gradient-to-r from-thirty to-fourty">
       {/* DOS VERSIONES, para funcionar una debe estar comentada y la otra activada, porque una remplazaría a la otra  */}
 
       {/* ↓ Versión 1: "Coherente" con la foto de gatitos de Home ↓ */}
@@ -111,7 +117,7 @@ function Registro() {
         <div className="flex justify-center items-center w-1/2 z-10"></div>
         <form
           onSubmit={(e) => handleSubmit(e)}
-          className="flex flex-col ml-12 mr-auto bg-thirty py-12 px-8 rounded-lg w-2/5 min-w-sign shadow-xl border-2 border-fourty border-opacity-50"
+          className="flex flex-col m-8 mr-48  bg-thirty py-12 px-8 rounded-lg w-2/5 min-w-sign shadow-xl border-2 border-fourty border-opacity-50"
         >
           <div className="mx-auto flex justify-center items-center bg-fourty w-20 h-20 rounded-full">
             <FaPaw className="text-white text-3xl" />
@@ -255,14 +261,15 @@ function Registro() {
             )}
           </label>
           <select
-            onChange={(e) => setProvinceId(e.target.value)}
+            onChange={handleOnChange}
             className="rounded-md px-1" /* id="provincias" */
+            name="Cityid"
           >
-            {provincia &&
-              provincia
-                .filter((p) => p.CountryId == countryId)
+            {ciudad &&
+              ciudad
+                .filter((p) => p.ProvinceId == provinceId)
                 .map((e) => (
-                  <option key={e.id} value={e.id}>
+                  <option key={e.id} value={e.id} >
                     {e.name}
                   </option>
                 ))}
