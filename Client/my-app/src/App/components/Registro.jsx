@@ -243,7 +243,7 @@ function Registro() {
           >
             {provincia &&
               provincia
-                .filter((p) => p.CountryId == countryId)
+                .filter((p) => parseInt(p.CountryId) === parseInt(countryId))
                 .map((e) => (
                   <option key={e.id} value={e.id}>
                     {e.name}
@@ -266,7 +266,7 @@ function Registro() {
           >
             {ciudad &&
               ciudad
-                .filter((p) => p.ProvinceId == provinceId)
+                .filter((p) => parseInt(p.ProvinceId) === parseInt(provinceId))
                 .map((e) => (
                   <option key={e.id} value={e.id} >
                     {e.name}
