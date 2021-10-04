@@ -1,13 +1,13 @@
 import React, { useState } from "react";
-import { useSelector } from "react-redux";
+// import { useSelector } from "react-redux";
 import ReactCardFlip from "react-card-flip";
-import Modal from "../pop-up/modal";
+// import Modal from "../pop-up/modal";
 import {FaFacebookSquare, FaInstagram, FaGlobe, FaDonate} from "react-icons/fa"
 
-function Card({ photo, name, phone, country, province, city, description, socialNet, responsable, instagram, facebook, donaciones }) {
+function CardRefugio({ photo, name, phone, country, province, city, description, socialNet, responsable, instagram, facebook, donaciones }) {
   const [isFlipped, setIsFlipped] = useState(false);
-  const [isOpen, setIsOpen] = useState(false);
-  const isLogged = useSelector((state) => state.isLogged);
+  // const [isOpen, setIsOpen] = useState(false);
+  // const isLogged = useSelector((state) => state.isLogged);
 
   const handleClick = () => {
     setIsFlipped(!isFlipped);
@@ -122,4 +122,4 @@ function Card({ photo, name, phone, country, province, city, description, social
   ); */
 }
 
-export default Card;
+export default CardRefugio;

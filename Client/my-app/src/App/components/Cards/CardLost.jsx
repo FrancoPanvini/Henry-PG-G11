@@ -3,7 +3,7 @@ import { useSelector } from "react-redux";
 import ReactCardFlip from "react-card-flip";
 import Modal from "../pop-up/modal";
 
-function Card({ photo, name, size, country, province, city }) {
+function CardLost({ photo, name, size, country, province, city }) {
   const [isFlipped, setIsFlipped] = useState(false);
   const [isOpen, setIsOpen] = useState(false);
   const isLogged = useSelector((state) => state.isLogged);
@@ -71,4 +71,4 @@ function Card({ photo, name, size, country, province, city }) {
   );
 }
 
-export default Card;
+export default CardLost;

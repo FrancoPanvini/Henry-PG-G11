@@ -1,23 +1,28 @@
 import React, { useEffect, useState }  from "react";
 import { useDispatch } from "react-redux";
 import { useSelector } from "react-redux";
-import { getLostPets, getPetsAdop, getShelters } from "../redux/actions";
-import Card from "./Cards/Card";
-import CardLost from './Cards/CardLost'
-import CardRefugio from './Cards/CardRefugio'
+import { getLostPets, getPetsAdop, getShelters } from "../../redux/actions";
+import CardAdopcion from "./CardAdopcion";
+import CardLost from './CardLost'
+import CardRefugio from './CardRefugio'
 import { BiChevronsRight, BiChevronsLeft } from "react-icons/bi";
 
 function ContenedorCard({className , title}) {
   const dispatch = useDispatch();
 
-  
- 
   useEffect(() => {
-    dispatch(title === "ADOPCIONES" ? getPetsAdop() : title === "PERDIDOS" ? getLostPets() : getShelters());
+    dispatch(
+      title === "ADOPCIONES" ? getPetsAdop() 
+      : title === "PERDIDOS" ? getLostPets() 
+      : getShelters());
   }, [dispatch, title])
-  
  
-  const items = useSelector(state => title === "ADOPCIONES" ? state.petsAdop.rows : title === "PERDIDOS" ? state.lostPets.rows : state.shelters.rows );
+  const items = useSelector(state => (
+    title === "ADOPCIONES" ? state.petsAdop.rows 
+    : title === "PERDIDOS" ? state.lostPets.rows 
+    : state.shelters.rows
+  ));
+  
   const [currentPage, setCurrentPage] = useState(1);
   const [itemsPerPage] = useState(6);
   const [pageNumberLimit] = useState(3);
@@ -28,43 +33,41 @@ function ContenedorCard({className , title}) {
     setCurrentPage(Number(e.target.id));
 }
 
-const pages = [];
+  const pages = [];
 
-for (let i = 1; i <= Math.ceil(items?.length/itemsPerPage); i++) {
-    pages.push(i);
-}
+  for (let i = 1; i <= Math.ceil(items?.length/itemsPerPage); i++) {
+      pages.push(i);
+  }
 
-const indexOfLastItem = currentPage * itemsPerPage;
-const indexOfFirstItem = indexOfLastItem - itemsPerPage;
-let currentItems =  items?.slice(indexOfFirstItem, indexOfLastItem);
+  const indexOfLastItem = currentPage * itemsPerPage;
+  const indexOfFirstItem = indexOfLastItem - itemsPerPage;
+  let currentItems =  items?.slice(indexOfFirstItem, indexOfLastItem);
 
+  const renderPagesNumber = pages.map(p => {
+    if( p < maxPageNumberList + 1 && p > minPageNumberList){
+      return ( 
+          <button key={p} id={p} onClick={handleChangePage} className="btn bg-primary text-white p-1 rounded-lg m-2">{p}</button>
+      )
+    }else return null;
+  });
 
-const renderPagesNumber = pages.map(p => {
-  if( p < maxPageNumberList + 1 && p > minPageNumberList){
-    return ( 
-        <button key={p} id={p} onClick={handleChangePage} className="btn bg-primary text-white p-1 rounded-lg m-2">{p}</button>
-    )
-  }else return null;
-});
+  const handleNext = () => {
+      setCurrentPage( currentPage + 1);
+      
+      if( currentPage + 1 > maxPageNumberList){
+          setMaxPageNumberList( maxPageNumberList + pageNumberLimit);
+          setMinPageNumberList( minPageNumberList + pageNumberLimit);
+      }
+  }
 
-
-const handleNext = () => {
-    setCurrentPage( currentPage + 1);
-    
-    if( currentPage + 1 > maxPageNumberList){
-        setMaxPageNumberList( maxPageNumberList + pageNumberLimit);
-        setMinPageNumberList( minPageNumberList + pageNumberLimit);
-    }
-}
-
-const handlePrev= () => {
-    setCurrentPage( currentPage - 1);
-    
-    if( (currentPage - 1) % pageNumberLimit === 0){
-        setMaxPageNumberList( maxPageNumberList - pageNumberLimit);
-        setMinPageNumberList( minPageNumberList - pageNumberLimit);
-    }
-}
+  const handlePrev= () => {
+      setCurrentPage( currentPage - 1);
+      
+      if( (currentPage - 1) % pageNumberLimit === 0){
+          setMaxPageNumberList( maxPageNumberList - pageNumberLimit);
+          setMinPageNumberList( minPageNumberList - pageNumberLimit);
+      }
+  }
 
   return (
     <div className={` ${className} p-12 h-full text-left w-full`}>
@@ -85,7 +88,7 @@ const handlePrev= () => {
         return (
           <div key={p.id} className="" >
         {  title === "ADOPCIONES" ? 
-          <Card 
+          <CardAdopcion 
           photo={p.petPic ? p.petPic : "https://drpp-ny.org/wp-content/uploads/2014/07/sorry-image-not-available.png"}
           name={p.name}
           age={p.age}

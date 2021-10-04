@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { logInUsers } from '../redux/actions/index';
+import { logInUsers } from '../../redux/actions/index';
 import { Link, useHistory } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import { FaPaw, FaExclamationCircle } from 'react-icons/fa';

@@ -1,7 +1,21 @@
+
+/////////
+/////////
+/////////    SE PUEDE ELIMINAR
+/////////    QUEDA SOLO SLIDER
+/////////
+
+
+
+
+
+
+
+
 import React from "react";
 import { useSelector } from "react-redux";
 import Carousel from "react-elastic-carousel";
-import Card from "../Cards/Card";
+import CardAdopcion from "../Cards/CardAdopcion";
 
 const breakPoints = [
   { width: 1, itemsToShow: 1 },
@@ -21,7 +35,7 @@ export default function Slider() {
             pets.map((p) => {
               return (
                 <div key={p.id} className="">
-                  <Card
+                  <CardAdopcion
                     photo={p.petPic ? p.petPic : "https://drpp-ny.org/wp-content/uploads/2014/07/sorry-image-not-available.png"}
                     name={p.name}
                     age={p.age}

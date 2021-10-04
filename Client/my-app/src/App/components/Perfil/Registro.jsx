@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import { FaPaw, FaExclamationCircle } from "react-icons/fa";
-import { getCities, getCountries, getProvinces, postUsers } from "../redux/actions/index";
+import { getCities, getCountries, getProvinces, postUsers } from "../../redux/actions/index";
 import { useHistory } from "react-router-dom";
 
 function Registro() {

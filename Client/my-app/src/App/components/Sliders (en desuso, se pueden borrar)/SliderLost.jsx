@@ -1,3 +1,17 @@
+
+/////////
+/////////
+/////////    SE PUEDE ELIMINAR
+/////////    QUEDA SOLO SLIDER
+/////////
+
+
+
+
+
+
+
+
 import React from "react";
 import { useSelector } from "react-redux";
 import Carousel from "react-elastic-carousel";

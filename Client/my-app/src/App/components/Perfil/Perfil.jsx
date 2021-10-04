@@ -3,7 +3,7 @@ import axios from 'axios';
 import { useState, useEffect } from 'react';
 import { FaPaw } from 'react-icons/fa';
 import {useDispatch} from 'react-redux'
-import {logOutUser} from '../redux/actions/index'
+import {logOutUser} from '../../redux/actions/index'
 
 function Perfil() {
   const dispatch = useDispatch();
