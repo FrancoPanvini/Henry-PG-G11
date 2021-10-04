@@ -1,10 +1,10 @@
 const express = require("express");
 const router = express.Router();
-const getEvents = require("./controllers/events_services/getEvents");
-const getEventById = require("./controllers/events_services/getEventbyId");
-const postEvent = require("./controllers/events_services/postEvent");
-const putEvent = require("./controllers/events_services/putEvent");
-const { deleteEvent } = require("./controllers/events_services/deleteEvent");
+const getEvents = require("./services/events_services/getEvents");
+const getEventById = require("./services/events_services/getEventbyId");
+const postEvent = require("./services/events_services/postEvent");
+const putEvent = require("./services/events_services/putEvent");
+const { deleteEvent } = require("./services/events_services/deleteEvent");
 
 //mostrar todos los eventos (con filters)
 router.get("/", getEvents);

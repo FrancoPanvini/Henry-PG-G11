@@ -1,6 +1,6 @@
 const express = require('express');
 const router = express.Router();
-const { } = require('./controllers/photos_controllers');
+const { } = require('./services/photos_services');
 
 
 //postear fotos relacionadas a una mascota

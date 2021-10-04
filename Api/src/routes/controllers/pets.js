@@ -1,10 +1,10 @@
 const express = require("express");
 const router = express.Router();
-const getPets = require("./controllers/pets_services/getPets");
-const getPetDetail = require("./controllers/pets_services/getPetDetail");
-const postPet = require("./controllers/pets_services/postPet");
-const putPet = require("./controllers/pets_services/putPet");
-const { deletePet } = require("./controllers/pets_services/deletePet");
+const getPets = require("./services/pets_services/getPets");
+const getPetDetail = require("./services/pets_services/getPetDetail");
+const postPet = require("./services/pets_services/postPet");
+const putPet = require("./services/pets_services/putPet");
+const { deletePet } = require("./services/pets_services/deletePet");
 
 //ver todos los animales (con filters)
 router.get("/", getPets);
