@@ -1,9 +1,9 @@
 const express = require("express");
 const router = express.Router();
-const getUser = require("./controllers/users_services/getUser");
-const getUsers = require("./controllers/users_services/getUsers");
-const postUser = require("./controllers/users_services/postUser");
-const { deleteUser } = require("./controllers/users_services/deleteUser");
+const getUser = require("./services/users_services/getUser");
+const getUsers = require("./services/users_services/getUsers");
+const postUser = require("./services/users_services/postUser");
+const { deleteUser } = require("./services/users_services/deleteUser");
 
 //ver todos los users (con filters)
 router.get("/", getUsers);

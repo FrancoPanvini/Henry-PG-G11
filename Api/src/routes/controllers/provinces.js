@@ -1,7 +1,7 @@
 const express = require("express");
 const router = express.Router();
-const getProvinces = require('./controllers/provinces_controllers/getProvinces');
-const getProvince = require("./controllers/provinces_controllers/getProvince");
+const getProvinces = require('./services/provinces_services/getProvinces');
+const getProvince = require("./services/provinces_services/getProvince");
 
 
 
