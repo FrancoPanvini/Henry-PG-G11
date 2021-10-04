@@ -57,6 +57,11 @@ function rootReducer(state = initialState, action) {
         ...state,
         shelters: action.payload.data
       }  
+    case "GET_SHELTERS_FILTERED":
+        return {
+          ...state,
+          shelters: action.payload.data,
+      };
 
     case "LOGIN":
       return {
