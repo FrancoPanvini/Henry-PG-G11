@@ -52,9 +52,16 @@ export const editPetsData = (dataEdit, id) => {
     return axios.put(`http://localhost:3001/pets/${id}`, dataEdit); 
 }
 
-export const getUser = () => {
-
+export const getShelters = () => {
+  return function(dispatch) {
+    axios.get(`http://localhost:3001/users?type=r`)
+     .then(data => {
+       dispatch({ type: "GET_SHELTERS", payload: data });
+     });
+ };
 }
+
+console.log(getShelters)
 
 export const getEvents = () => {
 

@@ -2,8 +2,9 @@ import React, { useState } from "react";
 import { useSelector } from "react-redux";
 import ReactCardFlip from "react-card-flip";
 import Modal from "./pop-up/modal";
+import {FaFacebookSquare, FaInstagram, FaGlobe, FaDonate} from "react-icons/fa"
 
-function Card({ photo, name, age, size, country, province, city, sex, description }) {
+function Card({ photo, name, phone, country, province, city, description, socialNet, responsable, instagram, facebook, donaciones }) {
   const [isFlipped, setIsFlipped] = useState(false);
   const [isOpen, setIsOpen] = useState(false);
   const isLogged = useSelector((state) => state.isLogged);
@@ -39,15 +40,13 @@ function Card({ photo, name, age, size, country, province, city, sex, descriptio
               {name.replace(/\b\w/g, function(l){ return l.toUpperCase() })}
             </div>
             <h3 className="p-1 text-white font-bold">
-              Edad: <span className="text-fourty ">{age}</span>
-            </h3>
-            <h3 className="p-1 text-white font-bold">
-              Tamano: <span className="text-fourty">{size === "c" ? "pequeño" : size === "m" ? "mediano" : "grande"}</span>
-            </h3>
-            <h3 className="p-1 text-white font-bold">
-              Sexo <span className="text-fourty">: {sex === "h" ? "hembra" : "macho"}</span>
+              Nombre: <span className="text-fourty ">{name}</span>
             </h3>
 
+            <h3 className="p-1 text-white font-bold">
+              Responsable: <span className="text-fourty ">{responsable}</span>
+            </h3>
+          
             <h3 className="p-1 text-white font-bold">
               Pais: <span className="text-fourty">{country}</span>
             </h3>
@@ -56,25 +55,41 @@ function Card({ photo, name, age, size, country, province, city, sex, descriptio
               Provincia:<span className="text-fourty"> {province}</span>
             </h3>
 
+            <h3 className="pt-1 text-white font-bold">
+              Ciudad: <span className="text-fourty">{city}</span>
+            </h3>
+
             <h3 className="p-1 text-white font-bold">
               Descripcion:<span className="text-fourty"> {description}</span>
             </h3>
 
-            <h3 className="pt-1 pb-4 text-white font-bold">
-              Ciudad: <span className="text-fourty">{city}</span>
+            <h3 className="p-1 text-white font-bold">
+              Telefono: <span className="text-fourty ">{phone}</span>
             </h3>
-            {isLogged ? (
+
+            <h3 className="p-1 text-white font-bold">
+              Redes: <a href={socialNet}><FaGlobe className='inline text-fourty mx-1 text-xl'/></a>
+              <a href={facebook}><FaFacebookSquare className='inline text-fourty mx-1 text-xl'/></a>
+              <a href={instagram}><FaInstagram className='inline text-fourty mx-1 text-xl'/></a>
+            </h3>
+
+            <h3 className="p-1 text-white font-bold">
+              Donaciones: <a href={donaciones}><FaDonate className='inline text-fourty mx-1 text-xl'/></a>
+            </h3>
+
+
+           {/*  {isLogged ? (
               <div>
                 <button
                   className="btn bg-yellow-600 text-white border-yellow-700 rounded-md"
                   onClick={() => setIsOpen(true)}
                 >
-                  <h2 className="p-2">Postulate</h2>
+                  <h2 className="p-2">Contactanos</h2>
                 </button>
 
                 <Modal name={name} description={description} open={isOpen} onClose={() => setIsOpen(false)}></Modal>
               </div>
-            ) : null}
+            ) : null} */}
           </div>
         </div>
       </ReactCardFlip>
