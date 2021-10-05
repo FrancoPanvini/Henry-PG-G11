@@ -135,11 +135,12 @@ function FiltersBar() {
   };
 
   return (
-    <>
+    <div>
+      <div className='px-2 ml-4 w-full h-7 font-bold text-thirty text-2xl'>Filtrar resultados:</div>
       {currentLocation === '/adopciones' ? (
-        <div className='r w-full  p-8 ml-4 bg-transparent rounded-sm '>
-          <div className='p-1 mb-2 flex flex-col justify-start'>
-            <label className='w-full pr-8 font-bold'>
+        <div className='r w-full px-8 py-4 ml-4 bg-transparent rounded-sm '>
+          <div className='p-1 mb-2 flex flex-col justify-start border-b-2 border-thirtyLight border-opacity-50'>
+            <label className='w-full h-7 font-bold'>
               Especie{' '}
               {urlFilter.type && (
                 <button
@@ -152,123 +153,177 @@ function FiltersBar() {
                 </button>
               )}
             </label>
-            <button
-              value='p'
-              name='type'
-              onClick={handleSetUrl}
-              className={`w-16 btn-nav text-white transition-all ${
-                urlFilter.type === 'p' ? ' bg-thirtyDark' : 'btn bg-thirtyLight'
-              }`}>
-              Perro
-            </button>
-            <button
-              value='g'
-              name='type'
-              onClick={handleSetUrl}
-              className={`w-16 btn-nav text-white transition-all ${
-                urlFilter.type === 'g' ? ' bg-thirtyDark' : 'btn bg-thirtyLight'
-              }`}>
-              Gato
-            </button>
+            <div className='h-7'>
+              <button
+                value='p'
+                name='type'
+                onClick={handleSetUrl}
+                className={`w-16 btn-nav text-white ${
+                  urlFilter.type === 'p'
+                    ? ' bg-thirtyDark'
+                    : 'btn bg-thirtyLight'
+                }`}>
+                Perro
+              </button>
+            </div>
+            <div className='h-7 mb-2'>
+              <button
+                value='g'
+                name='type'
+                onClick={handleSetUrl}
+                className={`w-16 btn-nav text-white ${
+                  urlFilter.type === 'g'
+                    ? ' bg-thirtyDark'
+                    : 'btn bg-thirtyLight'
+                }`}>
+                Gato
+              </button>
+            </div>
           </div>
 
           <SelectUbication urlFilter={urlFilter} handleSetUrl={handleSetUrl} />
 
-          <div className='p-1 mb-2 flex flex-wrap justify-between items-center '>
-            <label className='w-1/2 pr-8  font-bold'>Edad</label>
-            <input
-              type='number'
-              name='agemin'
-              min={0}
-              max={20}
-              placeholder='Edad min:'
-              value={urlFilter.agemin}
-              className='w-3/4 mb-2 rounded-sm'
-              onChange={handleSetAge}
-            />
-            <input
-              type='number'
-              name='agemax'
-              min={0}
-              max={20}
-              placeholder='Edad max:'
-              className='w-3/4 mb-4 rounded-sm'
-              value={urlFilter.agemax}
-              onChange={handleSetAge}
-            />
+          <div className='p-1 mb-2 flex flex-wrap justify-between items-center border-b-2 border-t-2 border-thirtyLight border-opacity-50'>
+            <label className='w-full h-7 font-bold mt-2'>Edad</label>
+            <div className='flex justify-start w-full'>
+              <div>
+                Min:
+                <br />
+                <input
+                  type='number'
+                  name='agemin'
+                  min={0}
+                  max={20}
+                  value={urlFilter.agemin}
+                  className='mb-2 w-12 px-1 rounded-md mr-8'
+                  onChange={handleSetAge}
+                />
+              </div>
+              <div>
+                Max:
+                <br />
+                <input
+                  type='number'
+                  name='agemax'
+                  min={0}
+                  max={20}
+                  className='mb-2 w-12 px-1 rounded-md'
+                  value={urlFilter.agemax}
+                  onChange={handleSetAge}
+                />
+              </div>
+            </div>
             <button
               type='submit'
               className='btn bg-primary p-1 rounded-lg disabled:opacity-50 mb-2'
               onClick={handleSend}
               disabled={setDisabled()}>
-              Filtrar
+              Aplicar
             </button>
           </div>
 
-          <div className='p-1 mb-2 flex flex-col justify-start'>
-            <label className='w-1/2 pr-8  font-bold'>Tamaño
+          <div className='p-1 mb-2 flex flex-col justify-start border-b-2 border-thirtyLight border-opacity-50'>
+            <label className='w-full h-7 font-bold'>
+              Tamaño{' '}
               {urlFilter.size && (
                 <button
                   value=''
                   name='size'
-                  title='Resetear filtro de Especie'
+                  title='Resetear filtro de Tamaño'
                   onClick={handleSetUrl}
                   className='w-4 btn btn-nav text-white bg-primary'>
                   x
                 </button>
               )}
             </label>
-            <button
-              value='c'
-              name='size'
-              onClick={handleSetUrl}
-              className={`w-16 btn-nav text-white transition-all ${
-                urlFilter.size === 'c' ? ' bg-thirtyDark' : 'btn bg-thirtyLight'
-              }`}>
-              Pequeño
-            </button>
-            <button
-              value='m'
-              name='size'
-              onClick={handleSetUrl}
-              className={`w-16 btn-nav text-white transition-all ${
-                urlFilter.size === 'm' ? ' bg-thirtyDark' : 'btn bg-thirtyLight'
-              }`}>
-              Mediano
-            </button>
-            <button
-              value='g'
-              name='size'
-              onClick={handleSetUrl}
-              className={`w-16 btn-nav text-white transition-all ${
-                urlFilter.size === 'g' ? ' bg-thirtyDark' : 'btn bg-thirtyLight'
-              }`}>
-              Grande
-            </button>
+            <div className='h-7'>
+              <button
+                value='c'
+                name='size'
+                onClick={handleSetUrl}
+                className={`w-20 btn-nav text-white transition-all ${
+                  urlFilter.size === 'c'
+                    ? ' bg-thirtyDark'
+                    : 'btn bg-thirtyLight'
+                }`}>
+                Pequeño
+              </button>
+            </div>
+            <div className='h-7'>
+              <button
+                value='m'
+                name='size'
+                onClick={handleSetUrl}
+                className={`w-20 btn-nav text-white transition-all ${
+                  urlFilter.size === 'm'
+                    ? ' bg-thirtyDark'
+                    : 'btn bg-thirtyLight'
+                }`}>
+                Mediano
+              </button>
+            </div>
+            <div className='h-7 mb-2'>
+              <button
+                value='g'
+                name='size'
+                onClick={handleSetUrl}
+                className={`w-20 btn-nav text-white transition-all ${
+                  urlFilter.size === 'g'
+                    ? ' bg-thirtyDark'
+                    : 'btn bg-thirtyLight'
+                }`}>
+                Grande
+              </button>
+            </div>
           </div>
 
-          <div className='p-1 mb-2 flex flex-col justify-start'>
-            <label className='w-1/2 pr-8  font-bold'>Sexo</label>
-            <button
-              value='m'
-              name='gender'
-              onClick={handleSetUrl}
-              className='w-1/3 hover:underline focus:underline'>
-              Macho
-            </button>
-            <button
-              value='h'
-              name='gender'
-              onClick={handleSetUrl}
-              className='w-1/3 hover:underline focus:underline'>
-              Hembra
-            </button>
+          <div className='p-1 mb-2 flex flex-col justify-start border-b-2 border-thirtyLight border-opacity-50'>
+            <label className='w-full h-7 font-bold'>
+              Sexo{' '}
+              {urlFilter.gender && (
+                <button
+                  value=''
+                  name='gender'
+                  title='Resetear filtro de Sexo'
+                  onClick={handleSetUrl}
+                  className='w-4 btn btn-nav text-white bg-primary'>
+                  x
+                </button>
+              )}
+            </label>
+            <div className='h-7'>
+              <button
+                value='m'
+                name='gender'
+                onClick={handleSetUrl}
+                className={`w-20 btn-nav text-white transition-all ${
+                  urlFilter.gender === 'm'
+                    ? ' bg-thirtyDark'
+                    : 'btn bg-thirtyLight'
+                }`}>
+                Macho
+              </button>
+            </div>
+            <div className='h-7 mb-2'>
+              <button
+                value='h'
+                name='gender'
+                onClick={handleSetUrl}
+                className={`w-20 btn-nav text-white transition-all ${
+                  urlFilter.gender === 'h'
+                    ? ' bg-thirtyDark'
+                    : 'btn bg-thirtyLight'
+                }`}>
+                Hembra
+              </button>
+            </div>
           </div>
+          <br />
 
           <button
-            className='btn bg-primary p-1 rounded-lg'
+            className='btn bg-primary py-1 px-3 rounded-lg'
             onClick={handleResetFilters}>
-            Reset Filters
+            Resetear filtros
           </button>
         </div>
       ) : currentLocation === '/perdidos' ? (
@@ -296,7 +351,7 @@ function FiltersBar() {
           </button>
         </div>
       )}
-    </>
+    </div>
   );
 }
 
