@@ -1,9 +1,9 @@
-import React, { useState } from "react";
-import { useSelector } from "react-redux";
-import ReactCardFlip from "react-card-flip";
-import Modal from "./pop-up/modal";
+import React, { useState } from 'react';
+import { useSelector } from 'react-redux';
+import ReactCardFlip from 'react-card-flip';
+import Modal from '../pop-up/modal';
 
-function Card({ photo, name, size, country, province, city }) {
+function CardLost({ photo, name, size, country, province, city }) {
   const [isFlipped, setIsFlipped] = useState(false);
   const [isOpen, setIsOpen] = useState(false);
   const isLogged = useSelector((state) => state.isLogged);
@@ -18,7 +18,9 @@ function Card({ photo, name, size, country, province, city }) {
         <div className="card w-80 h-96 grid justify-items-center">
           <img src={photo} alt="" className="w-full h-72 object-cover" />
           <h3 className="font-bold text-white bg-primary p-4 w-full grid justify-items-center">
-            {name.replace(/\b\w/g, function(l){ return l.toUpperCase() })}
+            {name.replace(/\b\w/g, function (l) {
+              return l.toUpperCase();
+            })}
             <div className="pt-3">
               <button
                 onClick={handleClick}
@@ -36,10 +38,15 @@ function Card({ photo, name, size, country, province, city }) {
               className="font-bold text-xl p-6 text-fourty cursor-pointer hover:text-white"
               onClick={handleClick}
             >
-              {name.replace(/\b\w/g, function(l){ return l.toUpperCase() })}
+              {name.replace(/\b\w/g, function (l) {
+                return l.toUpperCase();
+              })}
             </div>
             <h3 className="p-1 text-white font-bold">
-              Tamano: <span className="text-fourty">{size === "c" ? "pequeño" : size === "m" ? "mediano" : "grande"}</span>
+              Tamano:{' '}
+              <span className="text-fourty">
+                {size === 'c' ? 'pequeño' : size === 'm' ? 'mediano' : 'grande'}
+              </span>
             </h3>
             <h3 className="p-1 text-white font-bold">
               Pais: <span className="text-fourty">{country}</span>
@@ -71,4 +78,4 @@ function Card({ photo, name, size, country, province, city }) {
   );
 }
 
-export default Card;
+export default CardLost;

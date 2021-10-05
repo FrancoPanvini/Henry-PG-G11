@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import ReactDom from "react-dom";
 import axios from "axios";
-import { useSelector } from "react-redux";
+// import { useSelector } from "react-redux";
 
 const MODAL_STYLES = {
   position: "fixed",
@@ -16,7 +16,7 @@ const MODAL_STYLES = {
 
 export default function Modal({ open, onClose, name, description }) {
   const userId = localStorage.getItem("userId");
-  const pets = useSelector((state) => state.petsAdop.rows);
+  // const pets = useSelector((state) => state.petsAdop.rows);
 
   const [user, setUser] = useState(null);
 

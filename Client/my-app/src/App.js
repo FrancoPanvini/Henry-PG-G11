@@ -2,17 +2,17 @@ import React, {useEffect} from "react";
 import "./App.css";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import Navbar from "./App/components/Navbar";
-import Footer from "./App/components/Footer";
-import Home from "./App/components/Home";
-import Login from "./App/components/Login";
-import Registro from "./App/components/Registro";
-import Adopciones from "./App/components/Adopciones";
-import Perdidos from "./App/components/Perdidos";
-import Refugios from "./App/components/Refugios";
-import Perfil from "./App/components/Perfil";
-import Nosotros from "./App/components/Nosotros";
-import FAQ from "./App/components/FAQ";
-import FormularioPosteo from "./App/components/FormularioPosteo";
+import Footer from "./App/components/info/Footer";
+import Home from "./App/components/Home/Home";
+import Login from "./App/components/Usuarios/Login";
+import Registro from "./App/components/Usuarios/Registro";
+import Adopciones from "./App/components/Mascotas/Adopciones";
+import Perdidos from "./App/components/Mascotas/Perdidos";
+import Refugios from "./App/components/Refugios/Refugios";
+import Perfil from "./App/components/Usuarios/Perfil";
+import Nosotros from "./App/components/info/Nosotros";
+import FAQ from "./App/components/info/FAQ";
+import FormularioPosteo from "./App/components/Mascotas/FormularioPosteo";
 import {useDispatch} from 'react-redux'
 import jwt from "jsonwebtoken"
 import { setUser } from "./App/redux/actions/index";

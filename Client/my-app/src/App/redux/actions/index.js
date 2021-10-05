@@ -5,7 +5,7 @@ import jwt from "jsonwebtoken"
 
 export const getPetsAdop = () => {
     return function(dispatch) {
-        axios.get(`http://localhost:3001/pets?adopted=false`)
+        axios.get(`/pets?adopted=false`)
          .then(data => {
            dispatch({ type: "GET_PETS", payload: data });
          });
@@ -14,7 +14,7 @@ export const getPetsAdop = () => {
 
 export const getPetsAdopHome = () => {
     return function(dispatch) {
-        axios.get(`http://localhost:3001/pets?adopted=false&paglimit=6&pagnumber=1`)
+        axios.get(`/pets?adopted=false&paglimit=6&pagnumber=1`)
          .then(data => {
            dispatch({ type: "GET_PETS_HOME", payload: data });
          });
@@ -23,7 +23,7 @@ export const getPetsAdopHome = () => {
 
 
 export const getPetsAdopFilter = (filters) => {
-    let url = "http://localhost:3001/pets?adopted=false"
+    let url = "/pets?adopted=false"
     let keys = Object.keys(filters);
     let values = Object.values(filters);
 
@@ -41,7 +41,7 @@ export const getPetsAdopFilter = (filters) => {
 
 export const getPetAdopDetail = (id) => {
     return function(dispatch) {
-        axios.get(`http://localhost:3001/pets/${id}`)
+        axios.get(`/pets/${id}`)
          .then(data => {
            dispatch({ type: "GET_PET_DETAIL", payload: data });
          });
@@ -49,12 +49,12 @@ export const getPetAdopDetail = (id) => {
 }
 
 export const editPetsData = (dataEdit, id) => {
-    return axios.put(`http://localhost:3001/pets/${id}`, dataEdit); 
+    return axios.put(`/pets/${id}`, dataEdit); 
 }
 
 export const getShelters = () => {
   return function(dispatch) {
-    axios.get(`http://localhost:3001/users?type=r`)
+    axios.get(`/users?type=r`)
      .then(data => {
        dispatch({ type: "GET_SHELTERS", payload: data });
      });
@@ -62,7 +62,7 @@ export const getShelters = () => {
 }
 
 export const getSheltersFilter = (filters) => {
-  let url = "http://localhost:3001/users?type=r"
+  let url = "/users?type=r"
   let keys = Object.keys(filters);
   let values = Object.values(filters);
 
@@ -77,8 +77,6 @@ export const getSheltersFilter = (filters) => {
        });
    };
 }
-
-console.log(getShelters)
 
 export const getEvents = () => {
 
@@ -101,7 +99,7 @@ export function postUsers(payload) {
 
  export async function postPets(payload) {
   // console.log(payload){
-       const response = await axios.post("http://localhost:3001/pets", payload)
+       const response = await axios.post("/pets", payload)
        console.log(response);
        return response;
 }
@@ -140,7 +138,7 @@ export function logInUsers(payload) {
 
 export const getCountries = () => {
   return function(dispatch) {
-      axios.get("http://localhost:3001/countries")
+      axios.get("/countries")
        .then(data => {
          dispatch({ type: "GET_COUNTRIES", payload: data });
        });
@@ -149,7 +147,7 @@ export const getCountries = () => {
 
 export const getProvinces = () => {
   return function(dispatch) {
-      axios.get("http://localhost:3001/provinces")
+      axios.get("/provinces")
        .then(data => {
          dispatch({ type: "GET_PROVINCES", payload: data });
        });
@@ -158,7 +156,7 @@ export const getProvinces = () => {
 
 export const getCities = () => {
   return function(dispatch) {
-      axios.get("http://localhost:3001/cities")
+      axios.get("/cities")
        .then(data => {
          dispatch({ type: "GET_CITIES", payload: data });
        });
@@ -178,7 +176,7 @@ export function logOutUser(){
 
 export const getLostPets = () => {
   return function(dispatch) {
-    axios.get(`http://localhost:3001/lostpets?found=false`)
+    axios.get(`/lostpets?found=false`)
      .then(data => {
        dispatch({ type: "GET_LOST_PETS", payload: data });
      });
@@ -186,7 +184,7 @@ export const getLostPets = () => {
 }
 
 export const getLostPetsFilter = (filters) => {
-  let url = "http://localhost:3001/lostpets?found=false"
+  let url = "/lostpets?found=false"
     let keys = Object.keys(filters);
     let values = Object.values(filters);
 
@@ -204,7 +202,7 @@ export const getLostPetsFilter = (filters) => {
 
 export const getLostPetsHome = () => {
   return function(dispatch) {
-      axios.get(`http://localhost:3001/lostpets?found=false&paglimit=6&pagnumber=1`)
+      axios.get(`/lostpets?found=false&paglimit=6&pagnumber=1`)
        .then(data => {
          dispatch({ type: "GET_LOST_PETS_HOME", payload: data });
        });
