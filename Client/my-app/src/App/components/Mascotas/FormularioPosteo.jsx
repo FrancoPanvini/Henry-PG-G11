@@ -18,6 +18,8 @@ function FormularioPosteo() {
   });
   const [url, setUrl] = useState([]);
   const [errors, setErrors] = useState({});
+  
+
 
   const validate = ({ name, PetsTypeid }) => {
     let errors = {};
