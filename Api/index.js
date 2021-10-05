@@ -16,8 +16,8 @@ conn
     //countryLoader()
   })
   .then(() => {
-    PetsType.bulkCreate(petsTypesArray);
-    UsersType.bulkCreate(usersTypesArray);
+    //PetsType.bulkCreate(petsTypesArray);
+    //UsersType.bulkCreate(usersTypesArray);
   })
   .then(() => {
     //Users.bulkCreate(userArray);
