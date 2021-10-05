@@ -13,7 +13,7 @@ conn
     });
   })
   .then(() => {
-    // countryLoader()
+    countryLoader()
   })
   .then(() => {
     //PetsType.bulkCreate(petsTypesArray);
