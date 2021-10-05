@@ -13,7 +13,6 @@ import {
   getSheltersFilter,
 } from '../../redux/actions';
 import SelectUbication from './SelectCountries/SelectUbication';
-import { FaRegWindowClose } from 'react-icons/fa';
 
 function FiltersBar() {
   const dispatch = useDispatch();
