@@ -13,6 +13,7 @@ import {
   getSheltersFilter,
 } from '../../redux/actions';
 import SelectUbication from './SelectCountries/SelectUbication';
+import { FaRegWindowClose } from 'react-icons/fa';
 
 function FiltersBar() {
   const dispatch = useDispatch();
@@ -23,16 +24,7 @@ function FiltersBar() {
     dispatch(getCities());
   }, [dispatch]);
 
-  const [urlFilter, setUrlFilter] = useState({
-    type: '',
-    gender: '',
-    size: '',
-    agemin: '',
-    agemax: '',
-    country: '',
-    province: '',
-    city: '',
-  });
+  const [urlFilter, setUrlFilter] = useState({});
   const [urlFilterLost, setUrlFilterLost] = useState({
     country: '',
     province: '',
@@ -111,16 +103,7 @@ function FiltersBar() {
   const handleResetFilters = (e) => {
     e.preventDefault();
     currentLocation === '/adopciones'
-      ? setUrlFilter({
-          type: '',
-          gender: '',
-          size: '',
-          agemin: '',
-          agemax: '',
-          country: '',
-          province: '',
-          city: '',
-        })
+      ? setUrlFilter({})
       : currentLocation === '/perdidos'
       ? setUrlFilterLost({ country: '', province: '', city: '' })
       : setUrlShelter({ country: '', province: '', city: '' });
@@ -156,19 +139,35 @@ function FiltersBar() {
       {currentLocation === '/adopciones' ? (
         <div className='r w-full  p-8 ml-4 bg-transparent rounded-sm '>
           <div className='p-1 mb-2 flex flex-col justify-start'>
-            <label className='w-full pr-8  font-bold'>Especie</label>
+            <label className='w-full pr-8 font-bold'>
+              Especie{' '}
+              {urlFilter.type && (
+                <button
+                  value=''
+                  name='type'
+                  title='Resetear filtro de Especie'
+                  onClick={handleSetUrl}
+                  className='w-4 btn btn-nav text-white bg-primary'>
+                  x
+                </button>
+              )}
+            </label>
             <button
               value='p'
               name='type'
               onClick={handleSetUrl}
-              className='w-1/6 hover:underline focus:underline'>
+              className={`w-16 btn-nav text-white transition-all ${
+                urlFilter.type === 'p' ? ' bg-thirtyDark' : 'btn bg-thirtyLight'
+              }`}>
               Perro
             </button>
             <button
               value='g'
               name='type'
               onClick={handleSetUrl}
-              className='w-1/6 hover:underline focus:underline'>
+              className={`w-16 btn-nav text-white transition-all ${
+                urlFilter.type === 'g' ? ' bg-thirtyDark' : 'btn bg-thirtyLight'
+              }`}>
               Gato
             </button>
           </div>
@@ -202,31 +201,48 @@ function FiltersBar() {
               className='btn bg-primary p-1 rounded-lg disabled:opacity-50 mb-2'
               onClick={handleSend}
               disabled={setDisabled()}>
-              Send
+              Filtrar
             </button>
           </div>
 
           <div className='p-1 mb-2 flex flex-col justify-start'>
-            <label className='w-1/2 pr-8  font-bold'>Tamaño</label>
+            <label className='w-1/2 pr-8  font-bold'>Tamaño
+              {urlFilter.size && (
+                <button
+                  value=''
+                  name='size'
+                  title='Resetear filtro de Especie'
+                  onClick={handleSetUrl}
+                  className='w-4 btn btn-nav text-white bg-primary'>
+                  x
+                </button>
+              )}
+            </label>
             <button
               value='c'
               name='size'
               onClick={handleSetUrl}
-              className='w-1/3 hover:underline focus:underline'>
+              className={`w-16 btn-nav text-white transition-all ${
+                urlFilter.size === 'c' ? ' bg-thirtyDark' : 'btn bg-thirtyLight'
+              }`}>
               Pequeño
             </button>
             <button
               value='m'
               name='size'
               onClick={handleSetUrl}
-              className='w-1/3 hover:underline focus:underline'>
+              className={`w-16 btn-nav text-white transition-all ${
+                urlFilter.size === 'm' ? ' bg-thirtyDark' : 'btn bg-thirtyLight'
+              }`}>
               Mediano
             </button>
             <button
               value='g'
               name='size'
               onClick={handleSetUrl}
-              className='w-1/3 hover:underline focus:underline'>
+              className={`w-16 btn-nav text-white transition-all ${
+                urlFilter.size === 'g' ? ' bg-thirtyDark' : 'btn bg-thirtyLight'
+              }`}>
               Grande
             </button>
           </div>
