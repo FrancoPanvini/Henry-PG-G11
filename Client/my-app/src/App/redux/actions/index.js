@@ -78,8 +78,6 @@ export const getSheltersFilter = (filters) => {
    };
 }
 
-console.log(getShelters)
-
 export const getEvents = () => {
 
 }

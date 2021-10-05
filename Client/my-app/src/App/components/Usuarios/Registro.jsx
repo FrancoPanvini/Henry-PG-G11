@@ -1,9 +1,14 @@
-import React, { useEffect, useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { Link } from "react-router-dom";
-import { FaPaw, FaExclamationCircle } from "react-icons/fa";
-import { getCities, getCountries, getProvinces, postUsers } from "../redux/actions/index";
-import { useHistory } from "react-router-dom";
+import React, { useEffect, useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { Link } from 'react-router-dom';
+import { FaPaw, FaExclamationCircle } from 'react-icons/fa';
+import {
+  getCities,
+  getCountries,
+  getProvinces,
+  postUsers,
+} from '../../redux/actions/index';
+import { useHistory } from 'react-router-dom';
 
 function Registro() {
   const dispatch = useDispatch();
@@ -15,20 +20,20 @@ function Registro() {
   // const [cityId, setCityId] = useState(null);
   const history = useHistory();
 
-    useEffect(() => {
+  useEffect(() => {
     dispatch(getCountries());
-    dispatch(getProvinces()); 
-    dispatch(getCities());  
-    }, [dispatch])
+    dispatch(getProvinces());
+    dispatch(getCities());
+  }, [dispatch]);
 
   const [input, setInput] = useState({
-    name: "",
-    mail: "",
-    phone: "",
-    direction: "",
-    password: "",
-    Cityid: "", // ← hardcodeado, revisar !!!
-    UsersTypeid: "i", // ← hardcodeado, revisar !!!
+    name: '',
+    mail: '',
+    phone: '',
+    direction: '',
+    password: '',
+    Cityid: '', // ← hardcodeado, revisar !!!
+    UsersTypeid: 'i', // ← hardcodeado, revisar !!!
   });
   const [errors, setErrors] = useState({});
 
@@ -43,26 +48,26 @@ function Registro() {
   }) => {
     let errors = {};
     if (!name) {
-      errors.name = "Ingresa tu nombre y apellido";
+      errors.name = 'Ingresa tu nombre y apellido';
     }
-    if (!mail || !mail.includes("@") || !mail.includes(".")) {
-      errors.mail = "Debe ser un email válido";
+    if (!mail || !mail.includes('@') || !mail.includes('.')) {
+      errors.mail = 'Debe ser un email válido';
     }
     if (!phone) {
-      errors.phone = "Ingresa tu número de contacto";
+      errors.phone = 'Ingresa tu número de contacto';
     }
     if (!direction) {
-      errors.direction = "Ingresa tu domicilio";
+      errors.direction = 'Ingresa tu domicilio';
     }
     if (!password || password.length < 8) {
-      errors.password = "Debe tener al menos 8 caracteres";
+      errors.password = 'Debe tener al menos 8 caracteres';
     }
     /* if (!UsersTypeid) {
       errors.UsersTypeid = "Selecciona un tipo de usuario";
     } */
     if (!Cityid) {
-      errors.Cityid = "Selecciona tu ciudad";
-    } 
+      errors.Cityid = 'Selecciona tu ciudad';
+    }
     return errors;
   };
 
@@ -77,25 +82,26 @@ function Registro() {
   };
 
   const handleDisabled = () => {
-    if (input.name !== "" && Object.keys(errors).length === 0) {
+    if (input.name !== '' && Object.keys(errors).length === 0) {
       return false;
     }
     return true;
   };
-  
+
   const handleSubmit = (e) => {
     e.preventDefault();
     dispatch(postUsers(input));
-    setInput({ // ← esto está de más me parece, total al recargar la página se borra todo de todas formas...
+    setInput({
+      // ← esto está de más me parece, total al recargar la página se borra todo de todas formas...
       ...input,
-      name: "",
-      mail: "",
-      phone: "",
-      direction: "",
-      password: "",
+      name: '',
+      mail: '',
+      phone: '',
+      direction: '',
+      password: '',
     });
-    alert("¡Registro exitoso! ahora puede iniciar sesión");
-    history.push("/login");
+    alert('¡Registro exitoso! ahora puede iniciar sesión');
+    history.push('/login');
   };
 
   return (
@@ -124,7 +130,7 @@ function Registro() {
           <br />
 
           <label className="text-white">
-            Nombre y apellido:{" "}
+            Nombre y apellido:{' '}
             {errors.name && (
               <span title={errors.name}>
                 <FaExclamationCircle className="inline text-primary align-baseline" />
@@ -141,7 +147,7 @@ function Registro() {
           />
           <br />
           <label className="text-white">
-            E-mail:{" "}
+            E-mail:{' '}
             {errors.mail && (
               <span title={errors.mail}>
                 <FaExclamationCircle className="inline text-primary align-baseline" />
@@ -158,7 +164,7 @@ function Registro() {
           />
           <br />
           <label className="text-white">
-            Teléfono:{" "}
+            Teléfono:{' '}
             {errors.phone && (
               <span title={errors.phone}>
                 <FaExclamationCircle className="inline text-primary align-baseline" />
@@ -175,7 +181,7 @@ function Registro() {
           />
           <br />
           <label className="text-white">
-            Dirección:{" "}
+            Dirección:{' '}
             {errors.direction && (
               <span title={errors.direction}>
                 <FaExclamationCircle className="inline text-primary align-baseline" />
@@ -192,7 +198,7 @@ function Registro() {
           />
           <br />
           <label className="text-white">
-            Pais:{" "}
+            Pais:{' '}
             {errors.pais && (
               <span title={errors.pais}>
                 <FaExclamationCircle className="inline text-primary align-baseline" />
@@ -221,7 +227,7 @@ function Registro() {
           </select>
           <br />
           <label className="text-white">
-            Provincia/Departamento:{" "}
+            Provincia/Departamento:{' '}
             {errors.provinces && (
               <span title={errors.provinces}>
                 <FaExclamationCircle className="inline text-primary align-baseline" />
@@ -252,7 +258,7 @@ function Registro() {
           </select>
           <br />
           <label className="text-white">
-            Ciudad:{" "}
+            Ciudad:{' '}
             {errors.Cityid && (
               <span title={errors.Cityid}>
                 <FaExclamationCircle className="inline text-primary align-baseline" />
@@ -268,14 +274,14 @@ function Registro() {
               ciudad
                 .filter((p) => parseInt(p.ProvinceId) === parseInt(provinceId))
                 .map((e) => (
-                  <option key={e.id} value={e.id} >
+                  <option key={e.id} value={e.id}>
                     {e.name}
                   </option>
                 ))}
           </select>
           <br />
           <label className="text-white">
-            Contraseña:{" "}
+            Contraseña:{' '}
             {errors.password && (
               <span title={errors.password}>
                 <FaExclamationCircle className="inline text-primary align-baseline" />
