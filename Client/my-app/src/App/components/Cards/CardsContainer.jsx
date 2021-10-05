@@ -78,7 +78,7 @@ function ContenedorCard({ className, title }) {
   };
 
   return (
-    <div className={` ${className} p-12 h-screen text-left w-full`}>
+    <div className={` ${className} p-12 h-full text-left w-full`}>
       <div className="mb-20 p-4 bg-gradient-to-r from-thirty to-fourty items-center  w-full">
         <h1 className="text-6xl font-bold grid justify-items-center  text-gray-200">
           {title}
