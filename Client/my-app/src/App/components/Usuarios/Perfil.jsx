@@ -2,8 +2,8 @@ import React from 'react';
 import axios from 'axios';
 import { useState, useEffect } from 'react';
 import { FaPaw } from 'react-icons/fa';
-import {useDispatch} from 'react-redux'
-import {logOutUser} from '../../redux/actions/index'
+import { useDispatch } from 'react-redux';
+import { logOutUser } from '../../redux/actions/index';
 
 function Perfil() {
   const dispatch = useDispatch();
@@ -13,18 +13,18 @@ function Perfil() {
   const initialUser = () => {
     axios
       .get(`users/${userId}`)
-      .then(res => {
+      .then((res) => {
         setUser(res.data);
         return res.data;
       })
-      .catch(err => console.log(err));
+      .catch((err) => console.log(err));
   };
   useEffect(initialUser, [userId]);
 
   const handleLogOut = () => {
-    dispatch(logOutUser())
-    window.location = '/'
-  }
+    dispatch(logOutUser());
+    window.location = '/';
+  };
 
   return (
     <div className="bg-gradient-to-r from-thirty to-fourty flex justify-center items-center h-screen85">
@@ -66,7 +66,10 @@ function Perfil() {
               <button className="btn btn-nav mx-2 px-4 bg-primaryDark">
                 Mis publicaciones
               </button>
-              <button className="btn btn-nav mx-2 px-4 bg-primaryDark" onClick={handleLogOut}>
+              <button
+                className="btn btn-nav mx-2 px-4 bg-primaryDark"
+                onClick={handleLogOut}
+              >
                 Cerrar sesión
               </button>
               <button className="btn btn-nav mx-2 px-4 bg-primaryDark">
@@ -78,7 +81,6 @@ function Perfil() {
           </>
         )}
         {/* ↑ borrar */}
-
       </div>
     </div>
   );

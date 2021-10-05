@@ -1,17 +1,17 @@
 import React from 'react';
 import { useSelector } from 'react-redux';
-import ContenedorCards from './Cards/ContenedorCards';
-import FiltersBar from './FiltersBar';
+import CardsContainer from '../Cards/CardsContainer';
+import FiltersBar from '../FiltersBar';
 import { Link } from 'react-router-dom';
 
 function Adopciones() {
-  const isLogged = useSelector(state => state.isLogged);
+  const isLogged = useSelector((state) => state.isLogged);
 
   return (
     <div>
       <div className="grid grid-cols-7 place-items-center bg-gray-200">
         <FiltersBar className="place-self-center fixed" />
-        <ContenedorCards title="ADOPCIONES" className="col-span-6" />
+        <CardsContainer title="ADOPCIONES" className="col-span-6" />
       </div>
 
       {isLogged && (

@@ -1,8 +1,13 @@
-import React, { useState } from "react";
+import React, { useState } from 'react';
 // import { useSelector } from "react-redux";
-import ReactCardFlip from "react-card-flip";
+import ReactCardFlip from 'react-card-flip';
 // import Modal from "../pop-up/modal";
-import {FaFacebookSquare, FaInstagram, FaGlobe, FaDonate} from "react-icons/fa"
+import {
+  FaFacebookSquare,
+  FaInstagram,
+  FaGlobe,
+  FaDonate,
+} from 'react-icons/fa';
 
 function CardRefugio({ photo, name, phone, country, province, city, description, socialNet, responsable, instagram, facebook, donaciones }) {
   const [isFlipped, setIsFlipped] = useState(false);
@@ -19,7 +24,9 @@ function CardRefugio({ photo, name, phone, country, province, city, description,
         <div className="card w-80 h-96 grid justify-items-center">
           <img src={photo} alt="" className="w-full h-72 object-cover" />
           <h3 className="font-bold text-white bg-primary p-4 w-full grid justify-items-center">
-            {name.replace(/\b\w/g, function(l){ return l.toUpperCase() })}
+            {name.replace(/\b\w/g, function (l) {
+              return l.toUpperCase();
+            })}
             <div className="pt-3">
               <button
                 onClick={handleClick}
@@ -37,7 +44,9 @@ function CardRefugio({ photo, name, phone, country, province, city, description,
               className="font-bold text-xl p-6 text-fourty cursor-pointer hover:text-white"
               onClick={handleClick}
             >
-              {name.replace(/\b\w/g, function(l){ return l.toUpperCase() })}
+              {name.replace(/\b\w/g, function (l) {
+                return l.toUpperCase();
+              })}
             </div>
             <h3 className="p-1 text-white font-bold">
               Nombre: <span className="text-fourty ">{name}</span>
@@ -46,7 +55,7 @@ function CardRefugio({ photo, name, phone, country, province, city, description,
             <h3 className="p-1 text-white font-bold">
               Responsable: <span className="text-fourty ">{responsable}</span>
             </h3>
-          
+
             <h3 className="p-1 text-white font-bold">
               Pais: <span className="text-fourty">{country}</span>
             </h3>
@@ -68,17 +77,26 @@ function CardRefugio({ photo, name, phone, country, province, city, description,
             </h3>
 
             <h3 className="p-1 text-white font-bold">
-              Redes: <a href={socialNet}><FaGlobe className='inline text-fourty mx-1 text-xl'/></a>
-              <a href={facebook}><FaFacebookSquare className='inline text-fourty mx-1 text-xl'/></a>
-              <a href={instagram}><FaInstagram className='inline text-fourty mx-1 text-xl'/></a>
+              Redes:{' '}
+              <a href={socialNet}>
+                <FaGlobe className="inline text-fourty mx-1 text-xl" />
+              </a>
+              <a href={facebook}>
+                <FaFacebookSquare className="inline text-fourty mx-1 text-xl" />
+              </a>
+              <a href={instagram}>
+                <FaInstagram className="inline text-fourty mx-1 text-xl" />
+              </a>
             </h3>
 
             <h3 className="p-1 text-white font-bold">
-              Donaciones: <a href={donaciones}><FaDonate className='inline text-fourty mx-1 text-xl'/></a>
+              Donaciones:{' '}
+              <a href={donaciones}>
+                <FaDonate className="inline text-fourty mx-1 text-xl" />
+              </a>
             </h3>
 
-
-           {/*  {isLogged ? (
+            {/*  {isLogged ? (
               <div>
                 <button
                   className="btn bg-yellow-600 text-white border-yellow-700 rounded-md"

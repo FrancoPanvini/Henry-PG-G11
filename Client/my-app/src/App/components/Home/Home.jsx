@@ -8,8 +8,8 @@ import {
   getProvinces,
   getShelters,
 } from '../../redux/actions';
-import ContenedorSlider from './ContenedorSlider';
-import Onboarding from '../Onboarding';
+import SliderContainer from './SliderContainer';
+import Onboarding from './Onboarding';
 import IconosHome from './IconosHome';
 
 function Home() {
@@ -28,9 +28,9 @@ function Home() {
     <div className="">
       <Onboarding />
       <IconosHome />
-      <ContenedorSlider title="ADOPCION" className=" bg-gradient-to-r from-thirty to-fourty text-white" />
-      <ContenedorSlider title="EXTRAVIADOS" className=" bg-gray-200 text-primary" />
-      <ContenedorSlider title="REFUGIOS" className=" bg-gradient-to-r from-thirty to-fourty text-white" />
+      <SliderContainer title="ADOPCION" className=" bg-gradient-to-r from-thirty to-fourty text-white" />
+      <SliderContainer title="PERDIDOS" className=" bg-gray-200 text-primary" />
+      <SliderContainer title="REFUGIOS" className=" bg-gradient-to-r from-thirty to-fourty text-white" />
     </div>
   );
 }
