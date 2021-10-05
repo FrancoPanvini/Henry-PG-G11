@@ -1,6 +1,6 @@
 import React from 'react';
 import CardsContainer from '../Cards/CardsContainer';
-import FiltersBar from '../FiltersBar';
+import FiltersBar from '../FilterBar/FiltersBar';
 
 function Refugios() {
   return (

@@ -1,7 +1,7 @@
 import React from 'react';
 import { useSelector } from 'react-redux';
 import CardsContainer from '../Cards/CardsContainer';
-import FiltersBar from '../FiltersBar';
+import FiltersBar from '../FilterBar/FiltersBar';
 import { Link } from 'react-router-dom';
 
 function Adopciones() {
