@@ -2,16 +2,16 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
-import  store  from './App/redux/store/index.js';
+import store from './App/redux/store/index.js';
 import { Provider } from 'react-redux';
-import axios from 'axios'
+import axios from 'axios';
 
-axios.defaults.baseURL = 'http://localhost:3001/'
+axios.defaults.baseURL = 'http://localhost:3001/';
 
 ReactDOM.render(
   <React.StrictMode>
     <Provider store={store}>
-      <App className="min-h-screen" />
+      <App className='min-h-screen' />
       <div id='portal'></div>
     </Provider>
   </React.StrictMode>,
