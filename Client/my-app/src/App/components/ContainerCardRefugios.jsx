@@ -1,8 +1,8 @@
 import React, { useEffect, useState }  from "react";
 import { useDispatch } from "react-redux";
 import { useSelector } from "react-redux";
-import { getPetsAdop } from "../redux/actions";
-import Card from "./Card";
+import { getShelters } from "../redux/actions";
+import CardRefugio from "./CardRefugio";
 //import { HiArrowCircleLeft, HiArrowCircleRight } from "react-icons/hi";
 import { BiChevronsRight, BiChevronsLeft } from "react-icons/bi";
 
@@ -10,11 +10,11 @@ function ContenedorCard({className , title}) {
   const dispatch = useDispatch();
  
   useEffect(() => {
-  dispatch(getPetsAdop());
+  dispatch(getShelters());
   }, [dispatch])
   
  
-  const pets = useSelector(state => state.petsAdop.rows);
+  const refugios = useSelector(state => state.shelters.rows);
   const [currentPage, setCurrentPage] = useState(1);
   const [itemsPerPage] = useState(6);
   const [pageNumberLimit] = useState(3);
@@ -27,13 +27,13 @@ function ContenedorCard({className , title}) {
 
 const pages = [];
 
-for (let i = 1; i <= Math.ceil(pets?.length/itemsPerPage); i++) {
+for (let i = 1; i <= Math.ceil(refugios?.length/itemsPerPage); i++) {
     pages.push(i);
 }
 
 const indexOfLastItem = currentPage * itemsPerPage;
 const indexOfFirstItem = indexOfLastItem - itemsPerPage;
-let currentItems =  pets?.slice(indexOfFirstItem, indexOfLastItem);
+let currentItems =  refugios?.slice(indexOfFirstItem, indexOfLastItem);
 
 
 const renderPagesNumber = pages.map(p => {
@@ -111,21 +111,31 @@ const handlePrev= () => {
                             {renderPagesNumber}
                             
                                 <button className=" btn bg-primary text-white rounded-full p-1 mr-1" onClick={handleNext} disabled={ currentPage === pages[pages.length - 1] ? true : false}><BiChevronsRight/></button>
+        {/* {currentPage > 1 && <HiArrowCircleLeft className="mr-4 cursor-pointer text-3xl text-primary" onClick={handlePrev}/>}
+        {pagination}
+        {currentPage === pages ? null : <HiArrowCircleRight className="ml-4 cursor-pointer text-3xl text-primary" onClick={handleNext}/>} */}
       </div>
       <div className='grid grid-cols-3 gap-4 items-center  justify-center w-full'>
       { currentItems && currentItems.map( p => {
         return (
           <div key={p.id} className="" >
-          <Card 
-          photo={p.petPic ? p.petPic : "https://drpp-ny.org/wp-content/uploads/2014/07/sorry-image-not-available.png"}
+          <CardRefugio 
+          photo={
+            p.photo
+              ? p.photo
+              : "https://drpp-ny.org/wp-content/uploads/2014/07/sorry-image-not-available.png"
+          }
           name={p.name}
-          age={p.age}
-          size={p.size}
-          sex={p.sex}
+          phone={p.phone}
           country={p.country}
           province={p.province}
           city={p.city}
           description={p.description}
+          responsable={p.responsable}
+          socialNet={p.link_web}
+          instagram={p.link_instagram}
+          facebook={p.link_facebook}
+          donaciones={p.link_donaciones}
           />
         </div>
         )

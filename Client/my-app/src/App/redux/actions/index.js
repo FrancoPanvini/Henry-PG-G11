@@ -52,9 +52,33 @@ export const editPetsData = (dataEdit, id) => {
     return axios.put(`http://localhost:3001/pets/${id}`, dataEdit); 
 }
 
-export const getUser = () => {
-
+export const getShelters = () => {
+  return function(dispatch) {
+    axios.get(`http://localhost:3001/users?type=r`)
+     .then(data => {
+       dispatch({ type: "GET_SHELTERS", payload: data });
+     });
+ };
 }
+
+export const getSheltersFilter = (filters) => {
+  let url = "http://localhost:3001/users?type=r"
+  let keys = Object.keys(filters);
+  let values = Object.values(filters);
+
+  for (let i = 0; i < keys.length; i++) {
+    url = url + '&' + keys[i] + "=" + values[i];
+  }
+
+  return function(dispatch) {
+      axios.get(url)
+       .then(data => {
+         dispatch({ type: "GET_SHELTERS_FILTERED", payload: data });
+       });
+   };
+}
+
+console.log(getShelters)
 
 export const getEvents = () => {
 
@@ -145,10 +169,45 @@ export function logOutUser(){
   return dispatch => {
     localStorage.removeItem('token')
     localStorage.removeItem('userId')
+    localStorage.removeItem('userCityid')
     dispatch({
       type: "LOG_OUT_USER"
     })
   }
 }
 
+export const getLostPets = () => {
+  return function(dispatch) {
+    axios.get(`http://localhost:3001/lostpets?found=false`)
+     .then(data => {
+       dispatch({ type: "GET_LOST_PETS", payload: data });
+     });
+ };
+}
+
+export const getLostPetsFilter = (filters) => {
+  let url = "http://localhost:3001/lostpets?found=false"
+    let keys = Object.keys(filters);
+    let values = Object.values(filters);
+
+    for (let i = 0; i < keys.length; i++) {
+      url = url + '&' + keys[i] + "=" + values[i];
+    }
+
+    return function(dispatch) {
+        axios.get(url)
+         .then(data => {
+           dispatch({ type: "GET_LOST_PETS_FILTERED", payload: data });
+         });
+     };
+}
+
+export const getLostPetsHome = () => {
+  return function(dispatch) {
+      axios.get(`http://localhost:3001/lostpets?found=false&paglimit=6&pagnumber=1`)
+       .then(data => {
+         dispatch({ type: "GET_LOST_PETS_HOME", payload: data });
+       });
+   };
+}
 

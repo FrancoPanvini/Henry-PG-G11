@@ -4,10 +4,13 @@ const initialState = {
   petsAdop: [],
   petsHome: [],
   user: {},
+  shelters: {},
   isLogged: false,
   countries: [],
   provinces: [],
   cities: [],
+  lostPets: [],
+  lostPetsHome: []
 };
 
 function rootReducer(state = initialState, action) {
@@ -49,6 +52,17 @@ function rootReducer(state = initialState, action) {
         isLogged: true,
       };
 
+    case "GET_SHELTERS":
+      return{
+        ...state,
+        shelters: action.payload.data
+      }  
+    case "GET_SHELTERS_FILTERED":
+        return {
+          ...state,
+          shelters: action.payload.data,
+      };
+
     case "LOGIN":
       return {
         ...state,
@@ -69,6 +83,21 @@ function rootReducer(state = initialState, action) {
         user: {},
         isLogged:  false
       }
+    
+    case "GET_LOST_PETS":
+      return {...state, lostPets:action.payload.data}
+
+    case "GET_LOST_PETS_FILTERED":
+      return {
+        ...state,
+        lostPets: action.payload.data,
+      };
+
+    case "GET_LOST_PETS_HOME":
+      return {
+        ...state,
+        lostPets: action.payload.data,
+      };
 
     default:
       return state;

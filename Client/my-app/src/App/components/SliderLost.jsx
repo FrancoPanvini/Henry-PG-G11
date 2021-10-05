@@ -1,7 +1,7 @@
 import React from "react";
 import { useSelector } from "react-redux";
 import Carousel from "react-elastic-carousel";
-import Card from "./Card";
+import CardLost from "./CardLost";
 
 const breakPoints = [
   { width: 1, itemsToShow: 1 },
@@ -11,7 +11,7 @@ const breakPoints = [
 ];
 
 export default function Slider() {
-  const pets = useSelector((state) => state.petsAdop.rows);
+  const pets = useSelector((state) => state.lostPets.rows);
 
   return (
     <>
@@ -21,12 +21,10 @@ export default function Slider() {
             pets.map((p) => {
               return (
                 <div key={p.id} className="">
-                  <Card
-                    photo={p.petPic ? p.petPic : "https://drpp-ny.org/wp-content/uploads/2014/07/sorry-image-not-available.png"}
+                  <CardLost
+                    photo={p.photo ? p.photo : "https://drpp-ny.org/wp-content/uploads/2014/07/sorry-image-not-available.png"}
                     name={p.name}
-                    age={p.age}
                     size={p.size}
-                    sex={p.sex}
                     country={p.country}
                     province={p.province}
                     city={p.city}
@@ -34,6 +32,15 @@ export default function Slider() {
                 </div>
               );
             })}
+
+          {/* <Card photo="https://picsum.photos/id/237/300/200"/>
+          <Card photo="https://picsum.photos/id/237/300/200"/>
+          <Card photo="https://picsum.photos/id/237/300/200"/>
+          <Card photo="https://picsum.photos/id/237/300/200"/>
+          <Card photo="https://picsum.photos/id/237/300/200"/>
+          <Card photo="https://picsum.photos/id/237/300/200"/>
+          <Card photo="https://picsum.photos/id/237/300/200"/>
+          <Card photo="https://picsum.photos/id/237/300/200"/> */}
         </Carousel>
       </div>
     </>

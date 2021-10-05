@@ -11,7 +11,7 @@ function Adopciones() {
     return (
     <div>
         <div className='grid grid-cols-7 place-items-center bg-gray-200'>
-            <FiltersBar className='place-self-center'/>
+            <FiltersBar className='place-self-center fixed'/>
             <ContainerCardAdopcion title="ADOPCIONES" className="col-span-6"/>
         </div>
 
