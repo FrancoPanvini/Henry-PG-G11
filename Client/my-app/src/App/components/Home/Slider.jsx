@@ -21,13 +21,13 @@ function Slider({ title }) {
 
   return (
     <>
-      <div className="pt-10">
+      <div className='pt-10'>
         <Carousel breakPoints={breakPoints}>
 
           {items &&
             items.map((p) => {
               return (
-                <div key={p.id} className="">
+                <div key={p.id} >
                   {title === 'ADOPCION' ? (
 
                     <CardAdopcion
