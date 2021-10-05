@@ -27,7 +27,7 @@ function SelectUbication({ urlFilter, handleSetUrl }) {
 
   return (
     <div className='p-1 mb-2 flex flex-wrap justify-between items-center '>
-      <label className='w-1/2 pr-8  font-bold'>Ubicacion</label>
+      <label className='w-1/2 pr-8  font-bold'>Ubicación</label>
       <select
         onChange={handleFilterUbication}
         name='country'
