@@ -9,7 +9,7 @@ function ContenedorVista() {
  
 const active = useSelector((state) => state.active);
   return (
-    <div className="bg-gray-200 h-5/6 w-5/6 p-4 m-auto rounded-lg shadow-inner">
+    <div className="bg-gray-200 h-5/6 w-5/6 p-4 m-auto rounded-lg ring-8 ring-gray-300 shadow-inner">
       {active === 'Mis Datos' ? (
         <DatosPersonales />
       ) : active === 'Mis Postulaciones' ? (
