@@ -18,19 +18,15 @@ function CardAdopcion({ photo, name, age, size, country, province, city, sex, id
       <ReactCardFlip isFlipped={isFlipped} flipDirection="horizontal" className="">
         <div onClick={handleClick} className="w-80 h-96 grid justify-items-center cursor-pointer bg-primaryDark rounded-2xl overflow-hidden">
           <img src={photo} alt="" className="w-full h-80 object-cover " />
-          <h3 className="font-bold text-white text-2xl  p-4 w-full grid justify-items-center">
-            {name.replace(/\b\w/g, function (l) {
-              return l.toUpperCase();
-            })}
+          <h3 className="font-bold text-white text-2xl  p-4 w-full grid justify-items-center capitalize">
+            {name}
           </h3>
         </div>
 
         <div className="h-96 w-80 bg-primary rounded-2xl ">
           <div onClick={handleClick} className="flex flex-col h-full items-center w-full  cursor-pointer">
-            <div className="font-bold text-xl p-6 text-fourty">
-              {name.replace(/\b\w/g, function (l) {
-                return l.toUpperCase();
-              })}
+            <div className="font-bold text-xl p-6 text-fourty capitalize">
+              {name}
             </div>
 
             <div className="text-center">
@@ -38,19 +34,19 @@ function CardAdopcion({ photo, name, age, size, country, province, city, sex, id
                 Edad: <span className="text-fourty ">{age}</span>
               </h3>
               <h3 className="p-1 text-white font-bold">
-                Tamano: <span className="text-fourty">{size === 'c' ? 'pequeño' : size === 'm' ? 'mediano' : 'grande'}</span>
+                Tamaño: <span className="text-fourty capitalize">{size === 'c' ? 'pequeño' : size === 'm' ? 'mediano' : 'grande'}</span>
               </h3>
               <h3 className="p-1 text-white font-bold">
-                Sexo <span className="text-fourty">: {sex === 'h' ? 'hembra' : 'macho'}</span>
+                Sexo <span className="text-fourty capitalize">: {sex === 'h' ? 'hembra' : 'macho'}</span>
               </h3>
               <h3 className="p-1 text-white font-bold">
-                Pais: <span className="text-fourty">{country}</span>
+                Pais: <span className="text-fourty capitalize">{country}</span>
               </h3>
               <h3 className="p-1 text-white font-bold">
-                Provincia:<span className="text-fourty"> {province}</span>
+                Provincia:<span className="text-fourty capitalize"> {province}</span>
               </h3>
               <h3 className="pt-1 pb-4 text-white font-bold">
-                Ciudad: <span className="text-fourty">{city}</span>
+                Ciudad: <span className="text-fourty capitalize">{city}</span>
               </h3>
             </div>
 
