@@ -18,7 +18,7 @@ export default function Modal({ open, onClose, name, description }) {
 
   useEffect(() => {
     setUserName(localStorage.getItem('userName'));
-  }, setUserName)
+  }, [])
 
   if (!open) return null;
 
