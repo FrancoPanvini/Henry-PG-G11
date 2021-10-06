@@ -1,8 +1,9 @@
 import React from 'react';
 
-function FormularioAdopcionSelect({ label, name, options, values, setInput, input }) {
+function FormularioAdopcionSelect({ label, name, options, values, setInput }) {
   const handleOnChange = e => {
-    setInput(e.target.name, e.target.value);
+    let value = e.target.value === 'true' ? true : e.target.value === 'false' ? false : e.target.value;
+    setInput(e.target.name, value);
   };
 
   return (
