@@ -1,7 +1,5 @@
 import React, { useEffect, useState } from "react";
 import ReactDom from "react-dom";
-import axios from "axios";
-// import { useSelector } from "react-redux";
 
 const MODAL_STYLES = {
   position: "fixed",
@@ -15,21 +13,12 @@ const MODAL_STYLES = {
 };
 
 export default function Modal({ open, onClose, name, description }) {
-  const userId = localStorage.getItem("userId");
-  // const pets = useSelector((state) => state.petsAdop.rows);
 
-  const [user, setUser] = useState(null);
+  const [userName, setUserName] = useState(null);
 
-  const initialUser = () => {
-    axios
-      .get(`users/${userId}`)
-      .then((res) => {
-        setUser(res.data);
-        return res.data;
-      })
-      .catch((err) => console.log(err));
-  };
-  useEffect(initialUser, [userId]);
+  useEffect(() => {
+    setUserName(localStorage.getItem('userName'));
+  }, [])
 
   if (!open) return null;
 
@@ -41,7 +30,7 @@ export default function Modal({ open, onClose, name, description }) {
           <form action="">
             <div>{description}</div>
             <div className="font-bold grid justify-items-center pb-10">
-              ¡Hola {user.name}!
+              ¡Hola {userName}!
             </div>
             <p className='text-white'>
               Agradecemos tu interes por{" "}

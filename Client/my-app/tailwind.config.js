@@ -22,6 +22,7 @@ module.exports = {
       height: { 
         screen80: "60vh",
         screen85: "85vh",
+        screen90: "90vh",
       },
       minWidth: {
         'sign': '350px',

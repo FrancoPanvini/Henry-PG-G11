@@ -105,7 +105,7 @@ function ContenedorCard({ className, title }) {
         </button>
       </div>
 
-      <div className="grid grid-cols-3 gap-4 items-center  justify-center w-full">
+      <div className="grid grid-cols-3 grid-rows-2 gap-4 items-center  justify-center w-full">
 
         {currentItems &&
           currentItems.map((p) => {
