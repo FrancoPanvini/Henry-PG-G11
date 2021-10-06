@@ -13,12 +13,13 @@ import Perfil from "./App/components/Usuarios/Perfil";
 import Nosotros from "./App/components/info/Nosotros";
 import FAQ from "./App/components/info/FAQ";
 import FormularioPosteo from "./App/components/Mascotas/FormularioPosteo";
-import Maps from './App/components/Maps/Maps'
 import {useDispatch} from 'react-redux'
 import jwt from "jsonwebtoken"
 import { setUser } from "./App/redux/actions/index";
 import axios from 'axios'
-import ContainerMaps from "./App/components/Maps/ContainerMaps";
+import MapsB from './App/components/Maps/V_beta/Maps'
+import MapsC from './App/components/Maps/V_beta/MapsFunction'
+import ContainerMaps from "./App/components/Maps/V_alpha/ContainerMaps";
 
 function App() {
   const dispatch = useDispatch();
@@ -51,7 +52,9 @@ function App() {
             <Route path="/perfil" exact component={Perfil} />
             <Route path="/nosotros" exact component={Nosotros} />
             <Route path="/faq" exact component={FAQ} />
-            <Route path="/maps" exact component={ContainerMaps}/>
+            <Route path="/mapsA" exact component={ContainerMaps}/>
+            <Route path="/mapsB" exact component={MapsB}/>
+            <Route path="/mapsC" exact component={MapsC}/>
             <Route
               path="/adopciones/ofrecer"
               exact
