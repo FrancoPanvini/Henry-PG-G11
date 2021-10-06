@@ -1,33 +1,19 @@
 import React from 'react'
-import { useState, useEffect } from 'react';
-import axios from 'axios'
+import {  useEffect } from 'react';
+import { initialUser } from '../../../../redux/actions';
+import { useDispatch, useSelector } from 'react-redux';
 
 
 
 function DatosPersonales() {
   const userId = localStorage.getItem('userId');
-  const [user, setUser] = useState(null);
+  const user = useSelector((state) => state.userData)
+  const dispatch = useDispatch();
 
-  const initialUser = () => {
-    axios
-    .get(`users/${userId}`)
-    .then((res) => {
-      setUser(res.data);
-      return res.data;
-    })
-    .catch((err) => console.log(err));
-  }
-  useEffect(initialUser, [userId])
 
-  /* const toUpper =(str) => {
-    return str
-        .toLowerCase()
-        .split(' ')
-        .map((Word) =>{
-            return Word[0].toUpperCase() + Word.substr(1);
-        })
-        .join(' ');
-     } */
+  useEffect(() => {
+    dispatch(initialUser(userId))
+  }, [dispatch, userId]);
 
   return (
     <div className="flex justify-between">

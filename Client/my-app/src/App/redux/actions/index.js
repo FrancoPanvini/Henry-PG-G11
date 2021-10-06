@@ -215,3 +215,11 @@ export const setActive = (payload) => {
    };
 }
 
+export const initialUser = (userId) => {
+  return function(dispatch) {
+      axios.get(`users/${userId}`)
+       .then(data => {
+         dispatch({ type: "INITIAL_USER", payload: data });
+       });
+   };
+}
