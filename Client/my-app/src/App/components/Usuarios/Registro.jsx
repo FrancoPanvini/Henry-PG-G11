@@ -2,19 +2,14 @@ import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { FaPaw, FaExclamationCircle } from 'react-icons/fa';
-import {
-  getCities,
-  getCountries,
-  getProvinces,
-  postUsers,
-} from '../../redux/actions/index';
+import { getCities, getCountries, getProvinces, postUsers } from '../../redux/actions/index';
 import { useHistory } from 'react-router-dom';
 
 function Registro() {
   const dispatch = useDispatch();
-  const pais = useSelector((state) => state.countries);
-  const provincia = useSelector((state) => state.provinces);
-  const ciudad = useSelector((state) => state.cities);
+  const paises = useSelector((state) => state.countries);
+  const provincias = useSelector((state) => state.provinces);
+  const ciudades = useSelector((state) => state.cities);
   const [countryId, setCountryId] = useState(null);
   const [provinceId, setProvinceId] = useState(null);
   // const [cityId, setCityId] = useState(null);
@@ -33,7 +28,7 @@ function Registro() {
     direction: '',
     password: '',
     confirmPassword: '',
-    Cityid: '', // ← hardcodeado, revisar !!!
+    Cityid: '',
     UsersTypeid: 'i', // ← hardcodeado, revisar !!!
   });
   const [errors, setErrors] = useState({});
@@ -86,6 +81,29 @@ function Registro() {
     setErrors(validate(newInput));
   };
 
+  //* Encuentro el id del país y provincia seleccionados por usuario
+  const handleUbicationChange = (e) => {
+    if (e.target.id === 'pais') {
+      let ubicacion = paises.find((pais) => pais.name === e.target.value);
+      console.log('ubicacion pais: ', ubicacion);
+      setCountryId(ubicacion.id);
+    }
+    if (e.target.id === 'provincia') {
+      let ubicacion = provincias.find((provincia) => provincia.name === e.target.value);
+      console.log('ubicacion provincia: ', ubicacion);
+      setProvinceId(ubicacion.id);
+    }
+    if (e.target.id === 'ciudad') {
+      let ubicacion = ciudades.find((ciudad) => ciudad.name === e.target.value.toLowerCase());
+      const newInput = {
+        ...input,
+        Cityid: ubicacion.id,
+      };
+      setInput(newInput);
+      setErrors(validate(newInput));
+    }
+  };
+
   const handleDisabled = () => {
     if (input.name !== '' && Object.keys(errors).length === 0) {
       return false;
@@ -96,15 +114,15 @@ function Registro() {
   const handleSubmit = (e) => {
     e.preventDefault();
     dispatch(postUsers(input));
-    setInput({
-      // ← esto está de más me parece, total al recargar la página se borra todo de todas formas...
-      ...input,
-      name: '',
-      mail: '',
-      phone: '',
-      direction: '',
-      password: '',
-    });
+    // setInput({
+    //   // ← esto está de más me parece, total al recargar la página se borra todo de todas formas...
+    //   ...input,
+    //   name: '',
+    //   mail: '',
+    //   phone: '',
+    //   direction: '',
+    //   password: '',
+    // });
     alert('¡Registro exitoso! ahora puede iniciar sesión');
     history.push('/login');
   };
@@ -159,68 +177,60 @@ function Registro() {
                 className='rounded-md px-1 mb-2'
               />
 
-              <label className='text-white'>
+              {/* <label className='text-white'>
                 Pais:{' '}
-                {errors.pais && (
-                  <span title={errors.pais}>
+                {errors.paises && (
+                  <span title={errors.paises}>
                     <FaExclamationCircle className='inline text-primary align-baseline' />
                   </span>
                 )}
               </label>
-              {/*  <input
-                type="datalist"
-                id="pais"
-                list='paises'
-                name="pais"
-                value={input.pais}
-                onChange={handleOnChange}
-                
-              /> */}
               <select
+                autoComplete='on'
                 onChange={(e) => setCountryId(e.target.value)}
-                /* id="paises" */ className='rounded-md px-1 mb-2'>
-                {pais &&
-                  pais.map((e) => (
-                    <option key={e.id} name={e.id} value={e.id}>
-                      {e.name}
+                id='paises'
+                className='rounded-md px-1 mb-2 capitalize'>
+                {paises &&
+                  paises.map((pais) => (
+                    <option key={pais.id} name={pais.id} value={pais.id} className='capitalize'>
+                      {pais.name}
                     </option>
                   ))}
-              </select>
+              </select> */}
 
-              <label className='text-white'>
-                Provincia/Departamento:{' '}
-                {errors.provinces && (
-                  <span title={errors.provinces}>
-                    <FaExclamationCircle className='inline text-primary align-baseline' />
-                  </span>
-                )}
-              </label>
-              {/*   <input
-                type="datalist"
-                id="provincia"
-                list='provincias'
-                name="provinces"
-                value={input.provinces}
-                onChange={handleOnChange}
-                className="rounded-md px-1"
-              /> */}
-              <select
-                onChange={(e) => setProvinceId(e.target.value)}
-                className='rounded-md px-1 mb-2' /* id="provincias" */
-              >
-                {provincia &&
-                  provincia
-                    .filter(
-                      (p) => parseInt(p.CountryId) === parseInt(countryId)
-                    )
+              <label className='text-white'>Pais:</label>
+              <input type='text' id='pais' list='paises' onChange={handleUbicationChange} className='rounded-md px-1 mb-2' />
+              <datalist id='paises'>{paises && paises.map((pais) => <option key={pais.id} value={pais.name} />)}</datalist>
+
+              {/* <label className='text-white'>Provincia/Departamento: </label>
+              <select onChange={(e) => setProvinceId(e.target.value)} className='rounded-md px-1 mb-2' id="provincias">
+                {provincias &&
+                  provincias
+                    .filter((p) => parseInt(p.CountryId) === parseInt(countryId))
                     .map((e) => (
                       <option key={e.id} value={e.id}>
                         {e.name}
                       </option>
                     ))}
-              </select>
+              </select> */}
 
-              <label className='text-white'>
+              <label className='text-white'>Provincia/Departamento: </label>
+              <input
+                type='text'
+                id='provincia'
+                list='provincias'
+                onChange={handleUbicationChange}
+                className='rounded-md px-1 mb-2'
+              />
+              <datalist className='rounded-md px-1 mb-2' id='provincias'>
+                {provincias &&
+                  provincias
+                    .filter((provincia) => parseInt(provincia.CountryId) === parseInt(countryId))
+                    .sort((a, b) => (a.name > b.name ? 1 : a.name < b.name ? -1 : 0))
+                    .map((provincia) => <option key={provincia.id} value={provincia.name} />)}
+              </datalist>
+
+              {/* <label className='text-white'>
                 Ciudad:{' '}
                 {errors.Cityid && (
                   <span title={errors.Cityid}>
@@ -228,21 +238,32 @@ function Registro() {
                   </span>
                 )}
               </label>
-              <select
-                onChange={handleOnChange}
-                className='rounded-md px-1' /* id="provincias" */
-                name='Cityid'>
+              <select onChange={handleOnChange} className='rounded-md px-1' id="provincias" name='Cityid'>
                 {ciudad &&
                   ciudad
-                    .filter(
-                      (p) => parseInt(p.ProvinceId) === parseInt(provinceId)
-                    )
+                    .filter((p) => parseInt(p.ProvinceId) === parseInt(provinceId))
                     .map((e) => (
                       <option key={e.id} value={e.id}>
                         {e.name}
                       </option>
                     ))}
-              </select>
+              </select> */}
+
+              <label className='text-white'>Ciudad:</label>
+              <input
+                type='text'
+                id='ciudad'
+                list='ciudades'
+                onChange={handleUbicationChange}
+                className='rounded-md px-1 mb-2'
+              />
+              <datalist className='rounded-md px-1 mb-2' id='ciudades'>
+                {ciudades &&
+                  ciudades
+                    .filter((ciudad) => parseInt(ciudad.ProvinceId) === parseInt(provinceId))
+                    .sort((a, b) => (a.name > b.name ? 1 : a.name < b.name ? -1 : 0))
+                    .map((ciudad) => <option key={ciudad.id} value={ciudad.name.replace(/(^|[^A-Za-zÁÉÍÓÚÑáéíóúñ])([a-záéíóúñ])/g, l => l.toUpperCase())} />)}
+              </datalist>
             </div>
 
             <div className='flex flex-col w-64'>
@@ -320,10 +341,7 @@ function Registro() {
           {/* <label>hOlaaa</label>
                   <input type='text' id='CityId' placeholder='CityId' value={input.CityId} onInput={(e) => handleOnChange(e)} /> */}
           <div className='flex flex-col'>
-            <button
-              type='submit'
-              disabled={handleDisabled()}
-              className='btn btn-lg bg-primary text-white border-yellow-600'>
+            <button type='submit' disabled={handleDisabled()} className='btn btn-lg bg-primary text-white border-yellow-600'>
               Registrate
             </button>
             <br />

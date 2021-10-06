@@ -140,20 +140,26 @@ export function logInUsers(payload) {
 export const getCountries = () => {
   return function(dispatch) {
       axios.get("/countries")
-       .then(data => {
+       .then(response => {
+         const data = response.data.map(country => ({...country, name: country.name.replace(/(^|[^A-Za-zÁÉÍÓÚÑáéíóúñ])([a-záéíóúñ])/g, l => l.toUpperCase())}));
          dispatch({ type: "GET_COUNTRIES", payload: data });
        });
    };
 }
 
 export const getProvinces = () => {
-  return function(dispatch) {
-      axios.get("/provinces")
-       .then(data => {
-         dispatch({ type: "GET_PROVINCES", payload: data });
-       });
-   };
-}
+  return function (dispatch) {
+    axios.get('/provinces').then((response) => {
+      const data = response.data
+        .map((province) => ({
+          ...province,
+          name: province.name.replace(/(^|[^A-Za-zÁÉÍÓÚÑáéíóúñ])([a-záéíóúñ])/g, (l) => l.toUpperCase()),
+        }));
+        console.log('provinces: ',data)
+      dispatch({ type: 'GET_PROVINCES', payload: data });
+    });
+  };
+};
 
 export const getCities = () => {
   return function(dispatch) {

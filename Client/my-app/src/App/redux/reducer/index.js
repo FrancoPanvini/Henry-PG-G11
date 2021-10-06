@@ -69,10 +69,10 @@ function rootReducer(state = initialState, action) {
       };
 
     case "GET_COUNTRIES":
-      return { ...state, countries: action.payload.data };
+      return { ...state, countries: action.payload };
 
     case "GET_PROVINCES":
-      return { ...state, provinces: action.payload.data };
+      return { ...state, provinces: action.payload };
 
     case "GET_CITIES":
       return { ...state, cities: action.payload.data };
