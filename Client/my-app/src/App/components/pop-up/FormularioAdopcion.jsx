@@ -12,12 +12,12 @@ function FormularioAdopcion({ onClose, name, petId }) {
   const [user, setUser] = useState({ id: '', name: '' });
 
   const [input, setInput] = useState({
-    residencia: '',
-    residentes: '',
-    adulto: false,
-    dedicacion: '',
-    otrasPets: false,
-    otrasPetsDesc: '',
+    residence: '',
+    residents: '',
+    adult: false,
+    dedication: '',
+    otherPets: false,
+    otherPetsDesc: '',
     oldPets: false,
     oldPetsDesc: '',
     Userid: '',
@@ -58,23 +58,23 @@ function FormularioAdopcion({ onClose, name, petId }) {
                 </p>
               </div>
               <br /> <br />
-              <FormularioAdopcionSelect label="Tipo de residencia: " name="residencia" options={['Casa', 'Apartamento']} values={['house', 'app']} setInput={handleSelectChange} input={input} />
+              <FormularioAdopcionSelect label="Tipo de residencia: " name="residence" options={['Casa', 'Apartamento']} values={['house', 'app']} setInput={handleSelectChange} input={input} />
               <br />
-              <FormularioAdopcionSelect label="Cantidad de niños en la residencia: " name="residentes" options={['1-3', '4-6', '+6']} values={['1-3', '4-6', '+6']} setInput={handleSelectChange} />
+              <FormularioAdopcionSelect label="Cantidad de niños en la residencia: " name="residents" options={['1-3', '4-6', '+6']} values={['1-3', '4-6', '+6']} setInput={handleSelectChange} />
               <br />
-              <FormularioAdopcionSelect label="Eres mayor de edad: " name="adulto" options={['SI', 'NO']} values={[true, false]} setInput={handleSelectChange} />
+              <FormularioAdopcionSelect label="Eres mayor de edad: " name="adult" options={['SI', 'NO']} values={[true, false]} setInput={handleSelectChange} />
               <br />
               <FormularioAdopcionSelect
                 label="¿Cuántas horas diarias puedes dedicarle al cuidado? "
-                name="dedicacion"
+                name="dedication"
                 options={['0-2', '3-5', '+5']}
                 values={['0-2', '3-5', '+5']}
                 setInput={handleSelectChange}
               />
               <br />
               <div className="flex gap-5">
-                <FormularioAdopcionSelect label="¿Tenes otras mascotas?: " name="otrasPets" options={['SI', 'NO']} values={[true, false]} setInput={handleSelectChange} />
-                {input.otrasPets && <FormularioAdopcionText label="¿Cuáles?: " name="otrasPetsDesc" setInput={handleSelectChange} />}
+                <FormularioAdopcionSelect label="¿Tenes otras mascotas?: " name="otherPets" options={['SI', 'NO']} values={[true, false]} setInput={handleSelectChange} />
+                {input.otrasPets && <FormularioAdopcionText label="¿Cuáles?: " name="otherPetsDesc" setInput={handleSelectChange} />}
               </div>
               <br />
               <div className="flex gap-5">
