@@ -6,7 +6,7 @@ const getAdoptions = async (req, res) => {
 
   let query = {
     where: {},
-    attributes: ["PetId", "UserId", "state", "residence", "residents", "adult", "dedication", "otherPets", "otherPetsDesc", "oldPets", "oldPetsDesc", "createdAt"],
+    attributes: ["id", "PetId", "UserId", "state", "residence", "residents", "adult", "dedication", "otherPets", "otherPetsDesc", "oldPets", "oldPetsDesc", "createdAt"],
     order: [["createdAt", "ASC"]],
   };
 

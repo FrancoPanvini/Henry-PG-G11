@@ -8,7 +8,7 @@ const getAdoptions = require("./services/adoptions_services/getAdoptions");
 router.post("/", postAdoption);
 
 //eliminar un proceso de adopción
-router.post("/", deleteAdoption);
+router.delete("/:id", deleteAdoption);
 
 //ver form (filter por usuario/animal)
 router.get("/", getAdoptions);
