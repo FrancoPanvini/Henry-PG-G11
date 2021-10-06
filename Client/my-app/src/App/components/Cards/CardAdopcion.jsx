@@ -1,10 +1,10 @@
-import React, { useState } from "react";
-import { useSelector } from "react-redux";
-import ReactCardFlip from "react-card-flip";
-import Modal from "../pop-up/modal";
-import { FaPaw } from "react-icons/fa";
+import React, { useState } from 'react';
+import { useSelector } from 'react-redux';
+import ReactCardFlip from 'react-card-flip';
+import FormularioAdopcion from '../pop-up/FormularioAdopcion';
+import { FaPaw } from 'react-icons/fa';
 
-function CardAdopcion({ photo, name, age, size, country, province, city, sex, description }) {
+function CardAdopcion({ photo, name, age, size, country, province, city, sex, id }) {
   const [isFlipped, setIsFlipped] = useState(false);
   const [isOpen, setIsOpen] = useState(false);
   const isLogged = useSelector(state => state.isLogged);
@@ -43,10 +43,10 @@ function CardAdopcion({ photo, name, age, size, country, province, city, sex, de
                 Edad: <span className="text-fourty ">{age}</span>
               </h3>
               <h3 className="p-1 text-white font-bold">
-                Tamano: <span className="text-fourty">{size === "c" ? "pequeño" : size === "m" ? "mediano" : "grande"}</span>
+                Tamano: <span className="text-fourty">{size === 'c' ? 'pequeño' : size === 'm' ? 'mediano' : 'grande'}</span>
               </h3>
               <h3 className="p-1 text-white font-bold">
-                Sexo <span className="text-fourty">: {sex === "h" ? "hembra" : "macho"}</span>
+                Sexo <span className="text-fourty">: {sex === 'h' ? 'hembra' : 'macho'}</span>
               </h3>
               <h3 className="p-1 text-white font-bold">
                 Pais: <span className="text-fourty">{country}</span>
@@ -59,7 +59,7 @@ function CardAdopcion({ photo, name, age, size, country, province, city, sex, de
               </h3>
             </div>
 
-            {isLogged ? (
+            {isLogged && (
               <div className="mt-auto mb-4">
                 <button className="shadow-buttonShadow btn-adogtame bg-fourty text-white border-fourtyDark rounded-2xl" onClick={() => setIsOpen(true)}>
                   <h2 className="p-2 flex items-center">
@@ -69,9 +69,9 @@ function CardAdopcion({ photo, name, age, size, country, province, city, sex, de
                   </h2>
                 </button>
 
-                <Modal name={name} description={description} open={isOpen} onClose={() => setIsOpen(false)}></Modal>
+                {isOpen && <FormularioAdopcion name={name} onClose={() => setIsOpen(false)} petId={id} />}
               </div>
-            ) : null}
+            )}
           </div>
         </div>
       </ReactCardFlip>

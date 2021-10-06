@@ -127,6 +127,7 @@ function ContenedorCard({ className, title }) {
                     province={p.province}
                     city={p.city}
                     description={p.description}
+                    id={p.id}
                   />
 
                 ) : title === 'PERDIDOS' ? (

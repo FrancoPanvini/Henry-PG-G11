@@ -87,3 +87,14 @@ code {
 .card {
   @apply rounded overflow-hidden shadow-lg;
 }
+
+.formAdopcion {
+  position: "fixed";
+  top: "50%";
+  left: "50%";
+  transform: "translate(-50%, -50%)";
+  background-color: "#8a9bad";
+  padding: "50px";
+  z-index: 1000;
+  border-radius: 25;
+}
