@@ -15,7 +15,7 @@ function SideBar() {
 
   return (
     <div className='text-center p-8 h-auto border-r-2   text-white font-3xl'>
-      <div className='flex flex-col justify-between'>
+      <div className='flex flex-col content-end'>
         <div className='flex flex-col justify-between'>
           <button
             id='Mis Datos'
@@ -43,7 +43,7 @@ function SideBar() {
           </button>
         </div>
         <div>
-          <button className='text-3xl'>
+          <button className='text-3xl self-end mt-60 transform  hover:scale-125 hover:text-red-800'>
             <BiLogOutCircle />
           </button>
         </div>
