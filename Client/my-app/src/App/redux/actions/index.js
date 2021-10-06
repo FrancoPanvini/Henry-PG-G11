@@ -208,4 +208,10 @@ export const getLostPetsHome = () => {
        });
    };
 }
+export const setActive = (payload) => {
+  return function(dispatch) {
+         dispatch({ type: "SET_ACTIVE", payload });
+
+   };
+}
 
