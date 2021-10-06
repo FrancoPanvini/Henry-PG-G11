@@ -111,6 +111,7 @@ export function setUser(user) {
             payload: user,
         })
         localStorage.setItem('userId', user.id)
+        localStorage.setItem('userName', user.name)
         localStorage.setItem('userCityid', user.CityId); // ← OJO que ""CityId"" está con mayúscula acá, pero en minúscula en la DB !!! REVISAR!!!!
     }
 }
@@ -167,6 +168,7 @@ export function logOutUser(){
   return dispatch => {
     localStorage.removeItem('token')
     localStorage.removeItem('userId')
+    localStorage.removeItem('userName')
     localStorage.removeItem('userCityid')
     dispatch({
       type: "LOG_OUT_USER"
