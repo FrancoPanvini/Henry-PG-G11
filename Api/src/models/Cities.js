@@ -9,8 +9,8 @@ module.exports = sequelize => {
     { sequelize: sequelize, modelName: "Cities", timestamps: false }
   );
 
-  Cities.beforeCreate(function (city) {
+/*   Cities.beforeCreate(function (city) {
     city.name = city.name.toLowerCase();
     return city;
-  });
+  }); */
 };

@@ -36,7 +36,6 @@ function Maps() {
     //Sets refs
     const mapRef = useRef();
     const markerRef = useRef();
-    console.log(mapRef)
     const onMarkerLoad = useCallback((marker) => {
       markerRef.current = marker;
     }, []);
@@ -72,9 +71,8 @@ function Maps() {
       .geocode({ location: latlng })
       .then((response) => {
         if (response.results[0]) {
+         fillInAddress(response.results[0])
          setPlaceName(prevState => [response.results[0].formatted_address]);
-         console.log(response.results[0]);
-         
         } else {
           window.alert('Clickea una calle pa');
         }
@@ -97,7 +95,6 @@ function Maps() {
         time: new Date(),
       },
     ]);
-    console.log(markers[0])
     await geocodeLatLng(geocoder, mapRef, lat, lng)
     setSelected(null);
     ;
@@ -120,9 +117,7 @@ function Maps() {
   };
 
 
-
-
-
+  //Sets Autocomplete
   const componentForm = [
     'route',
     'street_number',
@@ -141,7 +136,7 @@ function Maps() {
     }
   );
   
-
+//Event listener when user selects a location
   autocomplete.addListener('place_changed', () => {
     const place = autocomplete.getPlace();
     if (!place.geometry) {
@@ -159,15 +154,15 @@ function Maps() {
       street_number: 'short_name',
       route: 'long_name',
       administrative_area_level_2: 'short_name',
+      sublocality: 'short_name',
       administrative_area_level_1: 'short_name',
       country: 'long_name',
     };
 
-    const getAddressComp = (type) => {
-        console.log(place)
+    const getAddressComp = (type, i) => {
+      console.log(place.address_components)
       for (let component of place.address_components) {
-
-        if (component.types[0] === type) {
+        if (component.types[i] === type) {
           return component[addressNameFormat[type]];
         }
       }
@@ -176,8 +171,22 @@ function Maps() {
     
     for (let component of componentForm) {
       if (component !== 'location') {
-        document.getElementById(component).innerHTML =
-          getAddressComp(component);
+        if(component !== "administrative_area_level_2") {
+          document.getElementById(component).innerHTML = getAddressComp(component,0);
+        }
+        else {
+          if(getAddressComp(component,0) != ''){
+            document.getElementById(component).innerHTML = getAddressComp(component,0);
+          }
+          else{
+
+            document.getElementById(component).innerHTML = getAddressComp("sublocality",1);
+          }
+        }
+
+          
+
+        
       }
     }
   }
