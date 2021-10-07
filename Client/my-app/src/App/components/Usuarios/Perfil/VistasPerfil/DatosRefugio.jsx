@@ -3,7 +3,6 @@ import {  useEffect } from 'react';
 import { initialUser } from '../../../../redux/actions';
 import { useDispatch, useSelector } from 'react-redux';
 import { FaDonate } from "react-icons/fa";
-import { Link } from 'react-router-dom';
 import { GrInstagram, GrFacebook } from "react-icons/gr"
 import { BiWorld } from "react-icons/bi";
 

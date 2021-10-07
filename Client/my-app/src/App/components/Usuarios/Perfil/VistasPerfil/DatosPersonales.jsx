@@ -17,7 +17,6 @@ function DatosPersonales() {
     dispatch(initialUser(userId))
   }, [dispatch, userId]);
   
-  console.log(user)
   return (
     <div>
       {user?.type === 'Individuo'? <DatosIndividuo /> : <DatosRefugio/>}
