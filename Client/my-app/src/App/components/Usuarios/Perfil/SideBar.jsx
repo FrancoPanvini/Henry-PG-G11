@@ -14,7 +14,7 @@ function SideBar() {
   };
 
   return (
-    <div className='text-center p-8 h-full border-r-2   text-white font-3xl'>
+    <div className='text-center p-8 h-full border-r-2   text-white text-xl'>
       <div className='flex flex-col h-full justify-between'>
         <div className='flex flex-col justify-between'>
           <button

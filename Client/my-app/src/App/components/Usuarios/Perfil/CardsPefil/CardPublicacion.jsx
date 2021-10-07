@@ -14,16 +14,16 @@ function CardPublicacion({ photo, name }) {
         />
          </div> 
       <div className="col-span-3">
-        <span className='text-white text-4xl capitalize'>{name}</span>
+        <span className='text-white text-2xl capitalize font-bold'>{name}</span>
       </div>
       <div className='col-span-3'>
-        <span className=' text-gray-200 text-2xl mr-8'>
+        <span className=' text-gray-200 text-xl mr-8'>
           En adopcion hace: 20 dias
         </span>
       </div>
       <div className="col-span-2">
-        <span className='text-gray-200 text-2xl mr-8'>Solicitudes: 15</span>
-        <button className='btn bg-gray-200 text-white py-2 px-2 mr-2 text-xl rounded-lg shadow-inner font-bold' title="Ver Solicitudes">
+        <span className='text-gray-200 text-xl mr-8'>Solicitudes: 15</span>
+        <button className='btn bg-gray-200 text-white py-2 px-2 mr-2 text-2xl rounded-lg shadow-inner font-bold' title="Ver Solicitudes">
           <GrDocumentText/>
         </button>
       </div>
