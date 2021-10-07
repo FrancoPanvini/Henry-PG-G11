@@ -19,6 +19,8 @@ import { setUser } from './App/redux/actions/index';
 import axios from 'axios';
 import Maps from './App/components/Maps/MapPost';
 import MapsV2 from './App/components/Maps/MapsV2';
+import PrivateRoute from './App/components/Routes/PrivateRoute';
+import PublicRoute from './App/components/Routes/PublicRoute';
 
 function App() {
   const dispatch = useDispatch();
@@ -43,20 +45,26 @@ function App() {
         <div className='z-0'>
           <Switch>
             <Route path='/' exact component={Home} />
-            <Route path='/login' exact component={Login} />
-            <Route path='/registro' exact component={Registro} />
+            <PublicRoute path='/login' exact component={Login} restricted={true} />
+            <PublicRoute path='/registro' exact component={Registro} restricted={true} />
             <Route path='/adopciones' exact component={Adopciones} />
             <Route path='/perdidos' exact component={Perdidos} />
             <Route path='/refugios' exact component={Refugios} />
-            <Route path='/perfil' exact component={Perfil} />
-            <Route path='/nosotros' exact component={Nosotros} />
-            <Route path='/faq' exact component={FAQ} />
             <Route path='/maps' exact component={Maps} />
             <Route path='/map' exact component={MapsV2} />
-            <Route
+            <PrivateRoute
+              path='/perfil'
+              exact
+              component={Perfil}
+              linkRedirect='/login'
+            />
+            <Route path='/nosotros' exact component={Nosotros} />
+            <Route path='/faq' exact component={FAQ} />
+            <PrivateRoute
               path='/adopciones/ofrecer'
               exact
               component={FormularioPosteo}
+              linkRedirect='/login'
             />
           </Switch>
           <Footer />

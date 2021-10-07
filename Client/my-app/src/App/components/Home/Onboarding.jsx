@@ -19,7 +19,7 @@ function Onboarding() {
       </div>
 
       <div>
-        <div className="bg-gatitosWeb bg-leftish-center bg-cover relative h-96 w-96 rounded-full ml-12 shadow-similBorderWhite floorShadowCircle" />
+        <div className="bg-gatitosWeb bg-leftish-center bg-cover relative md:h-52 md:w-52 lg:h-72 lg:w-72 2xl:h-96 2xl:w-96 rounded-full ml-12 shadow-similBorderWhite floorShadowCircle" />
       </div>
     </div>
   );
