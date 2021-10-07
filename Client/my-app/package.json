@@ -11,12 +11,14 @@
   "dependencies": {
     "@craco/craco": "^6.3.0",
     "@googlemaps/js-api-loader": "^1.12.4",
+    "@reach/combobox": "^0.16.1",
     "@react-google-maps/api": "^2.4.1",
     "@reduxjs/toolkit": "^1.6.1",
     "@testing-library/jest-dom": "^4.2.4",
     "@testing-library/react": "^9.5.0",
     "@testing-library/user-event": "^7.2.1",
     "axios": "^0.21.4",
+    "date-fns": "^2.25.0",
     "firebase": "^9.1.1",
     "jsonwebtoken": "^8.5.1",
     "react": "^17.0.2",
@@ -24,6 +26,7 @@
     "react-dom": "^17.0.2",
     "react-elastic-carousel": "^0.11.5",
     "react-icons": "^4.2.0",
+    "react-map-gl": "^6.1.17",
     "react-normalize": "^0.4.4",
     "react-redux": "^7.2.5",
     "react-router-dom": "^5.3.0",
@@ -31,6 +34,7 @@
     "redux-devtools-extension": "^2.13.9",
     "redux-thunk": "^2.3.0",
     "styled-components": "^5.3.1",
+    "timeago.js": "^4.0.2",
     "use-places-autocomplete": "^1.9.4"
   },
   "scripts": {

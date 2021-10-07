@@ -25,5 +25,5 @@ function ContainerMaps() {
     </div>
   )
 }
- ///prueba
+
 export default ContainerMaps
