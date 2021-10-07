@@ -2,12 +2,13 @@ import React from 'react';
 import { BiTrash, BiEdit } from 'react-icons/bi';
 
 function CardPublicacion({ photo, name }) {
+
   return (
     <div className='flex flex-row justify-evenly items-center my-8 rounded-lg py-8 shadow-inner ring ring-primary ring-offset-2  w-full h-1/4 border-4 bg-primary text-white '>
       <img
         src={photo}
         alt=''
-        className='w-20 h-20 rounded-full ring-4 ring-gray-600 ring-opacity-50 transform  hover:scale-150 hover:pointer '
+        className='w-20 h-20 rounded-full object-cover ring-4 ring-gray-600 ring-opacity-50 transform duration-100 hover:scale-150 hover:pointer '
       />
       <div>
         <span className='text-white text-4xl capitalize'>{name}</span>

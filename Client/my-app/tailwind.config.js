@@ -27,6 +27,8 @@ module.exports = {
         104: "32rem",
         108: "36rem",
         112: "40rem",
+        116: "44rem",
+        120: "48rem",
       },
       minWidth: {
         'sign': '350px',

@@ -12,7 +12,7 @@ function MisAdopciones() {
   const [pet, setPet] = useState([])
 
 const initialPet = (userId) => {
-  axios.get(`/pets?adopterid=${userId}`)
+  axios.get(`/pets?adopter=${userId}`)
   .then((res) => {
     setPet(res.data.rows)
     return res.data.rows
