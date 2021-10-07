@@ -5,13 +5,13 @@ module.exports = sequelize => {
   Countries.init(
     {
       name: { type: DataTypes.STRING, allowNull: false },
-      code: { type: DataTypes.STRING, allowNull: false },
+      code: { type: DataTypes.STRING },
     },
     { sequelize: sequelize, modelName: "Countries", timestamps: false }
   );
 
-  Countries.beforeCreate(function (country) {
+  /* Countries.beforeCreate(function (country) {
     country.name = country.name.toLowerCase();
     return country;
-  });
+  }); */
 };

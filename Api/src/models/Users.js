@@ -13,10 +13,12 @@ module.exports = sequelize => {
       responsable: { type: DataTypes.STRING },
       dni: { type: DataTypes.INTEGER },
       description: { type: DataTypes.TEXT },
-      link_web: { type: DataTypes.STRING },
+      link_MUSocialNetwork: { type: DataTypes.STRING },
       link_instagram: { type: DataTypes.STRING },
       link_facebook: { type: DataTypes.STRING },
       link_donaciones: { type: DataTypes.STRING },
+      lat: { type: DataTypes.FLOAT },
+      lng: { type: DataTypes.FLOAT }
     },
     { sequelize: sequelize, modelName: "Users", timestamps: true }
   );
