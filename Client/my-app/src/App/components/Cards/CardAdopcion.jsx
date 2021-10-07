@@ -37,9 +37,9 @@ function CardAdopcion({ photo, name, age, size, country, province, city, sex, id
               </div>
             </div>
 
-            <div className="text-center">
-              <h3 className="p-1 text-white font-bold">
-                Edad: <span className="text-fourty ">{age}</span>
+            <div className='text-center'>
+              <h3 className='p-1 text-white font-bold'>
+                Edad: <span className='text-fourty '>{age}</span>
               </h3>
               <h3 className="p-1 text-white font-bold">
                 Tamaño: <span className="text-fourty capitalize">{size === "c" ? "pequeño" : size === "m" ? "mediano" : "grande"}</span>
@@ -47,22 +47,25 @@ function CardAdopcion({ photo, name, age, size, country, province, city, sex, id
               <h3 className="p-1 text-white font-bold">
                 Sexo <span className="text-fourty capitalize">: {sex === "h" ? "hembra" : "macho"}</span>
               </h3>
-              <h3 className="p-1 text-white font-bold">
-                Pais: <span className="text-fourty capitalize">{country}</span>
+              <h3 className='p-1 text-white font-bold'>
+                Pais: <span className='text-fourty capitalize'>{country}</span>
               </h3>
-              <h3 className="p-1 text-white font-bold">
-                Provincia:<span className="text-fourty capitalize"> {province}</span>
+              <h3 className='p-1 text-white font-bold'>
+                Provincia:
+                <span className='text-fourty capitalize'> {province}</span>
               </h3>
-              <h3 className="pt-1 pb-4 text-white font-bold">
-                Ciudad: <span className="text-fourty capitalize">{city}</span>
+              <h3 className='pt-1 pb-4 text-white font-bold'>
+                Ciudad: <span className='text-fourty capitalize'>{city}</span>
               </h3>
             </div>
 
             {/* Button & PopUp form for adoptions */}
             {isLogged && (
-              <div className="mt-auto mb-4">
-                <button className="shadow-buttonShadow btn-adogtame bg-fourty text-white border-fourtyDark rounded-2xl" onClick={() => setIsOpen(true)}>
-                  <h2 className="p-2 flex items-center tracking-wide">
+              <div className='mt-auto mb-4'>
+                <button
+                  className='shadow-buttonShadow btn-adogtame bg-fourty text-white border-fourtyDark rounded-2xl'
+                  onClick={() => setIsOpen(true)}>
+                  <h2 className='p-2 flex items-center tracking-wide'>
                     AD
                     <FaPaw />
                     GTAME
