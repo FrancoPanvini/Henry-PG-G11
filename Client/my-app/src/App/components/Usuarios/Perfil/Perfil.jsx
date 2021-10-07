@@ -18,9 +18,9 @@ function Perfil() {
   };
 
   return(
-    <div className="flex h-screen90 bg-gradient-to-r from-thirty to-fourty ">
+    <div className="flex h-screen82 bg-gradient-to-r from-thirty to-fourty ">
       <SideBar className="w-1/4"/>
-      <ContenedorVista userId={userId} className="w-3/4"/>
+      <ContenedorVista userId={userId} className="w-3/4 h-full"/>
     </div>
   );
 }

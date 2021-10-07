@@ -14,7 +14,7 @@ function Navbar() {
   }
 
   return (
-    <div className=" flex justify-between px-4 h-screen5 bg-gradient-to-r from-thirty to-fourty items-center text-white ">
+    <div className=" flex justify-between px-4 h-screen9 bg-gradient-to-r from-thirty to-fourty items-center text-white ">
       <Link to="/" className="text-xl flex items-center ml-4">
         AD<FaPaw />GTAME
       </Link>
