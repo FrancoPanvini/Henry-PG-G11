@@ -19,7 +19,7 @@ export default function MapsV2() {
     latitude: 4.710989,
     longitude: -74.08175,
     zoom: 10,
-  }); //prueba
+  });
 
   useEffect(() => {
     const ubications = async () => {
