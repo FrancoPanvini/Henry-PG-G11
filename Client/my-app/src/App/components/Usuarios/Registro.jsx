@@ -85,20 +85,20 @@ function Registro() {
   const handleUbicationChange = (e) => {
     if (e.target.id === 'pais') {
       let ubicacion = paises.find((pais) => pais.name === e.target.value);
-      console.log('ubicacion pais: ', ubicacion);
-      setCountryId(ubicacion.id);
+      ubicacion && setCountryId(ubicacion.id);
     }
     if (e.target.id === 'provincia') {
       let ubicacion = provincias.find((provincia) => provincia.name === e.target.value);
-      console.log('ubicacion provincia: ', ubicacion);
-      setProvinceId(ubicacion.id);
+      ubicacion && setProvinceId(ubicacion.id);
     }
     if (e.target.id === 'ciudad') {
       let ubicacion = ciudades.find((ciudad) => ciudad.name === e.target.value.toLowerCase());
-      const newInput = {
-        ...input,
-        Cityid: ubicacion.id,
-      };
+      let newInput = { ...input };
+      ubicacion &&
+        (newInput = {
+          ...newInput,
+          Cityid: ubicacion.id,
+        });
       setInput(newInput);
       setErrors(validate(newInput));
     }
@@ -155,7 +155,7 @@ function Registro() {
                 type='text'
                 id='name'
                 name='name'
-                value={input.name}
+                // value={input.name}
                 onChange={handleOnChange}
                 className='rounded-md px-1 mb-2'
               />
@@ -172,7 +172,7 @@ function Registro() {
                 type='text'
                 id='direction'
                 name='direction'
-                value={input.direction}
+                // value={input.direction}
                 onChange={handleOnChange}
                 className='rounded-md px-1 mb-2'
               />
@@ -250,19 +250,18 @@ function Registro() {
               </select> */}
 
               <label className='text-white'>Ciudad:</label>
-              <input
-                type='text'
-                id='ciudad'
-                list='ciudades'
-                onChange={handleUbicationChange}
-                className='rounded-md px-1 mb-2'
-              />
+              <input type='text' id='ciudad' list='ciudades' onChange={handleUbicationChange} className='rounded-md px-1 mb-2' />
               <datalist className='rounded-md px-1 mb-2' id='ciudades'>
                 {ciudades &&
                   ciudades
                     .filter((ciudad) => parseInt(ciudad.ProvinceId) === parseInt(provinceId))
                     .sort((a, b) => (a.name > b.name ? 1 : a.name < b.name ? -1 : 0))
-                    .map((ciudad) => <option key={ciudad.id} value={ciudad.name.replace(/(^|[^A-Za-zÁÉÍÓÚÑáéíóúñ])([a-záéíóúñ])/g, l => l.toUpperCase())} />)}
+                    .map((ciudad) => (
+                      <option
+                        key={ciudad.id}
+                        value={ciudad.name.replace(/(^|[^A-Za-zÁÉÍÓÚÑáéíóúñ])([a-záéíóúñ])/g, (l) => l.toUpperCase())}
+                      />
+                    ))}
               </datalist>
             </div>
 
@@ -279,7 +278,7 @@ function Registro() {
                 type='text'
                 id='mail'
                 name='mail'
-                value={input.mail}
+                // value={input.mail}
                 onChange={handleOnChange}
                 className='rounded-md px-1 mb-2'
               />
@@ -295,7 +294,7 @@ function Registro() {
                 type='password'
                 id='password'
                 name='password'
-                value={input.password}
+                // value={input.password}
                 onChange={handleOnChange}
                 className='rounded-md px-1 mb-2'
               />
@@ -311,7 +310,7 @@ function Registro() {
                 type='password'
                 // id='password'
                 name='confirmPassword'
-                value={input.confirmPassword}
+                // value={input.confirmPassword}
                 onChange={handleOnChange}
                 className='rounded-md px-1 mb-2'
               />
@@ -328,7 +327,7 @@ function Registro() {
                 type='number'
                 id='phone'
                 name='phone'
-                value={input.phone}
+                // value={input.phone}
                 onChange={handleOnChange}
                 className='rounded-md px-1 mb-2'
               />
