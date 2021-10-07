@@ -3,7 +3,7 @@ import { Link, useHistory } from 'react-router-dom';
 import UploadImage from './../cargue-fotos/UploadImage';
 import { postPets } from '../../redux/actions/index';
 import { FaExclamationCircle, FaWindowClose } from 'react-icons/fa';
-import Maps from '../Maps/MapPost';
+import Maps from '../Maps/Maps';
 
 function FormularioPosteo() {
   const history = useHistory();

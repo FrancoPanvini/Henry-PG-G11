@@ -13,11 +13,11 @@ import Perfil from './App/components/Usuarios/Perfil';
 import Nosotros from './App/components/info/Nosotros';
 import FAQ from './App/components/info/FAQ';
 import FormularioPosteo from './App/components/Mascotas/FormularioPosteo';
+import Maps from './App/components/Maps/V_alpha/Maps';
 import { useDispatch } from 'react-redux';
 import jwt from 'jsonwebtoken';
 import { setUser } from './App/redux/actions/index';
 import axios from 'axios';
-import Maps from './App/components/Maps/MapPost';
 import MapsV2 from './App/components/Maps/MapsV2';
 
 function App() {

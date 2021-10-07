@@ -18,7 +18,7 @@ import jwt from 'jsonwebtoken';
 import { setUser } from './App/redux/actions/index';
 import axios from 'axios';
 import Maps from './App/components/Maps/MapPost';
-import MapsV2 from './App/components/Maps/MapsV2';
+/* import MapsV2 from './App/components/Maps/MapsV2'; */
 
 function App() {
   const dispatch = useDispatch();
@@ -52,7 +52,7 @@ function App() {
             <Route path='/nosotros' exact component={Nosotros} />
             <Route path='/faq' exact component={FAQ} />
             <Route path='/maps' exact component={Maps} />
-            <Route path='/map' exact component={MapsV2} />
+            {/* <Route path='/map' exact component={MapsV2} /> */}
             <Route
               path='/adopciones/ofrecer'
               exact
