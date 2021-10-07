@@ -12,7 +12,8 @@ const initialState = {
   lostPets: [],
   lostPetsHome: [],
   active: 'Mis Datos',
-  useData: []
+  userData: [],
+  userPets: [],
 };
 
 function rootReducer(state = initialState, action) {
@@ -110,6 +111,11 @@ function rootReducer(state = initialState, action) {
       return{
         ...state,
         userData: action.payload.data
+      }
+    case "GET_USER_PETS":
+      return{
+        ...state,
+        userPets: action.payload.data
       }
 
     default:

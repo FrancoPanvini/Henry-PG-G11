@@ -5,7 +5,7 @@ import MisAdopciones from './MisAdopciones';
 import Postulaciones from './Postulaciones';
 import Publicaciones from './Publicaciones';
 
-function ContenedorVista() {
+function ContenedorVista({userId}) {
  
 const active = useSelector((state) => state.active);
   return (
@@ -15,7 +15,7 @@ const active = useSelector((state) => state.active);
       ) : active === 'Mis Postulaciones' ? (
         <Postulaciones />
       ) : active === 'Mis Publicaciones' ? (
-        <Publicaciones />
+        <Publicaciones userId={userId} />
       ) : (
         <MisAdopciones />
       )}

@@ -43,7 +43,7 @@ function SideBar() {
           </button>
         </div>
         <div>
-          <button className='text-3xl self-end mt-60 transform  hover:scale-125 hover:text-red-800'>
+          <button className='text-3xl self-end mt-96 transform  hover:scale-125 hover:text-red-800'>
             <BiLogOutCircle />
           </button>
         </div>
