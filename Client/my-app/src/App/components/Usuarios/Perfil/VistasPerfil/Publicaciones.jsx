@@ -17,10 +17,15 @@ function Publicaciones({ userId }) {
 
   return (
     <div className='container mx-auto  flex flex-col'>
-      <div className='flex justify-center mt-8 h-auto bg-gray-200'>
+      <div className='flex flex-row justify-center mt-8 h-full bg-gray-200'>
         <Link to='/adopciones/ofrecer' className='mx-auto'>
           <button className='btn btn-lg text-3xl bg-primary text-white'>
             Ofrecer una mascota en adopción
+          </button>
+        </Link>
+        <Link to='/adopciones/ofrecer' className='mx-auto'>
+          <button className='btn btn-lg text-3xl bg-primary text-white'>
+            Postear perdido
           </button>
         </Link>
       </div>
