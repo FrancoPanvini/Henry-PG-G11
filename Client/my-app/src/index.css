@@ -3,7 +3,7 @@
 @tailwind utilities;
 
 .btn {
-  @apply border-b-2 shadow-md transition-all;
+  @apply border-b-2 shadow-2xl transition-all;
 }
 
 .btn-nav {
@@ -18,18 +18,24 @@
   @apply shadow-lg filter brightness-110;
 }
 
+.btn-adogtame {
+  @apply border-b-2 transition-all;
+}
+
+.btn-adogtame:hover {
+  @apply filter brightness-110;
+}
+
 .navButtonActive {
   @apply opacity-50;
 }
 
 .path {
-  clip-path: circle(50.0% at 50% 1%);;
+  clip-path: circle(50% at 50% 1%);
 }
 .path2 {
   clip-path: polygon(0 6%, 100% 0, 100% 100%, 0% 100%);
 }
-
-
 
 /* .btn-action {
   @apply bg-yellow-600 text-white border-yellow-700;
@@ -40,7 +46,7 @@
   position: absolute;
   inset: 0;
   z-index: 1;
-  background: linear-gradient(90deg, rgba(0,0,0,0) 80%, #4b8591 100%);
+  background: linear-gradient(90deg, rgba(0, 0, 0, 0) 80%, #4b8591 100%);
 }
 
 .onboarding-transparency-left::after {
@@ -48,7 +54,7 @@
   position: absolute;
   inset: 0;
   z-index: 1;
-  background: linear-gradient(90deg, #4F768E 0%, rgba(0,0,0,0) 20%);
+  background: linear-gradient(90deg, #4f768e 0%, rgba(0, 0, 0, 0) 20%);
 }
 
 .floorShadowCircle::before {
@@ -81,3 +87,16 @@ code {
 .card {
   @apply rounded overflow-hidden shadow-lg;
 }
+
+.formAdopcion {
+  position: "fixed";
+  top: "50%";
+  left: "50%";
+  transform: "translate(-50%, -50%)";
+  background-color: "#8a9bad";
+  padding: "50px";
+  z-index: 1000;
+  border-radius: 25;
+}
+
+

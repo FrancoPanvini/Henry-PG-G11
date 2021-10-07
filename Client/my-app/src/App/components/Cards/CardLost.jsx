@@ -1,11 +1,11 @@
 import React, { useState } from 'react';
 import { useSelector } from 'react-redux';
 import ReactCardFlip from 'react-card-flip';
-import Modal from '../pop-up/modal';
+// import Modal from '../pop-up/modal';
 
 function CardLost({ photo, name, size, country, province, city }) {
   const [isFlipped, setIsFlipped] = useState(false);
-  const [isOpen, setIsOpen] = useState(false);
+  // const [isOpen, setIsOpen] = useState(false);
   const isLogged = useSelector((state) => state.isLogged);
 
   const handleClick = () => {
@@ -63,12 +63,12 @@ function CardLost({ photo, name, size, country, province, city }) {
               <div>
                 <button
                   className="btn bg-yellow-600 text-white border-yellow-700 rounded-md"
-                  onClick={() => setIsOpen(true)}
+                  // onClick={() => setIsOpen(true)}
                 >
                   <h2 className="p-2">Contactate</h2>
                 </button>
 
-                <Modal open={isOpen} onClose={() => setIsOpen(false)}></Modal>
+                {/* <Modal open={isOpen} onClose={() => setIsOpen(false)}></Modal> */}
               </div>
             ) : null}
           </div>

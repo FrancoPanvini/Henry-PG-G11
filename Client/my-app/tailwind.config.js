@@ -52,6 +52,7 @@ module.exports = {
       boxShadow: {
         'activeNavBar': '0px -4px 0 0 #f5b461 inset;',
         'similBorderWhite': '0 20px 25px -5px #0003, 0 0 3px 3px #FFF6 inset;',
+        'buttonShadow':'0px 5px 20px 5px #0003;'
       }
     },
   },

@@ -16,15 +16,15 @@ conn
     // countryLoader()
   })
   .then(() => {
-    //PetsType.bulkCreate(petsTypesArray);
-    //UsersType.bulkCreate(usersTypesArray);
+    // PetsType.bulkCreate(petsTypesArray);
+    // UsersType.bulkCreate(usersTypesArray);
   })
   .then(() => {
-    //Users.bulkCreate(userArray);
+    // Users.bulkCreate(userArray);
   })
   .then(() => {
-    //Pets.bulkCreate(petsArray);
-    //Events.bulkCreate(eventsArray)
+    // Pets.bulkCreate(petsArray);
+    // Events.bulkCreate(eventsArray)
   });
 
 const petsTypesArray = [
@@ -51,7 +51,7 @@ const eventsArray = [
 ];
 
 const petsArray = [
-  { name: "Juancho", PetsTypeId: "p", Cityid: 1, sex: "m", size: "c", age: 0, Ownerid: 1 },
+  { name: "Juancho", PetsTypeId: "p", Cityid: 1, sex: "m", size: "c", age: 0, Ownerid:4  },
   { name: "Juana", PetsTypeId: "g", Cityid: 2, sex: "h", size: "m", age: 2, Ownerid: 2 },
   { name: "Renato", PetsTypeId: "p", Cityid: 3, sex: "m", size: "g", age: 3, Ownerid: 3 },
   { name: "Pipita", PetsTypeId: "g", Cityid: 2, sex: "h", size: "g", age: 8, Ownerid: 2 },

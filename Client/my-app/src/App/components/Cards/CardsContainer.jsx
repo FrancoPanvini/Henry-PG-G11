@@ -12,15 +12,14 @@ function ContenedorCard({ className, title }) {
 
   useEffect(() => {
     dispatch(
-      title === 'ADOPCIONES' ? getPetsAdop()
-      : title === 'PERDIDOS' ? getLostPets()
-      : getShelters()
-    );
+        title === 'ADOPCIONES' ? getPetsAdop() 
+      : title === 'PERDIDOS' ? getLostPets() 
+      : getShelters());
   }, [dispatch, title]);
 
   const items = useSelector((state) =>
-    title === 'ADOPCIONES' ? state.petsAdop.rows
-    : title === 'PERDIDOS' ? state.lostPets.rows
+      title === 'ADOPCIONES' ? state.petsAdop.rows 
+    : title === 'PERDIDOS' ? state.lostPets.rows 
     : state.shelters.rows
   );
 
@@ -47,12 +46,7 @@ function ContenedorCard({ className, title }) {
   const renderPagesNumber = pages.map((p) => {
     if (p < maxPageNumberList + 1 && p > minPageNumberList) {
       return (
-        <button
-          key={p}
-          id={p}
-          onClick={handleChangePage}
-          className="btn bg-primary text-white p-1 rounded-lg m-2"
-        >
+        <button key={p} id={p} onClick={handleChangePage} className='btn bg-primary text-white p-1 rounded-lg m-2'>
           {p}
         </button>
       );
@@ -79,46 +73,37 @@ function ContenedorCard({ className, title }) {
 
   return (
     <div className={` ${className} p-12 h-full text-left w-full`}>
-      <div className="mb-20 p-4 bg-gradient-to-r from-thirty to-fourty items-center  w-full">
-        <h1 className="text-6xl font-bold grid justify-items-center  text-gray-200">
-          {title}
-        </h1>
+      <div className='mb-20 p-4 bg-gradient-to-r from-thirty to-fourty items-center  w-full'>
+        <h1 className='text-6xl font-bold grid justify-items-center  text-gray-200'>{title}</h1>
       </div>
 
-      <div className="flex items-center justify-center p-8 ">
+      <div className='flex items-center justify-center p-8 '>
         <button
-          className="btn  bg-primary text-white rounded-full p-1 mr-1"
+          className='btn  bg-primary text-white rounded-full p-1 mr-1'
           onClick={handlePrev}
-          disabled={currentPage === pages[0] ? true : false}
-        >
+          disabled={currentPage === pages[0] ? true : false}>
           <BiChevronsLeft />
         </button>
 
         {renderPagesNumber}
 
         <button
-          className=" btn bg-primary text-white rounded-full p-1 mr-1"
+          className=' btn bg-primary text-white rounded-full p-1 mr-1'
           onClick={handleNext}
-          disabled={currentPage === pages[pages.length - 1] ? true : false}
-        >
+          disabled={currentPage === pages[pages.length - 1] ? true : false}>
           <BiChevronsRight />
         </button>
       </div>
 
-      <div className="grid grid-cols-3 grid-rows-2 gap-4 items-center  justify-center w-full">
+      <div className='grid grid-cols-3 grid-rows-2 gap-4 w-full'>
 
         {currentItems &&
           currentItems.map((p) => {
             return (
-              <div key={p.id} className="">
-
+              <div key={p.id} className='flex justify-center'>
                 {title === 'ADOPCIONES' ? (
                   <CardAdopcion
-                    photo={
-                      p.petPic
-                        ? p.petPic
-                        : 'https://drpp-ny.org/wp-content/uploads/2014/07/sorry-image-not-available.png'
-                    }
+                    photo={p.petPic ? p.petPic : 'https://drpp-ny.org/wp-content/uploads/2014/07/sorry-image-not-available.png'}
                     name={p.name}
                     age={p.age}
                     size={p.size}
@@ -127,15 +112,12 @@ function ContenedorCard({ className, title }) {
                     province={p.province}
                     city={p.city}
                     description={p.description}
+                    id={p.id}
                   />
 
                 ) : title === 'PERDIDOS' ? (
                   <CardLost
-                    photo={
-                      p.photo
-                        ? p.photo
-                        : 'https://drpp-ny.org/wp-content/uploads/2014/07/sorry-image-not-available.png'
-                    }
+                    photo={p.photo ? p.photo : 'https://drpp-ny.org/wp-content/uploads/2014/07/sorry-image-not-available.png'}
                     name={p.name}
                     size={p.size}
                     country={p.country}
@@ -143,13 +125,10 @@ function ContenedorCard({ className, title }) {
                     city={p.city}
                   />
 
-                ) : ( // case title === 'REFUGIOS'
+                ) : (
+                  // case title === 'REFUGIOS'
                   <CardRefugio
-                    photo={
-                      p.photo
-                        ? p.photo
-                        : 'https://drpp-ny.org/wp-content/uploads/2014/07/sorry-image-not-available.png'
-                    }
+                    photo={p.photo ? p.photo : 'https://drpp-ny.org/wp-content/uploads/2014/07/sorry-image-not-available.png'}
                     name={p.name}
                     phone={p.phone}
                     country={p.country}
