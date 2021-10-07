@@ -2,7 +2,7 @@ const { where } = require("sequelize");
 const { Adoptions } = require("../../../../db");
 
 const getAdoptions = async (req, res) => {
-  const { applicant, pet, state } = req.query;
+  const { applicant, pet, state, count } = req.query;
 
   let query = {
     where: {},
@@ -20,9 +20,12 @@ const getAdoptions = async (req, res) => {
   if (state) query.where = { ...query.where, state: state };
 
   //* Obtain data from DB
-  let adoptions = await Adoptions.findAll(query);
-
-  res.status(200).json(adoptions);
+  let adoptions = await Adoptions.findAndCountAll(query);
+  if (count === 'true') {
+    res.status(200).json({ count: adoptions.count });
+  } else {
+    res.status(200).json(adoptions.rows);
+  }
 };
 
 module.exports = getAdoptions;

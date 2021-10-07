@@ -111,7 +111,6 @@ function ContenedorCard({ className, title }) {
                     country={p.country}
                     province={p.province}
                     city={p.city}
-                    description={p.description}
                     id={p.id}
                   />
 

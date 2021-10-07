@@ -1,9 +1,9 @@
-import React from 'react';
-import { useSelector } from 'react-redux';
-import Carousel from 'react-elastic-carousel';
-import CardAdopcion from '../Cards/CardAdopcion';
-import CardLost from '../Cards/CardLost';
-import CardRefugio from '../Cards/CardRefugio';
+import React from "react";
+import { useSelector } from "react-redux";
+import Carousel from "react-elastic-carousel";
+import CardAdopcion from "../Cards/CardAdopcion";
+import CardLost from "../Cards/CardLost";
+import CardRefugio from "../Cards/CardRefugio";
 
 const breakPoints = [
   { width: 1, itemsToShow: 1 },
@@ -13,29 +13,19 @@ const breakPoints = [
 ];
 
 function Slider({ title }) {
-  const items = useSelector((state) =>
-    title === 'ADOPCION' ? state.petsAdop.rows
-    : title === 'PERDIDOS' ? state.lostPets.rows
-    : state.shelters.rows
-  );
+  const items = useSelector(state => (title === "ADOPCION" ? state.petsAdop.rows : title === "PERDIDOS" ? state.lostPets.rows : state.shelters.rows));
 
   return (
     <>
-      <div className='pt-10'>
+      <div className="pt-10">
         <Carousel breakPoints={breakPoints}>
-
           {items &&
-            items.map((p) => {
+            items.map(p => {
               return (
-                <div key={p.id} >
-                  {title === 'ADOPCION' ? (
-
+                <div key={p.id}>
+                  {title === "ADOPCION" ? (
                     <CardAdopcion
-                      photo={
-                        p.petPic
-                          ? p.petPic
-                          : 'https://drpp-ny.org/wp-content/uploads/2014/07/sorry-image-not-available.png'
-                      }
+                      photo={p.petPic ? p.petPic : "https://drpp-ny.org/wp-content/uploads/2014/07/sorry-image-not-available.png"}
                       name={p.name}
                       age={p.age}
                       size={p.size}
@@ -43,30 +33,21 @@ function Slider({ title }) {
                       country={p.country}
                       province={p.province}
                       city={p.city}
+                      id={p.id}
                     />
-
-                  ) : title === 'PERDIDOS' ? (
+                  ) : title === "PERDIDOS" ? (
                     <CardLost
-                      photo={
-                        p.photo
-                          ? p.photo
-                          : 'https://drpp-ny.org/wp-content/uploads/2014/07/sorry-image-not-available.png'
-                      }
+                      photo={p.photo ? p.photo : "https://drpp-ny.org/wp-content/uploads/2014/07/sorry-image-not-available.png"}
                       name={p.name}
                       size={p.size}
                       country={p.country}
                       province={p.province}
                       city={p.city}
                     />
-
                   ) : (
                     // caso title === "REFUGIOS"
                     <CardRefugio
-                      photo={
-                        p.photo
-                          ? p.photo
-                          : 'https://drpp-ny.org/wp-content/uploads/2014/07/sorry-image-not-available.png'
-                      }
+                      photo={p.photo ? p.photo : "https://drpp-ny.org/wp-content/uploads/2014/07/sorry-image-not-available.png"}
                       name={p.name}
                       phone={p.phone}
                       country={p.country}
@@ -80,11 +61,9 @@ function Slider({ title }) {
                       donaciones={p.link_donaciones}
                     />
                   )}
-
                 </div>
               );
             })}
-
         </Carousel>
       </div>
     </>
