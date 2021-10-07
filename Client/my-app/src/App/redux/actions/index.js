@@ -215,4 +215,18 @@ export const getLostPetsHome = () => {
        });
    };
 }
+export const setActive = (payload) => {
+  return function(dispatch) {
+         dispatch({ type: "SET_ACTIVE", payload });
 
+   };
+}
+
+export const initialUser = (userId) => {
+  return function(dispatch) {
+      axios.get(`users/${userId}`)
+       .then(data => {
+         dispatch({ type: "INITIAL_USER", payload: data });
+       });
+   };
+}
