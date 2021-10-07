@@ -91,7 +91,7 @@ export function postUsers(payload) {
     // console.log(payload)
      return async function (dispatch){
          const response = await axios.post("users/", payload)
-         console.log(response);
+        //  console.log(response); // DELETE DELETE DELETE
          return response;
      }
      
@@ -100,7 +100,7 @@ export function postUsers(payload) {
  export async function postPets(payload) {
   // console.log(payload){
        const response = await axios.post("/pets", payload)
-       console.log(response);
+      //  console.log(response); // DELETE DELETE DELETE
        return response;
 }
 
@@ -131,7 +131,7 @@ export function logInUsers(payload) {
           }).catch ((err) => {
             alert(`${err}`)
           })
-         console.log(response);
+        //  console.log(response); // DELETE DELETE DELETE
          return response;
      }
      
@@ -155,7 +155,6 @@ export const getProvinces = () => {
           ...province,
           name: province.name.replace(/(^|[^A-Za-zÁÉÍÓÚÑáéíóúñ])([a-záéíóúñ])/g, (l) => l.toUpperCase()),
         }));
-        console.log('provinces: ',data)
       dispatch({ type: 'GET_PROVINCES', payload: data });
     });
   };
