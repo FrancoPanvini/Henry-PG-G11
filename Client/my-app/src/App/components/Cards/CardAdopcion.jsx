@@ -24,8 +24,10 @@ function CardAdopcion({ photo, name, age, size, country, province, city, sex, id
     <div className="w-auto h-5/6">
       <ReactCardFlip isFlipped={isFlipped} flipDirection="horizontal" className="">
         <div onClick={handleClick} className="card card-size-lg">
-          <img src={photo} alt="" className="w-full h-4/5 object-cover " />
-          <h3 className="font-bold text-white text-2xl h-full w-full text-center capitalize">{name}</h3>
+          <div className="w-full h-4/5 card-transparency-bottom relative object-cover">
+            <img src={photo} alt="" className="h-full w-full object-cover" />
+          </div>
+          <div className="z-50 flex justify-center items-center w-full h-1/5 text-white font-bold text-2xl capitalize">{name}, {id}</div>
         </div>
 
         <div className="card card-size-lg">

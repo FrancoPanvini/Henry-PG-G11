@@ -93,7 +93,7 @@ code {
 }
 
 .card:hover {
-  @apply shadow-md filter brightness-105;
+  @apply shadow-lg filter brightness-105;
 }
 
 .card-size-lg {
@@ -102,6 +102,14 @@ code {
 
 .card-size-md {
   @apply w-52 h-64;
+}
+
+.card-transparency-bottom::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  background: linear-gradient(180deg, rgba(0, 0, 0, 0) 85%, #f5b461 100%);
 }
 
 .formAdopcion {
