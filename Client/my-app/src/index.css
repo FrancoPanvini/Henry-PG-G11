@@ -2,8 +2,12 @@
 @tailwind components;
 @tailwind utilities;
 
+.background {
+  @apply bg-gradient-to-r from-thirty to-fourty;
+}
+
 .btn {
-  @apply border-b-2 shadow-2xl transition-all;
+  @apply border-b-2 shadow-xl transition-all;
 }
 
 .btn-nav {
@@ -19,11 +23,11 @@
 }
 
 .btn-adogtame {
-  @apply border-b-2 transition-all;
+  @apply border-b-2 shadow-buttonShadow transition-all;
 }
 
 .btn-adogtame:hover {
-  @apply filter brightness-110;
+  @apply filter brightness-110 shadow-lg;
 }
 
 .navButtonActive {
@@ -42,7 +46,7 @@
 } */
 
 .onboarding-transparency-right::after {
-  content: "";
+  content: '';
   position: absolute;
   inset: 0;
   z-index: 1;
@@ -50,7 +54,7 @@
 }
 
 .onboarding-transparency-left::after {
-  content: "";
+  content: '';
   position: absolute;
   inset: 0;
   z-index: 1;
@@ -58,7 +62,7 @@
 }
 
 .floorShadowCircle::before {
-  content: "";
+  content: '';
   position: absolute;
   left: 0;
   right: 0;
@@ -84,19 +88,45 @@ code {
     monospace;
 }*/
 
-.card {
+/* .card {
   @apply rounded overflow-hidden shadow-lg;
+} */
+
+.card {
+  @apply rounded-xl overflow-hidden text-center cursor-pointer bg-primary transition-all;
+}
+
+.card:hover {
+  @apply shadow-lg filter brightness-105;
+}
+
+.card-size-lg {
+  @apply w-80 h-96;
+}
+
+.card-size-md {
+  @apply w-52 h-64;
+}
+
+.card-transparency-bottom::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  background: linear-gradient(180deg, rgba(0, 0, 0, 0) 88%, #f5b561e0 98%, #f5b461 100%);
+}
+
+.panel {
+  @apply p-8 rounded-lg border-2 border-white border-opacity-50 shadow;
 }
 
 .formAdopcion {
-  position: "fixed";
-  top: "50%";
-  left: "50%";
-  transform: "translate(-50%, -50%)";
-  background-color: "#8a9bad";
-  padding: "50px";
+  position: 'fixed';
+  top: '50%';
+  left: '50%';
+  transform: 'translate(-50%, -50%)';
+  background-color: '#8a9bad';
+  padding: '50px';
   z-index: 1000;
   border-radius: 25;
 }
-
-
