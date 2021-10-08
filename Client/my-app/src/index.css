@@ -19,11 +19,11 @@
 }
 
 .btn-adogtame {
-  @apply border-b-2 transition-all;
+  @apply border-b-2 shadow-buttonShadow transition-all;
 }
 
 .btn-adogtame:hover {
-  @apply filter brightness-110;
+  @apply filter brightness-110 shadow-lg;
 }
 
 .navButtonActive {
@@ -109,7 +109,7 @@ code {
   position: absolute;
   inset: 0;
   z-index: 1;
-  background: linear-gradient(180deg, rgba(0, 0, 0, 0) 85%, #f5b461 100%);
+  background: linear-gradient(180deg, rgba(0, 0, 0, 0) 88%, #f5b561e0 98%, #f5b461 100%);
 }
 
 .formAdopcion {
