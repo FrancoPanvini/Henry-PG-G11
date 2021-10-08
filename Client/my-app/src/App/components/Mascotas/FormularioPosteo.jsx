@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { Link, useHistory } from 'react-router-dom';
 import UploadImage from './../cargue-fotos/UploadImage';
 import { postPets } from '../../redux/actions/index';
-import { FaExclamationCircle, FaWindowClose } from 'react-icons/fa';
+import { FaExclamationCircle, FaPaw, FaWindowClose } from 'react-icons/fa';
 
 function FormularioPosteo() {
   const history = useHistory();
@@ -64,12 +64,12 @@ function FormularioPosteo() {
   };
 
   return (
-    <div className="py-16 bg-gradient-to-r from-thirty to-fourty">
-      <form className="flex flex-col w-4/5 max-w-3xl mx-auto p-8 rounded-lg bg-gradient-to-l from-secondary to-secondaryDark border-2 border-white border-opacity-50 relative">
+    <div className="background py-16">
+      <form className="panel flex flex-col w-4/5 max-w-3xl mx-auto bg-gradient-to-r from-primaryDark to-primary relative">
         <Link to="/adopciones">
           <FaWindowClose
-            title="Volver a Adopciones"
-            className="absolute text-2xl right-2 top-2 text-fourtyLight transition-all hover:text-fourty"
+            title="Cancelar y volver a Adopciones"
+            className="absolute text-2xl right-2 top-2 text-fourty transition-all hover:text-fourtyLight"
           />
         </Link>
         <label>
@@ -77,25 +77,24 @@ function FormularioPosteo() {
           {errors.name && (
             <FaExclamationCircle
               title={errors.name}
-              className="inline text-fourtyLight align-baseline"
+              className="inline text-fourty align-baseline"
             />
           )}
         </label>
         <input
           name="name"
           onChange={handleChange}
-          className="rounded-md px-1"
+          className="rounded-md px-1 mb-4"
         />
-        <br />
 
-        <div className="flex justify-evenly">
-          <div className="text-center w-2/5 rounded-2xl bg-secondaryDark px-4 py-2">
+        <div className="flex justify-evenly border-b-2 border-primaryDark">
+          <div className="text-center w-1/2 px-8 py-4 border-r-2 border-primaryDark">
             <label>
               Especie:{' '}
               {errors.PetsTypeid && (
                 <FaExclamationCircle
                   title={errors.PetsTypeid}
-                  className="inline text-fourtyLight align-baseline"
+                  className="inline text-fourty align-baseline"
                 />
               )}
             </label>
@@ -122,9 +121,9 @@ function FormularioPosteo() {
               </label>
             </div>
           </div>
-          <div className="text-center w-2/5 rounded-xl bg-secondary px-4 py-2">
+          <div className="text-center w-1/2 px-8 py-2 border-l-2 border-primaryLight">
             <label>Sexo:</label>
-            <div className="flex justify-evenly items-center">
+            <div className="flex justify-evenly items-centert">
               <label htmlFor="hembra">
                 <input
                   name="sex"
@@ -148,10 +147,9 @@ function FormularioPosteo() {
             </div>
           </div>
         </div>
-        <br />
 
-        <div className="flex justify-evenly">
-          <div className="text-center rounded-xl bg-secondaryDark px-4 py-2">
+        <div className="flex justify-evenly border-t-2 border-primaryLight border-">
+          <div className="text-center w-2/5 p-4 border-r-2 border-primaryDark">
             <label>Edad (en años):</label> <br />
             <input
               name="age"
@@ -162,7 +160,7 @@ function FormularioPosteo() {
               className="rounded-md px-1"
             />
           </div>
-          <div className="text-center w-3/5 rounded-2xl bg-secondary px-4 py-2">
+          <div className="text-center w-3/5 px-8 py-4 border-l-2 border-primaryLight">
             <label>Tamaño aproximado de la raza:</label>
             <div className="flex justify-evenly items-center">
               <label htmlFor="chico">
@@ -223,15 +221,15 @@ function FormularioPosteo() {
         </select>
         <br /> */}
 
-        <div className="flex justify-evenly items-center rounded-xl bg-gradient-to-r from-secondary to-secondaryLight px-4 py-2">
+        <div className="flex justify-evenly items-center bg-gradient-to-r from-primary to-primaryLight px-4 py-2">
           <div>
             <label>
               Foto: (preferentemente la mascota al centro de la imagen)
             </label>
             <UploadImage setUrl={setUrl} />
           </div>
-          <div className="w-32 h-32 bg-secondaryDark border-2 border-secondary">
-            {url === '' ? (
+          <div className="w-32 h-32 bg-primaryDark border-2 border-primaryDark">
+            {url.length === 0 ? (
               <div className="h-full flex justify-center items-center text-center text-secondaryLight">
                 previsualización de imagen
               </div>

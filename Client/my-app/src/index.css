@@ -2,8 +2,12 @@
 @tailwind components;
 @tailwind utilities;
 
+.background {
+  @apply bg-gradient-to-r from-thirty to-fourty;
+}
+
 .btn {
-  @apply border-b-2 shadow-2xl transition-all;
+  @apply border-b-2 shadow-xl transition-all;
 }
 
 .btn-nav {
@@ -110,6 +114,10 @@ code {
   inset: 0;
   z-index: 1;
   background: linear-gradient(180deg, rgba(0, 0, 0, 0) 88%, #f5b561e0 98%, #f5b461 100%);
+}
+
+.panel {
+  @apply p-8 rounded-lg border-2 border-white border-opacity-50 shadow;
 }
 
 .formAdopcion {
