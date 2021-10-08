@@ -7,6 +7,8 @@ import CardPublicacion from '../CardsPefil/CardPublicacion';
 function Publicaciones({ userId }) {
 
   const dispatch = useDispatch();
+
+
   useEffect(() => {
     dispatch(getPetsAdopByUser(userId));
   }, [dispatch, userId]);

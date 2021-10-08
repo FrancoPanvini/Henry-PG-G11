@@ -35,13 +35,12 @@ function CardPublicacion({
           En adopcion: 20 dias
         </span>
       </div>
-      <div className='col-span-3 flex items-center'>
-        <span className='text-gray-200 text-lg mr-8'>Solicitudes: 15</span>
-        <button
-          className='btn bg-gray-200 text-white w-10 h-10 flex justify-center items-center mr-2 text-2xl rounded-lg shadow-inner'
-          title='Ver Solicitudes'>
-          <GrDocumentText />
+      <div className="col-span-3 flex items-center">
+        <span className="text-gray-200 text-lg mr-8">Solicitudes: 20{/* {forms? forms.length: 0} */}</span>
+        <button className="btn bg-gray-200 text-white w-10 h-10 flex justify-center items-center mr-2 text-2xl rounded-lg shadow-inner" title="Ver Solicitudes">
+          <GrDocumentText onClick={() => setIsOpen(true)} />
         </button>
+        {isOpen && <FormSlider onClose={() => setIsOpen(false)} id={petId} />}
       </div>
       <div className='flex'>
         <button
