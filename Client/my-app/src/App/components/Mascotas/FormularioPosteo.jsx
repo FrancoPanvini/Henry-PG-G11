@@ -1,12 +1,11 @@
 import React, { useState } from 'react';
 import ReactDom from 'react-dom';
-// import { Link, useHistory } from 'react-router-dom';
 import UploadImage from './../cargue-fotos/UploadImage';
 import { postPets } from '../../redux/actions/index';
 import { FaExclamationCircle, FaWindowClose } from 'react-icons/fa';
 
-function FormularioPosteo({ onClose }) {
-  // const history = useHistory();
+function FormularioPosteo({ onClose, onPostPet }) {
+
   const [mascota, setMascota] = useState({
     name: '',
     size: '',
@@ -57,18 +56,16 @@ function FormularioPosteo({ onClose }) {
       photo: url,
     };
     postPets(newMascota);
+    onPostPet();
     setUrl([]);
-    alert('¡Listo!');
+    alert('¡Listo! Tu posteo está pendiente de confirmación, ¡muy pronto será publicado!');
     onClose();
-    // history.push('/adopciones');
   };
 
   return ReactDom.createPortal(
     <>
       <div className='fixed inset-0 bg-gray-50 bg-opacity-70 z-40' />
-      <div className='fixed inset-0 z-50'>
-        {' '}
-        {/* py-16 */}
+      <div className='fixed inset-0 z-50 pt-32'>
         <form className='panel flex flex-col w-4/5 max-w-3xl mx-auto bg-gradient-to-r from-primaryDark to-primary relative'>
           {/* <Link to='/adopciones'> */}
           <FaWindowClose
@@ -86,8 +83,8 @@ function FormularioPosteo({ onClose }) {
           <input name='name' onChange={handleChange} className='rounded-md px-1' />
           <br />
 
-          <div className='flex justify-evenly'>
-            <div className='text-center w-2/5 rounded-2xl bg-secondaryDark px-4 py-2'>
+          <div className='flex'>
+            <div className='text-center w-1/2 rounded-2xl px-4 py-2'>
               <label>
                 Especie:{' '}
                 {errors.PetsTypeid && (
@@ -105,18 +102,18 @@ function FormularioPosteo({ onClose }) {
                 </label>
               </div>
             </div>
-          </div>
-          <div className='text-center w-1/2 px-8 py-2 border-l-2 border-primaryLight'>
-            <label>Sexo:</label>
-            <div className='flex justify-evenly items-centert'>
-              <label htmlFor='hembra'>
-                <input name='sex' type='radio' id='hembra' value='h' onChange={handleChange} />
-                Hembra
-              </label>{' '}
-              <label htmlFor='macho'>
-                <input name='sex' type='radio' id='macho' value='m' onChange={handleChange} />
-                Macho
-              </label>
+            <div className='text-center w-1/2 px-8 py-2 border-l-2 border-primaryLight'>
+              <label>Sexo:</label>
+              <div className='flex justify-evenly items-centert'>
+                <label htmlFor='hembra'>
+                  <input name='sex' type='radio' id='hembra' value='h' onChange={handleChange} />
+                  Hembra
+                </label>{' '}
+                <label htmlFor='macho'>
+                  <input name='sex' type='radio' id='macho' value='m' onChange={handleChange} />
+                  Macho
+                </label>
+              </div>
             </div>
           </div>
 
@@ -175,15 +172,16 @@ function FormularioPosteo({ onClose }) {
             </div>
             <div className='w-32 h-32 bg-primaryDark border-2 border-primaryDark'>
               {url.length === 0 ? (
-                <div className='h-full flex justify-center items-center text-center text-secondaryLight'>
+                <div className='h-full flex justify-center items-center text-center text-primaryLight'>
                   previsualización de imagen
                 </div>
               ) : (
                 <img src={url} alt='previsualización de imagen' className='w-full h-full object-cover' />
               )}
             </div>
-            <br />
-
+          </div>
+          <br />
+          <div className="w-full text-center">
             <button
               disabled={handleDisabled()}
               onClick={handlePublicar}
