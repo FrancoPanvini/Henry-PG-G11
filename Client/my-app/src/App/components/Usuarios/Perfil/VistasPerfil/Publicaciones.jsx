@@ -5,15 +5,15 @@ import { getPetsAdopByUser } from '../../../../redux/actions';
 import CardPublicacion from '../CardsPefil/CardPublicacion';
 
 function Publicaciones({ userId }) {
-  const pets = useSelector((state) => state.userPets.rows);
 
   const dispatch = useDispatch();
-
-  console.log(pets);
-
   useEffect(() => {
     dispatch(getPetsAdopByUser(userId));
   }, [dispatch, userId]);
+  
+  const pets = useSelector((state) => state.userPets.rows);
+
+
 
   return (
     <div className='container mx-auto  flex flex-col'>
@@ -41,6 +41,12 @@ function Publicaciones({ userId }) {
                       : 'https://drpp-ny.org/wp-content/uploads/2014/07/sorry-image-not-available.png'
                   }
                   name={p.name}
+                  petId={p.id}
+                  userId={userId}
+                  size={p.size}
+                  age={p.age}
+                  type={p.type}
+                  gender={p.sex}
                 />
               </div>
             );

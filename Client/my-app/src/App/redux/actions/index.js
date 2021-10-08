@@ -48,10 +48,6 @@ export const getPetAdopDetail = (id) => {
      };
 }
 
-export const editPetsData = (dataEdit, id) => {
-    return axios.put(`/pets/${id}`, dataEdit); 
-}
-
 export const getShelters = () => {
   return function(dispatch) {
     axios.get(`/users?type=r`)
