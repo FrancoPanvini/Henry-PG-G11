@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { Link, useHistory } from 'react-router-dom';
 import UploadImage from './../cargue-fotos/UploadImage';
 import { postPets } from '../../redux/actions/index';
-import { FaExclamationCircle, FaPaw, FaWindowClose } from 'react-icons/fa';
+import { FaExclamationCircle, FaWindowClose } from 'react-icons/fa';
 
 function FormularioPosteo() {
   const history = useHistory();
