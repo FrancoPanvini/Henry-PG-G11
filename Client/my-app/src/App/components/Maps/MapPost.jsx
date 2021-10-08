@@ -8,17 +8,15 @@ import {
   } from '@react-google-maps/api';
 const libraries = ['places'];
 
-
+//Sets Map settings
 const mapContainerStyle = {
   width: '50vh',
-  height: '50vh',
+  height: '30vh',
 };
-
 let center = {
   lng: -74.08175,
   lat: 4.710989,
 };
-
 const options = {
     mapTypeControl: false,
     panControl: true,
@@ -27,7 +25,7 @@ const options = {
     streetViewControl: false,
 };
 
-function Maps() {
+function Maps({onLocationChange}) {
     const [selected, setSelected] = useState(null);
     const [placeName, setPlaceName] = useState([]);
     const [random, setRandom] = useState(1);
@@ -41,7 +39,6 @@ function Maps() {
     }, []);
     const onMapLoad = useCallback((map) => {
       mapRef.current = map;
-      console.log(map)
       setRandom(3)
     }, []);
 
@@ -72,6 +69,8 @@ function Maps() {
       .then((response) => {
         if (response.results[0]) {
          fillInAddress(response.results[0])
+         document.getElementById("lat").innerHTML = lat
+         document.getElementById("lng").innerHTML = lng
          setPlaceName(prevState => [response.results[0].formatted_address]);
         } else {
           window.alert('Clickea una calle pa');
@@ -79,10 +78,6 @@ function Maps() {
       })
       .catch((e) => window.alert('Geocoder failed due to: ' + e));
   };
-
-
-
-
 
   //Handles marker when clicking on map
   const handleOnChange = async(e) => {
@@ -116,17 +111,16 @@ function Maps() {
 
   };
 
-
-  //Sets Autocomplete
+//Sets what data to store from geocoder
   const componentForm = [
     'route',
     'street_number',
-    'location',
     'administrative_area_level_2',
     'administrative_area_level_1',
     'country',
   ];
 
+  //Sets Autocomplete
   const autocompleteInput = document.getElementById('location');
   const autocomplete = new window.google.maps.places.Autocomplete(
     autocompleteInput,
@@ -136,7 +130,7 @@ function Maps() {
     }
   );
   
-//Event listener when user selects a location
+  //Event listener when user selects a location
   autocomplete.addListener('place_changed', () => {
     const place = autocomplete.getPlace();
     if (!place.geometry) {
@@ -148,7 +142,7 @@ function Maps() {
     }
   });
 
-
+  //Fills the divs
   const fillInAddress = (place) => {
     const addressNameFormat = {
       street_number: 'short_name',
@@ -158,9 +152,8 @@ function Maps() {
       administrative_area_level_1: 'short_name',
       country: 'long_name',
     };
-
+    //Iterates for each hierarchy of locations data (country,province,city,locality,street,number)
     const getAddressComp = (type, i) => {
-      console.log(place.address_components)
       for (let component of place.address_components) {
         if (component.types[i] === type) {
           return component[addressNameFormat[type]];
@@ -168,7 +161,7 @@ function Maps() {
       }
       return '';
     };
-    
+    //Iterates again trying to find the hierarchy searched (set at line 115)
     for (let component of componentForm) {
       if (component !== 'location') {
         if(component !== "administrative_area_level_2") {
@@ -179,19 +172,14 @@ function Maps() {
             document.getElementById(component).innerHTML = getAddressComp(component,0);
           }
           else{
-
             document.getElementById(component).innerHTML = getAddressComp("sublocality",1);
           }
-        }
-
-          
-
-        
+        }      
       }
     }
   }
 
-
+  //Renders mapCenter and marker at gicen position
   const renderAddress = async(place) => {
     mapRef.current.setCenter(place.geometry.location);
     mapRef.current.setZoom(15);
@@ -211,21 +199,19 @@ function Maps() {
 
   };
 
+  //Rerenders on click to activate the autocomplete
   const onInputClick = () => {
-    /* setInputKey(2) */
     setRandom(2)
-    document.getElementById("location").focus()
-
   }
 
   return (
-    <div className='mt-6'>
+    <div className='mt-6 grid justify-items-center'>
       <input
       onClick={onInputClick}
         type='text'
         placeholder='Address'
         id='location'
-        style={{ width: '100%', height: '15%' }}
+        className='border-2 border-black rounded w-80 h-10 grid justify-items-center absolute mt-2.5 z-10'
       />
 
       <GoogleMap
@@ -265,19 +251,26 @@ function Maps() {
               setSelected(null);
             }}>
             <div>
-              <h2>Mascota ubicada en: {name}</h2>
-              <div></div>
-              <p>Publicada: {/* markers[0].time */}</p>
+              <h2>Dirrección: {name}</h2>
             </div>
           </InfoWindow>
         )) : null}
       </GoogleMap>
-      <div id='street_number'></div>
-      <div id='route'></div>
-      <div id='location'></div>
-      <div id='administrative_area_level_2'></div>
-      <div id='administrative_area_level_1'></div>
-      <div id='country'></div>
+      {!document.getElementById('street_number')?  null : document.getElementById('street_number').innerHTML ? <button type="button" onClick={()=> onLocationChange()} className='z-10' style={{height:"25px", width: "5.5%", position:"absolute", top:"72%", border:"1px solid black", backgroundColor:"white"}}>Confirmar</button> : null}
+      <div style={{display:"flex"}}>
+        <div id='route'  className='font-bold text-white rounded-md px-1 mb-2'></div>
+        <div id='street_number' className='font-bold text-white rounded-md px-1 mb-2'></div>
+      </div>
+      
+      <div style={{display:"flex"}}>
+        <div id='administrative_area_level_2' className='font-bold text-white rounded-md px-1 mb-2'></div>
+        <span className='font-bold text-white rounded-md px-1 mb-2'>-</span> 
+        <div id='administrative_area_level_1' className='font-bold text-white rounded-md px-1 mb-2'></div>
+        <span className='font-bold text-white rounded-md px-1 mb-2'>-</span>
+        <div id='country' className='font-bold text-white rounded-md px-1 mb-2'></div>
+      </div>
+      <div style={{display:"none"}} id="lat"></div>
+      <div style={{display:"none"}} id="lng"></div>
     </div>
   );
 }

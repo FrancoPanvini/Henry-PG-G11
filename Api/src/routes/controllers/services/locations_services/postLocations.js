@@ -15,7 +15,7 @@ const postLocations = async (req, res) => {
     const [City, _CityCreated] = await Cities.findOrCreate({
         where: { ProvinceId: Province.id, name: city },
       });
-      res.status(200).json()
+      res.status(200).json(City)
     
   } catch (error) {
     res.status(409).send(error);

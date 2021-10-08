@@ -22,6 +22,7 @@ module.exports = sequelize => {
     },
     { sequelize: sequelize, modelName: "Users", timestamps: true }
   );
+
   Users.beforeCreate(function (user) {
     user.name = user.name.toLowerCase();
     user.mail = user.mail.toLowerCase();

@@ -5,7 +5,7 @@ import ReactMapGL, { Marker, Popup } from 'react-map-gl';
 import { FaDog } from 'react-icons/fa';
 import axios from 'axios';
 import {format} from 'timeago.js'
-import Modal from '../pop-up/modal'
+//import Modal from '../pop-up/modal'
 
 export default function MapsV2() {
   const [ubication, setUbication] = useState([]);
