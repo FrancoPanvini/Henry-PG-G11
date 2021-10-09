@@ -7,7 +7,7 @@ import { getPetDetail } from '../../services/getPetDetail';
 //? Icons
 import { IoIosCloseCircle } from 'react-icons/io';
 
-//? Carousel
+//? Carousel, seteamos que muestre una sola foto por página
 import Carousel from 'react-elastic-carousel';
 const breakPoints = [{ width: 1, itemsToShow: 1 }];
 
@@ -22,8 +22,6 @@ function CardPopUpPetDetail({ onClose, petId }) {
     };
     getPet(petId);
   }, [petId]);
-
-  //* Definir
 
   return ReactDom.createPortal(
     <>
@@ -41,45 +39,50 @@ function CardPopUpPetDetail({ onClose, petId }) {
             <div className='flex justify-center items-center h-96 text-white text-2xl font-bold animate-pulse'>
               Cargando información...
             </div>
-          ) : (
 
-            /* ↓ una vez que tengo la información, la muestro */
+          /* ↓ una vez que tengo la información, la muestro */
+          ) : (
             <>
               <div>
-                <h3 className='font-bold text-4xl py-3 px-6 text-center text-white capitalize'>{pet?.name}</h3>
+                <h3 className='font-bold text-4xl py-3 px-6 text-center text-white capitalize'>
+                  {pet.name}
+                </h3>
               </div>
               <div className='flex justify-center items-center h-full'>
-                <div className={pet?.petPics ? 'w-1/2 pr-6' : 'w-full'}>
+                <div className={pet.petPics ? 'w-1/2 pr-6' : 'w-full'}>
+
+                  {/* ↓ armamos una oración estilo `Es un ${sexo} de tamaño ${tamaño} de ${edad} años` */}
                   <p className=' text-lg p-6 text-justify text-white italic border-b-2 border-fourty border-opacity-25'>
-                    {pet?.sex === 'm' ? 'Es un macho ' : pet?.sex === 'h' ? 'Es una hembra ' : null}
-                    {pet?.size === 'c'
-                      ? 'de tamaño pequeño '
-                      : pet?.size === 'm'
-                      ? 'de tamaño mediano '
-                      : pet?.size === 'g'
-                      ? 'grande '
+                    {pet.sex === 'm' ? 'Es un macho '
+                      : pet.sex === 'h' ? 'Es una hembra '
+                      : pet.type === 'p' ? 'Es un canino '
+                      : 'Es un felino '}
+                    {pet.size === 'c' ? 'de tamaño pequeño '
+                      : pet.size === 'm' ? 'de tamaño mediano '
+                      : pet.size === 'g' ? 'de tamaño grande '
                       : null}
-                    {pet?.age === 0
-                      ? 'de menos de un año'
-                      : pet?.age === 1
-                      ? `de ${pet?.age} año`
-                      : pet?.age > 1
-                      ? `de ${pet?.age} años`
+                    {pet.age === 0 ? 'de menos de un año'
+                      : pet.age === 1 ? `de ${pet.age} año`
+                      : pet.age > 1 ? `de ${pet.age} años`
                       : null}
                     <span className='not-italic'> &#128512;</span>
                   </p>
+
+                  {/* ↓ mostramos la descripción (si tiene) */}
                   {pet.description && (
                     <p className=' text-lg p-6 text-justify text-white italic border-b-2 border-fourty border-opacity-25'>
-                      <b>Descripción:</b> <br /> {pet?.description}
+                      <b>Descripción:</b> <br /> {pet.description}
                     </p>
                   )}
                   <p className=' text-lg p-6 text-justify text-white italic'>
                     <b>Ubicación:</b> <br />
-                    <span className='capitalize'>{`${pet?.city}, ${pet?.province}, ${pet?.country} `}</span>
+                    <span className='capitalize'>{`${pet.city}, ${pet.province}, ${pet.country} `}</span>
                     <span className='not-italic'>&#127758;</span>
                   </p>
                 </div>
-                {pet?.petPics?.length > 0 && (
+
+                {/* ↓ Si tiene fotos, las mostramos. Si es más de una, se muestran en un carousel */}
+                {pet.petPics?.length > 0 && (
                   <div className='w-1/2 px-6 py-4 rounded-xl shadow-inner bg-fourtyDark bg-opacity-20'>
                     {pet.petPics.length === 1 ? (
                       <div className='h-full w-full flex justify-center'>
@@ -91,8 +94,10 @@ function CardPopUpPetDetail({ onClose, petId }) {
                       </div>
                     ) : (
                       <Carousel breakPoints={breakPoints}>
-                        {pet?.petPics?.map((pic, index) => (
-                          <div key={index} className='h-full w-full flex justify-center'>
+                        {pet.petPics.map((pic, index) => (
+                          <div
+                            key={index}
+                            className='h-full w-full flex justify-center'>
                             <img
                               key={index}
                               src={pic}
@@ -103,16 +108,13 @@ function CardPopUpPetDetail({ onClose, petId }) {
                         ))}
                       </Carousel>
                     )}
-                    {/* <div className='grid grid-cols-2 gap-3 justify-items-center mt-3'>
-                {pet?.petPics?.map((pic, index) => (
-                  <img key={index} src={pic} alt='not available' className='h-96 object-cover rounded-2xl' />
-                  ))}
-                </div> */}
                   </div>
                 )}
+
               </div>
             </>
           )}
+
         </div>
       </div>
     </>,
