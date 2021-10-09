@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { BiTrash, BiEdit } from 'react-icons/bi';
 import { GrDocumentText } from 'react-icons/gr';
+import FormSlider from './FormSlider';
 import PopUpDelete from './PopUpDelete';
 import PopUpEdit from './PopUpEdit';
 
@@ -19,7 +20,7 @@ function CardPublicacion({
   const [isOpenE, setIsOpenE] = useState(false);
 
   return (
-    <div className='grid grid-cols-10 auto-cols-min place-items-center my-4 rounded-lg py-4 shadow-inner ring ring-primary ring-offset-2  w-full h-1/5 border-4 bg-primary text-white '>
+    <div className='grid grid-cols-10 auto-cols-min place-items-center my-8 rounded-lg py-4 shadow-inner ring ring-primary ring-offset-2  w-full h-1/5 border-4 bg-primary text-white '>
       <div className=''>
         <img
           src={photo}

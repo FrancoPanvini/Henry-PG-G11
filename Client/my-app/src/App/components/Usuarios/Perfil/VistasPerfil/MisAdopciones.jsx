@@ -1,13 +1,13 @@
 import React from 'react'
 import axios from 'axios'
 import {useEffect, useState} from 'react'
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import {initialUser } from '../../../../redux/actions';
 import CardAdopcion from '../CardsPefil/CardAdopcion';
 
 function MisAdopciones() {
   const userId = localStorage.getItem('userId');
-  const user = useSelector((state) => state.userData)
+  // const user = useSelector((state) => state.userData)
   const dispatch = useDispatch();
   const [pet, setPet] = useState([])
 

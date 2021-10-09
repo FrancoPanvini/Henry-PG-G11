@@ -56,13 +56,6 @@ function PopUpEdit({
               userId={userId}
             />
           </div>
-          <div className='flex justify-center'>
-            <button
-              className='btn bg-gray-200 p-4 m-4 rounded-lg'
-              onClick={onClose}>
-              CANCELAR
-            </button>
-          </div>
         </div>
       </div>
     </>,
