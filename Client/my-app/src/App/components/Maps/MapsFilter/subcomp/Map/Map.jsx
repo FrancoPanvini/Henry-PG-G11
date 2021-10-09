@@ -10,7 +10,7 @@ import CardAdopcion from "../../../../Cards/CardAdopcion";
 const Map = ({ setCoordinates, setBounds, coordinates, pets, setChildClicked }) => {
   const classes = useStyles();
   const isDesktop = useMediaQuery("(min-width:600px)");
-  
+
 
   return (
     <div className={classes.mapContainer}>
@@ -26,7 +26,7 @@ const Map = ({ setCoordinates, setBounds, coordinates, pets, setChildClicked }) 
           setCoordinates({ lat: e.center.lat, lng: e.center.lng });
           setBounds({ ne: e.marginBounds.ne, sw: e.marginBounds.sw });
         }}
-        
+        onChildClick={(child)=>setChildClicked(child)}
       >
         {pets?.map((pet, i) => (
           <div
@@ -39,7 +39,7 @@ const Map = ({ setCoordinates, setBounds, coordinates, pets, setChildClicked }) 
          { !isDesktop ? (
               <LocationOnOutlinedIcon color="primary" fontSize="large" />
             ) : (
-                  <CardAdopcion
+                 /*  <CardAdopcion
                   photo={pet.petPic ? pet.petPic : 'https://drpp-ny.org/wp-content/uploads/2014/07/sorry-image-not-available.png'}
                   name={pet.name}
                   age={pet.age}
@@ -48,8 +48,8 @@ const Map = ({ setCoordinates, setBounds, coordinates, pets, setChildClicked }) 
                   country={pet.country}
                   province={pet.province}
                   city={pet.city}
-                  id={pet.id}/> 
-              /*  <Paper elevation={3} className={classes.paper}>
+                  id={pet.id}/>  */
+              <Paper elevation={3} className={classes.paper}>
                    <Typography className={classes.typography} variant="subtitle2" gutterBottom>
                       {pet.name}
                   </Typography>
@@ -58,7 +58,7 @@ const Map = ({ setCoordinates, setBounds, coordinates, pets, setChildClicked }) 
                   src={pet.petPic ? pet.petPic : 'https://drpp-ny.org/wp-content/uploads/2014/07/sorry-image-not-available.png'}
                   alt={pet.name}
                   /> 
-              </Paper> */  
+              </Paper> 
             )} 
           </div>
         ))}
