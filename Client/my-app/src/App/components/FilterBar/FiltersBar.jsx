@@ -158,7 +158,8 @@ function FiltersBar() {
 
   return (
     <div>
-      <div className='px-2 ml-4 w-full h-7 font-bold text-thirty text-2xl'>Filtrar resultados:</div>
+      <div className='px-2 ml-4 w-full h-7 font-bold text-thirty text-2xl'>        Filtrar resultados:
+      </div>
       {currentLocation === '/adopciones' ? (
         <div className='r w-full px-8 py-4 ml-4 bg-transparent rounded-sm '>
           <div className='p-1 mb-2 flex flex-col justify-start border-b-2 border-thirtyLight border-opacity-50'>
@@ -181,7 +182,9 @@ function FiltersBar() {
                 name='type'
                 onClick={handleSetUrl}
                 className={`w-16 btn-nav text-white ${
-                  urlFilter.type === 'p' ? ' bg-thirtyDark' : 'btn bg-thirtyLight'
+                  urlFilter.type === 'p'
+                    ? ' bg-thirtyDark'
+                    : 'btn bg-thirtyLight'
                 }`}>
                 Perro
               </button>
@@ -192,7 +195,9 @@ function FiltersBar() {
                 name='type'
                 onClick={handleSetUrl}
                 className={`w-16 btn-nav text-white ${
-                  urlFilter.type === 'g' ? ' bg-thirtyDark' : 'btn bg-thirtyLight'
+                  urlFilter.type === 'g'
+                    ? ' bg-thirtyDark'
+                    : 'btn bg-thirtyLight'
                 }`}>
                 Gato
               </button>
@@ -273,7 +278,9 @@ function FiltersBar() {
                 name='size'
                 onClick={handleSetUrl}
                 className={`w-20 btn-nav text-white transition-all ${
-                  urlFilter.size === 'c' ? ' bg-thirtyDark' : 'btn bg-thirtyLight'
+                  urlFilter.size === 'c'
+                    ? ' bg-thirtyDark'
+                    : 'btn bg-thirtyLight'
                 }`}>
                 Pequeño
               </button>
@@ -284,7 +291,9 @@ function FiltersBar() {
                 name='size'
                 onClick={handleSetUrl}
                 className={`w-20 btn-nav text-white transition-all ${
-                  urlFilter.size === 'm' ? ' bg-thirtyDark' : 'btn bg-thirtyLight'
+                  urlFilter.size === 'm'
+                    ? ' bg-thirtyDark'
+                    : 'btn bg-thirtyLight'
                 }`}>
                 Mediano
               </button>
@@ -295,7 +304,9 @@ function FiltersBar() {
                 name='size'
                 onClick={handleSetUrl}
                 className={`w-20 btn-nav text-white transition-all ${
-                  urlFilter.size === 'g' ? ' bg-thirtyDark' : 'btn bg-thirtyLight'
+                  urlFilter.size === 'g'
+                    ? ' bg-thirtyDark'
+                    : 'btn bg-thirtyLight'
                 }`}>
                 Grande
               </button>
@@ -322,7 +333,9 @@ function FiltersBar() {
                 name='gender'
                 onClick={handleSetUrl}
                 className={`w-20 btn-nav text-white transition-all ${
-                  urlFilter.gender === 'm' ? ' bg-thirtyDark' : 'btn bg-thirtyLight'
+                  urlFilter.gender === 'm'
+                    ? ' bg-thirtyDark'
+                    : 'btn bg-thirtyLight'
                 }`}>
                 Macho
               </button>
@@ -333,7 +346,9 @@ function FiltersBar() {
                 name='gender'
                 onClick={handleSetUrl}
                 className={`w-20 btn-nav text-white transition-all ${
-                  urlFilter.gender === 'h' ? ' bg-thirtyDark' : 'btn bg-thirtyLight'
+                  urlFilter.gender === 'h'
+                    ? ' bg-thirtyDark'
+                    : 'btn bg-thirtyLight'
                 }`}>
                 Hembra
               </button>
@@ -341,21 +356,33 @@ function FiltersBar() {
           </div>
           <br />
 
-          <button className='btn bg-primary py-1 px-3 rounded-lg' onClick={handleResetFilters}>
+          <button
+            className='btn bg-primary py-1 px-3 rounded-lg'
+            onClick={handleResetFilters}>
             Resetear filtros
           </button>
         </div>
       ) : currentLocation === '/perdidos' ? (
         <div className='border-r border-gray-800 p-8 ml-4 bg-transparent rounded-sm'>
-          <SelectUbication urlFilter={urlFilterLost} handleSetUrl={handleSetUrlLost} />
-          <button className='btn bg-primary p-1 rounded-lg' onClick={handleResetFilters}>
+          <SelectUbication
+            urlFilter={urlFilterLost}
+            handleSetUrl={handleSetUrlLost}
+          />
+          <button
+            className='btn bg-primary p-1 rounded-lg'
+            onClick={handleResetFilters}>
             Reset Filters
           </button>
         </div>
       ) : (
         <div className='border-r border-gray-800 p-8 ml-4 bg-transparent rounded-sm '>
-          <SelectUbication urlFilter={urlShelter} handleSetUrl={handleSetUrlShelter} />
-          <button className='btn bg-primary p-1 rounded-lg' onClick={handleResetFilters}>
+          <SelectUbication
+            urlFilter={urlShelter}
+            handleSetUrl={handleSetUrlShelter}
+          />
+          <button
+            className='btn bg-primary p-1 rounded-lg'
+            onClick={handleResetFilters}>
             Reset Filters
           </button>
         </div>
