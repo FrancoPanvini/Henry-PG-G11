@@ -46,7 +46,7 @@ const AppMap = () => {
     const pet = async (sw, ne, type) => {
       try {
         const res = await axios.get(`/pets/`);
-        setPets(res.data.rows);
+        setPets(res.data.rows.filter((place) => place.name));
         setFilteredSize([]);
         setFilteredSex([]);
         setIsLoading(false);
@@ -67,8 +67,8 @@ const AppMap = () => {
   return (
     <div>
       <CssBaseline />
-      <Search />
-      <Grid container spacing={3} style={{ width: "100%" }}>
+      <Search setCoordinates={setCoordinates}/>
+      <Grid container spacing={3} style={{ width: "100%" , height:"auto"}}>
         <Grid item xs={12} md={4}>
           <List
             pets={filteredSex.length ? filteredSex : pets}
@@ -83,7 +83,7 @@ const AppMap = () => {
             setSize={setSize}
           />
         </Grid>
-        <Grid item xs={12} md={8}>
+        <Grid item xs={12} md={8} style={{marginTop: '20px'}}>
           <Map
             onLoad={onMapLoad}
             setCoordinates={setCoordinates}
@@ -93,7 +93,7 @@ const AppMap = () => {
             pets={filteredSize.length ? filteredSize : pets}
             setChildClicked={setChildClicked}
           />
-          <button onClick={() => setBoundsOnClick()}>Buscar Aquí</button>
+          {/* <button onClick={() => setBoundsOnClick()}>Buscar Aquí</button> */}
         </Grid>
       </Grid>
     </div>
