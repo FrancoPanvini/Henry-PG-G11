@@ -23,7 +23,16 @@ function FiltersBar() {
     dispatch(getCities());
   }, [dispatch]);
 
-  const [urlFilter, setUrlFilter] = useState({});
+  const [urlFilter, setUrlFilter] = useState({
+    type: '',
+    country: '',
+    province: '',
+    city: '',
+    agemin: '',
+    agemax: '',
+    size: '',
+    sex: '',
+  });
   const [urlFilterLost, setUrlFilterLost] = useState({
     country: '',
     province: '',
@@ -88,21 +97,35 @@ function FiltersBar() {
     setUrlFilter(updateFilter);
   };
 
+  //* botón para resetar los filtros de edad
+  const handleResetAge = () => {
+    let updateFilter = {
+      ...urlFilter,
+      agemin: '',
+      agemax: '',
+    };
+    setUrlFilter(updateFilter);
+    sendFilters(updateFilter);
+  };
+
   const handleSend = (e) => {
     e.preventDefault();
     sendFilters(urlFilter);
   };
 
-  const setDisabled = () => {
-    if (urlFilter.agemax === '' && urlFilter.agemax === '') return true;
-
-    return false;
-  };
-
   const handleResetFilters = (e) => {
     e.preventDefault();
     currentLocation === '/adopciones'
-      ? setUrlFilter({})
+      ? setUrlFilter({
+          type: '',
+          country: '',
+          province: '',
+          city: '',
+          agemin: '',
+          agemax: '',
+          size: '',
+          sex: '',
+        })
       : currentLocation === '/perdidos'
       ? setUrlFilterLost({ country: '', province: '', city: '' })
       : setUrlShelter({ country: '', province: '', city: '' });
@@ -115,7 +138,7 @@ function FiltersBar() {
   };
 
   const sendFilters = (filters) => {
-    let cleanFilter = filters;
+    let cleanFilter = { ...filters }; // ← Dami, acá había que hacer una copia, sino cleanFilter era lo mismo que urlFilter, y al hacer delete en cleanFilter estabas modificando las propiedades del estado en sí también ! ((((borrar este comentario))
 
     cleanFilter.type === '' && delete cleanFilter.type;
     cleanFilter.gender === '' && delete cleanFilter.gender;
@@ -158,9 +181,7 @@ function FiltersBar() {
                 name='type'
                 onClick={handleSetUrl}
                 className={`w-16 btn-nav text-white ${
-                  urlFilter.type === 'p'
-                    ? ' bg-thirtyDark'
-                    : 'btn bg-thirtyLight'
+                  urlFilter.type === 'p' ? ' bg-thirtyDark' : 'btn bg-thirtyLight'
                 }`}>
                 Perro
               </button>
@@ -171,9 +192,7 @@ function FiltersBar() {
                 name='type'
                 onClick={handleSetUrl}
                 className={`w-16 btn-nav text-white ${
-                  urlFilter.type === 'g'
-                    ? ' bg-thirtyDark'
-                    : 'btn bg-thirtyLight'
+                  urlFilter.type === 'g' ? ' bg-thirtyDark' : 'btn bg-thirtyLight'
                 }`}>
                 Gato
               </button>
@@ -183,7 +202,17 @@ function FiltersBar() {
           <SelectUbication urlFilter={urlFilter} handleSetUrl={handleSetUrl} />
 
           <div className='p-1 mb-2 flex flex-wrap justify-between items-center border-b-2 border-t-2 border-thirtyLight border-opacity-50'>
-            <label className='w-full h-7 font-bold mt-2'>Edad</label>
+            <label className='w-full h-7 font-bold mt-2'>
+              Edad{' '}
+              {(urlFilter.agemin || urlFilter.agemax) && (
+                <button
+                  title='Resetear filtro de Edad'
+                  onClick={handleResetAge}
+                  className='w-4 btn btn-nav text-white bg-primary'>
+                  x
+                </button>
+              )}
+            </label>
             <div className='flex justify-start w-full'>
               <div>
                 Min:
@@ -214,9 +243,12 @@ function FiltersBar() {
             </div>
             <button
               type='submit'
-              className='btn bg-primary p-1 rounded-lg disabled:opacity-50 mb-2'
-              onClick={handleSend}
-              disabled={setDisabled()}>
+              className={
+                urlFilter.agemin || urlFilter.agemax
+                  ? 'btn bg-primary p-1 rounded-lg disabled:opacity-50 mb-2'
+                  : 'btn p-1 mb-2 invisible'
+              }
+              onClick={handleSend}>
               Aplicar
             </button>
           </div>
@@ -241,9 +273,7 @@ function FiltersBar() {
                 name='size'
                 onClick={handleSetUrl}
                 className={`w-20 btn-nav text-white transition-all ${
-                  urlFilter.size === 'c'
-                    ? ' bg-thirtyDark'
-                    : 'btn bg-thirtyLight'
+                  urlFilter.size === 'c' ? ' bg-thirtyDark' : 'btn bg-thirtyLight'
                 }`}>
                 Pequeño
               </button>
@@ -254,9 +284,7 @@ function FiltersBar() {
                 name='size'
                 onClick={handleSetUrl}
                 className={`w-20 btn-nav text-white transition-all ${
-                  urlFilter.size === 'm'
-                    ? ' bg-thirtyDark'
-                    : 'btn bg-thirtyLight'
+                  urlFilter.size === 'm' ? ' bg-thirtyDark' : 'btn bg-thirtyLight'
                 }`}>
                 Mediano
               </button>
@@ -267,9 +295,7 @@ function FiltersBar() {
                 name='size'
                 onClick={handleSetUrl}
                 className={`w-20 btn-nav text-white transition-all ${
-                  urlFilter.size === 'g'
-                    ? ' bg-thirtyDark'
-                    : 'btn bg-thirtyLight'
+                  urlFilter.size === 'g' ? ' bg-thirtyDark' : 'btn bg-thirtyLight'
                 }`}>
                 Grande
               </button>
@@ -296,9 +322,7 @@ function FiltersBar() {
                 name='gender'
                 onClick={handleSetUrl}
                 className={`w-20 btn-nav text-white transition-all ${
-                  urlFilter.gender === 'm'
-                    ? ' bg-thirtyDark'
-                    : 'btn bg-thirtyLight'
+                  urlFilter.gender === 'm' ? ' bg-thirtyDark' : 'btn bg-thirtyLight'
                 }`}>
                 Macho
               </button>
@@ -309,9 +333,7 @@ function FiltersBar() {
                 name='gender'
                 onClick={handleSetUrl}
                 className={`w-20 btn-nav text-white transition-all ${
-                  urlFilter.gender === 'h'
-                    ? ' bg-thirtyDark'
-                    : 'btn bg-thirtyLight'
+                  urlFilter.gender === 'h' ? ' bg-thirtyDark' : 'btn bg-thirtyLight'
                 }`}>
                 Hembra
               </button>
@@ -319,33 +341,21 @@ function FiltersBar() {
           </div>
           <br />
 
-          <button
-            className='btn bg-primary py-1 px-3 rounded-lg'
-            onClick={handleResetFilters}>
+          <button className='btn bg-primary py-1 px-3 rounded-lg' onClick={handleResetFilters}>
             Resetear filtros
           </button>
         </div>
       ) : currentLocation === '/perdidos' ? (
         <div className='border-r border-gray-800 p-8 ml-4 bg-transparent rounded-sm'>
-          <SelectUbication
-            urlFilter={urlFilterLost}
-            handleSetUrl={handleSetUrlLost}
-          />
-          <button
-            className='btn bg-primary p-1 rounded-lg'
-            onClick={handleResetFilters}>
+          <SelectUbication urlFilter={urlFilterLost} handleSetUrl={handleSetUrlLost} />
+          <button className='btn bg-primary p-1 rounded-lg' onClick={handleResetFilters}>
             Reset Filters
           </button>
         </div>
       ) : (
         <div className='border-r border-gray-800 p-8 ml-4 bg-transparent rounded-sm '>
-          <SelectUbication
-            urlFilter={urlShelter}
-            handleSetUrl={handleSetUrlShelter}
-          />
-          <button
-            className='btn bg-primary p-1 rounded-lg'
-            onClick={handleResetFilters}>
+          <SelectUbication urlFilter={urlShelter} handleSetUrl={handleSetUrlShelter} />
+          <button className='btn bg-primary p-1 rounded-lg' onClick={handleResetFilters}>
             Reset Filters
           </button>
         </div>
