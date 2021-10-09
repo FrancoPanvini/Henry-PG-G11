@@ -21,6 +21,7 @@ module.exports = {
     extend: {
       height: { 
         screen80: "60vh",
+        screen70: "70vh",
         screen85: "85vh",
         screen90: "90vh",
       },

@@ -117,7 +117,20 @@ code {
 }
 
 .panel {
-  @apply p-8 rounded-lg border-2 border-white border-opacity-50 shadow;
+  @apply p-8 rounded-xl border-2 border-white border-opacity-50 shadow;
+}
+
+progress {
+  @apply rounded-lg bg-thirtyDark;
+}
+progress::-webkit-progress-bar {
+  @apply rounded-lg bg-thirtyDark;
+}
+progress::-webkit-progress-value {
+  @apply rounded-lg bg-thirtyLight;
+}
+progress::-moz-progress-bar {
+  @apply rounded-lg bg-thirtyLight;
 }
 
 .formAdopcion {

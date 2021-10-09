@@ -45,8 +45,8 @@ function UploadImage({ photo, setUrl }) {
         <button onClick={handleUpload} className='btn btn-nav bg-thirty px-8 rounded-xl border-b-fourty mt-1'>
           Subir foto seleccionada y previsualizar
         </button>
-        <div>
-          <progress value={progress} max='100' className="w-3/5 rounded-lg" title='Progreso de subida' />
+        <div className="flex items-center justify-center">
+          <progress value={progress} max='100' className="w-3/5 mr-2" title='Progreso de subida' />{progress}%
         </div>
       </div>
     </div>
