@@ -63,9 +63,9 @@ function FormularioAdopcion({ onClose, name, petId }) {
             <form>
               <IoIosCloseCircle className="text-primary absolute top-3 right-3 text-3xl hover:text-primaryLight cursor-pointer transition-all" onClick={onClose} />
               <div>
-                <div className="font-bold text-primary grid justify-items-center pb-10">¡Hola {user.name}!</div>
+                <div className="font-bold text-primary grid justify-items-center pb-10 capitalize">¡Hola {user.name}!</div>
                 <p className="text-white">
-                  Agradecemos tu interes por <span className="font-bold text-primary">{name}</span>, para considerar tu solicitud de adopción necesitamos conocerte un poco mas, por favor contesta
+                  Agradecemos tu interes por <span className="font-bold text-primary capitalize">{name}</span>, para considerar tu solicitud de adopción necesitamos conocerte un poco mas, por favor contesta
                   nuestras preguntas
                 </p>
               </div>
