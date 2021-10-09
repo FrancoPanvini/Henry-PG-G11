@@ -43,6 +43,9 @@ module.exports = {
       minWidth: {
         sign: "350px",
       },
+      inset: {
+        '18': '4.5rem',
+      },
       colors: {
         fourtyLight: "#5a889b",
         fourty: "#316B83",

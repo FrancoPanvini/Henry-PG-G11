@@ -29,16 +29,16 @@ function Adopciones() {
 
   return (
     <div>
+      <div className='grid grid-cols-7 place-items-center bg-gray-200 relative'>
       {isLogged && (
-        <div className=''>
-          <button className='btn btn-lg bg-primary text-white absolute top-32 right-8' onClick={() => setIsOpen(true)}>
+        <>
+          <button className='btn btn-lg bg-primary text-white absolute top-18 right-8' onClick={() => setIsOpen(true)}>
             Ofrecer una mascota en adopción
           </button>
           {isOpen && <FormularioPosteo onClose={() => setIsOpen(false)} onPostPet={onPostPet} />}
-        </div>
+        </>
       )}
 
-      <div className='grid grid-cols-7 place-items-center bg-gray-200'>
         <FiltersBar className='place-self-center fixed' />
         <CardsContainer title='ADOPCIONES' className='col-span-6' />
       </div>
