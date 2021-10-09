@@ -1,15 +1,24 @@
-import React, {useState} from 'react'
+import React, {useState, useEffect, createRef} from 'react'
 import {CircularProgress, Grid, Typography, InputLabel, MenuItem, FormControl, Select} from '@material-ui/core';
 
 import useStyles from './style';
-import PetsDetail from '../PetsDetail'
+import PetsDetail from '../PetsDetail/PetsDetail'
+import CardAdopcion from '../../../../Cards/CardAdopcion';
 
-const List = ({pets}) => {
+const List = ({pets, childClicked}) => {
 
     const classes = useStyles();
     const [type, setType] = useState('p');
     const [sex, setSex] = useState('m');
     const [size, setSize] = useState('p')
+
+    const [petRefs, setPetRefs] = useState([])
+
+    useEffect(() => {
+        
+        setPetRefs((refs) => Array(pets.length).fill().map((_, i) => refs[i] || createRef()));
+        
+    }, [pets])
 
     return (
         <div className={classes.container}>
@@ -39,8 +48,19 @@ const List = ({pets}) => {
             </FormControl>
             <Grid container spacing={3} className={classes.list}>
                 {pets?.map((pet, i) => 
-                <Grid item key={i} xs={12}>
+                <Grid ref={petRefs[i]} item key={i} xs={12}>
                     <PetsDetail pet={pet} />
+                   {/*  <CardAdopcion
+                    photo={pet.petPic ? pet.petPic : 'https://drpp-ny.org/wp-content/uploads/2014/07/sorry-image-not-available.png'}
+                    name={pet.name}
+                    age={pet.age}
+                    size={pet.size}
+                    sex={pet.sex}
+                    country={pet.country}
+                    province={pet.province}
+                    city={pet.city}
+                    id={pet.id}
+                    /> */}
                 </Grid>)}
             </Grid>
         </div>

@@ -37,6 +37,8 @@ function Registro() {
     direction: "",
     password: "",
     confirmPassword: "",
+    lat: "",
+    lng: "",
     Cityid: "",
     UsersTypeid: "i", // ← hardcodeado, revisar !!!
   });
