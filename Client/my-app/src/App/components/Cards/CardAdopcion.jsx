@@ -24,7 +24,7 @@ function CardAdopcion({ selected, refProp, photo, name, age, size, country, prov
   refProp?.current?.scrollIntoView({ behavior: "smooth", block: "start" });
 
   return (
-    <div className="w-auto h-5/6">
+    <div className="w-80 h-5/6 m-0 p-0">
       <ReactCardFlip isFlipped={isFlipped} flipDirection="horizontal" className="">
         <div onClick={handleClick} className="w-80 h-96 grid justify-items-center cursor-pointer bg-primaryDark rounded-2xl overflow-hidden">
           <img src={photo} alt="" className="w-full h-80 object-cover " />

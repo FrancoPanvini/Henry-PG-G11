@@ -10,8 +10,9 @@ import axios from "axios";
 
 const AppMap = () => {
   const [pets, setPets] = useState([]);
+  const [filteredPets, setFilteredPets] = useState([]);
   const [childClicked, setChildClicked] = useState(null);
-  const [coordinates, setCoordinates] = useState({});
+  const [coordinates, setCoordinates] = useState({ lat: 0, lng: 0 });
   const [bounds, setBounds] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
   const [type, setType] = useState("p");
@@ -20,6 +21,18 @@ const AppMap = () => {
 
   const [filteredSex, setFilteredSex] = useState([]);
   const [filteredSize, setFilteredSize] = useState([]);
+  const [random, setRandom] = useState("");
+
+  let filterin = {
+    type:"",
+    sex:"",
+    size:""
+  }
+  const [filters, setFilters] = useState({
+    type:"",
+    sex:"",
+    size:""
+  })
 
   const mapRef = useRef();
   const onMapLoad = useCallback((map) => {
@@ -32,47 +45,67 @@ const AppMap = () => {
         setCoordinates({ lat: latitude, lng: longitude });
       }
     );
-  });
+  },);
 
-  useEffect(() => {
-    const filteredSex = pets.filter((pet) => pet.sex !== sex);
-    const filteredSize = pets.filter((pet) => pet.size == size);
-    setFilteredSex(filteredSex);
-    setFilteredSize(filteredSize);
-  }, [sex, size]);
 
-  useEffect(() => {
-    setIsLoading(true);
-    const pet = async (sw, ne, type) => {
-      try {
-        const res = await axios.get(`/pets/`);
-        setPets(res.data.rows.filter((place) => place.name));
-        setFilteredSize([]);
-        setFilteredSex([]);
-        setIsLoading(false);
-        console.log(res.data.rows);
-      } catch (err) {
-        console.log(err);
+  const applyFilter = (type, el) => {
+    let aux = {...filters, [type]: el}
+    setFilters(aux)
+    let filterAux = Object.entries({...filters, [type]: el}); //[[type,""],[sex,""],[size,""]]
+    console.log(filterAux)
+    let auxDeAux = filterAux.reduce((acc, filtered) => {
+      if(filtered[1] != "") {
+        let auxe = filtered[0]
+
+        console.log(acc[0], filtered[1])
+        acc = acc.filter(pet => filtered[1] == pet[filtered[0]])
+        return acc
       }
-    };
-    pet();
-  }, [type, coordinates, bounds]);
+      else{
+        return acc
+      }
+    },pets)
+    console.log(auxDeAux)
+    setFilteredPets(auxDeAux)
+    setRandom("")
 
-  const setBoundsOnClick = () => {
-    let bounds = mapRef.current.getBounds();
-    console.log(bounds);
-  };
+  }
 
-  console.log(pets);
+
+  useEffect(() => {
+         setIsLoading(true);
+      const pet = async (sw, ne, type) => {
+        try {
+          const res = await axios.get(`/pets?adopted=false`);
+          setPets(res.data.rows.filter((place) => place.name));
+          setFilteredPets(res.data.rows.filter((place) => place.name))
+          setIsLoading(false);
+          setFilters({
+            type:"",
+            sex:"",
+            size:""
+          })
+        } 
+        catch (err) {
+          console.log(err);
+        }
+      };
+      pet();  
+  }, [bounds]);
+
+
+
+
   return (
     <div>
       <CssBaseline />
-      <Search setCoordinates={setCoordinates}/>
-      <Grid container spacing={3} style={{ width: "100%" , height:"auto"}}>
+      <Search setCoordinates={setCoordinates} />
+      <Grid container spacing={3} style={{ width: "100%", height: "auto" }}>
         <Grid item xs={12} md={4}>
           <List
-            pets={filteredSex.length ? filteredSex : pets}
-            pets={filteredSize.length ? filteredSize : pets}
+            //pets={filteredSex.length ? filteredSex : pets}
+            //pets={filteredSize.length ? filteredSize : pets}
+            filter={applyFilter}
             childClicked={childClicked}
             isLoading={isLoading}
             type={type}
@@ -81,19 +114,20 @@ const AppMap = () => {
             setSex={setSex}
             size={size}
             setSize={setSize}
+            pets={filteredPets}
           />
         </Grid>
-        <Grid item xs={12} md={8} style={{marginTop: '20px'}}>
+        <Grid item xs={12} md={8} style={{ marginTop: "20px" }}>
           <Map
             onLoad={onMapLoad}
             setCoordinates={setCoordinates}
             setBounds={setBounds}
             coordinates={coordinates}
-            pets={filteredSex.length ? filteredSex : pets}
-            pets={filteredSize.length ? filteredSize : pets}
+            pets={filteredPets}
+            //pets={filteredSex.length ? filteredSex : pets}
+            //pets={filteredSize.length ? filteredSize : pets}
             setChildClicked={setChildClicked}
           />
-          {/* <button onClick={() => setBoundsOnClick()}>Buscar Aquí</button> */}
         </Grid>
       </Grid>
     </div>

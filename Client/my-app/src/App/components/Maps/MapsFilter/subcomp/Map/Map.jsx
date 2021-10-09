@@ -11,9 +11,12 @@ const Map = ({ setCoordinates, setBounds, coordinates, pets, setChildClicked }) 
   const classes = useStyles();
   const isDesktop = useMediaQuery("(min-width:600px)");
 
+//bounds.ne.lat  latMax lngMin
+//bounds.sw.lat  latMin lngMax
 
   return (
     <div className={classes.mapContainer}>
+      
       <GoogleMapReact
         bootstrapURLKeys={{ key: "AIzaSyC9FtL0Nsz0ROcYVY7hOkp9JL2tU4ECjqY" }}
         defaultCenter={coordinates}
@@ -22,9 +25,9 @@ const Map = ({ setCoordinates, setBounds, coordinates, pets, setChildClicked }) 
         margin={[50, 50, 50, 50]}
         options={""}
         onChange={(e) => {
-          //console.log(e)
+          console.log(e.bounds)
           setCoordinates({ lat: e.center.lat, lng: e.center.lng });
-          setBounds({ ne: e.marginBounds.ne, sw: e.marginBounds.sw });
+          /* setBounds({ latMin: e.bounds.sw.lat, latMax: e.bounds.ne.lat, lngMin: e.bounds.ne.lng, lngMax: e.bounds.sw.lng  }); */
         }}
         onChildClick={(child)=>setChildClicked(child)}
       >

@@ -13,13 +13,18 @@ import useStyles from "./style";
 import PetsDetail from "../PetsDetail/PetsDetail";
 import CardAdopcion from "../../../../Cards/CardAdopcion";
 
-const List = ({ pets, childClicked, isLoading, type, setType, sex, setSex, size, setSize }) => {
+const List = ({ pets, childClicked, isLoading, type, setType, sex, setSex, size, setSize, filter }) => {
   const classes = useStyles();
 /*   const [type, setType] = useState("p");
   const [sex, setSex] = useState("m");
   const [size, setSize] = useState("p"); */
 
   const [petRefs, setPetRefs] = useState([]);
+  const [prueba, setPrueba] = useState({
+    type: '',
+    sex: '',
+    size: ''
+  });
 
   useEffect(() => {
     setPetRefs((refs) =>
@@ -28,6 +33,13 @@ const List = ({ pets, childClicked, isLoading, type, setType, sex, setSex, size,
         .map((_, i) => refs[i] || createRef())
     );
   }, [pets]);
+
+
+  const handleChange = (event, type) => {
+  
+    let aux = {...prueba, [type]:event}
+    setPrueba(aux);
+  };
 
   return (
     <div className={classes.container}>
@@ -40,29 +52,32 @@ const List = ({ pets, childClicked, isLoading, type, setType, sex, setSex, size,
         <>
           <FormControl className={classes.formControl}>
             <InputLabel>Tipo</InputLabel>
-            <Select value={type} onChange={(e) => setType(e.target.value)}>
-              <MenuItem value="p">Perros</MenuItem>
-              <MenuItem value="g">Gatos</MenuItem>
+            <Select defaultValue="all" value={prueba.type} onChange={(e) => handleChange(e.target.value,"type")}>
+              <MenuItem onClick={(e) => filter("type", "")} value="all">ALL</MenuItem>
+              <MenuItem onClick={(e) => filter("type", e.target.dataset.value)} value="Perro">Perros</MenuItem>
+              <MenuItem onClick={(e) => filter("type", e.target.dataset.value)} value="Gato">Gatos</MenuItem>
             </Select>
           </FormControl>
           <FormControl className={classes.formControl}>
             <InputLabel>Sexo</InputLabel>
-            <Select value={sex} onChange={(e) => setSex(e.target.value)}>
-              <MenuItem value="m">Macho</MenuItem>
-              <MenuItem value="h">Hembra</MenuItem>
+            <Select defaultValue="all" value={prueba.sex} onChange={(e) => handleChange(e.target.value,"sex")}>
+              <MenuItem onClick={(e) => filter("sex", "")} value="all">ALL</MenuItem>
+              <MenuItem onClick={(e) => filter("sex", e.target.dataset.value)} value="m">Macho</MenuItem>
+              <MenuItem onClick={(e) => filter("sex", e.target.dataset.value)} value="h">Hembra</MenuItem>
             </Select>
           </FormControl>
           <FormControl className={classes.formControl}>
             <InputLabel>Tamaño</InputLabel>
-            <Select value={size} onChange={(e) => setSize(e.target.value)}>
-              <MenuItem value="c">Pequeno</MenuItem>
-              <MenuItem value="m">Mediano</MenuItem>
-              <MenuItem value="g">Grande</MenuItem>
+            <Select defaultValue="all" value={prueba.size} onChange={(e) => handleChange(e.target.value,"size")}>
+              <MenuItem onClick={(e) => filter("size", "")} value="all">ALL</MenuItem>
+              <MenuItem onClick={(e) => filter("size", e.target.dataset.value)} value="c">Pequeño</MenuItem>
+              <MenuItem onClick={(e) => filter("size", e.target.dataset.value)} value="m">Mediano</MenuItem>
+              <MenuItem onClick={(e) => filter("size", e.target.dataset.value)} value="g">Grande</MenuItem>
             </Select>
           </FormControl>
           <Grid container spacing={3} className={classes.list}>
             {pets?.map((pet, i) => (
-              <Grid ref={petRefs[i]} key={i} xs={12}>
+              <Grid ref={petRefs[i]} key={i} xs={12} style={{padding: 'auto'}}>
                {/*  <PetsDetail
                   pet={pet}
                   selected={Number(childClicked) === i}
