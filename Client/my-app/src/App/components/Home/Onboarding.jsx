@@ -1,7 +1,10 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import { useSelector } from 'react-redux';
 
 function Onboarding() {
+  const   isLogged = useSelector((state) => state.isLogged);
+
   return (
     <div className='relative bg-gradient-to-r from-thirty to-fourty h-screen80 flex items-center justify-center'>
       <div className='flex flex-col items-center justify-center'>
@@ -10,9 +13,19 @@ function Onboarding() {
           <br /> Y DALE UN HOGAR
         </span>
         <br />
-        <Link to='/registro'>
-          <button className='btn btn-lg bg-primary text-white border-fourty'>REGISTRATE</button>
-        </Link>
+        {isLogged ? (
+          <Link to='/adopciones'>
+            <button className='btn btn-lg bg-primary text-white border-fourty'>
+              ADOPTA
+            </button>
+          </Link>
+        ) : (
+          <Link to='/registro'>
+            <button className='btn btn-lg bg-primary text-white border-fourty'>
+              REGISTRATE
+            </button>
+          </Link>
+        )}
       </div>
 
       <div>

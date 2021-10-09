@@ -48,10 +48,6 @@ export const getPetAdopDetail = (id) => {
      };
 }
 
-export const editPetsData = (dataEdit, id) => {
-    return axios.put(`/pets/${id}`, dataEdit); 
-}
-
 export const getShelters = () => {
   return function(dispatch) {
     axios.get(`/users?type=r`)
@@ -215,4 +211,27 @@ export const getLostPetsHome = () => {
        });
    };
 }
+export const setActive = (payload) => {
+  return function(dispatch) {
+         dispatch({ type: "SET_ACTIVE", payload });
 
+   };
+}
+
+export const initialUser = (userId) => {
+  return function(dispatch) {
+      axios.get(`users/${userId}`)
+       .then(data => {
+         dispatch({ type: "INITIAL_USER", payload: data });
+       });
+   };
+}
+
+export const getPetsAdopByUser = (id) => {
+  return function(dispatch) {
+      axios.get(`/pets?owner=${id}`)
+       .then(data => {
+         dispatch({ type: "GET_USER_PETS", payload: data });
+       });
+   };
+}
