@@ -158,8 +158,7 @@ function FiltersBar() {
 
   return (
     <div>
-      <div className='px-2 ml-4 w-full h-7 font-bold text-thirty text-2xl'>        Filtrar resultados:
-      </div>
+      <div className='px-2 ml-4 w-full h-7 font-bold text-thirty text-2xl'>Filtrar resultados:</div>
       {currentLocation === '/adopciones' ? (
         <div className='r w-full px-8 py-4 ml-4 bg-transparent rounded-sm '>
           <div className='p-1 mb-2 flex flex-col justify-start border-b-2 border-thirtyLight border-opacity-50'>
