@@ -65,7 +65,7 @@ module.exports = {
         "center-bottomish": "50% 80%",
       },
       boxShadow: {
-        'activeNavBar': '0px -4px 0 0 #f5b461 inset;',
+        'activeNavBar': '0 -1.8em 5px -24px #f5b461 inset;', // ← difuminado en la NavBar, para quitarlo remplazar el tercer valor ('5px') por '0'
         'similBorderWhite': '0 20px 25px -5px #0003, 0 0 3px 3px #FFF6 inset;',
         'buttonShadow':'0px 5px 15px 2px #0003;'
       }
