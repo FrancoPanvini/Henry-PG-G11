@@ -1,5 +1,7 @@
 import React, { useEffect, useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import parsePhoneNumber from 'libphonenumber-js'
+import PhoneCodes from "./phoneRegionInput";
+import { useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
 import { FaPaw, FaExclamationCircle } from "react-icons/fa";
 import axios from 'axios'
@@ -14,14 +16,15 @@ import MapPost from '../Maps/MapPost'
 
 function Registro() {
   const dispatch = useDispatch();
-  const paises = useSelector((state) => state.countries);
+  /* const paises = useSelector((state) => state.countries);
   const provincias = useSelector((state) => state.provinces);
-  const ciudades = useSelector((state) => state.cities);
-  const [countryId, setCountryId] = useState(null);
-  const [provinceId, setProvinceId] = useState(null);
+  const ciudades = useSelector((state) => state.cities); */
+  /* const [countryId, setCountryId] = useState(null);
+  const [provinceId, setProvinceId] = useState(null); */
+  const [phoneCode, setPhoneCode] = useState("");
   // const [cityId, setCityId] = useState(null);
   const [location, setLocation] = useState({})
-  const [direccion, setDireccion] = useState("")
+  //const [direccion, setDireccion] = useState("")
   const history = useHistory();
 
   useEffect(() => {
@@ -99,6 +102,10 @@ function Registro() {
       province,
       country
     })
+    lat = parseFloat(lat)
+    lng = parseFloat(lng)
+ 
+ 
 
     setInput(prevState => {
       return {
@@ -108,9 +115,12 @@ function Registro() {
         "lng":lng
       }})
 
-      
-    setDireccion(adress)
+    //setDireccion(adress)
     setErrors(validate({...input,"direction": adress,"lat":lat,"lng":lng}))
+  }
+
+  const handlePhoneCodeChange = (e) => {
+    setPhoneCode(e.target.value)
   }
 
 
@@ -120,16 +130,34 @@ function Registro() {
 
   const handleOnChange = (e) => {
     e.preventDefault();
-    const newInput = {
-      ...input,
-      [e.target.name]: e.target.value,
-    };
-    setInput(newInput);
-    setErrors(validate(newInput));
+    if(e.target.name === "phone") {
+      if(e.target?.value) {
+        setErrors(validate(input));
+
+        const phoneNumber = parsePhoneNumber(e.target.value, phoneCode)
+        if(phoneNumber?.isValid()){
+          console.log("Is Valid")
+          const newInput = {
+            ...input,
+            [e.target.name]: phoneNumber.number.substring(1),
+          };
+          setInput(newInput);
+          setErrors(validate(newInput));
+        }
+      }
+    }
+    else{
+      const newInput = {
+        ...input,
+        [e.target.name]: e.target.value,
+      };
+      setInput(newInput);
+      setErrors(validate(newInput));
+    }
   };
 
   //* Encuentro el id del país y provincia seleccionados por usuario
-  const handleUbicationChange = (e) => {
+ /*  const handleUbicationChange = (e) => {
     if (e.target.id === "pais") {
       let ubicacion = paises.find((pais) => pais.name === e.target.value);
       ubicacion && setCountryId(ubicacion.id);
@@ -151,7 +179,7 @@ function Registro() {
       setInput(newInput);
       setErrors(validate(newInput));
     }
-  };
+  }; */
 
   const handleDisabled = () => {
     if (input.name !== "" && Object.keys(errors).length === 0) {
@@ -160,18 +188,11 @@ function Registro() {
     return true;
   };
 
-
-
-    
-  
-
-
-
   const handleSubmit = async(e) => {
     e.preventDefault();
-    console.log(input)
     let city = await axios.post('/locations',location)
     let auxInput= {...input, Cityid:city.data.id}
+    console.log(auxInput)
     dispatch(postUsers(auxInput));
     
     
@@ -248,6 +269,14 @@ function Registro() {
                   </span>
                 )}
               </label>
+              <div style={{display:"flex", alignItems:"flex-start"}}>
+                <PhoneCodes onCodeChange={handlePhoneCodeChange}/>
+              {/* <Cleave placeholder="Ingresa tu nro."
+                options={{phone: true, phoneRegionCode:"AR"}}
+                onFocus={}
+                onChange={} 
+              /> */}
+             <div style={{display:"hidden",width:"20px"}}></div>
               <input
                 type="number"
                 id="phone"
@@ -255,7 +284,9 @@ function Registro() {
                 // value={input.phone}
                 onChange={handleOnChange}
                 className="rounded-md px-1 mb-2"
-              />
+                />
+              
+                </div>
 
               {/* <label className='text-white'>
                 Pais:{' '}

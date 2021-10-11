@@ -13,7 +13,6 @@ import {
   getSheltersFilter,
 } from "../../redux/actions";
 import SelectUbication from "./SelectCountries/SelectUbication";
-import MapsV2 from "../Maps/MapsV2";
 import { Link } from "react-router-dom";
 
 function FiltersBar() {
@@ -217,7 +216,7 @@ function FiltersBar() {
             />
 
             <button>
-              <Link className="w-full h-7 font-bold mt-2" to="/mapfilter">
+              <Link className="w-full h-7 font-bold mt-2" to="/adopciones/map">
                 Buscar por Mapa
               </Link>
             </button>

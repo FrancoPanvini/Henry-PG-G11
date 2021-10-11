@@ -1,9 +1,10 @@
 import React, { useState } from "react";
 import ReactDom from "react-dom";
+import axios from "axios";
 import UploadImage from "./../cargue-fotos/UploadImage";
 import { postPets } from "../../redux/actions/index";
 import { FaExclamationCircle, FaWindowClose } from "react-icons/fa";
-import Maps from "../Maps/MapPost";
+import MapPost from "../Maps/MapPost";
 
 function FormularioPosteo({ onClose, onPostPet }) {
   const [mascota, setMascota] = useState({
@@ -15,11 +16,15 @@ function FormularioPosteo({ onClose, onPostPet }) {
     Ownerid: localStorage.getItem("userId"),
     PetsTypeid: "",
     Cityid: localStorage.getItem("userCityid"),
+    lat: '',
+    lng: ''
   });
   const [url, setUrl] = useState([]);
   const [errors, setErrors] = useState({});
+  
+  const [location, setLocation] = useState({})
 
-  const validate = ({ name, PetsTypeid }) => {
+  const validate = ({ name, PetsTypeid, lat }) => {
     let errors = {};
     if (!name) {
       errors.name = "Tu mascota debe tener un nombre";
@@ -27,9 +32,9 @@ function FormularioPosteo({ onClose, onPostPet }) {
     if (PetsTypeid === "") {
       errors.PetsTypeid = "Debes seleccionar si tu mascota es perro o gato";
     }
-    // if (Cityid === '') {
-    //   errors.Cityid = "Debes seleccionar la ciudad donde está tu mascota"
-    // }
+/*     if (lat === '') {
+       errors.coords = "Debes seleccionar la ubicación donde está tu mascota"
+     } */
     return errors;
   };
 
@@ -49,12 +54,15 @@ function FormularioPosteo({ onClose, onPostPet }) {
     return true;
   };
 
-  const handlePublicar = (e) => {
+  const handlePublicar = async(e) => {
     e.preventDefault();
+    let city = await axios.post('/locations',location)
     let newMascota = {
       ...mascota,
       photo: url,
+      Cityid:city.data.id
     };
+    console.log(newMascota)
     postPets(newMascota);
     onPostPet();
     setUrl([]);
@@ -63,6 +71,28 @@ function FormularioPosteo({ onClose, onPostPet }) {
     );
     onClose();
   };
+
+
+  const handleLocation = () => {
+    let city = document.getElementById("administrative_area_level_2")?.innerHTML
+    let province = document.getElementById("administrative_area_level_1")?.innerHTML
+    let country = document.getElementById("country")?.innerHTML
+    let lat = document.getElementById("lat")?.innerHTML
+    let lng = document.getElementById("lng")?.innerHTML
+    setLocation({
+      city,
+      province,
+      country
+    })
+    lat = parseFloat(lat)
+    lng = parseFloat(lng)
+    setMascota(prevState => {
+      return {
+        ...prevState,
+        "lat":lat,
+        "lng":lng
+      }})
+  }
 
   return ReactDom.createPortal(
     <>
@@ -249,7 +279,7 @@ function FormularioPosteo({ onClose, onPostPet }) {
           </div>
           <br />
           <div className="grid justify-items-center">
-            Ubicacion de la Mascota: <Maps />
+            Ubicacion de la Mascota: <MapPost onLocationChange={handleLocation} onChange={handleChange}/>
           </div>
           <br />
           <div className="w-full text-center">
