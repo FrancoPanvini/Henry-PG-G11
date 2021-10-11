@@ -30,7 +30,7 @@ function FormularioPosteoPerdido({ onClose, onPostPet }) {
   //* "errors" es el objeto que la función validate del input manipula
   const [errors, setErrors] = useState({});
 
-  //* validate recibe el input, si encuentra errores le agrega propiedades al estado de errors, el cuál desactiva el botón "Publicar" 
+  //* validate recibe el input, si encuentra errores le agrega propiedades al estado de errors, el cuál desactiva el botón "Publicar"
   const validate = ({ name }) => {
     let errors = {};
     if (!name) {
@@ -78,7 +78,7 @@ function FormularioPosteoPerdido({ onClose, onPostPet }) {
     });
   };
 
-  //* función que desactiva el botón Publicar cuando no todos los datos están completados  
+  //* función que desactiva el botón Publicar cuando no todos los datos están completados
   const handleDisabled = () => {
     if (mascota.name !== '' && Object.keys(errors).length === 0) {
       return false;
@@ -137,15 +137,7 @@ function FormularioPosteoPerdido({ onClose, onPostPet }) {
 
             {/* ↓ Especie de la mascota */}
             <div className='text-center w-3/12 py-4 border-l-2 border-r-2 border-primaryLight'>
-              <label>
-                Especie:{' '}
-                {errors.PetsTypeid && (
-                  <FaExclamationCircle
-                    title={errors.PetsTypeid}
-                    className='inline text-fourtyLight align-baseline'
-                  />
-                )}
-              </label>
+              <label>Especie:</label>
               <div className='flex justify-evenly items-center'>
                 <label htmlFor='gato'>
                   <input
@@ -261,7 +253,6 @@ function FormularioPosteoPerdido({ onClose, onPostPet }) {
               Publicar
             </button>
           </div>
-          {/* RESTO DEL FORMULARIO */}
         </form>
       </div>
     </>,
