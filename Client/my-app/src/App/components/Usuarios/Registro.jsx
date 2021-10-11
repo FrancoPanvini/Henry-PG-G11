@@ -1,4 +1,6 @@
 import React, { useEffect, useState } from "react";
+import parsePhoneNumber from 'libphonenumber-js'
+import PhoneCodes from "./phoneRegionInput";
 import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import { FaPaw, FaExclamationCircle } from "react-icons/fa";
@@ -19,6 +21,7 @@ function Registro() {
   const ciudades = useSelector((state) => state.cities);
   const [countryId, setCountryId] = useState(null);
   const [provinceId, setProvinceId] = useState(null);
+  const [phoneCode, setPhoneCode] = useState("");
   // const [cityId, setCityId] = useState(null);
   const [location, setLocation] = useState({})
   const [direccion, setDireccion] = useState("")
@@ -99,6 +102,10 @@ function Registro() {
       province,
       country
     })
+    lat = parseFloat(lat)
+    lng = parseFloat(lng)
+ 
+ 
 
     setInput(prevState => {
       return {
@@ -108,9 +115,12 @@ function Registro() {
         "lng":lng
       }})
 
-      
     setDireccion(adress)
     setErrors(validate({...input,"direction": adress,"lat":lat,"lng":lng}))
+  }
+
+  const handlePhoneCodeChange = (e) => {
+    setPhoneCode(e.target.value)
   }
 
 
@@ -120,12 +130,30 @@ function Registro() {
 
   const handleOnChange = (e) => {
     e.preventDefault();
-    const newInput = {
-      ...input,
-      [e.target.name]: e.target.value,
-    };
-    setInput(newInput);
-    setErrors(validate(newInput));
+    if(e.target.name === "phone") {
+      if(e.target?.value) {
+        setErrors(validate(input));
+
+        const phoneNumber = parsePhoneNumber(e.target.value, phoneCode)
+        if(phoneNumber?.isValid()){
+          console.log("Is Valid")
+          const newInput = {
+            ...input,
+            [e.target.name]: phoneNumber.number.substring(1),
+          };
+          setInput(newInput);
+          setErrors(validate(newInput));
+        }
+      }
+    }
+    else{
+      const newInput = {
+        ...input,
+        [e.target.name]: e.target.value,
+      };
+      setInput(newInput);
+      setErrors(validate(newInput));
+    }
   };
 
   //* Encuentro el id del país y provincia seleccionados por usuario
@@ -162,9 +190,9 @@ function Registro() {
 
   const handleSubmit = async(e) => {
     e.preventDefault();
-    console.log(input)
     let city = await axios.post('/locations',location)
     let auxInput= {...input, Cityid:city.data.id}
+    console.log(auxInput)
     dispatch(postUsers(auxInput));
     
     
@@ -241,6 +269,14 @@ function Registro() {
                   </span>
                 )}
               </label>
+              <div style={{display:"flex", alignItems:"flex-start"}}>
+                <PhoneCodes onCodeChange={handlePhoneCodeChange}/>
+              {/* <Cleave placeholder="Ingresa tu nro."
+                options={{phone: true, phoneRegionCode:"AR"}}
+                onFocus={}
+                onChange={} 
+              /> */}
+             <div style={{display:"hidden",width:"20px"}}></div>
               <input
                 type="number"
                 id="phone"
@@ -248,7 +284,9 @@ function Registro() {
                 // value={input.phone}
                 onChange={handleOnChange}
                 className="rounded-md px-1 mb-2"
-              />
+                />
+              
+                </div>
 
               {/* <label className='text-white'>
                 Pais:{' '}
