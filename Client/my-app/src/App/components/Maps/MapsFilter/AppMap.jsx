@@ -12,7 +12,7 @@ const AppMap = () => {
   const [pets, setPets] = useState([]);
   const [filteredPets, setFilteredPets] = useState([]);
   const [childClicked, setChildClicked] = useState(null);
-  const [coordinates, setCoordinates] = useState({ lat: 0, lng: 0 });
+  const [coordinates, setCoordinates] = useState(null);
   const [bounds, setBounds] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
   const [type, setType] = useState("p");
@@ -39,12 +39,15 @@ const AppMap = () => {
     mapRef.current = map;
   }, []);
 
+  const currentPosition = (pos) => {
+    setCoordinates({lat: pos.coords.latitude, lng: pos.coords.longitude})
+  }
+  const noCurrentPosition = (error) => {
+    console.log(error)
+    setCoordinates({lat: 4.6533326, lng: -74.083652})
+  }
   useEffect(() => {
-    navigator.geolocation.getCurrentPosition(
-      ({ coords: { latitude, longitude } }) => {
-        setCoordinates({ lat: latitude, lng: longitude });
-      }
-    );
+    navigator.geolocation.getCurrentPosition(currentPosition,noCurrentPosition)
   },);
 
 

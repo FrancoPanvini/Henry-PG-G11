@@ -19,6 +19,7 @@ import axios from 'axios';
 import AppMap from './App/components/Maps/MapsFilter/AppMap';
 import PrivateRoute from './App/components/Routes/PrivateRoute';
 import PublicRoute from './App/components/Routes/PublicRoute';
+import FormularioPosteo from './App/components/Mascotas/FormularioPosteo';
 
 function App() {
   const dispatch = useDispatch();
@@ -57,6 +58,13 @@ function App() {
             />
             <Route path='/nosotros' exact component={Nosotros} />
             <Route path='/faq' exact component={FAQ} />
+            <PrivateRoute
+              path='/adopciones/ofrecer'
+              exact
+              component={FormularioPosteo}
+              linkRedirect='/login'
+            />
+            
           </Switch>
           <Footer />
         </div>
