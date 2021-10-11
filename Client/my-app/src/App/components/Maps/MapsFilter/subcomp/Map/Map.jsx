@@ -19,13 +19,12 @@ const Map = ({ setCoordinates, setBounds, coordinates, pets, setChildClicked }) 
       
       <GoogleMapReact
         bootstrapURLKeys={{ key: "AIzaSyC9FtL0Nsz0ROcYVY7hOkp9JL2tU4ECjqY" }}
-        defaultCenter={coordinates}
+        /* defaultCenter={coordinates} */
         center={coordinates}
         defaultZoom={15}
         margin={[50, 50, 50, 50]}
         options={{gestureHandling: "greedy"}}
         onChange={(e) => {
-          console.log(e.bounds)
           setCoordinates({ lat: e.center.lat, lng: e.center.lng });
           setBounds({ latMin: e.bounds.sw.lat, latMax: e.bounds.ne.lat, lngMin: e.bounds.sw.lng, lngMax: e.bounds.ne.lng  });
         }}

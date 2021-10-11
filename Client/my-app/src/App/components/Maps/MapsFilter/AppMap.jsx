@@ -12,7 +12,7 @@ const AppMap = () => {
   const [pets, setPets] = useState([]);
   const [filteredPets, setFilteredPets] = useState([]);
   const [childClicked, setChildClicked] = useState(null);
-  const [coordinates, setCoordinates] = useState(null);
+  const [coordinates, setCoordinates] = useState({});
   const [bounds, setBounds] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
   const [type, setType] = useState("p");
@@ -43,12 +43,12 @@ const AppMap = () => {
     setCoordinates({lat: pos.coords.latitude, lng: pos.coords.longitude})
   }
   const noCurrentPosition = (error) => {
-    console.log(error)
     setCoordinates({lat: 4.6533326, lng: -74.083652})
   }
   useEffect(() => {
     navigator.geolocation.getCurrentPosition(currentPosition,noCurrentPosition)
-  },);
+    setRandom(1)
+  },[]);
 
 
   const applyFilter = (type, el) => {
@@ -85,19 +85,15 @@ const AppMap = () => {
         try {
           if(bounds?.latMax) {
             const res = await axios.get(`/pets?adopted=false&lngMax=${bounds.lngMax}&lngMin=${bounds.lngMin}&latMax=${bounds.latMax}&latMin=${bounds.latMin}`);
-            console.log(res)
             let animals = res.data.rows.filter((place) => place.name) //
             setPets(animals);
-            console.log(animals)
-            console.log(filters)
+
 
             let filterAux = Object.entries({...filters})
             filters
               ? setFilteredPets(filterAux.reduce((acc, filtered) => {
                 if(filtered[1] != "") {
                   let auxe = filtered[0]
-          
-                  console.log(acc[0], filtered[1])
                   acc = acc.filter(pet => filtered[1] == pet[filtered[0]])
                   return acc
                 }
@@ -138,7 +134,6 @@ const AppMap = () => {
 
   return (
     <div>
-      
       <Search setCoordinates={setCoordinates} />
       <Grid container spacing={3} style={{ width: "100%", height: "auto" }}>
         <Grid item xs={12} md={4}>
