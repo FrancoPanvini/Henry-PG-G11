@@ -21,7 +21,7 @@ function FormularioPosteo({ onClose, onPostPet }) {
   });
   const [url, setUrl] = useState([]);
   const [errors, setErrors] = useState({});
-  const [direccion, setDireccion] = useState("");
+  
   const [location, setLocation] = useState({})
 
   const validate = ({ name, PetsTypeid, lat }) => {
