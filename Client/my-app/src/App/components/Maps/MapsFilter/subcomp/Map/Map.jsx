@@ -1,10 +1,10 @@
-import React, {useState} from "react";
+import React from "react";
 import GoogleMapReact from "google-map-react";
 import { Paper, Typography, useMediaQuery } from "@material-ui/core";
 import LocationOnOutlinedIcon from "@material-ui/icons/LocationOnOutlined";
 
 import useStyles from "./styles";
-import CardAdopcion from "../../../../Cards/CardAdopcion";
+/* import CardAdopcion from "../../../../Cards/CardAdopcion"; */
 
 
 const Map = ({ setCoordinates, setBounds, coordinates, pets, setChildClicked }) => {
@@ -56,6 +56,7 @@ const Map = ({ setCoordinates, setBounds, coordinates, pets, setChildClicked }) 
                       {pet.name}
                   </Typography>
                   <img
+                  alt=""
                   className={classes.pointer}
                   src={pet.petPic ? pet.petPic : 'https://drpp-ny.org/wp-content/uploads/2014/07/sorry-image-not-available.png'}
                   //alt={pet.name}

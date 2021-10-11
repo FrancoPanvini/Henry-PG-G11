@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import parsePhoneNumber from 'libphonenumber-js'
 import PhoneCodes from "./phoneRegionInput";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
 import { FaPaw, FaExclamationCircle } from "react-icons/fa";
 import axios from 'axios'
@@ -16,15 +16,15 @@ import MapPost from '../Maps/MapPost'
 
 function Registro() {
   const dispatch = useDispatch();
-  const paises = useSelector((state) => state.countries);
+  /* const paises = useSelector((state) => state.countries);
   const provincias = useSelector((state) => state.provinces);
-  const ciudades = useSelector((state) => state.cities);
-  const [countryId, setCountryId] = useState(null);
-  const [provinceId, setProvinceId] = useState(null);
+  const ciudades = useSelector((state) => state.cities); */
+  /* const [countryId, setCountryId] = useState(null);
+  const [provinceId, setProvinceId] = useState(null); */
   const [phoneCode, setPhoneCode] = useState("");
   // const [cityId, setCityId] = useState(null);
   const [location, setLocation] = useState({})
-  const [direccion, setDireccion] = useState("")
+  //const [direccion, setDireccion] = useState("")
   const history = useHistory();
 
   useEffect(() => {
@@ -115,7 +115,7 @@ function Registro() {
         "lng":lng
       }})
 
-    setDireccion(adress)
+    //setDireccion(adress)
     setErrors(validate({...input,"direction": adress,"lat":lat,"lng":lng}))
   }
 

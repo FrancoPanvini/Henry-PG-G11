@@ -1,8 +1,5 @@
 let PhoneCodes = ({onCodeChange}) => {
 
-    let onCange = (e) => {
-        console.log(e.target.value)
-    }
    return (
     <select onChange={onCodeChange} class="select-box">
         <option value=""></option>
