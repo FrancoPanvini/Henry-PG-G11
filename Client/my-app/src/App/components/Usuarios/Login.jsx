@@ -60,7 +60,7 @@ function Login() {
   };
 
   return (
-    <div className='h-screen90 flex items-center justify-around bg-gradient-to-r from-thirty to-fourty'>
+    <div className='h-screen82 flex items-center justify-around bg-gradient-to-r from-thirty to-fourty'>
       <div className='w-2/5'>
         <div className='bg-cachorroWeb bg-bottom bg-cover relative h-96 w-96 rounded-full mr-12 ml-auto shadow-similBorderWhite floorShadowCircle' />
       </div>

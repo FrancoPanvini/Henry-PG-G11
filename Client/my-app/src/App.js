@@ -9,10 +9,9 @@ import Registro from './App/components/Usuarios/Registro';
 import Adopciones from './App/components/Mascotas/Adopciones';
 import Perdidos from './App/components/Mascotas/Perdidos';
 import Refugios from './App/components/Refugios/Refugios';
-import Perfil from './App/components/Usuarios/Perfil';
+import Perfil from './App/components/Usuarios/Perfil/Perfil';
 import Nosotros from './App/components/info/Nosotros';
 import FAQ from './App/components/info/FAQ';
-import FormularioPosteo from './App/components/Mascotas/FormularioPosteo';
 import { useDispatch } from 'react-redux';
 import jwt from 'jsonwebtoken';
 import { setUser } from './App/redux/actions/index';
@@ -62,12 +61,6 @@ function App() {
             />
             <Route path='/nosotros' exact component={Nosotros} />
             <Route path='/faq' exact component={FAQ} />
-            <PrivateRoute
-              path='/adopciones/ofrecer'
-              exact
-              component={FormularioPosteo}
-              linkRedirect='/login'
-            />
           </Switch>
           <Footer />
         </div>

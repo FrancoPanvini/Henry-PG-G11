@@ -10,8 +10,20 @@ import CardPopUpPetDetail from "./CardPopUpPetDetail";
 import { FaPaw } from "react-icons/fa";
 import { IoMdAddCircle } from "react-icons/io";
 
-function CardAdopcion({ selected, refProp, photo, name, age, size, country, province, city, sex, id}) {
-  const isLogged = useSelector(state => state.isLogged);
+function CardAdopcion({
+  selected,
+  refProp,
+  photo,
+  name,
+  age,
+  size,
+  country,
+  province,
+  city,
+  sex,
+  id,
+}) {
+  const isLogged = useSelector((state) => state.isLogged);
   const [isFlipped, setIsFlipped] = useState(false);
   const [isOpen, setIsOpen] = useState(false);
   const [isOpenDetail, setIsOpenDetail] = useState(false);
@@ -21,19 +33,26 @@ function CardAdopcion({ selected, refProp, photo, name, age, size, country, prov
   };
 
   if (selected)
-  refProp?.current?.scrollIntoView({ behavior: "smooth", block: "start" });
+    refProp?.current?.scrollIntoView({ behavior: "smooth", block: "start" });
 
   return (
-    <div className="w-80 h-5/6 m-0 p-0">
-      <ReactCardFlip isFlipped={isFlipped} flipDirection="horizontal" className="">
-        <div onClick={handleClick} className="w-80 h-96 grid justify-items-center cursor-pointer bg-primaryDark rounded-2xl overflow-hidden">
-          <img src={photo} alt="" className="w-full h-80 object-cover " />
-          <h3 className="font-bold text-white text-2xl  p-4 w-full grid justify-items-center capitalize">{name}</h3>
+    <div className="w-auto h-5/6">
+      <ReactCardFlip isFlipped={isFlipped} flipDirection="horizontal">
+        <div onClick={handleClick} className="card card-size-lg">
+          <div className="w-full h-4/5 card-transparency-bottom relative object-cover">
+            <img src={photo} alt="" className="h-full w-full object-cover" />
+          </div>
+          <div className="z-50 flex justify-center items-center pb-2 w-full h-1/5 text-white font-bold text-2xl capitalize">
+            {name}
+          </div>
         </div>
 
-        <div className="h-96 w-80 bg-primary rounded-2xl ">
-          <div onClick={handleClick} className="flex flex-col h-full items-center w-full  cursor-pointer">
-            <div className="font-bold text-2xl p-6 text-fourty capitalize flex items-start gap-3 ">
+        <div className="card card-size-lg relative">
+          <div
+            onClick={handleClick}
+            className="flex flex-col items-center h-full w-full cursor-pointer"
+          >
+            <div className="font-bold text-xl p-6 text-fourty capitalize flex items-start gap-3 ">
               {name}
               {/* Button & PopUp card for detail */}
               <div className="">
@@ -42,52 +61,72 @@ function CardAdopcion({ selected, refProp, photo, name, age, size, country, prov
                   onClick={() => setIsOpenDetail(true)}
                   className="text-fourty absolute text-3xl hover:text-fourtyLight cursor-pointer transition-all bg-white rounded-full"
                 />
-                {isOpenDetail && <CardPopUpPetDetail onClose={() => setIsOpenDetail(false)} petId={id} />}
+                {isOpenDetail && (
+                  <CardPopUpPetDetail
+                    onClose={() => setIsOpenDetail(false)}
+                    petId={id}
+                  />
+                )}
               </div>
             </div>
 
             <div className="text-center">
-              <h3 className="p-1 text-white font-bold text-xl">
-                Edad: <span className="text-fourty text-xl">{age}</span>
+              <h3 className="p-1 text-white font-bold">
+                Edad: <span className="text-fourty ">{age}</span>
               </h3>
-              
-              <h3 className="p-1 text-white font-bold text-xl">
-                Tamaño: <span className="text-fourty capitalize text-xl">{size === "c" ? "pequeño" : size === "m" ? "mediano" : "grande"}</span>
+              <h3 className="p-1 text-white font-bold">
+                Tamaño:{" "}
+                <span className="text-fourty capitalize">
+                  {size === "c"
+                    ? "pequeño"
+                    : size === "m"
+                    ? "mediano"
+                    : "grande"}
+                </span>
               </h3>
-              
-              <h3 className="p-1 text-white font-bold text-xl">
-                Sexo <span className="text-fourty capitalize text-xl">: {sex === "h" ? "hembra" : "macho"}</span>
+              <h3 className="p-1 text-white font-bold">
+                Sexo{" "}
+                <span className="text-fourty capitalize">
+                  : {sex === "h" ? "hembra" : "macho"}
+                </span>
               </h3>
-              
-              <h3 className="p-1 text-white font-bold text-xl">
-                Pais: <span className="text-fourty capitalize text-xl">{country}</span>
+              <h3 className="p-1 text-white font-bold">
+                Pais: <span className="text-fourty capitalize">{country}</span>
               </h3>
-              
-              <h3 className="p-1 text-white font-bold text-xl">
+              <h3 className="p-1 text-white font-bold">
                 Provincia:
-                <span className="text-fourty capitalize text-xl"> {province}</span>
+                <span className="text-fourty capitalize"> {province}</span>
               </h3>
-              
-              <h3 className="pt-1 pb-4 text-white font-bold text-xl">
-                Ciudad: <span className="text-fourty capitalize text-xl">{city}</span>
+              <h3 className="pt-1 pb-4 text-white font-bold">
+                Ciudad: <span className="text-fourty capitalize">{city}</span>
               </h3>
             </div>
-
-            {/* Button & PopUp form for adoptions */}
-            {isLogged && (
-              <div className="mt-auto mb-4">
-                <button className="shadow-buttonShadow btn-adogtame bg-fourty text-white border-fourtyDark rounded-2xl" onClick={() => setIsOpen(true)}>
-                  <h2 className="p-2 flex items-center tracking-wide">
-                    AD
-                    <FaPaw />
-                    GTAME
-                  </h2>
-                </button>
-
-                {isOpen && <FormularioAdopcion name={name} onClose={() => setIsOpen(false)} petId={id} />}
-              </div>
-            )}
           </div>
+
+          {/* Button & PopUp form for adoptions */}
+          {isLogged && (
+            <div className="w-full h-px relative bottom-16">
+              <button
+                className="btn-adogtame bg-fourty text-white border-fourtyDark rounded-2xl"
+                onClick={() => setIsOpen(true)}
+              >
+                <h2 className="p-2 flex items-center tracking-wide">
+                  AD
+                  <FaPaw />
+                  GTAME
+                </h2>
+              </button>
+
+              {isOpen && (
+                <FormularioAdopcion
+                  name={name}
+                  onClose={() => setIsOpen(false)}
+                  petId={id}
+                  onClick
+                />
+              )}
+            </div>
+          )}
         </div>
       </ReactCardFlip>
     </div>

@@ -14,21 +14,21 @@ function Navbar() {
   }
 
   return (
-    <div className=" flex justify-between px-4 bg-gradient-to-r from-thirty to-fourty items-center text-white ">
+    <div className=" flex justify-between items-center px-4 h-screen9 bg-gradient-to-r from-thirty to-fourty  text-white ">
       <Link to="/" className="text-xl flex items-center ml-4">
         AD<FaPaw />GTAME
       </Link>
-      <div className="grid grid-cols-5 text-center items-center">
-        <NavLink to="/" exact className="py-4 text-center hover:text-primary focus:text-primary " activeClassName="shadow-activeNavBar text-primary" >
+      <div className="h-full grid grid-cols-5 text-center">
+        <NavLink to="/" exact className="h-full w-36 flex items-center justify-center hover:text-primary" activeClassName="shadow-activeNavBar text-primary" >
           INICIO
         </NavLink>
-        <NavLink to="/adopciones" className="p-4 text-center focus:text-primary hover:text-primary" activeClassName="shadow-activeNavBar text-primary" >
+        <NavLink to="/adopciones" className="h-full w-36 flex items-center justify-center hover:text-primary" activeClassName="shadow-activeNavBar text-primary" >
           ADOPCIONES
         </NavLink>
-        <NavLink to="/perdidos" className="p-4 text-center focus:text-primary hover:text-primary" activeClassName="shadow-activeNavBar text-primary" >
+        <NavLink to="/perdidos" className="h-full w-36 flex items-center justify-center hover:text-primary" activeClassName="shadow-activeNavBar text-primary" >
           PERDIDOS
         </NavLink>
-        <NavLink to="/refugios" className="p-4 mr-12 text-center focus:text-primary hover:text-primary" activeClassName="shadow-activeNavBar text-primary" >
+        <NavLink to="/refugios" className="h-full w-36 flex items-center justify-center mr-4 hover:text-primary" activeClassName="shadow-activeNavBar text-primary" >
           REFUGIOS
         </NavLink>
 

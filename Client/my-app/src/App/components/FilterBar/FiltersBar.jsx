@@ -25,7 +25,16 @@ function FiltersBar() {
     dispatch(getCities());
   }, [dispatch]);
 
-  const [urlFilter, setUrlFilter] = useState({});
+  const [urlFilter, setUrlFilter] = useState({
+    type: "",
+    country: "",
+    province: "",
+    city: "",
+    agemin: "",
+    agemax: "",
+    size: "",
+    sex: "",
+  });
   const [urlFilterLost, setUrlFilterLost] = useState({
     country: "",
     province: "",
@@ -90,21 +99,35 @@ function FiltersBar() {
     setUrlFilter(updateFilter);
   };
 
+  //* botón para resetar los filtros de edad
+  const handleResetAge = () => {
+    let updateFilter = {
+      ...urlFilter,
+      agemin: "",
+      agemax: "",
+    };
+    setUrlFilter(updateFilter);
+    sendFilters(updateFilter);
+  };
+
   const handleSend = (e) => {
     e.preventDefault();
     sendFilters(urlFilter);
   };
 
-  const setDisabled = () => {
-    if (urlFilter.agemax === "" && urlFilter.agemax === "") return true;
-
-    return false;
-  };
-
   const handleResetFilters = (e) => {
     e.preventDefault();
     currentLocation === "/adopciones"
-      ? setUrlFilter({})
+      ? setUrlFilter({
+          type: "",
+          country: "",
+          province: "",
+          city: "",
+          agemin: "",
+          agemax: "",
+          size: "",
+          sex: "",
+        })
       : currentLocation === "/perdidos"
       ? setUrlFilterLost({ country: "", province: "", city: "" })
       : setUrlShelter({ country: "", province: "", city: "" });
@@ -117,7 +140,7 @@ function FiltersBar() {
   };
 
   const sendFilters = (filters) => {
-    let cleanFilter = filters;
+    let cleanFilter = { ...filters }; // ← Dami, acá había que hacer una copia, sino cleanFilter era lo mismo que urlFilter, y al hacer delete en cleanFilter estabas modificando las propiedades del estado en sí también ! ((((borrar este comentario))
 
     cleanFilter.type === "" && delete cleanFilter.type;
     cleanFilter.gender === "" && delete cleanFilter.gender;
@@ -194,7 +217,7 @@ function FiltersBar() {
             />
 
             <button>
-              <Link className="w-full h-7 font-bold mt-2" to="/map">
+              <Link className="w-full h-7 font-bold mt-2" to="/mapfilter">
                 Buscar por Mapa
               </Link>
             </button>
@@ -202,7 +225,18 @@ function FiltersBar() {
           {}
 
           <div className="p-1 mb-2 flex flex-wrap justify-between items-center border-b-2 border-t-2 border-thirtyLight border-opacity-50">
-            <label className="w-full h-7 font-bold mt-2">Edad</label>
+            <label className="w-full h-7 font-bold mt-2">
+              Edad{" "}
+              {(urlFilter.agemin || urlFilter.agemax) && (
+                <button
+                  title="Resetear filtro de Edad"
+                  onClick={handleResetAge}
+                  className="w-4 btn btn-nav text-white bg-primary"
+                >
+                  x
+                </button>
+              )}
+            </label>
             <div className="flex justify-start w-full">
               <div>
                 Min:
@@ -233,9 +267,12 @@ function FiltersBar() {
             </div>
             <button
               type="submit"
-              className="btn bg-primary p-1 rounded-lg disabled:opacity-50 mb-2"
+              className={
+                urlFilter.agemin || urlFilter.agemax
+                  ? "btn bg-primary p-1 rounded-lg disabled:opacity-50 mb-2"
+                  : "btn p-1 mb-2 invisible"
+              }
               onClick={handleSend}
-              disabled={setDisabled()}
             >
               Aplicar
             </button>
