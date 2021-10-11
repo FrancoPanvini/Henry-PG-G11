@@ -19,6 +19,7 @@ function CardPopUpPetDetail({ onClose, petId }) {
     const getPet = async (id) => {
       const pet = await getPetDetail(id);
       setPet(pet.data);
+      console.log(pet.data)
     };
     getPet(petId);
   }, [petId]);

@@ -41,6 +41,15 @@
   clip-path: polygon(0 6%, 100% 0, 100% 100%, 0% 100%);
 }
 
+/* .card{
+  width: 250px;
+  height: 250px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+} */
+
+
 /* .btn-action {
   @apply bg-yellow-600 text-white border-yellow-700;
 } */

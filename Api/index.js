@@ -8,23 +8,20 @@ const countryLoader = require("./utils/Countries&ProvincesArray");
 conn
   .sync()
   .then(() => {
-    server.listen(process.env.PORT, () => {
-      console.log(`Server listening at ${process.env.PORT}`);
+    server.listen(3001, () => {
+      console.log(`Server listening at 3001`);
     });
   })
   .then(() => {
-    // countryLoader()
+    //PetsType.bulkCreate(petsTypesArray);
+    //UsersType.bulkCreate(usersTypesArray);
   })
   .then(() => {
-    // PetsType.bulkCreate(petsTypesArray);
-    // UsersType.bulkCreate(usersTypesArray);
+    //Users.bulkCreate(userArray);
   })
   .then(() => {
-    // Users.bulkCreate(userArray);
-  })
-  .then(() => {
-    // Pets.bulkCreate(petsArray);
-    // Events.bulkCreate(eventsArray)
+    //Pets.bulkCreate(petsArray);
+    //Events.bulkCreate(eventsArray)
   });
 
 const petsTypesArray = [
@@ -51,7 +48,7 @@ const eventsArray = [
 ];
 
 const petsArray = [
-  { name: "Juancho", PetsTypeId: "p", Cityid: 1, sex: "m", size: "c", age: 0, Ownerid:4  },
+  { name: "Juancho", PetsTypeId: "p", Cityid: 1, sex: "m", size: "c", age: 0, Ownerid:1  },
   { name: "Juana", PetsTypeId: "g", Cityid: 2, sex: "h", size: "m", age: 2, Ownerid: 2 },
   { name: "Renato", PetsTypeId: "p", Cityid: 3, sex: "m", size: "g", age: 3, Ownerid: 3 },
   { name: "Pipita", PetsTypeId: "g", Cityid: 2, sex: "h", size: "g", age: 8, Ownerid: 2 },
