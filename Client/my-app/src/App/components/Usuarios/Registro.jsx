@@ -195,17 +195,6 @@ function Registro() {
     console.log(auxInput)
     dispatch(postUsers(auxInput));
     
-    
-    // setInput({
-      //   // ← esto está de más me parece, total al recargar la página se borra todo de todas formas...
-    //   ...input,
-    //   name: '',
-    //   mail: '',
-    //   phone: '',
-    //   direction: '',
-    //   password: '',
-    // });
-    
     alert("¡Registro exitoso! ahora puede iniciar sesión");
     history.push("/login");
   };
@@ -416,7 +405,7 @@ function Registro() {
 
               
               <label className="text-white">
-                Dirección:{" "}
+                Zona de residencia:{" "}
                 {errors.direction && (
                   <span title={errors.direction}>
                     <FaExclamationCircle className="inline text-primary align-baseline" />
@@ -434,12 +423,7 @@ function Registro() {
               />
             </div>
           </div>
-
           <br />
-          {/* <label>Ciudad</label>
-                  <input type='text' id='CityId' placeholder='CityId' value={input.CityId} onInput={(e) => handleOnChange(e)} /> */}
-          {/* <label>hOlaaa</label>
-                  <input type='text' id='CityId' placeholder='CityId' value={input.CityId} onInput={(e) => handleOnChange(e)} /> */}
           
           <div>
             <MapPost onLocationChange={handleLocation} onChange={handleOnChange}/>
