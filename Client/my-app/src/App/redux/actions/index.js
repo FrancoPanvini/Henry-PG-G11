@@ -84,8 +84,8 @@ export const getAllPets = () => {
 
 
 export function postUsers(payload) {
-    // console.log(payload)
      return async function (dispatch){
+
          const response = await axios.post("users/", payload)
         //  console.log(response); // DELETE DELETE DELETE
          return response;
@@ -112,7 +112,6 @@ export function setUser(user) {
     }
 }
 export function logInUsers(payload) {
-    // console.log(payload)
      return async function (dispatch){
          const response = await axios.post("login/", payload).then((res) => {
             if(res.data.message) {
@@ -127,7 +126,6 @@ export function logInUsers(payload) {
           }).catch ((err) => {
             alert(`${err}`)
           })
-        //  console.log(response); // DELETE DELETE DELETE
          return response;
      }
      

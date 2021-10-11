@@ -2,7 +2,7 @@ const { Pets, PetsPics } = require("../../../../db");
 const { deletePetDB } = require("./deletePet");
 
 const postPets = async (req, res) => {
-  const { name, size, sex, age, description, Ownerid, PetsTypeid, Cityid, photo } = req.body;
+  const { name, size, sex, age, description, Ownerid, PetsTypeid, Cityid, photo, lat, lng } = req.body;
 
   //* Create new Pet
   let newPet, created;
@@ -14,6 +14,8 @@ const postPets = async (req, res) => {
         sex,
         age,
         description,
+        lat,
+        lng
       },
     });
     if (!created) throw new Error(`${name} allready exist as your pet`);
@@ -54,6 +56,7 @@ const postPets = async (req, res) => {
     if (created) {
       deletePetDB(newPet.dataValues.id);
     }
+    console.log(error)
     res.status(409).send(error.message);
   }
 };

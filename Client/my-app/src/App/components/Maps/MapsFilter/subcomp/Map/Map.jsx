@@ -1,10 +1,10 @@
-import React, {useState} from "react";
+import React from "react";
 import GoogleMapReact from "google-map-react";
 import { Paper, Typography, useMediaQuery } from "@material-ui/core";
 import LocationOnOutlinedIcon from "@material-ui/icons/LocationOnOutlined";
 
 import useStyles from "./styles";
-import CardAdopcion from "../../../../Cards/CardAdopcion";
+/* import CardAdopcion from "../../../../Cards/CardAdopcion"; */
 
 
 const Map = ({ setCoordinates, setBounds, coordinates, pets, setChildClicked }) => {
@@ -19,15 +19,14 @@ const Map = ({ setCoordinates, setBounds, coordinates, pets, setChildClicked }) 
       
       <GoogleMapReact
         bootstrapURLKeys={{ key: "AIzaSyC9FtL0Nsz0ROcYVY7hOkp9JL2tU4ECjqY" }}
-        defaultCenter={coordinates}
+        /* defaultCenter={coordinates} */
         center={coordinates}
-        defaultZoom={12}
+        defaultZoom={15}
         margin={[50, 50, 50, 50]}
-        options={""}
+        options={{gestureHandling: "greedy"}}
         onChange={(e) => {
-          console.log(e.bounds)
           setCoordinates({ lat: e.center.lat, lng: e.center.lng });
-          /* setBounds({ latMin: e.bounds.sw.lat, latMax: e.bounds.ne.lat, lngMin: e.bounds.ne.lng, lngMax: e.bounds.sw.lng  }); */
+          setBounds({ latMin: e.bounds.sw.lat, latMax: e.bounds.ne.lat, lngMin: e.bounds.sw.lng, lngMax: e.bounds.ne.lng  });
         }}
         onChildClick={(child)=>setChildClicked(child)}
       >
@@ -57,9 +56,10 @@ const Map = ({ setCoordinates, setBounds, coordinates, pets, setChildClicked }) 
                       {pet.name}
                   </Typography>
                   <img
+                  alt=""
                   className={classes.pointer}
                   src={pet.petPic ? pet.petPic : 'https://drpp-ny.org/wp-content/uploads/2014/07/sorry-image-not-available.png'}
-                  alt={pet.name}
+                  //alt={pet.name}
                   /> 
               </Paper> 
             )} 

@@ -10,7 +10,7 @@ import {
 } from "@material-ui/core";
 
 import useStyles from "./style";
-import PetsDetail from "../PetsDetail/PetsDetail";
+//import PetsDetail from "../PetsDetail/PetsDetail";
 import CardAdopcion from "../../../../Cards/CardAdopcion";
 
 const List = ({ pets, childClicked, isLoading, type, setType, sex, setSex, size, setSize, filter }) => {
@@ -39,6 +39,7 @@ const List = ({ pets, childClicked, isLoading, type, setType, sex, setSex, size,
   
     let aux = {...prueba, [type]:event}
     setPrueba(aux);
+    
   };
 
   return (

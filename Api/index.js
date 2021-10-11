@@ -1,6 +1,5 @@
 const server = require("./src/app.js");
 const { conn, Pets, PetsType, UsersType, Users, Events } = require("./src/db.js");
-const countryLoader = require("./utils/Countries&ProvincesArray");
 
 //* Descomentar esta línea para restartear la DB
 //conn.sync({ force: true }).then(() => {
@@ -8,8 +7,8 @@ const countryLoader = require("./utils/Countries&ProvincesArray");
 conn
   .sync()
   .then(() => {
-    server.listen(3001, () => {
-      console.log(`Server listening at 3001`);
+    server.listen(process.env.PORT, () => {
+      console.log(`Server listening at ${process.env.PORT}`);
     });
   })
   .then(() => {
