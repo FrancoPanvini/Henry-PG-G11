@@ -1,8 +1,8 @@
 import axios from 'axios';
 
-export const postAdoption = async (input) => {
+export const postLostPet = async (pet) => {
   try {
-    const rta = await axios.post('/adoptions', input);
+    const rta = await axios.post('/lostpets', pet);
     return rta;
   } catch (error) {
     console.log(error);
