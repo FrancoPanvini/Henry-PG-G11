@@ -1,6 +1,5 @@
 const server = require("./src/app.js");
 const { conn, Pets, PetsType, UsersType, Users, Events } = require("./src/db.js");
-const countryLoader = require("./utils/Countries&ProvincesArray");
 
 //* Descomentar esta línea para restartear la DB
 //conn.sync({ force: true }).then(() => {
