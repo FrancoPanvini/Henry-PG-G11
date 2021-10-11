@@ -110,6 +110,7 @@ const AppMap = () => {
       }
     };
     pet();
+    // eslint-disable-next-line
   }, [bounds]);
 
   return (
