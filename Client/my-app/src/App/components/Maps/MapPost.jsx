@@ -71,12 +71,12 @@ function Maps({onLocationChange}) {
          fillInAddress(response.results[0])
          document.getElementById("lat").innerHTML = lat
          document.getElementById("lng").innerHTML = lng
-         setPlaceName(prevState => [response.results[0].formatted_address]);
+         setPlaceName(prevState => [response.results[0].formatted_address])   
         } else {
           window.alert('Clickea una calle pa');
         }
       })
-      .catch((e) => window.alert('Geocoder failed due to: ' + e));
+      .catch((e) => console.log('Geocoder failed due to: ' + e));
   };
 
   //Handles marker when clicking on map
@@ -91,9 +91,12 @@ function Maps({onLocationChange}) {
       },
     ]);
     await geocodeLatLng(geocoder, mapRef, lat, lng)
+    
     setSelected(null);
     ;
   };
+
+
 
   //Handles marker while dragging
   const handleOnDrag = async(e) => {
@@ -134,11 +137,10 @@ function Maps({onLocationChange}) {
   autocomplete.addListener('place_changed', () => {
     const place = autocomplete.getPlace();
     if (!place.geometry) {
-      window.alert("No details available for input: '" + place.name + "'");
       return;
     } else {
       renderAddress(place);
-      fillInAddress(place);
+      /* fillInAddress(place); */
     }
   });
 
@@ -148,6 +150,7 @@ function Maps({onLocationChange}) {
       street_number: 'short_name',
       route: 'long_name',
       administrative_area_level_2: 'short_name',
+      locality: 'short_name',
       sublocality: 'short_name',
       administrative_area_level_1: 'short_name',
       country: 'long_name',
@@ -172,11 +175,17 @@ function Maps({onLocationChange}) {
             document.getElementById(component).innerHTML = getAddressComp(component,0);
           }
           else{
-            document.getElementById(component).innerHTML = getAddressComp("sublocality",1);
+            if(getAddressComp("sublocality",1) != ''){
+              document.getElementById(component).innerHTML = getAddressComp("sublocality",1);
+            }
+            else{
+              document.getElementById(component).innerHTML = getAddressComp("locality",0);
+            }
           }
         }      
       }
     }
+    document.getElementById("location").value = ""
   }
 
   //Renders mapCenter and marker at gicen position
@@ -209,7 +218,7 @@ function Maps({onLocationChange}) {
       <input
       onClick={onInputClick}
         type='text'
-        placeholder='Address'
+        placeholder='Buscar dirección...'
         id='location'
         className='border-2 border-black rounded w-80 h-10 grid justify-items-center absolute mt-2.5 z-10'
       />
@@ -257,12 +266,12 @@ function Maps({onLocationChange}) {
         )) : null}
       </GoogleMap>
       {!document.getElementById('street_number')?  null : document.getElementById('street_number').innerHTML ? <button type="button" onClick={()=> onLocationChange()} className='z-10' style={{height:"25px", width: "5.5%", position:"absolute", top:"72%", border:"1px solid black", backgroundColor:"white"}}>Confirmar</button> : null}
-      <div style={{display:"flex"}}>
+      <div style={{display:"none"}}>
         <div id='route'  className='font-bold text-white rounded-md px-1 mb-2'></div>
         <div id='street_number' className='font-bold text-white rounded-md px-1 mb-2'></div>
       </div>
       
-      <div style={{display:"flex"}}>
+      <div style={{display:"none"}}>
         <div id='administrative_area_level_2' className='font-bold text-white rounded-md px-1 mb-2'></div>
         <span className='font-bold text-white rounded-md px-1 mb-2'>-</span> 
         <div id='administrative_area_level_1' className='font-bold text-white rounded-md px-1 mb-2'></div>

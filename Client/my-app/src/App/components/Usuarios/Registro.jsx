@@ -50,8 +50,8 @@ function Registro() {
     phone,
     direction,
     password,
-    confirmPassword,
-    Cityid,
+    confirmPassword
+    //Cityid,
     // UsersTypeid,
   }) => {
     let errors = {};
@@ -93,6 +93,7 @@ function Registro() {
     let country = document.getElementById("country")?.innerHTML
     let lat = document.getElementById("lat")?.innerHTML
     let lng = document.getElementById("lng")?.innerHTML
+    document.getElementById("direction").innerHTML = adress
     setLocation({
       city,
       province,
@@ -109,10 +110,8 @@ function Registro() {
 
       
     setDireccion(adress)
+    setErrors(validate({...input,"direction": adress,"lat":lat,"lng":lng}))
   }
-/*   const auxButtonClick = () => {
-    console.log(document.getElementById("country")?.innerHTML)
-  } */
 
 
 
@@ -170,13 +169,14 @@ function Registro() {
 
   const handleSubmit = async(e) => {
     e.preventDefault();
+    console.log(input)
     let city = await axios.post('/locations',location)
     let auxInput= {...input, Cityid:city.data.id}
     dispatch(postUsers(auxInput));
-
-
+    
+    
     // setInput({
-    //   // ← esto está de más me parece, total al recargar la página se borra todo de todas formas...
+      //   // ← esto está de más me parece, total al recargar la página se borra todo de todas formas...
     //   ...input,
     //   name: '',
     //   mail: '',
@@ -184,9 +184,7 @@ function Registro() {
     //   direction: '',
     //   password: '',
     // });
-
-
-
+    
     alert("¡Registro exitoso! ahora puede iniciar sesión");
     history.push("/login");
   };
@@ -226,18 +224,18 @@ function Registro() {
               />
 
               <label className="text-white">
-                Dirección:{" "}
-                {errors.direction && (
-                  <span title={errors.direction}>
+                Contraseña:{" "}
+                {errors.password && (
+                  <span title={errors.password}>
                     <FaExclamationCircle className="inline text-primary align-baseline" />
                   </span>
                 )}
               </label>
               <input
-                type="text"
-                id="direction"
-                name="direction"
-                // value={input.direction}
+                type="password"
+                id="password"
+                name="password"
+                // value={input.password}
                 onChange={handleOnChange}
                 className="rounded-md px-1 mb-2"
               />
@@ -364,22 +362,7 @@ function Registro() {
                 onChange={handleOnChange}
                 className="rounded-md px-1 mb-2"
               />
-              <label className="text-white">
-                Contraseña:{" "}
-                {errors.password && (
-                  <span title={errors.password}>
-                    <FaExclamationCircle className="inline text-primary align-baseline" />
-                  </span>
-                )}
-              </label>
-              <input
-                type="password"
-                id="password"
-                name="password"
-                // value={input.password}
-                onChange={handleOnChange}
-                className="rounded-md px-1 mb-2"
-              />
+
               <label className="text-white">
                 Repetir contraseña:{" "}
                 {errors.confirmPassword && (
@@ -396,6 +379,28 @@ function Registro() {
                 onChange={handleOnChange}
                 className="rounded-md px-1 mb-2"
               />
+
+
+
+
+              
+              <label className="text-white">
+                Dirección:{" "}
+                {errors.direction && (
+                  <span title={errors.direction}>
+                    <FaExclamationCircle className="inline text-primary align-baseline" />
+                  </span>
+                )}
+              </label>
+              <input
+                disabled
+                type="text"
+                id="direction"
+                name="direction"
+                value={input.direction}
+                onChange={handleOnChange}
+                className="rounded-md px-1 mb-2"
+              />
             </div>
           </div>
 
@@ -409,6 +414,8 @@ function Registro() {
             <MapPost onLocationChange={handleLocation} onChange={handleOnChange}/>
             {/* <button type="button" onClick={() => auxButtonClick()}>Confirm</button> */}
           </div>
+          <br />
+          <br />
           <br />
           
           <div className="flex flex-col">
