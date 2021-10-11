@@ -8,8 +8,8 @@ const countryLoader = require("./utils/Countries&ProvincesArray");
 conn
   .sync()
   .then(() => {
-    server.listen(3001, () => {
-      console.log(`Server listening at 3001`);
+    server.listen(process.env.PORT, () => {
+      console.log(`Server listening at ${process.env.PORT}`);
     });
   })
   .then(() => {
