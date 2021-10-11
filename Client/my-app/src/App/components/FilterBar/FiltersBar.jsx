@@ -216,7 +216,7 @@ function FiltersBar() {
             />
 
             <button>
-              <Link className="w-full h-7 font-bold mt-2" to="/mapfilter">
+              <Link className="w-full h-7 font-bold mt-2" to="/adopciones/mapfilter">
                 Buscar por Mapa
               </Link>
             </button>

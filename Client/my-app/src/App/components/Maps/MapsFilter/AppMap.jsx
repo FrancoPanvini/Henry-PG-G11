@@ -138,7 +138,7 @@ const AppMap = () => {
 
   return (
     <div>
-      <CssBaseline />
+      
       <Search setCoordinates={setCoordinates} />
       <Grid container spacing={3} style={{ width: "100%", height: "auto" }}>
         <Grid item xs={12} md={4}>
