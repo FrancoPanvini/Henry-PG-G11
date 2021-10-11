@@ -92,7 +92,7 @@ function FormularioPosteoPerdido({ onClose, onPostPet }) {
     let city = await axios.post('/locations', location);
     let newMascota = {
       ...mascota,
-      photo: url[0],
+      photo: url,
       Cityid: city.data.id,
     };
     postLostPet(newMascota);
