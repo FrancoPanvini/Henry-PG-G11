@@ -48,10 +48,6 @@ export const getPetAdopDetail = (id) => {
      };
 }
 
-export const editPetsData = (dataEdit, id) => {
-    return axios.put(`/pets/${id}`, dataEdit); 
-}
-
 export const getShelters = () => {
   return function(dispatch) {
     axios.get(`/users?type=r`)
@@ -89,8 +85,9 @@ export const getAllPets = () => {
 
 export function postUsers(payload) {
      return async function (dispatch){
-         const response = await axios.post("/users", payload)
-         console.log(response);
+
+         const response = await axios.post("users/", payload)
+        //  console.log(response); // DELETE DELETE DELETE
          return response;
      }
      
@@ -99,7 +96,7 @@ export function postUsers(payload) {
  export async function postPets(payload) {
   // console.log(payload){
        const response = await axios.post("/pets", payload)
-       console.log(response);
+      //  console.log(response); // DELETE DELETE DELETE
        return response;
 }
 
@@ -110,6 +107,7 @@ export function setUser(user) {
             payload: user,
         })
         localStorage.setItem('userId', user.id)
+        localStorage.setItem('userName', user.name)
         localStorage.setItem('userCityid', user.CityId); // ← OJO que ""CityId"" está con mayúscula acá, pero en minúscula en la DB !!! REVISAR!!!!
     }
 }
@@ -136,20 +134,25 @@ export function logInUsers(payload) {
 export const getCountries = () => {
   return function(dispatch) {
       axios.get("/countries")
-       .then(data => {
+       .then(response => {
+         const data = response.data.map(country => ({...country, name: country.name.replace(/(^|[^A-Za-zÁÉÍÓÚÑáéíóúñ])([a-záéíóúñ])/g, l => l.toUpperCase())}));
          dispatch({ type: "GET_COUNTRIES", payload: data });
        });
    };
 }
 
 export const getProvinces = () => {
-  return function(dispatch) {
-      axios.get("/provinces")
-       .then(data => {
-         dispatch({ type: "GET_PROVINCES", payload: data });
-       });
-   };
-}
+  return function (dispatch) {
+    axios.get('/provinces').then((response) => {
+      const data = response.data
+        .map((province) => ({
+          ...province,
+          name: province.name.replace(/(^|[^A-Za-zÁÉÍÓÚÑáéíóúñ])([a-záéíóúñ])/g, (l) => l.toUpperCase()),
+        }));
+      dispatch({ type: 'GET_PROVINCES', payload: data });
+    });
+  };
+};
 
 export const getCities = () => {
   return function(dispatch) {
@@ -164,6 +167,7 @@ export function logOutUser(){
   return dispatch => {
     localStorage.removeItem('token')
     localStorage.removeItem('userId')
+    localStorage.removeItem('userName')
     localStorage.removeItem('userCityid')
     dispatch({
       type: "LOG_OUT_USER"
@@ -205,4 +209,27 @@ export const getLostPetsHome = () => {
        });
    };
 }
+export const setActive = (payload) => {
+  return function(dispatch) {
+         dispatch({ type: "SET_ACTIVE", payload });
 
+   };
+}
+
+export const initialUser = (userId) => {
+  return function(dispatch) {
+      axios.get(`users/${userId}`)
+       .then(data => {
+         dispatch({ type: "INITIAL_USER", payload: data });
+       });
+   };
+}
+
+export const getPetsAdopByUser = (id) => {
+  return function(dispatch) {
+      axios.get(`/pets?owner=${id}`)
+       .then(data => {
+         dispatch({ type: "GET_USER_PETS", payload: data });
+       });
+   };
+}

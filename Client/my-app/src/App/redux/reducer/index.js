@@ -10,7 +10,10 @@ const initialState = {
   provinces: [],
   cities: [],
   lostPets: [],
-  lostPetsHome: []
+  lostPetsHome: [],
+  active: 'Mis Datos',
+  userData: [],
+  userPets: [],
 };
 
 function rootReducer(state = initialState, action) {
@@ -69,10 +72,10 @@ function rootReducer(state = initialState, action) {
       };
 
     case "GET_COUNTRIES":
-      return { ...state, countries: action.payload.data };
+      return { ...state, countries: action.payload };
 
     case "GET_PROVINCES":
-      return { ...state, provinces: action.payload.data };
+      return { ...state, provinces: action.payload };
 
     case "GET_CITIES":
       return { ...state, cities: action.payload.data };
@@ -98,6 +101,22 @@ function rootReducer(state = initialState, action) {
         ...state,
         lostPets: action.payload.data,
       };
+
+    case "SET_ACTIVE":
+      return{
+        ...state,
+        active: action.payload
+      }
+    case "INITIAL_USER":
+      return{
+        ...state,
+        userData: action.payload.data
+      }
+    case "GET_USER_PETS":
+      return{
+        ...state,
+        userPets: action.payload.data
+      }
 
     default:
       return state;

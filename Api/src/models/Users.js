@@ -17,13 +17,15 @@ module.exports = sequelize => {
       link_instagram: { type: DataTypes.STRING },
       link_facebook: { type: DataTypes.STRING },
       link_donaciones: { type: DataTypes.STRING },
+      lat: { type: DataTypes.FLOAT },
+      lng: { type: DataTypes.FLOAT }
     },
     { sequelize: sequelize, modelName: "Users", timestamps: true }
   );
+
   Users.beforeCreate(function (user) {
     user.name = user.name.toLowerCase();
     user.mail = user.mail.toLowerCase();
-    user.direction = user.direction.toLowerCase();
     if (user.responsable) {
       user.responsable = user.responsable.toLowerCase();
     }

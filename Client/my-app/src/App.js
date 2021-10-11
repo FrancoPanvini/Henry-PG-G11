@@ -9,16 +9,17 @@ import Registro from './App/components/Usuarios/Registro';
 import Adopciones from './App/components/Mascotas/Adopciones';
 import Perdidos from './App/components/Mascotas/Perdidos';
 import Refugios from './App/components/Refugios/Refugios';
-import Perfil from './App/components/Usuarios/Perfil';
+import Perfil from './App/components/Usuarios/Perfil/Perfil';
 import Nosotros from './App/components/info/Nosotros';
 import FAQ from './App/components/info/FAQ';
-import FormularioPosteo from './App/components/Mascotas/FormularioPosteo';
 import { useDispatch } from 'react-redux';
 import jwt from 'jsonwebtoken';
 import { setUser } from './App/redux/actions/index';
 import axios from 'axios';
+import AppMap from './App/components/Maps/MapsFilter/AppMap';
 import PrivateRoute from './App/components/Routes/PrivateRoute';
 import PublicRoute from './App/components/Routes/PublicRoute';
+import FormularioPosteo from './App/components/Mascotas/FormularioPosteo';
 
 function App() {
   const dispatch = useDispatch();
@@ -48,6 +49,7 @@ function App() {
             <Route path='/adopciones' exact component={Adopciones} />
             <Route path='/perdidos' exact component={Perdidos} />
             <Route path='/refugios' exact component={Refugios} />
+            <Route path='/adopciones/map' exact component={AppMap} />
             <PrivateRoute
               path='/perfil'
               exact
@@ -62,6 +64,7 @@ function App() {
               component={FormularioPosteo}
               linkRedirect='/login'
             />
+            
           </Switch>
           <Footer />
         </div>
