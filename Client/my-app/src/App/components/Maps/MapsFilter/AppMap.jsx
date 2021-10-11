@@ -92,7 +92,7 @@ const AppMap = () => {
               )
             : setFilteredPets(animals);
 
-          //setFilteredPets(res.data.rows.filter((place) => place.name))
+          
           setIsLoading(false);
         } else {
           const res = await axios.get(`/pets?adopted=false`);
