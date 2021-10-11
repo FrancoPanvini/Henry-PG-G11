@@ -13,7 +13,6 @@ import {
   getSheltersFilter,
 } from "../../redux/actions";
 import SelectUbication from "./SelectCountries/SelectUbication";
-import MapsV2 from "../Maps/MapsV2";
 import { Link } from "react-router-dom";
 
 function FiltersBar() {

@@ -129,7 +129,7 @@ function Registro() {
   };
 
   //* Encuentro el id del país y provincia seleccionados por usuario
-  const handleUbicationChange = (e) => {
+ /*  const handleUbicationChange = (e) => {
     if (e.target.id === "pais") {
       let ubicacion = paises.find((pais) => pais.name === e.target.value);
       ubicacion && setCountryId(ubicacion.id);
@@ -151,7 +151,7 @@ function Registro() {
       setInput(newInput);
       setErrors(validate(newInput));
     }
-  };
+  }; */
 
   const handleDisabled = () => {
     if (input.name !== "" && Object.keys(errors).length === 0) {
@@ -159,13 +159,6 @@ function Registro() {
     }
     return true;
   };
-
-
-
-    
-  
-
-
 
   const handleSubmit = async(e) => {
     e.preventDefault();

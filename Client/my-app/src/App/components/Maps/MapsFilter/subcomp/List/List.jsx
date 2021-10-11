@@ -39,6 +39,7 @@ const List = ({ pets, childClicked, isLoading, type, setType, sex, setSex, size,
   
     let aux = {...prueba, [type]:event}
     setPrueba(aux);
+    
   };
 
   return (

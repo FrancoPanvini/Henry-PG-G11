@@ -21,13 +21,13 @@ const Map = ({ setCoordinates, setBounds, coordinates, pets, setChildClicked }) 
         bootstrapURLKeys={{ key: "AIzaSyC9FtL0Nsz0ROcYVY7hOkp9JL2tU4ECjqY" }}
         defaultCenter={coordinates}
         center={coordinates}
-        defaultZoom={12}
+        defaultZoom={14}
         margin={[50, 50, 50, 50]}
-        options={""}
+        options={{gestureHandling: "greedy"}}
         onChange={(e) => {
           console.log(e.bounds)
           setCoordinates({ lat: e.center.lat, lng: e.center.lng });
-          /* setBounds({ latMin: e.bounds.sw.lat, latMax: e.bounds.ne.lat, lngMin: e.bounds.ne.lng, lngMax: e.bounds.sw.lng  }); */
+          setBounds({ latMin: e.bounds.sw.lat, latMax: e.bounds.ne.lat, lngMin: e.bounds.sw.lng, lngMax: e.bounds.ne.lng  });
         }}
         onChildClick={(child)=>setChildClicked(child)}
       >
@@ -59,7 +59,7 @@ const Map = ({ setCoordinates, setBounds, coordinates, pets, setChildClicked }) 
                   <img
                   className={classes.pointer}
                   src={pet.petPic ? pet.petPic : 'https://drpp-ny.org/wp-content/uploads/2014/07/sorry-image-not-available.png'}
-                  alt={pet.name}
+                  //alt={pet.name}
                   /> 
               </Paper> 
             )} 

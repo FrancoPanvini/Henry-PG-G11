@@ -49,42 +49,79 @@ const AppMap = () => {
 
 
   const applyFilter = (type, el) => {
-    let aux = {...filters, [type]: el}
-    setFilters(aux)
-    let filterAux = Object.entries({...filters, [type]: el}); //[[type,""],[sex,""],[size,""]]
-    console.log(filterAux)
-    let auxDeAux = filterAux.reduce((acc, filtered) => {
-      if(filtered[1] != "") {
-        let auxe = filtered[0]
 
-        console.log(acc[0], filtered[1])
-        acc = acc.filter(pet => filtered[1] == pet[filtered[0]])
-        return acc
-      }
-      else{
-        return acc
-      }
-    },pets)
-    console.log(auxDeAux)
-    setFilteredPets(auxDeAux)
-    setRandom("")
-
+      
+      let aux = {...filters, [type]: el}
+      setFilters(aux)
+      let filterAux = Object.entries({...filters, [type]: el}); //[[type,""],[sex,""],[size,""]]
+      console.log(filterAux)
+      let auxDeAux = filterAux.reduce((acc, filtered) => {
+        if(filtered[1] != "") {
+          let auxe = filtered[0]
+          
+          console.log(acc[0], filtered[1])
+          acc = acc.filter(pet => filtered[1] == pet[filtered[0]])
+          return acc
+        }
+        else{
+          return acc
+        }
+      },pets)
+      console.log(auxDeAux)
+      setFilteredPets(auxDeAux)
+    
   }
 
 
   useEffect(() => {
-         setIsLoading(true);
+  
+
+      //setIsLoading(true);
+    
       const pet = async (sw, ne, type) => {
         try {
-          const res = await axios.get(`/pets?adopted=false`);
-          setPets(res.data.rows.filter((place) => place.name));
-          setFilteredPets(res.data.rows.filter((place) => place.name))
-          setIsLoading(false);
-          setFilters({
-            type:"",
-            sex:"",
-            size:""
-          })
+          if(bounds?.latMax) {
+            const res = await axios.get(`/pets?adopted=false&lngMax=${bounds.lngMax}&lngMin=${bounds.lngMin}&latMax=${bounds.latMax}&latMin=${bounds.latMin}`);
+            console.log(res)
+            let animals = res.data.rows.filter((place) => place.name) //
+            setPets(animals);
+            console.log(animals)
+            console.log(filters)
+
+            let filterAux = Object.entries({...filters})
+            filters
+              ? setFilteredPets(filterAux.reduce((acc, filtered) => {
+                if(filtered[1] != "") {
+                  let auxe = filtered[0]
+          
+                  console.log(acc[0], filtered[1])
+                  acc = acc.filter(pet => filtered[1] == pet[filtered[0]])
+                  return acc
+                }
+                else{
+                  return acc
+                }
+              },animals))
+              : setFilteredPets(animals)
+            
+
+
+
+            //setFilteredPets(res.data.rows.filter((place) => place.name))
+            setIsLoading(false);
+          }
+          else{
+
+            const res = await axios.get(`/pets?adopted=false`);
+            setPets(res.data.rows.filter((place) => place.name));
+            setFilteredPets(res.data.rows.filter((place) => place.name))
+            setFilters({
+              type:"",
+              sex:"",
+              size:""
+            })
+            setIsLoading(false);
+          }
         } 
         catch (err) {
           console.log(err);
