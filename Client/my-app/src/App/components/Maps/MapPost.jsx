@@ -13,11 +13,12 @@ let center = {
   lat: 4.710989,
 };
 const options = {
-  mapTypeControl: false,
-  panControl: true,
-  zoomControl: true,
-  scaleControl: false,
-  streetViewControl: false,
+    mapTypeControl: false,
+    panControl: true,
+    zoomControl: true,
+    scaleControl: false,
+    streetViewControl: false,
+    clickableIcons: false
 };
 
 function Maps({ onLocationChange }) {

@@ -1,6 +1,13 @@
 import React from 'react';
 
-const CardAdopcion = ({photo, name}) => {
+const CardAdopcion = ({photo, name, created}) => {
+
+  const pubDay = new Date(created);
+  const now = new Date();
+  const millDif = pubDay - now;
+  const diffDays = Math.ceil(millDif / (1000 * 60 * 60 * 24));
+  const timeAgo = new Intl.RelativeTimeFormat().format(diffDays, 'days');
+
     return(
         <div className="grid grid-cols-10 auto-cols-min place-items-center my-4 rounded-lg py-4 shadow-inner ring ring-primary ring-offset-2  w-full  border-4 bg-primary text-white ">
         <div className="">
@@ -10,7 +17,7 @@ const CardAdopcion = ({photo, name}) => {
           <span className="text-white text-2xl capitalize font-bold">{name}</span>
         </div>
         <div className="col-span-2">
-          <span className=" text-gray-200 text-lg mr-8">Adoptado hace: 20 dias</span>
+          <span className=" text-gray-200 text-lg mr-8">Adoptado hace: {timeAgo}</span>
         </div>
       </div>
     )
