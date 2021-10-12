@@ -15,7 +15,6 @@ function SideBar() {
 
   const handleLogOut = () => {
     dispatch(logOutUser());
-    window.location = '/';
   };
 
   return (
