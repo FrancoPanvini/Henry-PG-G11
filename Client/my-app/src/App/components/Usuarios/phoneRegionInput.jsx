@@ -1,7 +1,7 @@
 let PhoneCodes = ({ onCodeChange }) => {
   return (
     <>
-      <input list='area-codes' onChange={onCodeChange} className='px-1 rounded-md w-16' placeholder='País' />
+      <input list='area-codes' onChange={onCodeChange} className='px-1 rounded-md w-16 text-black' placeholder='País' />
       <datalist id='area-codes'>
         <option value=''></option>
         <option value='AC'>AC</option>
