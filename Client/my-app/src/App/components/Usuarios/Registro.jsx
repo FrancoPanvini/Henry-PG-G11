@@ -1,30 +1,18 @@
-import React, { useEffect, useState } from "react";
-import parsePhoneNumber from 'libphonenumber-js'
-import PhoneCodes from "./phoneRegionInput";
-import { useDispatch } from "react-redux";
-import { Link } from "react-router-dom";
-import { FaPaw, FaExclamationCircle } from "react-icons/fa";
-import axios from 'axios'
-import {
-  getCities,
-  getCountries,
-  getProvinces,
-  postUsers,
-} from "../../redux/actions/index";
-import { useHistory } from "react-router-dom";
-import MapPost from '../Maps/MapPost'
+import React, { useEffect, useState } from 'react';
+import parsePhoneNumber from 'libphonenumber-js';
+import PhoneCodes from './phoneRegionInput';
+import { useDispatch } from 'react-redux';
+import { Link } from 'react-router-dom';
+import { FaPaw, FaExclamationCircle } from 'react-icons/fa';
+import axios from 'axios';
+import { getCities, getCountries, getProvinces, postUsers } from '../../redux/actions/index';
+import { useHistory } from 'react-router-dom';
+import MapPost from '../Maps/MapPost';
 
 function Registro() {
   const dispatch = useDispatch();
-  /* const paises = useSelector((state) => state.countries);
-  const provincias = useSelector((state) => state.provinces);
-  const ciudades = useSelector((state) => state.cities); */
-  /* const [countryId, setCountryId] = useState(null);
-  const [provinceId, setProvinceId] = useState(null); */
-  const [phoneCode, setPhoneCode] = useState("");
-  // const [cityId, setCityId] = useState(null);
-  const [location, setLocation] = useState({})
-  //const [direccion, setDireccion] = useState("")
+  const [phoneCode, setPhoneCode] = useState('');
+  const [location, setLocation] = useState({});
   const history = useHistory();
 
   useEffect(() => {
@@ -34,109 +22,84 @@ function Registro() {
   }, [dispatch]);
 
   const [input, setInput] = useState({
-    name: "",
-    mail: "",
-    phone: "",
-    direction: "",
-    password: "",
-    confirmPassword: "",
-    lat: "",
-    lng: "",
-    Cityid: "",
-    UsersTypeid: "i", // ← hardcodeado, revisar !!!
+    name: '',
+    mail: '',
+    phone: '',
+    direction: '',
+    password: '',
+    confirmPassword: '',
+    lat: '',
+    lng: '',
+    Cityid: '',
+    UsersTypeid: 'i',
   });
   const [errors, setErrors] = useState({});
 
-  const validate = ({
-    name,
-    mail,
-    phone,
-    direction,
-    password,
-    confirmPassword
-    //Cityid,
-    // UsersTypeid,
-  }) => {
+  const validate = ({ name, mail, phone, direction, password, confirmPassword }) => {
     let errors = {};
     if (!name) {
-      errors.name = "Ingresa tu nombre y apellido";
+      errors.name = 'Ingresa tu nombre y apellido';
     }
-    if (!mail || !mail.includes("@") || !mail.includes(".")) {
-      errors.mail = "Debe ser un email válido";
+    if (!mail || !mail.includes('@') || !mail.includes('.')) {
+      errors.mail = 'Debe ser un email válido';
     }
     if (!phone) {
-      errors.phone = "Ingresa tu número de contacto";
+      errors.phone = 'Ingresa tu número telefónico';
     }
     if (!direction) {
-      errors.direction = "Ingresa tu domicilio";
+      errors.direction = 'Ingresa la zona donde resides';
     }
     if (!password || password.length < 8) {
-      errors.password = "Debe tener al menos 8 caracteres";
+      errors.password = 'Debe tener al menos 8 caracteres';
     }
-    if (!confirmPassword || !(confirmPassword === password)) {
-      errors.confirmPassword = "Las contraseñas deben coincidir";
+    if (!confirmPassword || confirmPassword.length < 8 || !(confirmPassword === password)) {
+      errors.confirmPassword = 'Las contraseñas deben coincidir';
     }
-    /* if (!UsersTypeid) {
-      errors.UsersTypeid = "Selecciona un tipo de usuario";
-    } */
-    /*    if (!Cityid) {
-      errors.Cityid = 'Selecciona tu ciudad';
-    } */
     return errors;
   };
 
-
-
-
-
   const handleLocation = () => {
-    let adress = document.getElementById("route")?.innerHTML + ' ' + document.getElementById("street_number")?.innerHTML
-    let city = document.getElementById("administrative_area_level_2")?.innerHTML
-    let province = document.getElementById("administrative_area_level_1")?.innerHTML
-    let country = document.getElementById("country")?.innerHTML
-    let lat = document.getElementById("lat")?.innerHTML
-    let lng = document.getElementById("lng")?.innerHTML
-    document.getElementById("direction").innerHTML = adress
+    let adress = document.getElementById('route')?.innerHTML + ' ' + document.getElementById('street_number')?.innerHTML;
+    let city = document.getElementById('administrative_area_level_2')?.innerHTML;
+    let province = document.getElementById('administrative_area_level_1')?.innerHTML;
+    let country = document.getElementById('country')?.innerHTML;
+    let lat = document.getElementById('lat')?.innerHTML;
+    let lng = document.getElementById('lng')?.innerHTML;
+    document.getElementById('direction').innerHTML = adress;
     setLocation({
       city,
       province,
-      country
-    })
-    lat = parseFloat(lat)
-    lng = parseFloat(lng)
- 
- 
+      country,
+    });
+    lat = parseFloat(lat);
+    lng = parseFloat(lng);
 
-    setInput(prevState => {
+    setInput((prevState) => {
       return {
         ...prevState,
-        "direction": adress,
-        "lat":lat,
-        "lng":lng
-      }})
+        direction: adress,
+        lat: lat,
+        lng: lng,
+      };
+    });
 
     //setDireccion(adress)
-    setErrors(validate({...input,"direction": adress,"lat":lat,"lng":lng}))
-  }
+    setErrors(validate({ ...input, direction: adress, lat: lat, lng: lng }));
+  };
 
   const handlePhoneCodeChange = (e) => {
-    setPhoneCode(e.target.value)
-  }
-
-
-
-
-
+    setPhoneCode(e.target.value);
+  };
 
   const handleOnChange = (e) => {
     e.preventDefault();
-    if(e.target.name === "phone") {
-      if(e.target?.value) {
+    if (e.target.name === 'phone') {
+      if (e.target?.value) {
         setErrors(validate(input));
 
-        const phoneNumber = parsePhoneNumber(e.target.value, phoneCode)
-        if(phoneNumber?.isValid()){
-          console.log("Is Valid")
+        const phoneNumber = parsePhoneNumber(e.target.value, phoneCode);
+        if (phoneNumber?.isValid()) {
+          console.log('Is Valid');
           const newInput = {
             ...input,
             [e.target.name]: phoneNumber.number.substring(1),
@@ -145,8 +108,7 @@ function Registro() {
           setErrors(validate(newInput));
         }
       }
-    }
-    else{
+    } else {
       const newInput = {
         ...input,
         [e.target.name]: e.target.value,
@@ -156,47 +118,22 @@ function Registro() {
     }
   };
 
-  //* Encuentro el id del país y provincia seleccionados por usuario
- /*  const handleUbicationChange = (e) => {
-    if (e.target.id === "pais") {
-      let ubicacion = paises.find((pais) => pais.name === e.target.value);
-      ubicacion && setCountryId(ubicacion.id);
-    }
-    if (e.target.id === "provincia") {
-      let ubicacion = provincias.find(
-        (provincia) => provincia.name === e.target.value
-      );
-      ubicacion && setProvinceId(ubicacion.id);
-    }
-    if (e.target.id === "ciudad") {
-      let ubicacion = ciudades.find((ciudad) => ciudad.name === e.target.value);
-      let newInput = { ...input };
-      ubicacion &&
-        (newInput = {
-          ...newInput,
-          Cityid: ubicacion.id,
-        });
-      setInput(newInput);
-      setErrors(validate(newInput));
-    }
-  }; */
-
   const handleDisabled = () => {
-    if (input.name !== "" && Object.keys(errors).length === 0) {
+    if (input.name !== '' && Object.keys(errors).length === 0) {
       return false;
     }
     return true;
   };
 
-  const handleSubmit = async(e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    let city = await axios.post('/locations',location)
-    let auxInput= {...input, Cityid:city.data.id}
-    console.log(auxInput)
+    let city = await axios.post('/locations', location);
+    let auxInput = { ...input, Cityid: city.data.id };
+    console.log(auxInput);
     dispatch(postUsers(auxInput));
-    
-    alert("¡Registro exitoso! ahora puede iniciar sesión");
-    history.push("/login");
+
+    alert('¡Registro exitoso! ahora puede iniciar sesión');
+    history.push('/login');
   };
 
   return (
@@ -204,78 +141,133 @@ function Registro() {
       <div className='w-2/5'>
         <div className='bg-cachorroWeb bg-bottom bg-cover relative h-96 w-96 rounded-full mr-12 ml-auto shadow-similBorderWhite floorShadowCircle' />
       </div>
-      <div className="flex justify-center items-center w-3/5 z-10 pl-60 h-60">
+      <div className='flex justify-center items-center w-3/5 z-10'>
         <form
           onSubmit={(e) => handleSubmit(e)}
-          className="h-auto p-4 pt-16 mr-auto bg-thirty rounded-lg w-2/5 min-w-min shadow-xl border-2 border-fourty border-opacity-50"
-        >
-          <div className="mx-auto flex justify-center items-center bg-fourty w-20 h-20 rounded-full">
-            <FaPaw className="text-white text-3xl" />
+          className='h-auto p-4 py-12 mr-auto bg-thirty rounded-lg w-3/5 min-w-min shadow-xl border-2 border-fourty border-opacity-50'>
+          <div className='mx-auto flex justify-center items-center bg-fourty w-20 h-20 rounded-full'>
+            <FaPaw className='text-white text-3xl' />
           </div>
           <br />
 
-          <div className="flex gap-8">
-            <div className="flex flex-col w-64">
-              <label className="text-white">
-                Nombre y apellido:{" "}
+          <div className='flex gap-8'>
+            <div className='flex flex-col h-7 w-2/5'>
+              <label className='text-white'>Tipo de cuenta:</label>
+              <div className='flex justify-evenly mb-2'>
+                <button
+                  value='i'
+                  name='UsersTypeid'
+                  onClick={handleOnChange}
+                  className={`w-16 btn-nav text-white ${
+                    input.UsersTypeid === 'i' ? 'border-b-2 border-opacity-0 bg-thirtyDark' : 'btn bg-thirtyLight'
+                  }`}>
+                  Personal
+                </button>
+                <button
+                  value='r'
+                  name='UsersTypeid'
+                  onClick={handleOnChange}
+                  className={`w-16 btn-nav text-white ${
+                    input.UsersTypeid === 'r' ? 'border-b-2 border-opacity-0 bg-thirtyDark' : 'btn bg-thirtyLight'
+                  }`}>
+                  Refugio
+                </button>
+              </div>
+
+              <label className='text-white'>
+                Nombre y apellido{input.UsersTypeid === 'r' && ' del titular'}:{' '}
                 {errors.name && (
                   <span title={errors.name}>
-                    <FaExclamationCircle className="inline text-primary align-baseline" />
+                    <FaExclamationCircle className='inline text-primary align-baseline' />
                   </span>
                 )}
               </label>
               <input
-                type="text"
-                id="name"
-                name="name"
+                type='text'
+                id='name'
+                name='name'
                 // value={input.name}
                 onChange={handleOnChange}
-                className="rounded-md px-1 mb-2"
+                className='rounded-md px-1 mb-2'
               />
 
-              <label className="text-white">
-                Contraseña:{" "}
+              <label className='text-white'>
+                E-mail:{' '}
+                {errors.mail && (
+                  <span title={errors.mail}>
+                    <FaExclamationCircle className='inline text-primary align-baseline' />
+                  </span>
+                )}
+              </label>
+              <input
+                type='text'
+                id='mail'
+                name='mail'
+                // value={input.mail}
+                onChange={handleOnChange}
+                className='rounded-md px-1 mb-2'
+              />
+
+              <label className='text-white'>
+                Contraseña:{' '}
                 {errors.password && (
                   <span title={errors.password}>
-                    <FaExclamationCircle className="inline text-primary align-baseline" />
+                    <FaExclamationCircle className='inline text-primary align-baseline' />
                   </span>
                 )}
               </label>
               <input
-                type="password"
-                id="password"
-                name="password"
+                type='password'
+                id='password'
+                name='password'
                 // value={input.password}
                 onChange={handleOnChange}
-                className="rounded-md px-1 mb-2"
+                className='rounded-md px-1 mb-2'
               />
 
-              <label className="text-white">
-                Teléfono:{" "}
-                {errors.phone && (
-                  <span title={errors.phone}>
-                    <FaExclamationCircle className="inline text-primary align-baseline" />
+              <label className='text-white'>
+                Repetir contraseña:{' '}
+                {errors.confirmPassword && (
+                  <span title={errors.confirmPassword}>
+                    <FaExclamationCircle className='inline text-primary align-baseline' />
                   </span>
                 )}
               </label>
-              <div style={{display:"flex", alignItems:"flex-start"}}>
-                <PhoneCodes onCodeChange={handlePhoneCodeChange}/>
-              {/* <Cleave placeholder="Ingresa tu nro."
-                options={{phone: true, phoneRegionCode:"AR"}}
-                onFocus={}
-                onChange={} 
-              /> */}
-             <div style={{display:"hidden",width:"20px"}}></div>
               <input
-                type="number"
-                id="phone"
-                name="phone"
-                // value={input.phone}
+                type='password'
+                // id='password'
+                name='confirmPassword'
+                // value={input.confirmPassword}
                 onChange={handleOnChange}
-                className="rounded-md px-1 mb-2"
-                />
-              
+                className='rounded-md px-1 mb-2'
+              />
+
+              <div className='flex gap-2'>
+                <div className='w-1/4'>
+                  <label className='text-white'>
+                    Código:
+                    <PhoneCodes onCodeChange={handlePhoneCodeChange} className='rounded-md' />
+                  </label>
                 </div>
+                <div className='w-3/4'>
+                  <label className='text-white'>
+                    Teléfono:{' '}
+                    {errors.phone && (
+                      <span title={errors.phone}>
+                        <FaExclamationCircle className='inline text-primary align-baseline' />
+                      </span>
+                    )}
+                  </label>
+                  <input
+                    type='number'
+                    id='phone'
+                    name='phone'
+                    // value={input.phone}
+                    onChange={handleOnChange}
+                    className='rounded-md px-1 mb-2'
+                  />
+                </div>
+              </div>
 
               {/* <label className='text-white'>
                 Pais:{' '}
@@ -365,85 +357,38 @@ function Registro() {
               </datalist> */}
             </div>
 
-            <div className="flex flex-col w-64">
-              <label className="text-white">
-                E-mail:{" "}
-                {errors.mail && (
-                  <span title={errors.mail}>
-                    <FaExclamationCircle className="inline text-primary align-baseline" />
-                  </span>
-                )}
-              </label>
-              <input
-                type="text"
-                id="mail"
-                name="mail"
-                // value={input.mail}
-                onChange={handleOnChange}
-                className="rounded-md px-1 mb-2"
-              />
-
-              <label className="text-white">
-                Repetir contraseña:{" "}
-                {errors.confirmPassword && (
-                  <span title={errors.confirmPassword}>
-                    <FaExclamationCircle className="inline text-primary align-baseline" />
-                  </span>
-                )}
-              </label>
-              <input
-                type="password"
-                // id='password'
-                name="confirmPassword"
-                // value={input.confirmPassword}
-                onChange={handleOnChange}
-                className="rounded-md px-1 mb-2"
-              />
-
-
-
-
-              
-              <label className="text-white">
-                Zona de residencia:{" "}
+            <div className='flex flex-col w-3/5'>
+              <label className='text-white'>
+                Dirección: (Seleccionar en el mapa){' '}
                 {errors.direction && (
                   <span title={errors.direction}>
-                    <FaExclamationCircle className="inline text-primary align-baseline" />
+                    <FaExclamationCircle className='inline text-primary align-baseline' />
                   </span>
                 )}
               </label>
               <input
                 disabled
-                type="text"
-                id="direction"
-                name="direction"
-                value={input.direction}
+                type='text'
+                id='direction'
+                name='direction'
+                // value={input.direction}
                 onChange={handleOnChange}
-                className="rounded-md px-1 mb-2"
+                className='rounded-md px-1'
               />
+              <div>
+                <MapPost onLocationChange={handleLocation} onChange={handleOnChange} className='h-4/5' />
+                {/* <button type="button" onClick={() => auxButtonClick()}>Confirm</button> */}
+              </div>
             </div>
           </div>
           <br />
-          
-          <div>
-            <MapPost onLocationChange={handleLocation} onChange={handleOnChange}/>
-            {/* <button type="button" onClick={() => auxButtonClick()}>Confirm</button> */}
-          </div>
-          <br />
-          <br />
-          <br />
-          
-          <div className="flex flex-col">
-            <button
-              type="submit"
-              disabled={handleDisabled()}
-              className="btn btn-lg bg-primary text-white border-yellow-600 -mt-5"
-            >
+          <div className='flex flex-col'>
+            <button type='submit' disabled={handleDisabled()} className='btn btn-lg bg-primary text-white border-yellow-600'>
               Registrate
             </button>
             <br />
-            <span className="text-center text-white hover:underline">
-              <Link to="/login">¿Ya tienes una cuenta? Inicia sesión</Link>
+            <span className='text-center text-white hover:underline'>
+              <Link to='/login'>¿Ya tienes una cuenta? Inicia sesión</Link>
             </span>
           </div>
         </form>
