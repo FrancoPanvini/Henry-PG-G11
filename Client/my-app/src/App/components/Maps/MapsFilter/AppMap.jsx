@@ -1,5 +1,6 @@
 import { Grid } from "@material-ui/core";
 import React, { useState, useCallback, useRef, useEffect } from "react";
+import { useLocation } from "react-router";
 
 import Search from "./subcomp/Search/Search";
 //import PetsDetail from "./subcomp/PetsDetail/PetsDetail";
@@ -45,6 +46,9 @@ const AppMap = () => {
     );
     setRandom(1);
   }, []);
+  let location = useLocation();
+
+
 
   const applyFilter = (type, el) => {
     let aux = { ...filters, [type]: el };
@@ -62,17 +66,27 @@ const AppMap = () => {
         return acc;
       }
     }, pets);
-    console.log(auxDeAux);
     setFilteredPets(auxDeAux);
   };
 
   useEffect(() => {
     //setIsLoading(true);
+    let currentLocation = location.pathname.split("/")[1];
+    if(currentLocation==="adopciones"){
+      currentLocation = "pets?adopted=false"
+    }
+    else if (currentLocation === "perdidos"){
+      currentLocation="lostpets?lost=true"
+    }
+    else{
+      currentLocation="users?type=r"
+    }
+    console.log(currentLocation)
     const pet = async () => {
       try {
         if (bounds?.latMax) {
           const res = await axios.get(
-            `/pets?adopted=false&lngMax=${bounds.lngMax}&lngMin=${bounds.lngMin}&latMax=${bounds.latMax}&latMin=${bounds.latMin}`
+            `/${currentLocation}&lngMax=${bounds.lngMax}&lngMin=${bounds.lngMin}&latMax=${bounds.latMax}&latMin=${bounds.latMin}`
           );
           let animals = res.data.rows.filter((place) => place.name); //
           setPets(animals);
@@ -95,7 +109,7 @@ const AppMap = () => {
           
           setIsLoading(false);
         } else {
-          const res = await axios.get(`/pets?adopted=false`);
+          const res = await axios.get(`/${currentLocation}`);
           setPets(res.data.rows.filter((place) => place.name));
           setFilteredPets(res.data.rows.filter((place) => place.name));
           setFilters({

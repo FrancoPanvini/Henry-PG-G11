@@ -193,8 +193,13 @@ function FiltersBar() {
             </div>
           </div>
 
-          <div className='p-1 mb-2 flex flex-col justify-start border-b-2 border-thirtyLight border-opacity-50'>
-            <SelectUbication urlFilter={urlFilter} handleSetUrl={handleSetUrl} />
+          <div className="p-1 mb-2 flex flex-col justify-start border-b-2 border-thirtyLight border-opacity-50">
+            <SelectUbication
+              urlFilter={urlFilter}
+              handleSetUrl={handleSetUrl}
+            />
+
+
           </div>
 
           <div className='p-1 mb-2 flex flex-wrap justify-between items-center border-b-2 border-thirtyLight border-opacity-50'>
