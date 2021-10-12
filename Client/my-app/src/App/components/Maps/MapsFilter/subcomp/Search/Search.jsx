@@ -29,7 +29,7 @@ const Search = ({setCoordinates}) => {
           Volver
         </button>
         <Typography variant="h5" className={classes.title}>
-          Buscador de Mascotas
+          Buscador
         </Typography>
         <Box display="flex">
           <Typography variant="h6" className={classes.title}>

@@ -7,7 +7,7 @@ import useStyles from "./styles";
 /* import CardAdopcion from "../../../../Cards/CardAdopcion"; */
 
 
-const Map = ({ setCoordinates, setBounds, coordinates, pets, setChildClicked }) => {
+const Map = ({ setCoordinates, setBounds, coordinates, items, setChildClicked }) => {
   const classes = useStyles();
   const isDesktop = useMediaQuery("(min-width:600px)");
 
@@ -30,7 +30,7 @@ const Map = ({ setCoordinates, setBounds, coordinates, pets, setChildClicked }) 
         }}
         onChildClick={(child)=>setChildClicked(child)}
       >
-        {pets?.map((pet, i) => (
+        {items?.map((pet, i) => (
           <div
             className={classes.markerContainer}
             lat={Number(pet.lat)}
