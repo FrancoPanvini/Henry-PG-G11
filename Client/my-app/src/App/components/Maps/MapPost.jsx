@@ -23,6 +23,7 @@ const options = {
     zoomControl: true,
     scaleControl: false,
     streetViewControl: false,
+    clickableIcons: false
 };
 
 function Maps({onLocationChange}) {
