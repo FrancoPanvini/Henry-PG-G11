@@ -7,6 +7,7 @@ const libraries = ['places'];
 const mapContainerStyle = {
   width: '100%',
   height: '100%',
+  borderRadius: '10px',
 };
 let center = {
   lng: -74.08175,
@@ -258,3 +259,5 @@ function Maps({ onLocationChange }) {
 }
 
 export default Maps;
+
+  
