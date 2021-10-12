@@ -114,10 +114,10 @@ const AppMap = () => {
   }, [bounds]);
 
   return (
-    <div>
-      <Search setCoordinates={setCoordinates} />
-      <Grid container spacing={3} style={{ width: "100%", height: "auto" }}>
-        <Grid item xs={12} md={4}>
+    <div className='h-screen82'>
+      <Search setCoordinates={setCoordinates} style={{height:"7vh"}}/>
+      <Grid container spacing={3} style={{ width: "100%", height: "75vh" }}>
+        <Grid item xs={12} md={3} style={{ height:"75vh"}}>
           <List
             //pets={filteredSex.length ? filteredSex : pets}
             //pets={filteredSize.length ? filteredSize : pets}
@@ -133,7 +133,7 @@ const AppMap = () => {
             pets={filteredPets}
           />
         </Grid>
-        <Grid item xs={12} md={8} style={{ marginTop: "20px" }}>
+        <Grid item xs={12} md={9} style={{ marginTop: "5px", height: "77vh" }}>
           <Map
             onLoad={onMapLoad}
             setCoordinates={setCoordinates}
