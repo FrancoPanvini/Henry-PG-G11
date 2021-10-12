@@ -60,6 +60,9 @@ const { Pets, Users, Events, Adoptions, Cities, Provinces, Countries, PetsType, 
 Pets.belongsTo(PetsType);
 PetsType.hasMany(Pets);
 
+PetsPics.belongsTo(LostPets);
+LostPets.hasMany(PetsPics);
+
 PetsPics.belongsTo(Pets);
 Pets.hasMany(PetsPics);
 
