@@ -11,9 +11,11 @@ const postPets = async (req, res) => {
       where: { name: name.toLowerCase(), UserId: parseInt(Userid) },
       defaults: {
         size,
+
         description,
         lat,
         lng
+
       },
     });
     if (!created) throw new Error(`${name} allready exist as your lost pet`);
@@ -32,14 +34,18 @@ const postPets = async (req, res) => {
       throw new Error("Problems setting City of pet");
     }
 
+
     //* Set Photos
+
     try {
       if(photo){
         let promises = photo.map(el => PetsPics.create({"url":el}).then(res => res.setLostPet(newPet.dataValues.id)))
         await Promise.all(promises)
       }
     } catch (error) {
+
       throw new Error("Problems setting Photos of lostPet");
+
     }
 
     res.status(200).json(newPet);
