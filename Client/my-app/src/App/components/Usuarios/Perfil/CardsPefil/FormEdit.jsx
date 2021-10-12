@@ -76,13 +76,13 @@ function FormEdit({
 
   return (
     <div className='py-16 w-full'>
-      <form className='flex flex-col w-full max-w-3xl mx-auto p-8 rounded-lg bg-gradient-to-l from-secondary to-secondaryDark border-2 border-white border-opacity-50 relative'>
+      <form className='flex flex-col w-full max-w-3xl mx-auto p-8 rounded-lg bg-primaryDark border-white border-opacity-50 relative'>
         <label>
           Nombre de la mascota:{' '}
           {errors.name && (
             <FaExclamationCircle
               title={errors.name}
-              className='inline text-fourtyLight align-baseline'
+              className='inline  align-baseline'
             />
           )}
         </label>
@@ -94,8 +94,8 @@ function FormEdit({
         />
         <br />
 
-        <div className='flex justify-evenly'>
-          <div className='text-center w-2/5 rounded-2xl bg-secondaryDark px-4 py-2'>
+        <div className='grid grid-cols-2 gap-3 justify-items-center'>
+          <div className='text-center w-2/5 rounded-2xl  px-4 py-2'>
             <label>
               Especie:{' '}
               {/*  {errors.PetsTypeid && (
@@ -105,10 +105,11 @@ function FormEdit({
                 />
               )} */}
             </label>
+            <br/>
             <select
               defaultValue={mascota.PetsTypeid}
               name='PetsTypeid'
-              onChange={handleChange}>
+              onChange={handleChange} className='rounded-md px-1 capitalize'>
               <option value='p'>Perro</option>
               <option value='g'>Gato</option>
             </select>
@@ -135,12 +136,13 @@ function FormEdit({
               </label>
             </div> */}
           </div>
-          <div className='text-center w-2/5 rounded-xl bg-secondary px-4 py-2'>
+          <div className='text-center w-2/5 rounded-xl  px-4 py-2'>
             <label>Sexo:</label>
+            <br/>
             <select
               defaultValue={mascota.sex}
               name='sex'
-              onChange={handleChange}>
+              onChange={handleChange} className='rounded-md px-1 capitalize'>
               <option value='h'>Hembra</option>
               <option value='m'>Macho</option>
             </select>
@@ -167,11 +169,8 @@ function FormEdit({
               </label>
             </div> */}
           </div>
-        </div>
-        <br />
 
-        <div className='flex justify-evenly'>
-          <div className='text-center rounded-xl bg-secondaryDark px-4 py-2'>
+          <div className='text-center rounded-xl  px-4 py-2'>
             <label>Edad (en años):</label> <br />
             <input
               name='age'
@@ -183,12 +182,13 @@ function FormEdit({
               className='rounded-md px-1'
             />
           </div>
-          <div className='text-center w-3/5 rounded-2xl bg-secondary px-4 py-2'>
-            <label>Tamaño aproximado de la raza:</label>
+          <div className='text-center w-3/5 rounded-2xl  px-4 py-2'>
+            <label>Tamaño aprox:</label>
+            <br/>
             <select
               defaultValue={mascota.size}
               name='size'
-              onChange={handleChange}>
+              onChange={handleChange} className='rounded-md px-1 capitalize'>
               <option value='c'>Pequeño</option>
               <option value='m'>Mediano</option>
               <option value='g'>Grande</option>
@@ -252,8 +252,8 @@ function FormEdit({
         </select>
         <br /> */}
 
-        <div className='flex justify-evenly items-center rounded-xl bg-gradient-to-r from-secondary to-secondaryLight'>
-          <div className='w-44 h-44 bg-secondaryDark border-2 border-secondary'>
+        <div className='flex justify-evenly items-center rounded-xl '>
+          <div className='w-44 h-44 border-2 border-secondary'>
             <img
               src={photo}
               alt='previsualización de imagen'
