@@ -13,15 +13,6 @@ const breakPoints = [
 ];
 
 const FormSlider = ({
-  UserId,
-  adult,
-  dedication,
-  oldPets,
-  oldPetsDesc,
-  otherPets,
-  otherPetsDesc,
-  residence,
-  residents,
   onClose,
   id,
 }) => {
@@ -36,6 +27,7 @@ const FormSlider = ({
     getForm(id);
   }, [id]);
 
+  console.log(forms)
   return ReactDom.createPortal(
     <>
       <div className='fixed inset-0 bg-gray-50 bg-opacity-70 z-20 overflow-y-scroll' />
@@ -67,6 +59,7 @@ const FormSlider = ({
                       otherPetsDesc={el.otherPetsDesc}
                       residence={el.residence}
                       residents={el.residents}
+                      formId={el.id}
                     />
                   </div>
                 );

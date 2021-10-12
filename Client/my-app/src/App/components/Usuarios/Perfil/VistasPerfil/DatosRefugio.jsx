@@ -1,107 +1,135 @@
-import React from 'react'
-import {  useEffect } from 'react';
+import React, { useState } from 'react';
+import { useEffect } from 'react';
 import { initialUser } from '../../../../redux/actions';
 import { useDispatch, useSelector } from 'react-redux';
-import { FaDonate } from "react-icons/fa";
-import { GrInstagram, GrFacebook } from "react-icons/gr"
-import { BiWorld } from "react-icons/bi";
+import { FaDonate } from 'react-icons/fa';
+import { GrInstagram, GrFacebook } from 'react-icons/gr';
+import { BiEdit, BiTrash, BiWorld } from 'react-icons/bi';
+import FormularioDatos from '../CardsPefil/FormularioDatos';
 
 const DatosRefugio = () => {
-const userId = localStorage.getItem('userId');
-  const user = useSelector((state) => state.userData)
+  const userId = localStorage.getItem('userId');
+  const user = useSelector((state) => state.userData);
   const dispatch = useDispatch();
-
+  const [edit, setEdit] = useState(false);
 
   useEffect(() => {
-    dispatch(initialUser(userId))
+    dispatch(initialUser(userId));
   }, [dispatch, userId]);
 
-    return(
-        <div className="flex justify-between relative">
-        <div className="flex flex-wrap ">
-            <div className="my-4 p-2 text-xl w-1/4">Nombre completo :
-            <div className="my-4 p-2 border-2 bg-gray-300 " >
-              <h2 className="capitalize">{user?.name}</h2>
-              </div>
-            </div>
-            <div className="my-4 p-2 text-xl w-1/4">Email :
-              <div className="my-4 p-2 border-2 bg-gray-300 ">
-                <h2>{user?.mail}</h2>
-              </div>
-            </div>
-            <div className="my-4 p-2  text-xl w-1/4" >Telefono :
-              <div className="my-4 p-2 border-2 bg-gray-300 ">
-                <h2>{user?.phone}</h2>
-              </div>
-            </div>
-            <div className="my-4 p-2  text-xl w-1/4" >Pais :
-              <div className="my-4 p-2 border-2 bg-gray-300 ">
-                <h2 className="capitalize">{user?.country}</h2>
-              </div>
-            </div>
-            <div className="my-4 p-2  text-xl w-1/4" >Provincia :
-              <div className="my-4 p-2 border-2 bg-gray-300 ">
-                <h2 className="capitalize">{user?.province}</h2>
-              </div>
-            </div>
-            <div className="my-4 p-2  text-xl w-1/4" >Ciudad :
-              <div className="my-4 p-2 border-2 bg-gray-300 ">
-                <h2 className="capitalize">{user?.city}</h2>
-              </div>
-            </div>
-            <div className="my-4 p-2  text-xl w-1/4" >Responsable :
-              <div className="my-4 p-2 border-2 bg-gray-300 ">
-                <h2 className="capitalize">{user?.responsable}</h2>
-                
-              </div>
-            </div>
-            <div className="my-4 p-2  text-xl w-1/4" >Redes :
-              <div className="my-4 p-2 border-2 bg-gray-300 ">
-                <h2 className="capitalize">{user?.responsable}</h2>
-                
-              </div>
-            </div>
-            <div className="my-4 p-2  text-xl w-full " >Descripcion :
-              <div className="my-4 p-2 border-2 bg-gray-300  ">
-                <h2 className=" break-all overflow-y-auto h-24 ">{user?.description}</h2>
-              </div>
-            </div>
-            
-            
-            <div className="my-4 p-2  text-xl w-1/2" >
-                <button className="btn bg-primary text-white py-4 px-8 rounded-lg">Edit</button>
-            </div>
-            <div className="my-4 p-2  text-xl w-1/2" >
-                <button className="btn bg-red-600 text-white py-4 px-8 rounded-lg">Borrar cuenta</button>
-            </div>
-        </div>
-        <div className="absolute top-0 right-0">
-            <img src={user?.photo} className="rounded-full ring-8 ring-gray-300 h-60 w-60" alt="asd"/>
-          </div>
-          <div className="flex flex-wrap h-96 " >
-          <div >
-            <a href={user?.link_donaciones}>
-                <FaDonate />
-            </a>
-          </div>
-          <div>
-            <a href={user?.link_facebook}>
-                <GrFacebook />
-            </a>
-          </div>
-          <div>
-            <a href={user?.link_instagram}>
-                <GrInstagram />
-            </a>
-          </div>
-          <div>
-            <a href={user?.link_web}>
-                <BiWorld />
-            </a>
-          </div>
-          </div>
-        </div>
-    )
-}
+  const handleClick = () => {
+    setEdit(edit ? false : true);
+  };
 
-export default DatosRefugio
+  return (
+    <>
+      {edit ? (
+        <div>
+          <FormularioDatos type='r' close={handleClick} user={user} />
+        </div>
+      ) : (
+        <div className='relative'>
+          <div className='flex flex-wrap'>
+            <div className='w-1/3 p-2 m-2 flex flex-col'>
+              <label>Nombre</label>
+              <span className='rounded-md p-1 mb-2 bg-white capitalize'>
+                {user.name}
+              </span>
+            </div>
+
+            <div className='w-1/3 p-2 m-2 flex flex-col'>
+              <label>Mail</label>
+              <span className='rounded-md p-1 mb-2 bg-white '>
+                {user.mail}
+              </span>
+            </div>
+
+            <div className='w-1/3 p-2 m-2 flex flex-col'>
+              <label>Telefono</label>
+              <span className='rounded-md p-1 mb-2 bg-white capitalize'>
+                {user.phone}
+              </span>
+            </div>
+            <img
+              src={user.photo}
+              alt='foto de usuario'
+              className='object-cover w-60 h-60 rounded-full absolute right-28 mx-auto top-0 ring ring-offset-4 ring-offset-gray-200'
+            />
+
+            <div className='w-1/3 p-2 m-2 flex flex-col'>
+              <label className=''>Pais: </label>
+              <span className='rounded-md p-1 bg-white mb-2 capitalize'>
+                {user.country}
+              </span>
+            </div>
+
+            <div className='w-1/3 p-2 m-2 flex flex-col'>
+              <label className=''>Provincia/Departamento:</label>
+              <span className='rounded-md p-1 bg-white mb-2 capitalize'>
+                {user.province}
+              </span>
+            </div>
+
+            <div className='w-1/3 p-2 m-2 flex flex-col'>
+              <label className=''>Ciudad:</label>
+              <span className='rounded-md p-1 bg-white mb-2 capitalize'>
+                {user.city}
+              </span>
+            </div>
+
+            <div className='w-1/3 p-2 m-2 flex flex-col'>
+              <label>Responsable</label>
+              <span className='rounded-md p-1 bg-white mb-2 capitalize'>
+                {user.responsable}
+              </span>
+            </div>
+            <div className='w-1/3 p-2 m-2 flex flex-col'>
+              <label>Descripcion</label>
+              <span className='rounded-md p-1 mb-2  bg-white '>
+                {user.description}
+              </span>
+            </div>
+            <div className='w-1/3 p-2 m-2 flex justify-around text-2xl items-center'>
+              <a
+                href={user.link_instagram} target='_blank' rel='noreferrer'
+                className='p-2 bg-gradient-to-b from-instagram via-red-500  to-yellow-500 rounded-lg text-white'>
+                <GrInstagram title='Instagram' />
+              </a>
+              <a
+                href={user.link_facebook} target='_blank' rel='noreferrer'
+                className='p-2 bg-facebook rounded-lg text-white'>
+                <GrFacebook title='Facebook' />
+              </a>
+              <a
+                href={user.link_web} target='_blank' rel='noreferrer'
+                className='p-2 bg-primary rounded-lg text-white'>
+                <BiWorld title='Web' />
+              </a>
+              <a
+                href={user.link_donaciones} target='_blank' rel='noreferrer'
+                className='p-2 bg-donations rounded-lg text-white'>
+                <FaDonate title='Donaciones' />
+              </a>
+            </div>
+          </div>
+          <div className='flex p-2 mx-24 mt-16 '>
+            <button
+              className='btn bg-green-600 text-white w-16 h-16 mr-8 flex justify-center items-center text-3xl rounded-full shadow-inner'
+              title='Editar publicacion'
+              onClick={handleClick}>
+              <BiEdit />
+            </button>
+            <button
+              className='btn bg-red-600 text-white w-16 h-16 flex justify-center items-center text-3xl  rounded-full shadow-inner'
+              title='Eliminar cuenta'
+              onClick={handleClick}>
+              <BiTrash />
+            </button>
+          </div>
+        </div>
+      )}
+    </>
+  );
+};
+
+export default DatosRefugio;

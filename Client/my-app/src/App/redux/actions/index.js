@@ -74,14 +74,6 @@ export const getSheltersFilter = (filters) => {
    };
 }
 
-export const getEvents = () => {
-
-}
-
-export const getAllPets = () => {
-
-}
-
 
 export function postUsers(payload) {
      return async function (dispatch){
