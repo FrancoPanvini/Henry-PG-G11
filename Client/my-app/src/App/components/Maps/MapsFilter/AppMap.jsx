@@ -1,13 +1,14 @@
-import { Grid } from "@material-ui/core";
-import React, { useState, useCallback, useRef, useEffect } from "react";
-import { useLocation } from "react-router";
+import { Grid } from '@material-ui/core';
+import React, { useState, useCallback, useRef, useEffect } from 'react';
+import { useLocation } from 'react-router';
 
-import Search from "./subcomp/Search/Search";
+import Search from './subcomp/Search/Search';
 //import PetsDetail from "./subcomp/PetsDetail/PetsDetail";
-import Map from "./subcomp/Map/Map";
-import List from "./subcomp/List/List";
+import Map from './subcomp/Map/Map';
+import List from './subcomp/List/List';
+import ListRefugios from './subcomp/List/ListRefugios';
 
-import axios from "axios";
+import axios from 'axios';
 
 const AppMap = () => {
   const [pets, setPets] = useState([]);
@@ -16,16 +17,16 @@ const AppMap = () => {
   const [coordinates, setCoordinates] = useState({});
   const [bounds, setBounds] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
-  const [type, setType] = useState("p");
-  const [sex, setSex] = useState("m");
-  const [size, setSize] = useState("p");
+  const [type, setType] = useState('p');
+  const [sex, setSex] = useState('m');
+  const [size, setSize] = useState('p');
 
-  const [, setRandom] = useState("");
+  const [, setRandom] = useState('');
 
   const [filters, setFilters] = useState({
-    type: "",
-    sex: "",
-    size: "",
+    type: '',
+    sex: '',
+    size: '',
   });
 
   const mapRef = useRef();
@@ -40,15 +41,10 @@ const AppMap = () => {
     setCoordinates({ lat: 4.6533326, lng: -74.083652 });
   };
   useEffect(() => {
-    navigator.geolocation.getCurrentPosition(
-      currentPosition,
-      noCurrentPosition
-    );
+    navigator.geolocation.getCurrentPosition(currentPosition, noCurrentPosition);
     setRandom(1);
   }, []);
   let location = useLocation();
-
-
 
   const applyFilter = (type, el) => {
     let aux = { ...filters, [type]: el };
@@ -56,7 +52,7 @@ const AppMap = () => {
     let filterAux = Object.entries({ ...filters, [type]: el }); //[[type,""],[sex,""],[size,""]]
     console.log(filterAux);
     let auxDeAux = filterAux.reduce((acc, filtered) => {
-      if (filtered[1] !== "") {
+      if (filtered[1] !== '') {
         //let auxe = filtered[0]
 
         console.log(acc[0], filtered[1]);
@@ -71,17 +67,15 @@ const AppMap = () => {
 
   useEffect(() => {
     //setIsLoading(true);
-    let currentLocation = location.pathname.split("/")[1];
-    if(currentLocation==="adopciones"){
-      currentLocation = "pets?adopted=false"
+    let currentLocation = location.pathname.split('/')[1];
+    if (currentLocation === 'adopciones') {
+      currentLocation = 'pets?adopted=false';
+    } else if (currentLocation === 'perdidos') {
+      currentLocation = 'lostpets?lost=true';
+    } else {
+      currentLocation = 'users?type=r';
     }
-    else if (currentLocation === "perdidos"){
-      currentLocation="lostpets?lost=true"
-    }
-    else{
-      currentLocation="users?type=r"
-    }
-    console.log(currentLocation)
+    console.log(currentLocation);
     const pet = async () => {
       try {
         if (bounds?.latMax) {
@@ -95,7 +89,7 @@ const AppMap = () => {
           filters
             ? setFilteredItems(
                 filterAux.reduce((acc, filtered) => {
-                  if (filtered[1] !== "") {
+                  if (filtered[1] !== '') {
                     //let auxe = filtered[0]
                     acc = acc.filter((pet) => filtered[1] === pet[filtered[0]]);
                     return acc;
@@ -106,16 +100,15 @@ const AppMap = () => {
               )
             : setFilteredItems(animals);
 
-          
           setIsLoading(false);
         } else {
           const res = await axios.get(`/${currentLocation}`);
           setPets(res.data.rows.filter((place) => place.name));
           setFilteredItems(res.data.rows.filter((place) => place.name));
           setFilters({
-            type: "",
-            sex: "",
-            size: "",
+            type: '',
+            sex: '',
+            size: '',
           });
           setIsLoading(false);
         }
@@ -129,25 +122,34 @@ const AppMap = () => {
 
   return (
     <div className='h-screen82'>
-      <Search setCoordinates={setCoordinates} style={{height:"7vh"}}/>
-      <Grid container spacing={3} style={{ width: "100%", height: "75vh" }}>
-        <Grid item xs={12} md={3} style={{ height:"75vh"}}>
-          <List
-            //pets={filteredSex.length ? filteredSex : pets}
-            //pets={filteredSize.length ? filteredSize : pets}
-            filter={applyFilter}
-            childClicked={childClicked}
-            isLoading={isLoading}
-            type={type}
-            setType={setType}
-            sex={sex}
-            setSex={setSex}
-            size={size}
-            setSize={setSize}
-            items={filteredItems}
-          />
+      <Search setCoordinates={setCoordinates} style={{ height: '7vh' }} />
+      <Grid container spacing={3} style={{ width: '100%', height: '75vh' }}>
+        <Grid item xs={12} md={3} style={{ height: '75vh' }}>
+          {location.pathname.includes('refugios') ? (
+            <ListRefugios
+              filter={applyFilter}
+              childClicked={childClicked}
+              isLoading={isLoading}
+              items={filteredItems}
+            />
+          ) : ( // caso que deba renderizar mascotas
+            <List
+              //pets={filteredSex.length ? filteredSex : pets}
+              //pets={filteredSize.length ? filteredSize : pets}
+              filter={applyFilter}
+              childClicked={childClicked}
+              isLoading={isLoading}
+              type={type}
+              setType={setType}
+              sex={sex}
+              setSex={setSex}
+              size={size}
+              setSize={setSize}
+              items={filteredItems}
+            />
+          )}
         </Grid>
-        <Grid item xs={12} md={9} style={{ marginTop: "5px", height: "77vh" }}>
+        <Grid item xs={12} md={9} style={{ marginTop: '5px', height: '77vh' }}>
           <Map
             onLoad={onMapLoad}
             setCoordinates={setCoordinates}

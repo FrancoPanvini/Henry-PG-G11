@@ -12,8 +12,6 @@ import {
 import useStyles from "./style";
 //import PetsDetail from "../PetsDetail/PetsDetail";
 import CardAdopcion from "../../../../Cards/CardAdopcion";
-import CardLost from "../../../../Cards/CardLost";
-import CardRefugio from "../../../../Cards/CardRefugio";
 
 const List = ({
   items,
@@ -54,7 +52,7 @@ const List = ({
 
   return (
     <div className={classes.container}>
-      <Typography variant="h4">Mascotas en Adopcion</Typography>
+      <Typography variant="h4">Mascotas</Typography>
       {isLoading ? (
         <div className={classes.loading}>
           <CircularProgress size="5rem" />
