@@ -34,12 +34,12 @@ function Publicaciones({ userId }) {
         <button
           className='btn btn-lg bg-primary text-white mr-16'
           onClick={() => setIsOpen(true)}>
-          Postar mascota en adopcion
+          Postear mascota en adopcion
         </button>
         <button
           className='btn btn-lg bg-primary text-white '
           onClick={() => setIsOpen2(true)}>
-          Postar mascota perdida
+          Postear mascota perdida
         </button>
 
         {isOpen && (
