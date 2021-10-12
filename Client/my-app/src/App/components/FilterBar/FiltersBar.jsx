@@ -139,7 +139,7 @@ function FiltersBar() {
   };
 
   const sendFilters = (filters) => {
-    let cleanFilter = { ...filters }; // ← Dami, acá había que hacer una copia, sino cleanFilter era lo mismo que urlFilter, y al hacer delete en cleanFilter estabas modificando las propiedades del estado en sí también ! ((((borrar este comentario))
+    let cleanFilter = { ...filters };
 
     cleanFilter.type === "" && delete cleanFilter.type;
     cleanFilter.gender === "" && delete cleanFilter.gender;
