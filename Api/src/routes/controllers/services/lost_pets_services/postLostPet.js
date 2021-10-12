@@ -1,4 +1,4 @@
-const { LostPets, PetsPics } = require("../../../../db");
+const { LostPets, LostPetsPics } = require("../../../../db");
 const { deleteLostPetDB } = require("./deleteLostPet");
 
 const postPets = async (req, res) => {
@@ -14,7 +14,6 @@ const postPets = async (req, res) => {
         description,
         lat,
         lng
-
       },
     });
     if (!created) throw new Error(`${name} allready exist as your lost pet`);
@@ -38,7 +37,7 @@ const postPets = async (req, res) => {
 
     try {
       if(photo){
-        let promises = photo.map(el => PetsPics.create({"url":el}).then(res => res.setLostPet(newPet.dataValues.id)))
+        let promises = photo.map(el => LostPetsPics.create({"url":el}).then(res => res.setLostPet(newPet.dataValues.id)))
         await Promise.all(promises)
       }
     } catch (error) {
