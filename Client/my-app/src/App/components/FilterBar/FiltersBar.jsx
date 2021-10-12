@@ -164,6 +164,11 @@ function FiltersBar() {
       </div>
       {currentLocation === "/adopciones" ? (
         <div className="r w-full px-8 py-4 ml-4 bg-transparent rounded-sm ">
+           <button>
+              <Link className="w-full h-7 font-bold mt-2" to="/adopciones/map">
+                Buscar por Mapa
+              </Link>
+            </button>
           <div className="p-1 mb-2 flex flex-col justify-start border-b-2 border-thirtyLight border-opacity-50">
             <label className="w-full h-7 font-bold">
               Especie{" "}
@@ -215,11 +220,7 @@ function FiltersBar() {
               handleSetUrl={handleSetUrl}
             />
 
-            <button>
-              <Link className="w-full h-7 font-bold mt-2" to="/adopciones/map">
-                Buscar por Mapa
-              </Link>
-            </button>
+           
           </div>
           {}
 
@@ -391,6 +392,11 @@ function FiltersBar() {
         </div>
       ) : currentLocation === "/perdidos" ? (
         <div className="border-r border-gray-800 p-8 ml-4 bg-transparent rounded-sm">
+          <button>
+              <Link className="w-full h-7 font-bold mt-2" to="/perdidos/map">
+                Buscar por Mapa
+              </Link>
+            </button>
           <SelectUbication
             urlFilter={urlFilterLost}
             handleSetUrl={handleSetUrlLost}
@@ -404,6 +410,11 @@ function FiltersBar() {
         </div>
       ) : (
         <div className="border-r border-gray-800 p-8 ml-4 bg-transparent rounded-sm ">
+          <button>
+              <Link className="w-full h-7 font-bold mt-2" to="/refugios/map">
+                Buscar por Mapa
+              </Link>
+            </button>
           <SelectUbication
             urlFilter={urlShelter}
             handleSetUrl={handleSetUrlShelter}
