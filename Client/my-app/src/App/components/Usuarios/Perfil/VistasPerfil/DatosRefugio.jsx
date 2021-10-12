@@ -4,7 +4,7 @@ import { initialUser } from '../../../../redux/actions';
 import { useDispatch, useSelector } from 'react-redux';
 import { FaDonate } from 'react-icons/fa';
 import { GrInstagram, GrFacebook } from 'react-icons/gr';
-import { BiEdit, BiTrash, BiWorld } from 'react-icons/bi';
+import { BiEdit, /* BiTrash */ BiWorld } from 'react-icons/bi';
 import FormularioDatos from '../CardsPefil/FormularioDatos';
 
 const DatosRefugio = () => {
@@ -115,16 +115,16 @@ const DatosRefugio = () => {
           <div className='flex p-2 mx-24 mt-16 '>
             <button
               className='btn bg-green-600 text-white w-16 h-16 mr-8 flex justify-center items-center text-3xl rounded-full shadow-inner'
-              title='Editar publicacion'
+              title='Editar datos'
               onClick={handleClick}>
               <BiEdit />
             </button>
-            <button
+            {/* <button
               className='btn bg-red-600 text-white w-16 h-16 flex justify-center items-center text-3xl  rounded-full shadow-inner'
               title='Eliminar cuenta'
               onClick={handleClick}>
               <BiTrash />
-            </button>
+            </button> */}
           </div>
         </div>
       )}
