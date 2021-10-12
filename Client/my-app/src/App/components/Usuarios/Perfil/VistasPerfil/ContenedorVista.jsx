@@ -13,7 +13,7 @@ const active = useSelector((state) => state.active);
       {active === 'Mis Datos' ? (
         <DatosPersonales />
       ) : active === 'Mis Postulaciones' ? (
-        <Postulaciones />
+        <Postulaciones UserId={userId} />
       ) : active === 'Mis Publicaciones' ? (
         <Publicaciones userId={userId} />
       ) : (

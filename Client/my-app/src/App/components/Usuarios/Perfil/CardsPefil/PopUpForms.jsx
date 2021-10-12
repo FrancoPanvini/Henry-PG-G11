@@ -1,11 +1,13 @@
 import React,{useEffect,useState} from 'react'
 import { getUserById } from '../../../../services/getUserById'
+import { acceptForms } from '../../../../services/acceptForms'
 
 
 
-const PopUpForms = ({UserId, adult, dedication, oldPets, oldPetsDesc, otherPets, otherPetsDesc, residence, residents, onClose}) => {
+const PopUpForms = ({UserId, adult, dedication, oldPets, oldPetsDesc, otherPets, otherPetsDesc, residence, residents, onClose, formId}) => {
  
     const [user, setUser] = useState()
+  console.log(`el id es ${formId}`)
 
     const handleUser =async (id) => {
             await getUserById(id).then((res)=>{
@@ -19,6 +21,12 @@ useEffect(()=> {
             
 }, [UserId])
     
+  const handleAccept = (e) => {
+    e.preventDefault();
+    acceptForms(formId);
+    alert('Has aceptado esta postulacion')
+    // onClose();
+  }
     return(
         <>
           <div className="bg-gray-50 bg-opacity-70 z-40 " />
@@ -39,7 +47,7 @@ useEffect(()=> {
                 <h2>Tipo de propiedad: Dpto{residence === 'app'?" Departamento":"Casa"}</h2>
                 <h2>Cuantas personas viven en su propiedad: {residents} personas</h2>
             <div>
-              <button className="btn bg-white text-black font-bold rounded-lg hover:bg-green-600 hover:text-white p-2 ">Aceptar</button>
+              <button onClick={handleAccept} className="btn bg-white text-black font-bold rounded-lg hover:bg-green-600 hover:text-white p-2 ">Aceptar</button>
               {/* <button>Rechazar</button> */}
             </div>
           </div>
