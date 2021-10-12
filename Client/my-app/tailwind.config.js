@@ -62,6 +62,8 @@ module.exports = {
         facebook: '#4267B2',
         donations: '#D4AF37 ',
         instagram: '#405DE6',
+        attention: '#C84B31',
+        attentionLight: '#de8775',
       },
       backgroundImage: {
         cachorroWeb: "url('https://images.unsplash.com/photo-1560807707-8cc77767d783?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=435&q=80')",
