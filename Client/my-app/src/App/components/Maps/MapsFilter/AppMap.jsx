@@ -1,8 +1,8 @@
-import { CssBaseline, Grid } from "@material-ui/core";
+import { Grid } from "@material-ui/core";
 import React, { useState, useCallback, useRef, useEffect } from "react";
 
 import Search from "./subcomp/Search/Search";
-import PetsDetail from "./subcomp/PetsDetail/PetsDetail";
+//import PetsDetail from "./subcomp/PetsDetail/PetsDetail";
 import Map from "./subcomp/Map/Map";
 import List from "./subcomp/List/List";
 
@@ -12,96 +12,112 @@ const AppMap = () => {
   const [pets, setPets] = useState([]);
   const [filteredPets, setFilteredPets] = useState([]);
   const [childClicked, setChildClicked] = useState(null);
-  const [coordinates, setCoordinates] = useState({ lat: 0, lng: 0 });
+  const [coordinates, setCoordinates] = useState({});
   const [bounds, setBounds] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
   const [type, setType] = useState("p");
   const [sex, setSex] = useState("m");
   const [size, setSize] = useState("p");
 
-  const [filteredSex, setFilteredSex] = useState([]);
-  const [filteredSize, setFilteredSize] = useState([]);
-  const [random, setRandom] = useState("");
+  const [, setRandom] = useState("");
 
-  let filterin = {
-    type:"",
-    sex:"",
-    size:""
-  }
   const [filters, setFilters] = useState({
-    type:"",
-    sex:"",
-    size:""
-  })
+    type: "",
+    sex: "",
+    size: "",
+  });
 
   const mapRef = useRef();
   const onMapLoad = useCallback((map) => {
     mapRef.current = map;
   }, []);
 
+  const currentPosition = (pos) => {
+    setCoordinates({ lat: pos.coords.latitude, lng: pos.coords.longitude });
+  };
+  const noCurrentPosition = (error) => {
+    setCoordinates({ lat: 4.6533326, lng: -74.083652 });
+  };
   useEffect(() => {
     navigator.geolocation.getCurrentPosition(
-      ({ coords: { latitude, longitude } }) => {
-        setCoordinates({ lat: latitude, lng: longitude });
-      }
+      currentPosition,
+      noCurrentPosition
     );
-  },);
-
+    setRandom(1);
+  }, []);
 
   const applyFilter = (type, el) => {
-    let aux = {...filters, [type]: el}
-    setFilters(aux)
-    let filterAux = Object.entries({...filters, [type]: el}); //[[type,""],[sex,""],[size,""]]
-    console.log(filterAux)
+    let aux = { ...filters, [type]: el };
+    setFilters(aux);
+    let filterAux = Object.entries({ ...filters, [type]: el }); //[[type,""],[sex,""],[size,""]]
+    console.log(filterAux);
     let auxDeAux = filterAux.reduce((acc, filtered) => {
-      if(filtered[1] != "") {
-        let auxe = filtered[0]
+      if (filtered[1] !== "") {
+        //let auxe = filtered[0]
 
-        console.log(acc[0], filtered[1])
-        acc = acc.filter(pet => filtered[1] == pet[filtered[0]])
-        return acc
+        console.log(acc[0], filtered[1]);
+        acc = acc.filter((pet) => filtered[1] === pet[filtered[0]]);
+        return acc;
+      } else {
+        return acc;
       }
-      else{
-        return acc
-      }
-    },pets)
-    console.log(auxDeAux)
-    setFilteredPets(auxDeAux)
-    setRandom("")
-
-  }
-
+    }, pets);
+    console.log(auxDeAux);
+    setFilteredPets(auxDeAux);
+  };
 
   useEffect(() => {
-         setIsLoading(true);
-      const pet = async (sw, ne, type) => {
-        try {
+    //setIsLoading(true);
+    const pet = async () => {
+      try {
+        if (bounds?.latMax) {
+          const res = await axios.get(
+            `/pets?adopted=false&lngMax=${bounds.lngMax}&lngMin=${bounds.lngMin}&latMax=${bounds.latMax}&latMin=${bounds.latMin}`
+          );
+          let animals = res.data.rows.filter((place) => place.name); //
+          setPets(animals);
+
+          let filterAux = Object.entries({ ...filters });
+          filters
+            ? setFilteredPets(
+                filterAux.reduce((acc, filtered) => {
+                  if (filtered[1] !== "") {
+                    //let auxe = filtered[0]
+                    acc = acc.filter((pet) => filtered[1] === pet[filtered[0]]);
+                    return acc;
+                  } else {
+                    return acc;
+                  }
+                }, animals)
+              )
+            : setFilteredPets(animals);
+
+          
+          setIsLoading(false);
+        } else {
           const res = await axios.get(`/pets?adopted=false`);
           setPets(res.data.rows.filter((place) => place.name));
-          setFilteredPets(res.data.rows.filter((place) => place.name))
-          setIsLoading(false);
+          setFilteredPets(res.data.rows.filter((place) => place.name));
           setFilters({
-            type:"",
-            sex:"",
-            size:""
-          })
-        } 
-        catch (err) {
-          console.log(err);
+            type: "",
+            sex: "",
+            size: "",
+          });
+          setIsLoading(false);
         }
-      };
-      pet();  
+      } catch (err) {
+        console.log(err);
+      }
+    };
+    pet();
+    // eslint-disable-next-line
   }, [bounds]);
 
-
-
-
   return (
-    <div>
-      <CssBaseline />
-      <Search setCoordinates={setCoordinates} />
-      <Grid container spacing={3} style={{ width: "100%", height: "auto" }}>
-        <Grid item xs={12} md={4}>
+    <div className='h-screen82'>
+      <Search setCoordinates={setCoordinates} style={{height:"7vh"}}/>
+      <Grid container spacing={3} style={{ width: "100%", height: "75vh" }}>
+        <Grid item xs={12} md={3} style={{ height:"75vh"}}>
           <List
             //pets={filteredSex.length ? filteredSex : pets}
             //pets={filteredSize.length ? filteredSize : pets}
@@ -117,7 +133,7 @@ const AppMap = () => {
             pets={filteredPets}
           />
         </Grid>
-        <Grid item xs={12} md={8} style={{ marginTop: "20px" }}>
+        <Grid item xs={12} md={9} style={{ marginTop: "5px", height: "77vh" }}>
           <Map
             onLoad={onMapLoad}
             setCoordinates={setCoordinates}

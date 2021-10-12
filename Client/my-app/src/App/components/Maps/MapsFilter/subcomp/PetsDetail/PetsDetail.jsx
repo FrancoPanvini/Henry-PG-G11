@@ -2,24 +2,15 @@ import React from "react";
 import {
   Box,
   Typography,
-  Button,
   Card,
   CardMedia,
-  CardContent,
-  CardActions,
-  Chip,
+  CardContent,  
 } from "@material-ui/core";
-import LocationOnIcon from "@material-ui/icons/LocationOn";
-import PhoneIcon from "@material-ui/icons/Phone";
-
-import useStyles from "./style";
-import CardAdopcion from "../../../../Cards/CardAdopcion";
-import { FaPlaceOfWorship } from "react-icons/fa";
 
 const PetsDetail = ({ pet, selected, refProp }) => {
   if (selected)
     refProp?.current?.scrollIntoView({ behavior: "smooth", block: "start" });
-  const classes = useStyles();
+  
 
   return (
     <Card elevation={6}>

@@ -1,4 +1,4 @@
-import React, { useState, useCallback, useRef, useEffect } from 'react';
+import React, { useState, useCallback, useRef } from 'react';
 
 import {
     GoogleMap,
@@ -28,7 +28,7 @@ const options = {
 function Maps({onLocationChange}) {
     const [selected, setSelected] = useState(null);
     const [placeName, setPlaceName] = useState([]);
-    const [random, setRandom] = useState(1);
+    const [, setRandom] = useState(1);
     const [markers, setMarkers] = useState([{lat: 0,lng: 0,time: new Date()}]);
 
     //Sets refs
@@ -171,11 +171,11 @@ function Maps({onLocationChange}) {
           document.getElementById(component).innerHTML = getAddressComp(component,0);
         }
         else {
-          if(getAddressComp(component,0) != ''){
+          if(getAddressComp(component,0) !== ''){
             document.getElementById(component).innerHTML = getAddressComp(component,0);
           }
           else{
-            if(getAddressComp("sublocality",1) != ''){
+            if(getAddressComp("sublocality",1) !== ''){
               document.getElementById(component).innerHTML = getAddressComp("sublocality",1);
             }
             else{

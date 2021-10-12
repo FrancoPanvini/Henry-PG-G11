@@ -16,11 +16,10 @@ import { useDispatch } from 'react-redux';
 import jwt from 'jsonwebtoken';
 import { setUser } from './App/redux/actions/index';
 import axios from 'axios';
-import Maps from './App/components/Maps/MapPost';
-import MapsV2 from './App/components/Maps/MapsV2';
 import AppMap from './App/components/Maps/MapsFilter/AppMap';
 import PrivateRoute from './App/components/Routes/PrivateRoute';
 import PublicRoute from './App/components/Routes/PublicRoute';
+import FormularioPosteo from './App/components/Mascotas/FormularioPosteo';
 
 function App() {
   const dispatch = useDispatch();
@@ -50,9 +49,7 @@ function App() {
             <Route path='/adopciones' exact component={Adopciones} />
             <Route path='/perdidos' exact component={Perdidos} />
             <Route path='/refugios' exact component={Refugios} />
-            <Route path='/maps' exact component={Maps} />
-            <Route path='/map' exact component={MapsV2} />
-            <Route path='/mapfilter' exact component={AppMap} />
+            <Route path='/adopciones/map' exact component={AppMap} />
             <PrivateRoute
               path='/perfil'
               exact
@@ -61,6 +58,13 @@ function App() {
             />
             <Route path='/nosotros' exact component={Nosotros} />
             <Route path='/faq' exact component={FAQ} />
+            <PrivateRoute
+              path='/adopciones/ofrecer'
+              exact
+              component={FormularioPosteo}
+              linkRedirect='/login'
+            />
+            
           </Switch>
           <Footer />
         </div>

@@ -24,7 +24,7 @@ function FormularioAdopcion({ onClose, name, petId }) {
     otherPetsDesc: "",
     oldPets: false,
     oldPetsDesc: "",
-    Userid: "",
+    Userid:  localStorage.getItem("userId"),
     Petid: petId,
   });
 
@@ -37,9 +37,9 @@ function FormularioAdopcion({ onClose, name, petId }) {
   }, []);
 
   //* Set UserId en Input
-  useEffect(() => {
+  /* useEffect(() => {
     setInput({ ...input, Userid: parseInt(user.id) });
-  }, [user]);
+  }, [user]); */
 
   //* Set estado Input cuando cambian los selects
   const handleSelectChange = (name, value) => {
