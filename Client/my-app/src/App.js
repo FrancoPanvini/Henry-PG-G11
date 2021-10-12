@@ -6,8 +6,7 @@ import Footer from './App/components/info/Footer';
 import Home from './App/components/Home/Home';
 import Login from './App/components/Usuarios/Login';
 import Registro from './App/components/Usuarios/Registro';
-import Adopciones from './App/components/Mascotas/Adopciones';
-import Perdidos from './App/components/Mascotas/Perdidos';
+import MascotasPagina from './App/components/Mascotas/MascotasPagina';
 import Refugios from './App/components/Refugios/Refugios';
 import Perfil from './App/components/Usuarios/Perfil/Perfil';
 import Nosotros from './App/components/info/Nosotros';
@@ -46,8 +45,12 @@ function App() {
             <Route path='/' exact component={Home} />
             <PublicRoute path='/login' exact component={Login} restricted={true} />
             <PublicRoute path='/registro' exact component={Registro} restricted={true} />
-            <Route path='/adopciones' exact component={Adopciones} />
-            <Route path='/perdidos' exact component={Perdidos} />
+            <Route path='/adopciones' exact >
+              <MascotasPagina title='ADOPCIONES' />
+            </Route>
+            <Route path='/perdidos' exact >
+              <MascotasPagina title='PERDIDOS' />
+            </Route>
             <Route path='/refugios' exact component={Refugios} />
             <Route path='/adopciones/map' exact component={AppMap} />
             <PrivateRoute
