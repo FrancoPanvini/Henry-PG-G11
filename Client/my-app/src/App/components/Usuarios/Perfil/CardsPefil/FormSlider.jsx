@@ -60,6 +60,7 @@ const FormSlider = ({
                       residence={el.residence}
                       residents={el.residents}
                       formId={el.id}
+                      state={el.state}
                     />
                   </div>
                 );

@@ -53,7 +53,7 @@ function DatosIndividuo() {
               </span>
             </div>
             <img
-              src={user.photo}
+              src={user.photo? user.photo : 'https://cdn.icon-icons.com/icons2/1378/PNG/512/avatardefault_92824.png'}
               alt='foto de usuario'
               className='object-cover w-60 h-60 rounded-full absolute right-28 mx-auto top-0 ring ring-offset-4 ring-offset-gray-200'
             />
