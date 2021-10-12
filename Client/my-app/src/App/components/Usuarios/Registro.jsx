@@ -246,7 +246,7 @@ function Registro() {
                 <div className='w-1/4'>
                   <label className='text-white'>
                     Código:
-                    <PhoneCodes onCodeChange={handlePhoneCodeChange} className='rounded-md' />
+                    <PhoneCodes onCodeChange={handlePhoneCodeChange} className='rounded-md text-black' />
                   </label>
                 </div>
                 <div className='w-3/4'>

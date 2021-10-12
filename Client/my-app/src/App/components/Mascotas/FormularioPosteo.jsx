@@ -101,8 +101,8 @@ function FormularioPosteo({ onClose, onPostPet }) {
   return ReactDom.createPortal(
     <>
       <div className="fixed inset-0 bg-gray-50 bg-opacity-70 z-40" />
-      <div className="fixed inset-0 z-50 pt-32">
-        <form className="panel flex flex-col w-3/5 mx-auto bg-gradient-to-r from-primaryDark to-primary relative">
+      <div className="fixed inset-0 z-50 pt-16">
+        <form className="panel flex flex-col w-3/5 min-w-max mx-auto bg-gradient-to-r from-primaryDark to-primary relative">
           <FaWindowClose
             title="Cancelar y volver a Adopciones"
             className="absolute text-2xl right-2 top-2 text-fourty transition-all hover:text-fourtyLight"
