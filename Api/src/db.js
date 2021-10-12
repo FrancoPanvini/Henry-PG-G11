@@ -54,14 +54,14 @@ fs.readdirSync(path.join(__dirname, "/models"))
 modelDefiners.forEach(model => model(sequelize));
 
 // En sequelize.models están todos los modelos importados como propiedades
-const { Pets, Users, Events, Adoptions, Cities, Provinces, Countries, PetsType, UsersType, PetsPics, LostPets } = sequelize.models;
+const { Pets, Users, Events, Adoptions, Cities, Provinces, Countries, PetsType, UsersType, PetsPics, LostPets, LostPetsPics } = sequelize.models;
 
 //Relaciones
 Pets.belongsTo(PetsType);
 PetsType.hasMany(Pets);
 
-PetsPics.belongsTo(LostPets);
-LostPets.hasMany(PetsPics);
+LostPetsPics.belongsTo(LostPets);
+LostPets.hasMany(LostPetsPics);
 
 PetsPics.belongsTo(Pets);
 Pets.hasMany(PetsPics);
