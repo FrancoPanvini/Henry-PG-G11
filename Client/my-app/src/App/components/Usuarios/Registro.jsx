@@ -72,7 +72,7 @@ function Registro() {
 
         const phoneNumber = parsePhoneNumber(e.target.value, phoneCode);
         if (phoneNumber?.isValid()) {
-          console.log('Is Valid');
+          //console.log('Is Valid');
           const newInput = {
             ...input,
             [e.target.name]: phoneNumber.number.substring(1),
