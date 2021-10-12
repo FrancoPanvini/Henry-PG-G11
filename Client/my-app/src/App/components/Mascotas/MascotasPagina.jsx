@@ -30,7 +30,7 @@ function Mascotas({ title }) {
       dispatch(title === 'ADOPCIONES' ? getPetsAdop() : getLostPets());
       setPetPosted(false);
     }
-  }, [petPosted, dispatch]);
+  }, [petPosted, dispatch, title]);
 
   return (
     <div className='grid grid-cols-7 place-items-center bg-gray-200 relative'>
