@@ -1,4 +1,4 @@
-const { LostPets } = require("../../../../db");
+const { LostPets, PetsPics } = require("../../../../db");
 const { deleteLostPetDB } = require("./deleteLostPet");
 
 const postPets = async (req, res) => {
@@ -11,7 +11,6 @@ const postPets = async (req, res) => {
       where: { name: name.toLowerCase(), UserId: parseInt(Userid) },
       defaults: {
         size,
-
         description,
         lat,
         lng
