@@ -53,6 +53,8 @@ function App() {
             </Route>
             <Route path='/refugios' exact component={Refugios} />
             <Route path='/adopciones/map' exact component={AppMap} />
+            <Route path='/perdidos/map' exact component={AppMap} />
+            <Route path='/refugios/map' exact component={AppMap} />
             <PrivateRoute
               path='/perfil'
               exact

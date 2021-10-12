@@ -3,7 +3,7 @@ import {  useEffect } from 'react';
 import { initialUser } from '../../../../redux/actions';
 import { useDispatch, useSelector } from 'react-redux';
 import FormularioDatos from '../CardsPefil/FormularioDatos';
-import { BiEdit, BiTrash } from 'react-icons/bi';
+import { BiEdit, /* BiTrash */ } from 'react-icons/bi';
 
 
 
@@ -53,7 +53,7 @@ function DatosIndividuo() {
               </span>
             </div>
             <img
-              src={user.photo}
+              src={user.photo? user.photo : 'https://cdn.icon-icons.com/icons2/1378/PNG/512/avatardefault_92824.png'}
               alt='foto de usuario'
               className='object-cover w-60 h-60 rounded-full absolute right-28 mx-auto top-0 ring ring-offset-4 ring-offset-gray-200'
             />
@@ -83,16 +83,16 @@ function DatosIndividuo() {
           <div className='flex p-2 mx-2 mt-8 '>
             <button
               className='btn bg-green-600 text-white w-16 h-16 mr-8 flex justify-center items-center text-3xl rounded-full shadow-inner'
-              title='Editar publicacion'
+              title='Editar datos'
               onClick={handleClick}>
               <BiEdit />
             </button>
-            <button
+           {/*  <button
               className='btn bg-red-600 text-white w-16 h-16 flex justify-center items-center text-3xl  rounded-full shadow-inner'
               title='Eliminar cuenta'
               onClick={handleClick}>
               <BiTrash />
-            </button>
+            </button> */}
           </div>
         </div>
       )}

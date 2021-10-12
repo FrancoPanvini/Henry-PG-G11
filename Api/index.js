@@ -5,7 +5,7 @@ const { conn, Pets, PetsType, UsersType, Users, Events } = require("./src/db.js"
 //conn.sync({ force: true }).then(() => {
 //* Descomentar esta línea para NO restartear la DB
 conn
-  .sync()
+  .sync({alter: true})
   .then(() => {
     server.listen(process.env.PORT, () => {
       console.log(`Server listening at ${process.env.PORT}`);

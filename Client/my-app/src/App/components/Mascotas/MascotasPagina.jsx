@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import { Link } from 'react-router-dom';
 
 //? Components
 import CardsContainer from '../Cards/CardsContainer';
@@ -34,26 +35,21 @@ function Mascotas({ title }) {
 
   return (
     <div className='grid grid-cols-7 place-items-center bg-gray-200 relative'>
+      <button className='btn btn-lg bg-attention text-white border-primaryDark absolute top-18 2xl:left-12 lg:left-8'>
+        <Link to={title === 'ADOPCIONES' ? '/adopciones/map' : '/perdidos/map'} >
+          Buscar por mapa
+        </Link>
+      </button>
       {isLogged && (
         <>
-          <button
-            className='btn btn-lg bg-primary text-white absolute top-18 right-8'
-            onClick={() => setIsOpen(true)}>
-            {title === 'ADOPCIONES'
-              ? 'Ofrecer una mascota en adopción'
-              : 'Publicar una mascota extraviada'}
+          <button className='btn btn-lg bg-primary text-white absolute top-18 right-18' onClick={() => setIsOpen(true)}>
+            {title === 'ADOPCIONES' ? 'Ofrecer una mascota' : 'Publicar una mascota perdida'}
           </button>
           {isOpen &&
             (title === 'ADOPCIONES' ? (
-              <FormularioPosteo
-                onClose={() => setIsOpen(false)}
-                onPostPet={onPostPet}
-              />
+              <FormularioPosteo onClose={() => setIsOpen(false)} onPostPet={onPostPet} />
             ) : (
-              <FormularioPosteoPerdido
-                onClose={() => setIsOpen(false)}
-                onPostPet={onPostPet}
-              />
+              <FormularioPosteoPerdido onClose={() => setIsOpen(false)} onPostPet={onPostPet} />
             ))}
         </>
       )}

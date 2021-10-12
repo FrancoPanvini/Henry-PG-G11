@@ -14,7 +14,7 @@ import useStyles from "./style";
 import CardAdopcion from "../../../../Cards/CardAdopcion";
 
 const List = ({
-  pets,
+  items,
   childClicked,
   isLoading,
   type,
@@ -39,11 +39,11 @@ const List = ({
 
   useEffect(() => {
     setPetRefs((refs) =>
-      Array(pets?.length)
+      Array(items?.length)
         .fill()
         .map((_, i) => refs[i] || createRef())
     );
-  }, [pets]);
+  }, [items]);
 
   const handleChange = (event, type) => {
     let aux = { ...prueba, [type]: event };
@@ -52,7 +52,7 @@ const List = ({
 
   return (
     <div className={classes.container}>
-      <Typography variant="h4">Mascotas en Adopcion</Typography>
+      <Typography variant="h4">Mascotas</Typography>
       {isLoading ? (
         <div className={classes.loading}>
           <CircularProgress size="5rem" />
@@ -138,7 +138,7 @@ const List = ({
             </Select>
           </FormControl>
           <Grid container spacing={3} className={classes.list}>
-            {pets?.map((pet, i) => (
+            {items?.map((pet, i) => (
               <Grid
                 ref={petRefs[i]}
                 key={i}

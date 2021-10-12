@@ -81,7 +81,7 @@ function CardRefugio({
                 Descripcion:<span className='text-fourty'> {description}</span>
               </h3>
               <h3 className='p-1 text-white font-bold'>
-                Telefono: <span className='text-fourty '>{phone}</span>
+                Telefono: <a href={`https://wa.me/${phone}`} ><span className='text-fourty '>{phone}</span></a>
               </h3>
               <h3 className='p-1 text-white font-bold'>
                 Redes:{' '}

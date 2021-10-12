@@ -4,7 +4,7 @@ import { initialUser } from '../../../../redux/actions';
 import { useDispatch, useSelector } from 'react-redux';
 import { FaDonate } from 'react-icons/fa';
 import { GrInstagram, GrFacebook } from 'react-icons/gr';
-import { BiEdit, BiTrash, BiWorld } from 'react-icons/bi';
+import { BiEdit, /* BiTrash */ BiWorld } from 'react-icons/bi';
 import FormularioDatos from '../CardsPefil/FormularioDatos';
 
 const DatosRefugio = () => {
@@ -51,7 +51,7 @@ const DatosRefugio = () => {
               </span>
             </div>
             <img
-              src={user.photo}
+              src={user.photo? user.photo : 'https://cdn.icon-icons.com/icons2/1378/PNG/512/avatardefault_92824.png'}
               alt='foto de usuario'
               className='object-cover w-60 h-60 rounded-full absolute right-28 mx-auto top-0 ring ring-offset-4 ring-offset-gray-200'
             />
@@ -80,13 +80,13 @@ const DatosRefugio = () => {
             <div className='w-1/3 p-2 m-2 flex flex-col'>
               <label>Responsable</label>
               <span className='rounded-md p-1 bg-white mb-2 capitalize'>
-                {user.responsable}
+                {user.responsable ? user.responsable : <span className="text-red-600">DEBE COMPLETAR ESTE CAMPO</span>}
               </span>
             </div>
             <div className='w-1/3 p-2 m-2 flex flex-col'>
               <label>Descripcion</label>
               <span className='rounded-md p-1 mb-2  bg-white '>
-                {user.description}
+                {user.description ? user.description : <span className="text-red-600">DEBE COMPLETAR ESTE CAMPO</span>}
               </span>
             </div>
             <div className='w-1/3 p-2 m-2 flex justify-around text-2xl items-center'>
@@ -115,16 +115,16 @@ const DatosRefugio = () => {
           <div className='flex p-2 mx-24 mt-16 '>
             <button
               className='btn bg-green-600 text-white w-16 h-16 mr-8 flex justify-center items-center text-3xl rounded-full shadow-inner'
-              title='Editar publicacion'
+              title='Editar datos'
               onClick={handleClick}>
               <BiEdit />
             </button>
-            <button
+            {/* <button
               className='btn bg-red-600 text-white w-16 h-16 flex justify-center items-center text-3xl  rounded-full shadow-inner'
               title='Eliminar cuenta'
               onClick={handleClick}>
               <BiTrash />
-            </button>
+            </button> */}
           </div>
         </div>
       )}
