@@ -11,7 +11,7 @@ import axios from "axios";
 
 const AppMap = () => {
   const [pets, setPets] = useState([]);
-  const [filteredPets, setFilteredPets] = useState([]);
+  const [filteredItems, setFilteredItems] = useState([]);
   const [childClicked, setChildClicked] = useState(null);
   const [coordinates, setCoordinates] = useState({});
   const [bounds, setBounds] = useState(null);
@@ -66,7 +66,7 @@ const AppMap = () => {
         return acc;
       }
     }, pets);
-    setFilteredPets(auxDeAux);
+    setFilteredItems(auxDeAux);
   };
 
   useEffect(() => {
@@ -93,7 +93,7 @@ const AppMap = () => {
 
           let filterAux = Object.entries({ ...filters });
           filters
-            ? setFilteredPets(
+            ? setFilteredItems(
                 filterAux.reduce((acc, filtered) => {
                   if (filtered[1] !== "") {
                     //let auxe = filtered[0]
@@ -104,14 +104,14 @@ const AppMap = () => {
                   }
                 }, animals)
               )
-            : setFilteredPets(animals);
+            : setFilteredItems(animals);
 
           
           setIsLoading(false);
         } else {
           const res = await axios.get(`/${currentLocation}`);
           setPets(res.data.rows.filter((place) => place.name));
-          setFilteredPets(res.data.rows.filter((place) => place.name));
+          setFilteredItems(res.data.rows.filter((place) => place.name));
           setFilters({
             type: "",
             sex: "",
@@ -144,7 +144,7 @@ const AppMap = () => {
             setSex={setSex}
             size={size}
             setSize={setSize}
-            pets={filteredPets}
+            items={filteredItems}
           />
         </Grid>
         <Grid item xs={12} md={9} style={{ marginTop: "5px", height: "77vh" }}>
@@ -153,7 +153,7 @@ const AppMap = () => {
             setCoordinates={setCoordinates}
             setBounds={setBounds}
             coordinates={coordinates}
-            pets={filteredPets}
+            items={filteredItems}
             //pets={filteredSex.length ? filteredSex : pets}
             //pets={filteredSize.length ? filteredSize : pets}
             setChildClicked={setChildClicked}

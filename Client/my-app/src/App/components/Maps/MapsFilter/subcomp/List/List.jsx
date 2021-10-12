@@ -12,9 +12,11 @@ import {
 import useStyles from "./style";
 //import PetsDetail from "../PetsDetail/PetsDetail";
 import CardAdopcion from "../../../../Cards/CardAdopcion";
+import CardLost from "../../../../Cards/CardLost";
+import CardRefugio from "../../../../Cards/CardRefugio";
 
 const List = ({
-  pets,
+  items,
   childClicked,
   isLoading,
   type,
@@ -39,11 +41,11 @@ const List = ({
 
   useEffect(() => {
     setPetRefs((refs) =>
-      Array(pets?.length)
+      Array(items?.length)
         .fill()
         .map((_, i) => refs[i] || createRef())
     );
-  }, [pets]);
+  }, [items]);
 
   const handleChange = (event, type) => {
     let aux = { ...prueba, [type]: event };
@@ -138,7 +140,7 @@ const List = ({
             </Select>
           </FormControl>
           <Grid container spacing={3} className={classes.list}>
-            {pets?.map((pet, i) => (
+            {items?.map((pet, i) => (
               <Grid
                 ref={petRefs[i]}
                 key={i}
