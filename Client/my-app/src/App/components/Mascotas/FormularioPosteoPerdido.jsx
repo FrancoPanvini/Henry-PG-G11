@@ -240,6 +240,7 @@ function FormularioPosteoPerdido({ onClose, onPostPet }) {
             <MapPost
               onLocationChange={handleLocation}
               onChange={handleChange}
+              className='h-full'
             />
           </div>
           <br />

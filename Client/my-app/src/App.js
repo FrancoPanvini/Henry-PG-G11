@@ -45,31 +45,20 @@ function App() {
             <Route path='/' exact component={Home} />
             <PublicRoute path='/login' exact component={Login} restricted={true} />
             <PublicRoute path='/registro' exact component={Registro} restricted={true} />
-            <Route path='/adopciones' exact >
+            <Route path='/adopciones' exact>
               <MascotasPagina title='ADOPCIONES' />
             </Route>
-            <Route path='/perdidos' exact >
+            <Route path='/perdidos' exact>
               <MascotasPagina title='PERDIDOS' />
             </Route>
             <Route path='/refugios' exact component={Refugios} />
             <Route path='/adopciones/map' exact component={AppMap} />
             <Route path='/perdidos/map' exact component={AppMap} />
             <Route path='/refugios/map' exact component={AppMap} />
-            <PrivateRoute
-              path='/perfil'
-              exact
-              component={Perfil}
-              linkRedirect='/login'
-            />
+            <PrivateRoute path='/perfil' exact component={Perfil} linkRedirect='/login' />
             <Route path='/nosotros' exact component={Nosotros} />
             <Route path='/faq' exact component={FAQ} />
-            <PrivateRoute
-              path='/adopciones/ofrecer'
-              exact
-              component={FormularioPosteo}
-              linkRedirect='/login'
-            />
-            
+            <PrivateRoute path='/adopciones/ofrecer' exact component={FormularioPosteo} linkRedirect='/login' />
           </Switch>
           <Footer />
         </div>
