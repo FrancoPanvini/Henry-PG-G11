@@ -18,7 +18,9 @@ const getLostPets = async (req, res) => {
         include: { model: Provinces, attributes: ["name", "CountryId"], required: true, where: {}, include: { model: Countries, required: true, attributes: ["name"] } },
       },
       { model: Users, attributes: ["name"] },
+
       // { model: PetsPics, attributes: ["url"] }
+
     ],
   };
 
@@ -64,6 +66,7 @@ const getLostPets = async (req, res) => {
       province: pet.dataValues.City.Province.name,
       city: pet.dataValues.City.name,
       // petPics: pet.PetsPics.map(pic => pic.url)
+
     };
     const { City, User, ...rest } = pet;
     return rest;
