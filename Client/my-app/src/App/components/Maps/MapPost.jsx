@@ -14,12 +14,12 @@ let center = {
   lat: 4.710989,
 };
 const options = {
-    mapTypeControl: false,
-    panControl: true,
-    zoomControl: true,
-    scaleControl: false,
-    streetViewControl: false,
-    clickableIcons: false
+  mapTypeControl: false,
+  panControl: true,
+  zoomControl: true,
+  scaleControl: false,
+  streetViewControl: false,
+  clickableIcons: false,
 };
 
 function Maps({ onLocationChange }) {
@@ -190,7 +190,7 @@ function Maps({ onLocationChange }) {
 
   return (
     <div className='relative grid justify-items-center h-full'>
-      <input autocomplete="nope" onClick={onInputClick} type='text' placeholder='Buscar dirección...' id='location' className='border-2 border-black rounded w-3/5 h-10 grid justify-items-center absolute mt-2.5 z-10' />
+      <input onClick={onInputClick} type='text' placeholder='Buscar dirección...' id='location' className='border-2 border-black rounded w-3/5 h-10 grid justify-items-center absolute mt-2.5 z-10' />
 
       <GoogleMap mapContainerStyle={mapContainerStyle} zoom={14} center={center} options={options} onClick={handleOnChange} onLoad={onMapLoad}>
         {markers.map(marker => (
@@ -217,8 +217,9 @@ function Maps({ onLocationChange }) {
         ))}
 
         {selected
-          ? placeName.map(name => (
+          ? placeName.map((name, index) => (
               <InfoWindow
+                key={index}
                 position={{ lat: markers[0].lat, lng: markers[0].lng }}
                 onCloseClick={() => {
                   setSelected(null);
@@ -232,11 +233,7 @@ function Maps({ onLocationChange }) {
           : null}
       </GoogleMap>
       {!document.getElementById('street_number') ? null : document.getElementById('street_number').innerHTML ? (
-        <button
-          type='button'
-          onClick={() => onLocationChange()}
-          className='btn bg-primary text-white border-yellow-600 z-10 absolute bottom-4 px-2 py-1 rounded-lg'
-        >
+        <button type='button' onClick={() => onLocationChange()} className='btn bg-primary text-white border-yellow-600 z-10 absolute bottom-4 px-2 py-1 rounded-lg'>
           Confirmar
         </button>
       ) : null}
@@ -259,5 +256,3 @@ function Maps({ onLocationChange }) {
 }
 
 export default Maps;
-
-  
