@@ -52,8 +52,7 @@ const postUser = async (req, res) => {
     if (created) {
       deleteUserDB(newUser.dataValues.id);
     }
-    console.log(error)
-    res.status(409).json(error);
+    res.status(409).send(error.message);
   }
 };
 
