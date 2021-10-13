@@ -23,7 +23,7 @@ function MisAdopciones() {
     initialPet(userId);
   }, [dispatch, userId]);
 
-  console.log(pet);
+
 
   return (
     <div className='container mx-auto  flex flex-col'>
@@ -44,7 +44,12 @@ function MisAdopciones() {
           
         ) : (
           pet?.map((el) => {
-            return <CardAdopcion photo={el.petPic} name={el.name} created={el.updatedAt} />;
+            return(
+              <div key={el.id}>
+              <CardAdopcion photo={el.petPic} name={el.name} created={el.updatedAt} />;
+              </div>
+            )
+
           })
         )}
       </div>

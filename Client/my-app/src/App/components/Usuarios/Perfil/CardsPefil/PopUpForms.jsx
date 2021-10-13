@@ -18,11 +18,9 @@ const PopUpForms = ({
   state,
 }) => {
   const [user, setUser] = useState();
-  console.log(`el id es ${formId}`);
 
   const handleUser = async (id) => {
     await getUserById(id).then((res) => {
-      console.log(res);
       setUser(res.data);
     });
   };
@@ -35,7 +33,7 @@ const PopUpForms = ({
     e.preventDefault();
     acceptForms(formId);
     alert('Has aceptado esta postulacion');
-    // onClose();
+    onClose();
   };
   return (
     <>

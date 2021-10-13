@@ -21,13 +21,11 @@ const FormSlider = ({
   useEffect(() => {
     const getForm = async (id) => {
       const form = await getFormByPet(id);
-      console.log(form.data);
       setForms(form.data);
     };
     getForm(id);
   }, [id]);
 
-  console.log(forms)
   return ReactDom.createPortal(
     <>
       <div className='fixed inset-0 bg-gray-50 bg-opacity-70 z-20 overflow-y-scroll' />
@@ -61,6 +59,7 @@ const FormSlider = ({
                       residents={el.residents}
                       formId={el.id}
                       state={el.state}
+                      onClose={onClose}
                     />
                   </div>
                 );
