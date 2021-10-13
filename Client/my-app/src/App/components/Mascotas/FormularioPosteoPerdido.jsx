@@ -26,7 +26,7 @@ function FormularioPosteoPerdido({ onClose, onPostPet }) {
   const [url, setUrl] = useState([]);
 
   //* "location" es el estado que guarda la info del lugar de la mascota, el cuál en handlePublicar se postea en DB
-  const [location, setLocation] = useState({});
+  const [location, setLocation] = useState({ city: '', province: '', country: '' });
 
   //* "errors" es el objeto que la función validate del input manipula
   const [errors, setErrors] = useState({});
@@ -176,7 +176,7 @@ function FormularioPosteoPerdido({ onClose, onPostPet }) {
             <div className='h-auto w-full flex flex-col justify-center ml-4'>
               {/* ↓ Mapa de ubicación de la mascota */}
               <div>Ubicación de la Mascota:</div>
-              <input disabled type='text' id='direction' name='direction' value={location?.city} className='rounded-md px-1 mb-2 text-white' />
+              <input disabled type='text' id='direction' name='direction' value={location.city} className='rounded-md px-1 mb-2 text-white' />
               <MapPost onLocationChange={handleLocation} onChange={handleChange} className='h-full' />
               {/* ↓ botón Publicar */}
               <div className='w-full text-center mt-4'>
