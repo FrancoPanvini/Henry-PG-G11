@@ -30,10 +30,10 @@ function FormularioDatos({ user, close, type }) {
     lng: '',
   });
   const paises = useSelector((state) => state.countries);
-  const provincias = useSelector((state) => state.provinces);
+  // const provincias = useSelector((state) => state.provinces);
   const ciudades = useSelector((state) => state.cities);
-  const [countryId, setCountryId] = useState(null);
-  const [provinceId, setProvinceId] = useState(null);
+  // const [countryId, setCountryId] = useState(null);
+  // const [provinceId, setProvinceId] = useState(null);
   //const [cityId, setCityId] = useState(null);
   const dispatch = useDispatch();
   const [location, setLocation] = useState({});
@@ -54,16 +54,16 @@ function FormularioDatos({ user, close, type }) {
   };
 
   const handleUbicationChange = (e) => {
-    if (e.target.id === 'pais') {
-      let ubicacion = paises.find((pais) => pais.name === e.target.value);
-      ubicacion && setCountryId(ubicacion.id);
-    }
-    if (e.target.id === 'provincia') {
-      let ubicacion = provincias.find(
-        (provincia) => provincia.name === e.target.value
-      );
-      ubicacion && setProvinceId(ubicacion.id);
-    }
+    // if (e.target.id === 'pais') {
+    //   let ubicacion = paises.find((pais) => pais.name === e.target.value);
+      // ubicacion && setCountryId(ubicacion.id);
+    // }
+    // if (e.target.id === 'provincia') {
+    //   let ubicacion = provincias.find(
+    //     (provincia) => provincia.name === e.target.value
+    //   );
+      // ubicacion && setProvinceId(ubicacion.id);
+    // }
     if (e.target.id === 'ciudad') {
       let ubicacion = ciudades.find(
         (ciudad) => ciudad.name === e.target.value.toLowerCase()
