@@ -25,7 +25,7 @@ function FormularioPosteo({ onClose, onPostPet }) {
   const [url, setUrl] = useState([]);
   const [errors, setErrors] = useState({});
 
-  const [location, setLocation] = useState({});
+  const [location, setLocation] = useState({ city: '', province: '', country: '' });
 
   const validate = ({ name, PetsTypeid, lat }) => {
     let errors = {};
@@ -188,8 +188,8 @@ function FormularioPosteo({ onClose, onPostPet }) {
             <div className='h-auto w-full flex flex-col justify-center ml-4'>
               {/* ↓ Mapa de ubicación de la mascota */}
               <div>Ubicación de la Mascota:</div>
-              <input disabled type='text' id='direction' name='direction' value={location?.city} className='rounded-md px-1 mb-2 text-white' />
-              <MapPost onLocationChange={handleLocation} onChange={handleChange} className='h-full' />
+              <input disabled type='text' id='direction' name='direction' value={location.city} className='rounded-md px-1 mb-2 text-white' />
+              <MapPost onLocationChange={handleLocation} className='h-full' />
               {/* ↓ botón Publicar */}
               <div className='w-full text-center mt-4 '>
                 <button disabled={handleDisabled()} onClick={handlePublicar} className='btn btn-lg bg-thirty text-white border-fourty'>
