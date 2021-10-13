@@ -1,7 +1,7 @@
 
 const { where, Op } = require("sequelize");
 
-const { LostPets, Users, Cities, Provinces, Countries, PetsPics } = require("../../../../db");
+const { LostPets, Users, Cities, Provinces, Countries, /* PetsPics */ } = require("../../../../db");
 
 const getLostPets = async (req, res) => {
   const { lost, paglimit, pagnumber, city, province, country, latMax, latMin, lngMax, lngMin } = req.query;
@@ -18,7 +18,7 @@ const getLostPets = async (req, res) => {
         include: { model: Provinces, attributes: ["name", "CountryId"], required: true, where: {}, include: { model: Countries, required: true, attributes: ["name"] } },
       },
       { model: Users, attributes: ["name"] },
-      { model: PetsPics, attributes: ["url"] }
+      // { model: PetsPics, attributes: ["url"] }
     ],
   };
 
@@ -63,7 +63,7 @@ const getLostPets = async (req, res) => {
       country: pet.dataValues.City.Province.Country.name,
       province: pet.dataValues.City.Province.name,
       city: pet.dataValues.City.name,
-      petPics: pet.PetsPics.map(pic => pic.url)
+      // petPics: pet.PetsPics.map(pic => pic.url)
     };
     const { City, User, ...rest } = pet;
     return rest;
