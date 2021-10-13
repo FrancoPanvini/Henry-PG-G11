@@ -13,8 +13,6 @@ function CardPostulacion({ PetId, state }) {
     getPet(PetId);
   }, [PetId]);
 
-  console.log(pet);
-
   return (
     <div className='grid grid-cols-10 auto-cols-min place-items-center my-8 rounded-lg py-4 shadow-inner ring ring-primary ring-offset-2  w-full h-1/5 border-4 bg-primary text-white '>
       <div className=''>
@@ -36,29 +34,25 @@ function CardPostulacion({ PetId, state }) {
       <div className='col-span-2'>
         <div className=' text-gray-200 text-xl mr-8 '>
           {state === 'p' ? (
-            <div className="flex justify-center items-center">
+            <div className='flex justify-center items-center'>
               <span>Pendiente</span>
               <span className='text-white bg-yellow-600 font-bold text-2xl ml-8 rounded-full p-2 shadow-2xl'>
                 <IoTimeOutline />
               </span>
             </div>
           ) : state === 'c' ? (
-            <div className="flex justify-center items-center">
-              <h2>
-                Cerrado
-              </h2>
-                <span className='text-white bg-red-600 font-bold text-2xl ml-8 rounded-full p-2 shadow-2xl'>
-                  <AiOutlineClose />
-                </span>
+            <div className='flex justify-center items-center'>
+              <h2>Cerrado</h2>
+              <span className='text-white bg-red-600 font-bold text-2xl ml-8 rounded-full p-2 shadow-2xl'>
+                <AiOutlineClose />
+              </span>
             </div>
           ) : (
-            <div className="flex justify-center items-center">
-              <span >
-                Aceptado
+            <div className='flex justify-center items-center'>
+              <span>Aceptado</span>
+              <span className='text-white bg-green-600 font-bold text-2xl ml-8 rounded-full p-2 shadow-2xl'>
+                <IoCheckmarkSharp />
               </span>
-                <span className='text-white bg-green-600 font-bold text-2xl ml-8 rounded-full p-2 shadow-2xl'>
-                  <IoCheckmarkSharp />
-                </span>
             </div>
           )}
         </div>

@@ -20,7 +20,7 @@ function Publicaciones({ userId }) {
 
   useEffect(() => {
     if (petPosted) {
-      dispatch(getPetsAdopByUser(userId));
+/*       dispatch(getPetsAdopByUser(userId)); */
       setPetPosted(false);
     }
     dispatch(getPetsAdopByUser(userId));

@@ -43,6 +43,9 @@ module.exports = {
       minWidth: {
         sign: "350px",
       },
+      minHeight: {
+        screen82:'82vh',
+       },
       inset: {
         '18': '4.5rem',
       },

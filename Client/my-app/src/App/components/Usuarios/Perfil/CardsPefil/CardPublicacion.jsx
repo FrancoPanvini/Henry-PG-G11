@@ -31,7 +31,6 @@ function CardPublicacion({
   useEffect(() => {
     const getForm = async (id) => {
       const form = await getFormByPet(id);
-      console.log(form.data);
       setForms(form.data.length);
     };
     getForm(petId);

@@ -9,7 +9,6 @@ function Postulaciones({ UserId }) {
   useEffect(() => {
     const getFormByUser = async (UserId) => {
       const forms = await getFormByUserId(UserId);
-      console.log(forms.data);
       setFormsByUser(forms.data);
     };
     getFormByUser(UserId);
@@ -39,7 +38,7 @@ function Postulaciones({ UserId }) {
       ) : (
         formsByUser?.map((el) => {
           return (
-            <div>
+            <div key={el.PetId}>
               <CardPostulacion PetId={el.PetId} state={el.state} />
             </div>
           );
