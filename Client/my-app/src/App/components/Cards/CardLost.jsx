@@ -35,10 +35,11 @@ function CardLost({ photo, name, size, country, province, city, id }) {
             <div className='font-bold text-xl p-6 text-fourty capitalize flex items-start gap-3 '>{name}</div>
 
             <div className='text-center'>
-              <h3 className='p-1 text-white font-bold'>
-                Tamaño: <span className='text-fourty capitalize'>{size && (size === 'c' ? 'pequeño' : size === 'm' ? 'mediano' : 'grande')}</span>
-              </h3>
-
+              {size && (
+                <h3 className='p-1 text-white font-bold'>
+                  Tamaño: <span className='text-fourty capitalize'>{size === 'c' ? 'pequeño' : size === 'm' ? 'mediano' : 'grande'}</span>
+                </h3>
+              )}
               <h3 className='p-1 text-white font-bold'>
                 Pais: <span className='text-fourty capitalize'>{country}</span>
               </h3>
