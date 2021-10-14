@@ -4,7 +4,7 @@ import ReactCardFlip from 'react-card-flip';
 
 //? Components
 import FormularioAdopcion from '../pop-up/FormularioAdopcion';
-import CardPopUpPetDetail from './CardPopUpPetDetail';
+import DetalleAdopcion from '../Mascotas/DetalleAdopcion';
 
 //? Icons
 import { FaPaw } from 'react-icons/fa';
@@ -34,18 +34,7 @@ function CardAdopcion({ selected, refProp, photo, name, age, size, country, prov
 
         <div className='card card-size-lg relative'>
           <div onClick={handleClick} className='flex flex-col items-center h-full w-full cursor-pointer'>
-            <div className='font-bold text-xl p-6 text-fourty capitalize flex items-start gap-3 '>
-              {name}
-              {/* Button & PopUp card for detail */}
-              <div className=''>
-                <IoMdAddCircle
-                  title='Ver más detalles'
-                  onClick={() => setIsOpenDetail(true)}
-                  className='text-fourty absolute text-3xl hover:text-fourtyLight cursor-pointer transition-all bg-white rounded-full'
-                />
-                {isOpenDetail && <CardPopUpPetDetail onClose={() => setIsOpenDetail(false)} petId={id} />}
-              </div>
-            </div>
+            <div className='font-bold text-xl p-6 text-fourty capitalize flex items-start gap-3 '>{name}</div>
 
             <div className='text-center'>
               {age && (
@@ -85,9 +74,15 @@ function CardAdopcion({ selected, refProp, photo, name, age, size, country, prov
             </div>
           </div>
 
-          {/* Button & PopUp form for adoptions */}
-          {isLogged && (
-            <div className='w-full h-px relative bottom-16'>
+          <div className='w-full h-px absolute bottom-16'>
+            {/* Button & PopUp card for detail */}
+            <button onClick={() => setIsOpenDetail(true)} className='btn rounded-2xl mr-4 bg-primaryDark text-white border-attentionLight'>
+              <h2 className='p-2 tracking-wide'>Ver más detalles</h2>
+            </button>
+            {isOpenDetail && <DetalleAdopcion onClose={() => setIsOpenDetail(false)} petId={id} />}
+
+            {/* Button & PopUp form for adoptions */}
+            {isLogged && (
               <button className='btn-adogtame bg-fourty text-white border-fourtyDark rounded-2xl' onClick={() => setIsOpen(true)}>
                 <h2 className='p-2 flex items-center tracking-wide'>
                   AD
@@ -95,10 +90,9 @@ function CardAdopcion({ selected, refProp, photo, name, age, size, country, prov
                   GTAME
                 </h2>
               </button>
-
-              {isOpen && <FormularioAdopcion name={name} onClose={() => setIsOpen(false)} petId={id} onClick />}
-            </div>
-          )}
+            )}
+            {isOpen && <FormularioAdopcion name={name} onClose={() => setIsOpen(false)} petId={id} onClick />}
+          </div>
         </div>
       </ReactCardFlip>
     </div>

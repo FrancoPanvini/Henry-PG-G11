@@ -43,6 +43,7 @@ function Slider({ title }) {
                       country={p.country}
                       province={p.province}
                       city={p.city}
+                      id={p.id}
                     />
                   ) : (
                     // caso title === "REFUGIOS"

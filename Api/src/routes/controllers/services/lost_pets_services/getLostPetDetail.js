@@ -5,7 +5,7 @@ const getLostPetDetail = async (req, res) => {
 
   let query = {
     where: { id },
-    attributes: ["id", "name", "size", "photo", "createdAt", "found", "description", "UserId"],
+    attributes: ["id", "name", "size", "photo", "createdAt", "found", "description", "UserId", "lat", "lng"],
     include: [
       {
         model: Cities,
@@ -32,6 +32,8 @@ const getLostPetDetail = async (req, res) => {
     city: pet.dataValues.City.name,
     UserId:pet.UserId,
     petPics: pet.LostPetsPics.map(pic => pic.url),
+    lat: pet.lat,
+    lng: pet.lng,
   };
 
   res.status(200).json(pet);
