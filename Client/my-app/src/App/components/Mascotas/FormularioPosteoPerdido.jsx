@@ -92,7 +92,8 @@ function FormularioPosteoPerdido({ onClose, onPostPet }) {
       photo: url,
       Cityid: city.data.id,
     };
-    postLostPet(newMascota);
+    console.log(newMascota);
+    // postLostPet(newMascota);
     onPostPet();
     alert('¡Listo! Tu posteo está pendiente de confirmación, ¡muy pronto será publicado!');
     onClose();
