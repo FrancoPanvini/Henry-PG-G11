@@ -8,7 +8,6 @@ import DetalleAdopcion from '../Mascotas/DetalleAdopcion';
 
 //? Icons
 import { FaPaw } from 'react-icons/fa';
-import { IoMdAddCircle } from 'react-icons/io';
 
 function CardAdopcion({ selected, refProp, photo, name, age, size, country, province, city, sex, id }) {
   const isLogged = useSelector((state) => state.isLogged);

@@ -8,7 +8,6 @@ import ReactCardFlip from 'react-card-flip';
 
 //? Icons
 import { FaPaw } from 'react-icons/fa';
-import { IoMdAddCircle } from 'react-icons/io';
 
 function CardLost({ photo, name, size, country, province, city, id }) {
   const [isFlipped, setIsFlipped] = useState(false);
