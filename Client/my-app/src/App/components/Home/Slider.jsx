@@ -37,7 +37,7 @@ function Slider({ title }) {
                     />
                   ) : title === "PERDIDOS" ? (
                     <CardLost
-                      photo={p.photo ? p.photo : "https://drpp-ny.org/wp-content/uploads/2014/07/sorry-image-not-available.png"}
+                      photo={p.petPic ? p.petPic : "https://drpp-ny.org/wp-content/uploads/2014/07/sorry-image-not-available.png"}
                       name={p.name}
                       size={p.size}
                       country={p.country}
