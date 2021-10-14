@@ -166,7 +166,7 @@ function Registro() {
                   values={['i', 'r']} 
                   onSelection={handleOnChange} 
                   colorsOn='bg-thirtyDark'
-                  colorsOff='bg-thirtyLight'
+                  colorsOff='bg-thirtyLight border-thirtyDark'
                 />
               </div>
 
