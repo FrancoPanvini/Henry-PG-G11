@@ -11,8 +11,8 @@ import PhoneCodes from './phoneRegionInput';
 import RadioSelectButtons from '../RadioSelectButtons';
 
 //? Services
-
 import { getCities, getCountries, getProvinces, postUsers } from '../../redux/actions/index';
+
 //? Styles
 import { FaPaw, FaExclamationCircle } from 'react-icons/fa';
 
@@ -159,22 +159,6 @@ function Registro() {
             <div className='flex flex-col w-2/5'>
               <label className='text-white'>Tipo de cuenta:</label>
               <div className='flex justify-evenly mb-2'>
-                {/* <button
-                  value='i'
-                  name='UsersTypeid'
-                  onClick={handleOnChange}
-                  className={`px-4 btn-nav text-white ${input.UsersTypeid === 'i' ? 'border-b-2 border-opacity-0 bg-thirtyDark' : 'btn bg-thirtyLight'}`}
-                >
-                  Personal
-                </button>
-                <button
-                  value='r'
-                  name='UsersTypeid'
-                  onClick={handleOnChange}
-                  className={`px-4 btn-nav text-white ${input.UsersTypeid === 'r' ? 'border-b-2 border-opacity-0 bg-thirtyDark' : 'btn bg-thirtyLight'}`}
-                >
-                  Refugio
-                </button> */}
                 <RadioSelectButtons 
                   state={input}
                   name='UsersTypeid' 
@@ -185,7 +169,6 @@ function Registro() {
                   colorsOff='bg-thirtyLight'
                 />
               </div>
-              
 
               <label className='text-white'>
                 {input.UsersTypeid === 'r' ? 'Nombre del refugio' : 'Nombre y apellido'}:{' '}
