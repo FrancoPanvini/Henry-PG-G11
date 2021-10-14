@@ -1,11 +1,11 @@
-const { Events } = require("../../../../db");
+const { Events } = require('../../../../db');
 
 async function putEvent(req, res) {
   const { id } = req.params;
   const { name, description, initDate, endDate, direction, CityId } = req.body;
 
   try {
-    await Events.update({ name, description, initDate, endDate, direction, CityId }, { where: { id: parseInt(id) } });
+    await Events.update({ name, description, initDate, endDate, direction, CityId, lat, lng }, { where: { id: parseInt(id) } });
     const event = await Events.findOne({ where: { id: parseInt(id) } });
     res.status(200).json(event);
   } catch (error) {
