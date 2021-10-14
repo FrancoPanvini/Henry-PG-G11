@@ -8,10 +8,11 @@ import { useHistory } from 'react-router-dom';
 //? Components
 import MapPost from '../Maps/MapPost';
 import PhoneCodes from './phoneRegionInput';
+import RadioSelectButtons from '../RadioSelectButtons';
 
 //? Services
-
 import { getCities, getCountries, getProvinces, postUsers } from '../../redux/actions/index';
+
 //? Styles
 import { FaPaw, FaExclamationCircle } from 'react-icons/fa';
 
@@ -158,22 +159,15 @@ function Registro() {
             <div className='flex flex-col w-2/5'>
               <label className='text-white'>Tipo de cuenta:</label>
               <div className='flex justify-evenly mb-2'>
-                <button
-                  value='i'
-                  name='UsersTypeid'
-                  onClick={handleOnChange}
-                  className={`w-16 btn-nav text-white ${input.UsersTypeid === 'i' ? 'border-b-2 border-opacity-0 bg-thirtyDark' : 'btn bg-thirtyLight'}`}
-                >
-                  Personal
-                </button>
-                <button
-                  value='r'
-                  name='UsersTypeid'
-                  onClick={handleOnChange}
-                  className={`w-16 btn-nav text-white ${input.UsersTypeid === 'r' ? 'border-b-2 border-opacity-0 bg-thirtyDark' : 'btn bg-thirtyLight'}`}
-                >
-                  Refugio
-                </button>
+                <RadioSelectButtons 
+                  state={input}
+                  name='UsersTypeid' 
+                  options={['Personal', 'Refugios']} 
+                  values={['i', 'r']} 
+                  onSelection={handleOnChange} 
+                  colorsOn='bg-thirtyDark'
+                  colorsOff='bg-thirtyLight border-thirtyDark'
+                />
               </div>
 
               <label className='text-white'>
