@@ -169,7 +169,7 @@ export function logOutUser(){
 
 export const getLostPets = () => {
   return function(dispatch) {
-    axios.get(`/lostpets?lost=true`)
+    axios.get(`/lostpets?found=false`)
      .then(data => {
        dispatch({ type: "GET_LOST_PETS", payload: data });
      });
