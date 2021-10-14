@@ -65,6 +65,7 @@ function CardPopUpPetDetail({ onClose, petId }) {
                       : pet.age === 1 ? `de ${pet.age} año`
                       : pet.age > 1 ? `de ${pet.age} años`
                       : null}
+                    <span className='not-italic'> &#128512;</span>
                   </p>
 
                   {/* ↓ mostramos la descripción (si tiene) */}
