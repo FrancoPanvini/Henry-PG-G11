@@ -5,7 +5,7 @@ import ReactCardFlip from 'react-card-flip';
 import { FaPaw } from 'react-icons/fa';
 // import { IoMdAddCircle } from 'react-icons/io';
 
-function CardLost({ photo, name, size, country, province, city, id }) {
+function CardLost({ photo, name, size, country, province, city }) {
   const [isFlipped, setIsFlipped] = useState(false);
   // const [isOpen, setIsOpen] = useState(false);
   const isLogged = useSelector((state) => state.isLogged);
@@ -27,7 +27,7 @@ function CardLost({ photo, name, size, country, province, city, id }) {
             <img src={photo} alt='' className='h-full w-full object-cover' />
           </div>
           <div className='z-50 flex justify-center items-center pb-2 w-full h-1/5 text-white font-bold text-2xl capitalize'>
-            {name}, id: {id}
+            {name}
           </div>
         </div>
 
