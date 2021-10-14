@@ -4,6 +4,7 @@ import { useDispatch } from 'react-redux';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
 import { useHistory } from 'react-router-dom';
+import swal from 'sweetalert';
 
 //? Components
 import MapPost from '../Maps/MapPost';
@@ -137,9 +138,12 @@ function Registro() {
     e.preventDefault();
     let city = await axios.post('/locations', location);
     let auxInput = { ...input, Cityid: city.data.id };
+    swal({
+      title: "Registro Exitoso!",
+      text: "Ahora puede iniciar sesión",
+      icon: "success",
+    })
     dispatch(postUsers(auxInput));
-
-    alert('¡Registro exitoso! ahora puede iniciar sesión');
     history.push('/login');
   };
 
