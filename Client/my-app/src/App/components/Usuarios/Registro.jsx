@@ -146,10 +146,10 @@ function Registro() {
 
   return (
     <div className='h-screen82 flex items-center justify-around bg-gradient-to-r from-thirty to-fourty'>
-      <div className='w-2/5 flex justify-center items-center'>
-        <div className='bg-cachorroWeb bg-bottom bg-cover relative h-96 w-96 rounded-full shadow-similBorderWhite floorShadowCircle' />
+      <div className='w-1/3'>
+        <div className='ml-auto mr-12 bg-cachorroWeb bg-bottom bg-cover relative h-96 w-96 rounded-full shadow-similBorderWhite floorShadowCircle' />
       </div>
-      <div className='flex justify-center items-center w-3/5 z-1 h-full'>
+      <div className='flex justify-center items-center w-2/3 z-1 h-full'>
         <form onSubmit={e => handleSubmit(e)} className='p-4 w-11/12 flex flex-col bg-thirty rounded-lg min-w-min shadow-xl border-2 border-fourty border-opacity-50'>
           <div className='mx-auto mb-4 flex justify-center items-center bg-fourty w-16 h-16 rounded-full'>
             <FaPaw className='text-white text-3xl' />
