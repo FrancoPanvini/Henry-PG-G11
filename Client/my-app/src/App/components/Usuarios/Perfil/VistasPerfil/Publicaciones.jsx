@@ -38,7 +38,7 @@ function Publicaciones({ userId }) {
           Postear mascota perdida
         </button>
 
-        {isOpen && <FormularioPosteo onClose={() => setIsOpen(false)} onPostPet={onPostPet} />}
+        {isOpen && <FormularioPosteoAdopcion onClose={() => setIsOpen(false)} onPostPet={onPostPet} />}
         {isOpen2 && <FormularioPosteoPerdido onClose={() => setIsOpen2(false)} onPostPet={onPostPet} />}
 
       </div>
