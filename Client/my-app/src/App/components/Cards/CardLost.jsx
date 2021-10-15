@@ -14,6 +14,7 @@ function CardLost({ photo, name, size, country, province, city, id }) {
   const isLogged = useSelector((state) => state.isLogged);
   // const [isOpen, setIsOpen] = useState(false);
   const [isOpenDetail, setIsOpenDetail] = useState(false);
+  const userData = useSelector((state) => state.userData)
 
   const handleClick = () => {
     setIsFlipped(!isFlipped);
@@ -60,7 +61,7 @@ function CardLost({ photo, name, size, country, province, city, id }) {
             {isOpenDetail && <DetallePerdido onClose={() => setIsOpenDetail(false)} petId={id} />}
 
             {/* Button & PopUp form for adoptions */}
-            {isLogged && (
+            {isLogged && userData.phone ? (
               <button className='btn-adogtame bg-fourty text-white border-fourtyDark rounded-2xl'>
                 <h2 className='p-2 flex items-center tracking-wide'>
                   C
@@ -68,7 +69,7 @@ function CardLost({ photo, name, size, country, province, city, id }) {
                   NTACTATE
                 </h2>
               </button>
-            )}
+            ) : <> </>}
             {/* {isOpen && <FormularioAdopcion name={name} onClose={() => setIsOpen(false)} petId={id} onClick />} */}
           </div>
         </div>
