@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { Link } from 'react-router-dom';
 
 //? Components
 import FiltersBarEvents from '../FilterBar/FiltersBarEvents';
@@ -28,8 +27,7 @@ function Eventos() {
   return (
     <div className='grid grid-cols-7 auto-cols-min place-items-center bg-gray-200 relative min-h-screen82'>
       <div className='flex flex-col justify-start items-start w-full h-full'>
-        <button className='btn btn-lg bg-attention text-white border-primaryDark mx-auto my-16'>{<Link to={'/adopciones/map'}>Buscar por mapa</Link>}</button>
-        <FiltersBarEvents className='place-self-center fixed' />
+        <FiltersBarEvents className='place-self-center  fixed' />
       </div>
 
       <div className=' col-span-6 w-full min-h-screen82'>

@@ -5,7 +5,7 @@ const getEventById = async (req, res) => {
 
   const query = {
     where: { id },
-    attributes: ["id", "name", "description", "initDate", "endDate", "direction"],
+    attributes: ["id", "name", "description", "initDate", "endDate", "direction", "photo"],
     order: ["initDate"],
     include: [
       {

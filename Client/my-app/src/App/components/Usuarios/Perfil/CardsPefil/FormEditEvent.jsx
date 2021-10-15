@@ -3,14 +3,13 @@ import ReactDom from 'react-dom';
 import axios from 'axios';
 
 //? Components
-import UploadImage from '../../../cargue-fotos/UploadImage';
 import MapPost from '../../../Maps/MapPost';
 import DatePick from '../../../Eventos/DatePick';
 
 //? Icons
 import { IoIosCloseCircle } from 'react-icons/io';
-import { FaExclamationCircle } from 'react-icons/fa';
-
+/* import { FaExclamationCircle } from 'react-icons/fa';
+ */
 //? Services
 import { updateEvent } from '../../../../services/updateEvent';
 
@@ -42,8 +41,8 @@ function FormularioPosteoEvento({
   console.log(eventId)
 
   //* "url" es dir del evento
-  const [url, setUrl] = useState([]);
-
+/*   const [url, setUrl] = useState([]);
+ */
   //* "location" es el estado que guarda la info del lugar de la mascota, el cuál en handlePublicar se postea en DB
   const [location, setLocation] = useState({
     city: '',
@@ -52,10 +51,10 @@ function FormularioPosteoEvento({
   });
 
   //* "errors" es el objeto que la función validate del input manipula
-  const [errors, setErrors] = useState({});
-
+/*   const [errors, setErrors] = useState({});
+ */
   //* validate recibe el input, si encuentra errores le agrega propiedades al estado de errors, el cuál desactiva el botón "Publicar"
-  const validate = ({ name, initDate, endDate, lat }) => {
+  /* const validate = ({ name, initDate, endDate, lat }) => {
     let errors = {};
     if (name) {
       errors.name = 'Debes ingresar el nombre del evento';
@@ -71,7 +70,7 @@ function FormularioPosteoEvento({
     // }
     return errors;
   };
-
+ */
   //* input change handler
   const handleChange = (e) => {
     const newEvento = {
@@ -132,7 +131,7 @@ function FormularioPosteoEvento({
 
   //* función que desactiva el botón Publicar cuando no todos los datos están completados
   const handleDisabled = () => {
-    if (evento.name !== '' && Object.keys(errors).length === 0) {
+    if (evento.name !== '' /* && Object.keys(errors).length === 0 */) {
       return false;
     }
     return true;
@@ -169,12 +168,12 @@ function FormularioPosteoEvento({
               {/* ↓ Nombre del evento */}
               <label>
                 Nombre del evento: 
-                {errors.name && (
+           {/*      {errors.name && (
                   <FaExclamationCircle
                     title={errors.name}
                     className='inline text-fourtyLight align-baseline'
                   />
-                )}
+                )} */}
               </label>
               <input
                 name='name'
@@ -259,7 +258,7 @@ function FormularioPosteoEvento({
                   disabled={handleDisabled()}
                   onClick={handlePublicar}
                   className='btn btn-lg bg-thirty text-white border-fourty'>
-                  Publicar
+                  Actualizar
                 </button>
               </div>
             </div>

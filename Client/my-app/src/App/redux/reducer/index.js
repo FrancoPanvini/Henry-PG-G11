@@ -93,10 +93,7 @@ function rootReducer(state = initialState, action) {
       return { ...state, lostPets: action.payload.data };
 
     case 'GET_LOST_PETS_FILTERED':
-      return {
-        ...state,
-        lostPets: action.payload.data,
-      };
+      return { ...state, lostPets: action.payload.data };
 
     case 'GET_LOST_PETS_HOME':
       return {
@@ -121,12 +118,6 @@ function rootReducer(state = initialState, action) {
       };
     case 'GET_EVENTS':
       return { ...state, events: action.payload };
-
-    case 'GET_EVENTS_FILTERED':
-      return {
-        ...state,
-        events: action.payload.data,
-      };
 
     default:
       return state;

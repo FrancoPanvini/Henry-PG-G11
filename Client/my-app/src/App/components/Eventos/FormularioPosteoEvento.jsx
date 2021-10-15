@@ -9,8 +9,8 @@ import DatePick from './DatePick';
 
 //? Icons
 import { IoIosCloseCircle } from 'react-icons/io';
-import { FaExclamationCircle } from 'react-icons/fa';
-
+/* import { FaExclamationCircle } from 'react-icons/fa';
+ */
 //? Services
 import { postEvent } from '../../services/postEvent';
 
@@ -33,10 +33,10 @@ function FormularioPosteoEvento({ onClose }) {
   const [location, setLocation] = useState({ city: '', province: '', country: '' });
 
   //* "errors" es el objeto que la función validate del input manipula
-  const [errors, setErrors] = useState({});
-
+/*   const [errors, setErrors] = useState({});
+ */
   //* validate recibe el input, si encuentra errores le agrega propiedades al estado de errors, el cuál desactiva el botón "Publicar"
-  const validate = ({ name, initDate, endDate, lat }) => {
+  /* const validate = ({ name, initDate, endDate, lat }) => {
     let errors = {};
     if (name) {
       errors.name = 'Debes ingresar el nombre del evento';
@@ -51,7 +51,7 @@ function FormularioPosteoEvento({ onClose }) {
     //   errors.coords = 'Debes seleccionar la ubicación donde está tu mascota';
     // }
     return errors;
-  };
+  }; */
 
   //* input change handler
   const handleChange = e => {
@@ -106,7 +106,7 @@ function FormularioPosteoEvento({ onClose }) {
 
   //* función que desactiva el botón Publicar cuando no todos los datos están completados
   const handleDisabled = () => {
-    if (evento.name !== '' && Object.keys(errors).length === 0) {
+    if (evento.name !== '' /* && Object.keys(errors).length === 0 */) {
       return false;
     }
     return true;
@@ -136,7 +136,7 @@ function FormularioPosteoEvento({ onClose }) {
           <div className='flex justify-between h-full'>
             <div className='flex flex-col'>
               {/* ↓ Nombre del evento */}
-              <label>Nombre del evento: {errors.name && <FaExclamationCircle title={errors.name} className='inline text-fourtyLight align-baseline' />}</label>
+              <label>Nombre del evento: {/* {errors.name && <FaExclamationCircle title={errors.name} className='inline text-fourtyLight align-baseline' />} */}</label>
               <input name='name' onChange={handleChange} className='rounded-md px-1 mb-4' />
 
               {/* ↓ Fecha de inicio del evento */}
