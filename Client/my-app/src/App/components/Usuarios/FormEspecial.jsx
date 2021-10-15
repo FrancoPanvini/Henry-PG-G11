@@ -171,7 +171,7 @@ const FormEspecial = () => {
                   />
                 </div>
               </div>
-              <div className='flex flex-col w-3/5 h-screen80'>
+              <div className='flex flex-col w-3/5 h-screen60'>
               <label className='text-white'>
                 Dirección: (Seleccionar en el mapa){' '}
                 {errors.direction && (

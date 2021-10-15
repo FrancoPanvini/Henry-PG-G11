@@ -168,7 +168,7 @@ function FormularioPosteoPerdido({ onClose, onPostPet }) {
 
             <div className='h-auto w-1/2 flex flex-col justify-center ml-4'>
               {/* ↓ Mapa de ubicación de la mascota */}
-              <div>Ubicación de la Mascota:</div>
+              <div>Zona en la que se perdió la mascota:</div>
               <input disabled type='text' id='direction' name='direction' value={location.city} className='rounded-md px-1 mb-2 text-white' />
               <MapPost onLocationChange={handleLocation} onChange={handleChange} className='h-full' />
               {/* ↓ botón Publicar */}
