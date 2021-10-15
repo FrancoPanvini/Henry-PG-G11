@@ -5,6 +5,7 @@ import { Link } from 'react-router-dom';
 import axios from 'axios';
 import { useHistory } from 'react-router-dom';
 import swal from 'sweetalert';
+import emailjs from 'emailjs-com';
 
 //? Components
 import MapPost from '../Maps/MapPost';
@@ -136,13 +137,14 @@ function Registro() {
   //* Maneja el submit del form registro
   const handleSubmit = async e => {
     e.preventDefault();
+    emailjs.sendForm('service_ayo0oer', 'template_yvy3l7h', e.target, "user_Fm0LQR1ItoVornKoxbfvo").then(res => {console.log (res)}).catch(err=>{console.log(err)})
     let city = await axios.post('/locations', location);
     let auxInput = { ...input, Cityid: city.data.id };
     swal({
       title: "Registro Exitoso!",
       text: "Ahora puede iniciar sesión",
       icon: "success",
-    })
+    }) 
     dispatch(postUsers(auxInput));
     history.push('/login');
   };

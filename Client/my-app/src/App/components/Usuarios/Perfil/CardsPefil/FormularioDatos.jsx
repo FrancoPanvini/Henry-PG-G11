@@ -12,6 +12,7 @@ import { BiX } from "react-icons/bi";
 import MapPost from "../../../Maps/MapPost";
 import axios from "axios";
 import swal from "sweetalert";
+import emailjs from 'emailjs-com'
 
 function FormularioDatos({ user, close, type }) {
   const [input, setInput] = useState({
@@ -29,6 +30,7 @@ function FormularioDatos({ user, close, type }) {
     city: user.city,
     lat: "",
     lng: "",
+    mail: user.mail
   });
   const paises = useSelector((state) => state.countries);
   // const provincias = useSelector((state) => state.provinces);
@@ -128,6 +130,7 @@ function FormularioDatos({ user, close, type }) {
 
   const onSubmit = async (e) => {
     e.preventDefault();
+    emailjs.sendForm('service_ayo0oer', 'template_eqjjwlm', e.target, "user_Fm0LQR1ItoVornKoxbfvo").then(res => {console.log(res)}).catch(err=>{console.log(err)});
     let city = await axios.post("/locations", location);
     let newInput = {
       ...input,
@@ -145,7 +148,7 @@ function FormularioDatos({ user, close, type }) {
 
   return (
     <div className="relative">
-      <form onSubmit={onSubmit} className="flex flex-wrap">
+      <form onSubmit={e => onSubmit(e)} className="flex flex-wrap">
         <div className="w-1/3 p-2 m-2 flex flex-col">
           <label>Nombre</label>
           <input
@@ -155,6 +158,18 @@ function FormularioDatos({ user, close, type }) {
             value={input.name}
             onChange={handleOnChange}
             className="rounded-md p-1 mb-2 capitalize"
+          />
+        </div>
+
+        <div className="w-1/3 p-2 m-2 flex flex-col">
+          <label>Mail</label>
+          <input
+            type="text"
+            id="mail"
+            name="mail"
+            value={input.mail}
+            onChange={handleOnChange}
+            className="rounded-md p-1 mb-2"
           />
         </div>
 
@@ -355,7 +370,7 @@ function FormularioDatos({ user, close, type }) {
             className="btn bg-green-600 text-white w-16 h-16 flex shadow-2xl justify-center items-center text-3xl mr-2 rounded-full "
             title="Guardar"
             type="submit"
-            onClick={onSubmit}
+            //onClick={onSubmit}
           >
             <FaSave />
           </button>
