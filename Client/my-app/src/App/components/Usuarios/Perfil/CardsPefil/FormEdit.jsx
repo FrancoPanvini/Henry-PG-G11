@@ -95,7 +95,7 @@ function FormEdit({ name, size, sex, age, photo, type, petId, onClose, userId })
 
   return (
     <div className='w-full max-w-3xl'>
-      <form className='flex flex-col w-full max-w-3xl mx-auto p-8 rounded-lg bg-primaryDark border-white border-opacity-50 relative'>
+      <form className='flex flex-col w-full max-w-3xl mx-auto p-8 rounded-lg bg-primaryDark relative'>
         <label>
           Nombre de la mascota:{' '}
           {errors.name && <FaExclamationCircle title={errors.name} className='inline text-thirty align-baseline animate-pulse' />}
@@ -103,7 +103,7 @@ function FormEdit({ name, size, sex, age, photo, type, petId, onClose, userId })
             <FaAsterisk title='Cambiaste el nombre de tu mascota' className='inline text-attention align-baseline' />
           )}
         </label>
-        <input name='name' value={mascota.name} onChange={handleChange} className='rounded-md px-1' />
+        <input name='name' value={mascota.name} onChange={handleChange} className='rounded-md px-1 capitalize' />
         <br />
 
         <div className='grid grid-cols-2 gap-3 justify-items-center'>
@@ -158,7 +158,7 @@ function FormEdit({ name, size, sex, age, photo, type, petId, onClose, userId })
           </div>
           <div className='text-center w-full px-4 py-2'>
             <label>
-              Tamaño aprox:
+              Tamaño:
               {originalData.size !== mascota.size && (
                 <FaAsterisk title='Cambiaste el tamaño de tu mascota' className='inline text-attention align-baseline' />
               )}

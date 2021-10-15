@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
 import { getPetsAdopByUser } from '../../../../redux/actions';
-import FormularioPosteo from '../../../Mascotas/FormularioPosteo';
+import FormularioPosteoAdopcion from '../../../Mascotas/FormularioPosteoAdopcion';
 import FormularioPosteoPerdido from '../../../Mascotas/FormularioPosteoPerdido';
 import CardPublicacion from '../CardsPefil/CardPublicacion';
 
@@ -43,7 +43,7 @@ function Publicaciones({ userId }) {
         </button>
 
         {isOpen && (
-          <FormularioPosteo
+          <FormularioPosteoAdopcion
             onClose={() => setIsOpen(false)}
             onPostPet={onPostPet}
           />

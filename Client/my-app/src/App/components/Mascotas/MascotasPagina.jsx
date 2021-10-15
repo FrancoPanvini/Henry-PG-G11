@@ -5,7 +5,7 @@ import { Link } from 'react-router-dom';
 //? Components
 import CardsContainer from '../Cards/CardsContainer';
 import FiltersBar from '../FilterBar/FiltersBar';
-import FormularioPosteo from './FormularioPosteo';
+import FormularioPosteoAdopcion from './FormularioPosteoAdopcion';
 import FormularioPosteoPerdido from './FormularioPosteoPerdido';
 
 //? Services
@@ -50,7 +50,7 @@ function Mascotas({ title }) {
             </button>
             {isOpen &&
               (title === 'ADOPCIONES' ? (
-                <FormularioPosteo onClose={() => setIsOpen(false)} onPostPet={onPostPet} />
+                <FormularioPosteoAdopcion onClose={() => setIsOpen(false)} onPostPet={onPostPet} />
               ) : (
                 <FormularioPosteoPerdido onClose={() => setIsOpen(false)} onPostPet={onPostPet} />
               ))}
