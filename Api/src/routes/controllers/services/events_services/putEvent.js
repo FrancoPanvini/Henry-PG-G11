@@ -2,7 +2,7 @@ const { Events } = require('../../../../db');
 
 async function putEvent(req, res) {
   const { id } = req.params;
-  const { name, description, initDate, endDate, direction, CityId } = req.body;
+  const { name, description, initDate, endDate, direction, CityId, lat, lng } = req.body;
 
   try {
     await Events.update({ name, description, initDate, endDate, direction, CityId, lat, lng }, { where: { id: parseInt(id) } });
