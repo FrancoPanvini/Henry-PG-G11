@@ -6,7 +6,7 @@ function Onboarding() {
   const   isLogged = useSelector((state) => state.isLogged);
 
   return (
-    <div className='relative bg-gradient-to-r from-thirty to-fourty h-screen80 flex items-center justify-center'>
+    <div className='relative bg-gradient-to-r from-thirty to-fourty h-screen60 flex items-center justify-center'>
       <div className='flex flex-col items-center justify-center'>
         <span className='text-center text-white text-3xl'>
           ENCUENTRA A TU MASCOTA IDEAL
