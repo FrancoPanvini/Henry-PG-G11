@@ -8,7 +8,7 @@ module.exports = sequelize => {
       mail: { type: DataTypes.STRING, allowNull: false, unique: true, isEmail: true },
       phone: { type: DataTypes.STRING },
       direction: { type: DataTypes.STRING },
-      password: { type: DataTypes.STRING, allowNull: false },
+      password: { type: DataTypes.STRING },
       photo: { type: DataTypes.STRING },
       responsable: { type: DataTypes.STRING },
       dni: { type: DataTypes.INTEGER },

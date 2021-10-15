@@ -3,6 +3,7 @@ import { logInUsers } from '../../redux/actions/index';
 import { Link, useHistory } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import { FaPaw, FaExclamationCircle } from 'react-icons/fa';
+import GoogleLogin from './GoogleLogin';
 /* import axios from 'axios'
 import jwt from "jsonwebtoken" */
 
@@ -116,6 +117,9 @@ function Login() {
             <Link to='/registro'>¿No tienes una cuenta? Registrate</Link>
           </span>
         </form>
+          <a href="http://localhost:3001/auth/google">
+          <GoogleLogin/>
+          </a>
       </div>
     </div>
   );

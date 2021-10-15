@@ -14,6 +14,7 @@ function CardAdopcion({ selected, refProp, photo, name, age, size, country, prov
   const [isFlipped, setIsFlipped] = useState(false);
   const [isOpen, setIsOpen] = useState(false);
   const [isOpenDetail, setIsOpenDetail] = useState(false);
+  const userData = useSelector((state) => state.userData)
 
   const handleClick = () => {
     setIsFlipped(!isFlipped);
@@ -81,7 +82,7 @@ function CardAdopcion({ selected, refProp, photo, name, age, size, country, prov
             {isOpenDetail && <DetalleAdopcion onClose={() => setIsOpenDetail(false)} petId={id} />}
 
             {/* Button & PopUp form for adoptions */}
-            {isLogged && (
+            {isLogged && userData.phone ? (
               <button className='btn-adogtame bg-fourty text-white border-fourtyDark rounded-2xl' onClick={() => setIsOpen(true)}>
                 <h2 className='p-2 flex items-center tracking-wide'>
                   AD
@@ -89,11 +90,12 @@ function CardAdopcion({ selected, refProp, photo, name, age, size, country, prov
                   GTAME
                 </h2>
               </button>
-            )}
-            {isOpen && <FormularioAdopcion name={name} onClose={() => setIsOpen(false)} petId={id} onClick />}
-          </div>
+            ) : <> </>
+          }
+          {isOpen && <FormularioAdopcion name={name} onClose={() => setIsOpen(false)} petId={id} onClick />}
         </div>
-      </ReactCardFlip>
+      </div>
+    </ReactCardFlip>
     </div>
   );
 }
