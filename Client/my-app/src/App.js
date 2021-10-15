@@ -8,6 +8,7 @@ import Login from './App/components/Usuarios/Login';
 import Registro from './App/components/Usuarios/Registro';
 import MascotasPagina from './App/components/Mascotas/MascotasPagina';
 import Refugios from './App/components/Refugios/Refugios';
+import Eventos from './App/components/Eventos/Eventos';
 import Perfil from './App/components/Usuarios/Perfil/Perfil';
 import Nosotros from './App/components/info/Nosotros';
 import FAQ from './App/components/info/FAQ';
@@ -51,6 +52,7 @@ function App() {
               <MascotasPagina title='PERDIDOS' />
             </Route>
             <Route path='/refugios' exact component={Refugios} />
+            <Route path='/eventos' exact component={Eventos} />
             <Route path='/adopciones/map' exact component={AppMap} />
             <Route path='/perdidos/map' exact component={AppMap} />
             <Route path='/refugios/map' exact component={AppMap} />
