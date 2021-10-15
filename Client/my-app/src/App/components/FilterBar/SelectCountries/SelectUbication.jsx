@@ -11,6 +11,7 @@ function SelectUbication({ urlFilter, handleSetUrl }) {
     dispatch(getCities());
   }, [dispatch]);
 
+
   const pais = useSelector(state => state.countries);
   const provincia = useSelector(state => state.provinces);
   const ciudad = useSelector(state => state.cities);
@@ -26,7 +27,7 @@ function SelectUbication({ urlFilter, handleSetUrl }) {
   return (
     <div className='p-1 mb-2 flex flex-wrap justify-between items-center '>
       <label className='w-1/2 pr-8  font-bold'>Ubicación</label>
-      <select onChange={handleFilterUbication} name='country' defaultValue='default' /* id="paises" */ className='w-full my-2 rounded-md px-1'>
+      <select onChange={handleFilterUbication} name='country' value={urlFilter.country} /* defaultValue='default' */ /* id="paises" */ className='w-full my-2 rounded-md px-1'>
         <option value='default'>Seleccionar</option>
         {pais &&
           pais.map(e => (
@@ -36,7 +37,7 @@ function SelectUbication({ urlFilter, handleSetUrl }) {
           ))}
       </select>
       <br />
-      <select onChange={handleFilterUbication} className='w-full rounded-md px-1 my-2' /* id="provincias" */ name='province'>
+      <select onChange={handleFilterUbication} value={urlFilter.province} className='w-full rounded-md px-1 my-2' /* id="provincias" */ name='province'>
         <option>Seleccionar</option>
         {provincia &&
           provincia
@@ -48,7 +49,7 @@ function SelectUbication({ urlFilter, handleSetUrl }) {
             ))}
       </select>
       <br />
-      <select onChange={handleSetUrl} className='w-full rounded-md px-1 my-2' /* id="provincias" */ name='city'>
+      <select onChange={handleSetUrl} value={urlFilter.city} className='w-full rounded-md px-1 my-2' /* id="provincias" */ name='city'>
         <option>Seleccionar</option>
         {ciudad &&
           ciudad

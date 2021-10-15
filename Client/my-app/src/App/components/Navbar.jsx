@@ -18,7 +18,7 @@ function Navbar() {
       <Link to="/" className="text-xl flex items-center ml-4">
         AD<FaPaw />GTAME
       </Link>
-      <div className="h-full grid grid-cols-5 text-center">
+      <div className="h-full grid grid-cols-6 text-center">
         <NavLink to="/" exact className="h-full w-36 flex items-center justify-center hover:text-primary" activeClassName="shadow-activeNavBar text-primary" >
           INICIO
         </NavLink>
@@ -30,6 +30,9 @@ function Navbar() {
         </NavLink>
         <NavLink to="/refugios" className="h-full w-36 flex items-center justify-center mr-4 hover:text-primary" activeClassName="shadow-activeNavBar text-primary" >
           REFUGIOS
+        </NavLink>
+        <NavLink to="/eventos" className="h-full w-36 flex items-center justify-center mr-4 hover:text-primary" activeClassName="shadow-activeNavBar text-primary" >
+          EVENTOS
         </NavLink>
 
         {isLogged 
