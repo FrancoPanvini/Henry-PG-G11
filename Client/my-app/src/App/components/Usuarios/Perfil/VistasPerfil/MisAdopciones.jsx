@@ -46,7 +46,7 @@ function MisAdopciones() {
           pet?.map((el) => {
             return(
               <div key={el.id}>
-              <CardAdopcion photo={el.petPic} name={el.name} created={el.updatedAt} />;
+              <CardAdopcion photo={el.petPic} name={el.name} created={el.updatedAt} />
               </div>
             )
 

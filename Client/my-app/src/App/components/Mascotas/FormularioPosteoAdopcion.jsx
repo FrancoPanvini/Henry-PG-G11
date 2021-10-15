@@ -3,7 +3,7 @@ import ReactDom from 'react-dom';
 import axios from 'axios';
 
 //? Components
-import UploadImage from './../cargue-fotos/UploadImage';
+import UploadImage from '../cargue-fotos/UploadImage';
 import MapPost from '../Maps/MapPost';
 import RadioSelectButtons from '../RadioSelectButtons';
 
@@ -27,7 +27,10 @@ function FormularioPosteo({ onClose, onPostPet }) {
     lat: '',
     lng: '',
   });
+
+  //* estado en el que guardaremos las fotos de la mascota
   const [url, setUrl] = useState([]);
+
   const [errors, setErrors] = useState({});
 
   const [location, setLocation] = useState({ city: '', province: '', country: '' });
@@ -106,7 +109,7 @@ function FormularioPosteo({ onClose, onPostPet }) {
           {/* ↓ botón para cancelar y volver atrás */}
           <IoIosCloseCircle title='Cancelar y volver a Adopciones' onClick={onClose}  className='text-thirty absolute top-3 right-3 text-3xl hover:text-thirtyLight cursor-pointer transition-all' />
           <div className='flex justify-between h-full'>
-            <div className='flex flex-col'>
+            <div className='flex flex-col w-1/2'>
               {/* ↓ Nombre de la mascota */}
               <label>Nombre de la mascota: {errors.name && <FaExclamationCircle title={errors.name} className='inline text-thirty align-baseline' />}</label>
               <input name='name' onChange={handleChange} className='rounded-md px-1 mb-4' />
@@ -172,22 +175,15 @@ function FormularioPosteo({ onClose, onPostPet }) {
               <textarea name='description' placeholder='Ej.: Tiene 6 meses, se lleva bien con otras mascotas, tiene sus vacunas, etc...' onChange={handleChange} className='rounded-md px-1 mb-4' />
 
               {/* ↓ Fotos */}
-              <div className='flex justify-evenly items-center bg-gradient-to-r from-primary to-primaryLight px-4 py-2'>
-                <div>
+              <div className='flex justify-between items-center bg-gradient-to-r from-primary to-primaryLight px-4 py-2'>
+                <div className='w-full'>
                   <label>Foto: (preferentemente la mascota al centro de la imagen)</label>
-                  <UploadImage setUrl={setUrl} />
-                </div>
-                <div className='w-32 h-32 bg-primaryDark border-2 border-primaryDark'>
-                  {url.length === 0 ? (
-                    <div className='h-full flex justify-center items-center text-center text-primaryLight'>previsualización de imagen</div>
-                  ) : (
-                    <img src={url} alt='previsualización de imagen' className='w-full h-full object-cover' />
-                  )}
+                  <UploadImage url={url} setUrl={setUrl} />
                 </div>
               </div>
             </div>
 
-            <div className='h-auto w-full flex flex-col justify-center ml-4'>
+            <div className='h-auto w-1/2 flex flex-col justify-center ml-4'>
               {/* ↓ Mapa de ubicación de la mascota */}
               <div>Ubicación de la Mascota:</div>
               <input disabled type='text' id='direction' name='direction' value={location.city} className='rounded-md px-1 mb-2 text-white' />

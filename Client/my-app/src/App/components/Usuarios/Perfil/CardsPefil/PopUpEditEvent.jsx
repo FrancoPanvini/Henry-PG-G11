@@ -3,22 +3,25 @@ import ReactDom from 'react-dom';
 
 //? Services
 import { IoIosCloseCircle } from 'react-icons/io';
-import FormEdit from './FormEdit';
+import FormEditEvent from './FormEditEvent';
 // import { useDispatch } from 'react-redux';
 // import { getPetsAdopByUser } from '../../../../redux/actions';
 // import { deletePet } from '../../../../services/deletePet';
 //? Icons
 
-function PopUpEdit({
+function PopUpEditEvent({
   onClose,
-  petId,
   name,
-  age,
-  photo,
-  size,
-  sex,
-  type,
+  description,
   userId,
+  eventId,
+  initDate,
+  endDate,
+  setUpdate,
+  direction,
+  photo,
+  lat,
+  lng,
 }) {
   // const dispatch = useDispatch();
   //* Seteamos en el estado los datos de la pet con su id
@@ -32,34 +35,31 @@ function PopUpEdit({
 
   return ReactDom.createPortal(
     <>
-      <div className='fixed inset-0 bg-gray-50 bg-opacity-70 z-40' />
-      <div className='fixed inset-0 z-50 overflow-y-scroll '>
-        <div className='panel relative top-10 mx-auto w-2/4 max-w-3xl grid justify-items-center'>
           <div>
             <IoIosCloseCircle
-              title='Cancelar y volver'
-              className='text-thirty absolute top-3 right-3 text-3xl hover:text-thirtyLight cursor-pointer transition-all z-50'
+              className='text-primary absolute top-3 right-3 text-3xl hover:text-primaryLight cursor-pointer transition-all'
               onClick={onClose}
             />
           </div>
-          <div className='panel w-full max-w-3xl'>
-            <FormEdit
-              petId={petId}
-              name={name}
-              size={size}
-              sex={sex}
-              type={type}
-              age={age}
-              photo={photo}
-              onClose={onClose}
+          <div className='w-full'>
+            <FormEditEvent
+              eventId={eventId}
               userId={userId}
+              name={name}
+              description={description}
+              initDate={initDate}
+              endDate={endDate}
+              onClose={onClose}
+              setUpdate={setUpdate}
+              direction={direction}
+              photo={photo}
+              lat={lat}
+              lng={lng}
             />
           </div>
-        </div>
-      </div>
     </>,
     document.getElementById('portal')
   );
 }
 
-export default PopUpEdit;
+export default PopUpEditEvent;
