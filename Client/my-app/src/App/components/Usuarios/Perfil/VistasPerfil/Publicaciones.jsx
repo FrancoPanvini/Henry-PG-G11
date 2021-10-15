@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
 import { getPetsAdopByUser } from '../../../../redux/actions';
-import FormularioPosteo from '../../../Mascotas/FormularioPosteo';
+import FormularioPosteoAdopcion from '../../../Mascotas/FormularioPosteoAdopcion';
 import FormularioPosteoPerdido from '../../../Mascotas/FormularioPosteoPerdido';
 import CardPublicacion from '../CardsPefil/CardPublicacion';
 
@@ -40,6 +40,7 @@ function Publicaciones({ userId }) {
 
         {isOpen && <FormularioPosteo onClose={() => setIsOpen(false)} onPostPet={onPostPet} />}
         {isOpen2 && <FormularioPosteoPerdido onClose={() => setIsOpen2(false)} onPostPet={onPostPet} />}
+
       </div>
       <div className='container mx-auto p-2'>
         {pets?.length === 0 ? (
