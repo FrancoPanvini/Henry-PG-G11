@@ -14,7 +14,7 @@ function CardPublicacion({
   age,
   size,
   type,
-  gender,
+  sex,
   created
 }) {
   const [isOpen, setIsOpen] = useState(false);
@@ -80,7 +80,7 @@ function CardPublicacion({
             size={size}
             photo={photo}
             type={type}
-            gender={gender}
+            sex={sex}
             userId={userId}
           />
         )}

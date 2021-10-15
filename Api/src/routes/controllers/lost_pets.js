@@ -4,6 +4,7 @@ const getLostPets = require("./services/lost_pets_services/getLostPets");
 const postLostPet = require("./services/lost_pets_services/postLostPet");
 const {deleteLostPet} = require("./services/lost_pets_services/deleteLostPet");
 const getLostPetDetail = require("./services/lost_pets_services/getLostPetDetail");
+const putFoundLostPet = require("./services/lost_pets_services/putFoundLostPet");
 
 //ver todos los animales perdidos
 router.get("/", getLostPets);
@@ -14,7 +15,10 @@ router.get("/:id", getLostPetDetail)
 //Publicar una nueva mascota
 router.post("/", postLostPet);
 
-//Modificar una mascota(datos/perdida-encontrada)
+//Modificar una mascota(datos)
+
+//Modificar una mascota(marcar como encontrada)
+router.put("/found/:id", putFoundLostPet);
 
 //Eliminar una mascota
 router.delete("/", deleteLostPet);

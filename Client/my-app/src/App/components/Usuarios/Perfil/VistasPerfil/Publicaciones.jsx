@@ -59,7 +59,7 @@ function Publicaciones({ userId }) {
                   size={p.size}
                   age={p.age}
                   type={p.type}
-                  gender={p.sex}
+                  sex={p.sex}
                   created={p.createdAt}
                 />
               </div>

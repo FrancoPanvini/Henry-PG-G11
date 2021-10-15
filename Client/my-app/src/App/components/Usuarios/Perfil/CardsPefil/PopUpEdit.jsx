@@ -16,9 +16,8 @@ function PopUpEdit({
   age,
   photo,
   size,
-  gender,
+  sex,
   type,
-  description,
   userId,
 }) {
   // const dispatch = useDispatch();
@@ -35,20 +34,20 @@ function PopUpEdit({
     <>
       <div className='fixed inset-0 bg-gray-50 bg-opacity-70 z-40' />
       <div className='fixed inset-0 z-50 overflow-y-scroll '>
-        <div className='relative top-10 mx-auto w-2/4 p-6 bg-fourty rounded-2xl grid justify-items-center  '>
+        <div className='relative top-10 mx-auto w-2/4 max-w-3xl bg-fourty rounded-2xl grid justify-items-center'>
           <div>
             <IoIosCloseCircle
-              className='text-primary absolute top-3 right-3 text-3xl hover:text-primaryLight cursor-pointer transition-all'
+              title='Cancelar y volver'
+              className='text-thirty absolute top-3 right-3 text-3xl hover:text-thirtyLight cursor-pointer transition-all z-50'
               onClick={onClose}
             />
           </div>
-          <div className='w-full'>
+          <div className='w-full max-w-3xl'>
             <FormEdit
               petId={petId}
               name={name}
               size={size}
-              gender={gender}
-              description={description}
+              sex={sex}
               type={type}
               age={age}
               photo={photo}

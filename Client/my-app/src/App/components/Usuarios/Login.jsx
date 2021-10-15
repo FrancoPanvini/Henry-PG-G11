@@ -62,12 +62,12 @@ function Login() {
   return (
     <div className='h-screen82 flex items-center justify-around bg-gradient-to-r from-thirty to-fourty'>
       <div className='w-2/5'>
-        <div className='bg-cachorroWeb bg-bottom bg-cover relative h-96 w-96 rounded-full mr-12 ml-auto shadow-similBorderWhite floorShadowCircle' />
+        <div className='ml-auto mr-12 bg-cachorroWeb bg-bottom bg-cover relative h-96 w-96 rounded-full shadow-similBorderWhite floorShadowCircle' />
       </div>
       <div className='flex justify-center items-center w-3/5 z-10'>
         <form
           onSubmit={(e) => handleSubmit(e)}
-          className='flex flex-col m-8 mr-auto bg-thirty py-12 px-8 rounded-lg w-2/5 min-w-sign shadow-xl border-2 border-fourty border-opacity-50'>
+          className='flex flex-col ml-12 mr-auto bg-thirty py-12 px-8 rounded-lg w-2/5 min-w-sign shadow-xl border-2 border-fourty border-opacity-50'>
           <div className='mx-auto flex justify-center items-center bg-fourty w-20 h-20 rounded-full'>
             <FaPaw className='text-white text-3xl' />
           </div>

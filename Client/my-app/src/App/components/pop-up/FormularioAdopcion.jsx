@@ -36,11 +36,6 @@ function FormularioAdopcion({ onClose, name, petId }) {
     });
   }, []);
 
-  //* Set UserId en Input
-  /* useEffect(() => {
-    setInput({ ...input, Userid: parseInt(user.id) });
-  }, [user]); */
-
   //* Set estado Input cuando cambian los selects
   const handleSelectChange = (name, value) => {
     setInput({ ...input, [name]: value });
@@ -58,26 +53,25 @@ function FormularioAdopcion({ onClose, name, petId }) {
     <>
       <div className="fixed inset-0 bg-gray-50 bg-opacity-70 z-40" />
       <div className="fixed inset-0 z-50">
-        <div className="relative top-10 mx-auto w-9/12 p-10 bg-fourty rounded-2xl grid justify-items-center">
+        <div className="panel relative top-10 mx-auto w-9/12 bg-fourty grid justify-items-center">
           <div>
             <form>
               <IoIosCloseCircle className="text-primary absolute top-3 right-3 text-3xl hover:text-primaryLight cursor-pointer transition-all" onClick={onClose} />
               <div>
                 <div className="font-bold text-primary grid justify-items-center pb-10 capitalize">¡Hola {user.name}!</div>
                 <p className="text-white">
-                  Agradecemos tu interes por <span className="font-bold text-primary capitalize">{name}</span>, para considerar tu solicitud de adopción necesitamos conocerte un poco mas, por favor contesta
-                  nuestras preguntas
+                  Agradecemos tu interés por <span className="font-bold text-primary capitalize">{name}</span>, para considerar tu solicitud de adopción necesitamos conocerte un poco más, por favor contesta las siguientes preguntas:
                 </p>
               </div>
               <br /> <br />
               <FormularioAdopcionSelect label="Tipo de residencia: " name="residence" options={["Casa", "Apartamento"]} values={["house", "app"]} setInput={handleSelectChange} input={input} />
               <br />
-              <FormularioAdopcionSelect label="Cantidad de niños en la residencia: " name="residents" options={["1-3", "4-6", "+6"]} values={["1-3", "4-6", "+6"]} setInput={handleSelectChange} />
+              <FormularioAdopcionSelect label="Cantidad de niños o niñas en la residencia: " name="residents" options={["0", "1-3", "4-6", "más de 6"]} values={["0", "1-3", "4-6", "más de 6"]} setInput={handleSelectChange} />
               <br />
               <FormularioAdopcionSelect label="Eres mayor de edad: " name="adult" options={["SI", "NO"]} values={[true, false]} setInput={handleSelectChange} />
               <br />
               <FormularioAdopcionSelect
-                label="¿Cuántas horas diarias puedes dedicarle al cuidado? "
+                label="¿Cuántas horas diarias puedes dedicarle al cuidado de la mascota? "
                 name="dedication"
                 options={["0-2", "3-5", "+5"]}
                 values={["0-2", "3-5", "+5"]}
@@ -85,7 +79,7 @@ function FormularioAdopcion({ onClose, name, petId }) {
               />
               <br />
               <div className="flex gap-5">
-                <FormularioAdopcionSelect label="¿Tenes otras mascotas?: " name="otherPets" options={["SI", "NO"]} values={[true, false]} setInput={handleSelectChange} />
+                <FormularioAdopcionSelect label="¿Tienes otras mascotas?: " name="otherPets" options={["SI", "NO"]} values={[true, false]} setInput={handleSelectChange} />
                 {input.otherPets && <FormularioAdopcionText label="¿Cuáles?: " name="otherPetsDesc" setInput={handleSelectChange} />}
               </div>
               <br />
