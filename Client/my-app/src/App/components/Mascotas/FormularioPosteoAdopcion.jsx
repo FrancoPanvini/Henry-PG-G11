@@ -1,9 +1,14 @@
-import React, { useState } from "react";
-import ReactDom from "react-dom";
-import axios from "axios";
-import UploadImage from "./../cargue-fotos/UploadImage";
-import { postPets } from "../../redux/actions/index";
-import MapPost from "../Maps/MapPost";
+import React, { useState } from 'react';
+import ReactDom from 'react-dom';
+import axios from 'axios';
+
+//? Components
+import UploadImage from '../cargue-fotos/UploadImage';
+import MapPost from '../Maps/MapPost';
+import RadioSelectButtons from '../RadioSelectButtons';
+
+//? Actions
+import { postPets } from '../../redux/actions/index';
 
 //? Icons
 import { IoIosCloseCircle } from "react-icons/io";
@@ -23,7 +28,10 @@ function FormularioPosteo({ onClose, onPostPet }) {
     lat: "",
     lng: "",
   });
+
+  //* estado en el que guardaremos las fotos de la mascota
   const [url, setUrl] = useState([]);
+
   const [errors, setErrors] = useState({});
 
   const [location, setLocation] = useState({
@@ -40,13 +48,11 @@ function FormularioPosteo({ onClose, onPostPet }) {
     if (PetsTypeid === "") {
       errors.PetsTypeid = "Debes seleccionar si tu mascota es perro o gato";
     }
-    /*     if (lat === '') {
-       errors.coords = "Debes seleccionar la ubicación donde está tu mascota"
-     } */
     return errors;
   };
 
-  const handleChange = (e) => {
+  const handleChange = e => {
+    e.preventDefault();
     const newMascota = {
       ...mascota,
       [e.target.name]: e.target.value,
@@ -119,87 +125,42 @@ function FormularioPosteo({ onClose, onPostPet }) {
       <div className="fixed inset-0 z-50 flex justify-center items-center">
         <form className="panel flex flex-col w-4/5 min-w-max mx-auto bg-gradient-to-r from-primaryDark to-primary relative">
           {/* ↓ botón para cancelar y volver atrás */}
-          <IoIosCloseCircle
-            className="text-fourty absolute top-3 right-3 text-3xl hover:text-fourtyLight cursor-pointer transition-all"
-            onClick={onClose}
-          />
-          <div className="flex justify-between h-full">
-            <div className="flex flex-col">
+          <IoIosCloseCircle title='Cancelar y volver a Adopciones' onClick={onClose}  className='text-thirty absolute top-3 right-3 text-3xl hover:text-thirtyLight cursor-pointer transition-all' />
+          <div className='flex justify-between h-full'>
+            <div className='flex flex-col w-1/2'>
               {/* ↓ Nombre de la mascota */}
-              <label>
-                Nombre de la mascota:{" "}
-                {errors.name && (
-                  <FaExclamationCircle
-                    title={errors.name}
-                    className="inline text-fourtyLight align-baseline"
-                  />
-                )}
-              </label>
-              <input
-                name="name"
-                onChange={handleChange}
-                className="rounded-md px-1 mb-4"
-              />
+              <label>Nombre de la mascota: {errors.name && <FaExclamationCircle title={errors.name} className='inline text-thirty align-baseline' />}</label>
+              <input name='name' onChange={handleChange} className='rounded-md px-1 mb-4' />
 
               <div className="flex">
                 {/* ↓ Especie de la mascota */}
-                <div className="text-center w-1/2 rounded-2xl px-4 py-2">
-                  <label>
-                    Especie:{" "}
-                    {errors.PetsTypeid && (
-                      <FaExclamationCircle
-                        title={errors.PetsTypeid}
-                        className="inline text-fourtyLight align-baseline"
-                      />
-                    )}
-                  </label>
-                  <div className="flex justify-evenly items-center">
-                    <label htmlFor="gato">
-                      <input
-                        name="PetsTypeid"
-                        type="radio"
-                        id="gato"
-                        value="g"
-                        onChange={handleChange}
-                      />
-                      Gato
-                    </label>
-                    <label htmlFor="perro">
-                      <input
-                        name="PetsTypeid"
-                        type="radio"
-                        id="perro"
-                        value="p"
-                        onChange={handleChange}
-                      />
-                      Perro
-                    </label>
+                <div className='text-center w-1/2 rounded-2xl px-4 py-2'>
+                  <label>Especie: {errors.PetsTypeid && <FaExclamationCircle title={errors.PetsTypeid} className='inline text-thirty align-baseline' />}</label>
+                  <div className='flex justify-evenly items-center'>
+                    <RadioSelectButtons
+                      state={mascota}
+                      name='PetsTypeid'
+                      options={['Gato', 'Perro']}
+                      values={['g', 'p']}
+                      onSelection={handleChange}
+                      colorsOff='bg-thirtyLight border-thirtyDark'
+                      colorsOn='bg-thirtyDark'
+                    />
                   </div>
                 </div>
-                {/* ↓ Genero de la mascota */}
-                <div className="text-center w-1/2 px-8 py-2 border-l-2 border-primaryLight">
+                {/* ↓ Sexo de la mascota */}
+                <div className='text-center w-1/2 px-8 py-2 border-l-2 border-primaryLight'>
                   <label>Sexo:</label>
-                  <div className="flex justify-evenly items-centert">
-                    <label htmlFor="hembra">
-                      <input
-                        name="sex"
-                        type="radio"
-                        id="hembra"
-                        value="h"
-                        onChange={handleChange}
-                      />
-                      Hembra
-                    </label>
-                    <label htmlFor="macho">
-                      <input
-                        name="sex"
-                        type="radio"
-                        id="macho"
-                        value="m"
-                        onChange={handleChange}
-                      />
-                      Macho
-                    </label>
+                  <div className='flex justify-evenly items-centert'>
+                  <RadioSelectButtons
+                      state={mascota}
+                      name='sex'
+                      options={['Hembra', 'Macho']}
+                      values={['h', 'm']}
+                      onSelection={handleChange}
+                      colorsOff='bg-thirtyLight border-thirtyDark'
+                      colorsOn='bg-thirtyDark'
+                    />
                   </div>
                 </div>
               </div>
@@ -220,37 +181,16 @@ function FormularioPosteo({ onClose, onPostPet }) {
                 {/* ↓ Tamaño de la mascota */}
                 <div className="text-center w-3/5 px-8 py-4 border-l-2 border-primaryLight">
                   <label>Tamaño aproximado de la raza:</label>
-                  <div className="flex justify-evenly items-center">
-                    <label htmlFor="chico">
-                      <input
-                        name="size"
-                        type="radio"
-                        id="chico"
-                        value="c"
-                        onChange={handleChange}
-                      />
-                      Chico
-                    </label>
-                    <label htmlFor="mediano">
-                      <input
-                        name="size"
-                        type="radio"
-                        id="mediano"
-                        value="m"
-                        onChange={handleChange}
-                      />
-                      Mediano
-                    </label>
-                    <label htmlFor="grande">
-                      <input
-                        name="size"
-                        type="radio"
-                        id="grande"
-                        value="g"
-                        onChange={handleChange}
-                      />
-                      Grande
-                    </label>
+                  <div className='flex justify-evenly items-center'>
+                    <RadioSelectButtons
+                      state={mascota}
+                      name='size'
+                      options={['Chico', 'Mediano', 'Grande']}
+                      values={['c', 'm', 'g']}
+                      onSelection={handleChange}
+                      colorsOff='bg-thirtyLight border-thirtyDark'
+                      colorsOn='bg-thirtyDark'
+                    />
                   </div>
                 </div>
               </div>
@@ -265,30 +205,15 @@ function FormularioPosteo({ onClose, onPostPet }) {
               />
 
               {/* ↓ Fotos */}
-              <div className="flex justify-evenly items-center bg-gradient-to-r from-primary to-primaryLight px-4 py-2">
-                <div>
-                  <label>
-                    Foto: (preferentemente la mascota al centro de la imagen)
-                  </label>
-                  <UploadImage setUrl={setUrl} />
-                </div>
-                <div className="w-32 h-32 bg-primaryDark border-2 border-primaryDark">
-                  {url.length === 0 ? (
-                    <div className="h-full flex justify-center items-center text-center text-primaryLight">
-                      previsualización de imagen
-                    </div>
-                  ) : (
-                    <img
-                      src={url}
-                      alt="previsualización de imagen"
-                      className="w-full h-full object-cover"
-                    />
-                  )}
+              <div className='flex justify-between items-center bg-gradient-to-r from-primary to-primaryLight px-4 py-2'>
+                <div className='w-full'>
+                  <label>Foto: (preferentemente la mascota al centro de la imagen)</label>
+                  <UploadImage url={url} setUrl={setUrl} />
                 </div>
               </div>
             </div>
 
-            <div className="h-auto w-full flex flex-col justify-center ml-4">
+            <div className='h-auto w-1/2 flex flex-col justify-center ml-4'>
               {/* ↓ Mapa de ubicación de la mascota */}
               <div>Ubicación de la Mascota:</div>
               <input

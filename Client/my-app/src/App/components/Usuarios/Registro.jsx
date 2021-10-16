@@ -10,10 +10,11 @@ import emailjs from 'emailjs-com';
 //? Components
 import MapPost from '../Maps/MapPost';
 import PhoneCodes from './phoneRegionInput';
+import RadioSelectButtons from '../RadioSelectButtons';
 
 //? Services
-
 import { getCities, getCountries, getProvinces, postUsers } from '../../redux/actions/index';
+
 //? Styles
 import { FaPaw, FaExclamationCircle } from 'react-icons/fa';
 
@@ -151,8 +152,8 @@ function Registro() {
 
   return (
     <div className='h-screen82 flex items-center justify-around bg-gradient-to-r from-thirty to-fourty'>
-      <div className='w-2/5 flex justify-center items-center'>
-        <div className='bg-cachorroWeb bg-bottom bg-cover relative h-96 w-96 rounded-full shadow-similBorderWhite floorShadowCircle' />
+      <div className='w-2/5'>
+        <div className='ml-auto mr-12 bg-cachorroWeb bg-bottom bg-cover relative h-96 w-96 rounded-full shadow-similBorderWhite floorShadowCircle' />
       </div>
       <div className='flex justify-center items-center w-3/5 z-1 h-full'>
         <form onSubmit={e => handleSubmit(e)} className='p-4 w-11/12 flex flex-col bg-thirty rounded-lg min-w-min shadow-xl border-2 border-fourty border-opacity-50'>
@@ -164,22 +165,15 @@ function Registro() {
             <div className='flex flex-col w-2/5'>
               <label className='text-white'>Tipo de cuenta:</label>
               <div className='flex justify-evenly mb-2'>
-                <button
-                  value='i'
-                  name='UsersTypeid'
-                  onClick={handleOnChange}
-                  className={`w-16 btn-nav text-white ${input.UsersTypeid === 'i' ? 'border-b-2 border-opacity-0 bg-thirtyDark' : 'btn bg-thirtyLight'}`}
-                >
-                  Personal
-                </button>
-                <button
-                  value='r'
-                  name='UsersTypeid'
-                  onClick={handleOnChange}
-                  className={`w-16 btn-nav text-white ${input.UsersTypeid === 'r' ? 'border-b-2 border-opacity-0 bg-thirtyDark' : 'btn bg-thirtyLight'}`}
-                >
-                  Refugio
-                </button>
+                <RadioSelectButtons 
+                  state={input}
+                  name='UsersTypeid' 
+                  options={['Personal', 'Refugios']} 
+                  values={['i', 'r']} 
+                  onSelection={handleOnChange} 
+                  colorsOn='bg-thirtyDark'
+                  colorsOff='bg-thirtyLight border-thirtyDark'
+                />
               </div>
 
               <label className='text-white'>

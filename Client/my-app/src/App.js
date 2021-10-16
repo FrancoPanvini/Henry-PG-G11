@@ -8,6 +8,7 @@ import Login from './App/components/Usuarios/Login';
 import Registro from './App/components/Usuarios/Registro';
 import MascotasPagina from './App/components/Mascotas/MascotasPagina';
 import Refugios from './App/components/Refugios/Refugios';
+import Eventos from './App/components/Eventos/Eventos';
 import Perfil from './App/components/Usuarios/Perfil/Perfil';
 import Nosotros from './App/components/info/Nosotros';
 import FAQ from './App/components/info/FAQ';
@@ -18,7 +19,6 @@ import axios from 'axios';
 import AppMap from './App/components/Maps/MapsFilter/AppMap';
 import PrivateRoute from './App/components/Routes/PrivateRoute';
 import PublicRoute from './App/components/Routes/PublicRoute';
-import FormularioPosteo from './App/components/Mascotas/FormularioPosteo';
 
 function App() {
   const dispatch = useDispatch();
@@ -52,13 +52,13 @@ function App() {
               <MascotasPagina title='PERDIDOS' />
             </Route>
             <Route path='/refugios' exact component={Refugios} />
+            <Route path='/eventos' exact component={Eventos} />
             <Route path='/adopciones/map' exact component={AppMap} />
             <Route path='/perdidos/map' exact component={AppMap} />
             <Route path='/refugios/map' exact component={AppMap} />
             <PrivateRoute path='/perfil' exact component={Perfil} linkRedirect='/login' />
             <Route path='/nosotros' exact component={Nosotros} />
             <Route path='/faq' exact component={FAQ} />
-            <PrivateRoute path='/adopciones/ofrecer' exact component={FormularioPosteo} linkRedirect='/login' />
           </Switch>
           <Footer />
         </div>

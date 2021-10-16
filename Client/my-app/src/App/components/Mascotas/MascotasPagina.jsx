@@ -5,7 +5,7 @@ import { Link } from 'react-router-dom';
 //? Components
 import CardsContainer from '../Cards/CardsContainer';
 import FiltersBar from '../FilterBar/FiltersBar';
-import FormularioPosteo from './FormularioPosteo';
+import FormularioPosteoAdopcion from './FormularioPosteoAdopcion';
 import FormularioPosteoPerdido from './FormularioPosteoPerdido';
 
 //? Services
@@ -14,6 +14,7 @@ import { getPetsAdop, getLostPets } from '../../redux/actions';
 function Mascotas({ title }) {
   const dispatch = useDispatch();
   const isLogged = useSelector(state => state.isLogged);
+  const userData = useSelector((state) => state.userData)
 
   //* interruptor del pop-up del posteo de mascotas
   const [isOpen, setIsOpen] = useState(false);
@@ -43,19 +44,19 @@ function Mascotas({ title }) {
         <FiltersBar className='place-self-center fixed' />
       </div>
       <div className=' col-span-6 w-full min-h-screen82'>
-        {isLogged && (
+        {isLogged && userData.phone ?  (
           <div>
             <button className='btn btn-lg bg-primary text-white absolute top-18 right-18' onClick={() => setIsOpen(true)}>
               {title === 'ADOPCIONES' ? 'Ofrecer una mascota' : 'Publicar una mascota'}
             </button>
             {isOpen &&
               (title === 'ADOPCIONES' ? (
-                <FormularioPosteo onClose={() => setIsOpen(false)} onPostPet={onPostPet} />
+                <FormularioPosteoAdopcion onClose={() => setIsOpen(false)} onPostPet={onPostPet} />
               ) : (
                 <FormularioPosteoPerdido onClose={() => setIsOpen(false)} onPostPet={onPostPet} />
               ))}
           </div>
-        )}
+        ) : <> </>}
         <CardsContainer title={title} />
       </div>
     </div>
