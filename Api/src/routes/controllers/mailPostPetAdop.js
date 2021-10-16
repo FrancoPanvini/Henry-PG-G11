@@ -1,12 +1,16 @@
 const express = require("express");
 const router = express.Router();
 const postAdopPets = require("./services/mail_services/postAdopPets");
-const getAdopPets = require("./services/mail_services/getAdopPets");
+const postLostPets = require("./services/mail_services/postLostPets");
+const postRegister = require("./services/mail_services/postRegister")
 
 //Enviar correo al publicar mascota en adopcion.
-router.post("/", postAdopPets);
+router.post("/postadop", postAdopPets);
 
 //Enviar correo al postularse a una adopcion.
-router.post("/", getAdopPets);
+router.post("/postlost", postLostPets);
+
+//Enviar correo de registro
+router.post("/postregister", postRegister)
 
 module.exports = router;

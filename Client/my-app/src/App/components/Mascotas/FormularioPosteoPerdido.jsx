@@ -22,6 +22,8 @@ function FormularioPosteoPerdido({ onClose, onPostPet }) {
     size: "",
     description: "",
     Userid: localStorage.getItem("userId"),
+    userMail: localStorage.getItem("userMail"),
+    userName: localStorage.getItem("userName"),
   });
 
   //* "url" es el array de fotos de la mascota
@@ -104,21 +106,26 @@ function FormularioPosteoPerdido({ onClose, onPostPet }) {
       photo: url,
       Cityid: city.data.id,
     };
+    postLostPet(newMascota); 
+    onPostPet();
     swal({
-      title: "Mascota Perdida",
-      text: "Los datos ingresados son correctos?",
-      icon: "warning",
-      buttons: ["No", "Si"],
-    }).then((res) => {
-      if (res) {
-        swal({
-          text: "La Mascota fue publicada como perdida",
-          icon: "success",
-          timer: "3000",
-        }).then(postLostPet(newMascota), onPostPet());
-      }
+      text: "La Mascota fue postulada en adopción",
+      icon: "success",
+      timer: "3000",
     });
-
+    try {
+      axios.post("http://localhost:3001/sendmail/postlost", {
+        name: mascota.name,
+        mail: mascota.userMail,
+        url: url[0],
+        size: mascota.size,
+        owner: mascota.userName, 
+        description: mascota.description
+      });
+      console.log("correo enviado");
+    } catch (err) {
+      console.log(err);
+    }
     onClose();
   };
 
