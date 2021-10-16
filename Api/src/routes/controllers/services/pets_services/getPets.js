@@ -2,11 +2,11 @@ const { where, Op } = require("sequelize");
 const { Pets, Users, PetsType, Cities, Provinces, Countries, PetsPics } = require("../../../../db");
 
 const getPets = async (req, res) => {
-  const { type, gender, size, agemin, agemax, city, province, country, owner, adopter, adopted, paglimit, pagnumber } = req.query;
+  const { type, gender, size, agemin, agemax, city, province, country, owner, adopter, adopted, paglimit, pagnumber, latMax, latMin, lngMax, lngMin } = req.query;
 
   let query = {
     where: {},
-    attributes: ["id", "name", "size", "sex", "age", "createdAt"],
+    attributes: ["id", "name", "size", "sex", "age", "lat", "lng", "createdAt", "updatedAt"],
     order: [["createdAt","DESC"]],
     include: [
       {
@@ -57,6 +57,9 @@ const getPets = async (req, res) => {
 
   //* Add filter by adopter of pet
   if (adopted) query.where = { ...query.where, adopted: adopted };
+
+  //*Add filter by coordinates
+  if(latMax && latMin && lngMax && lngMin) query.where = { ...query.where, lat:{[Op.between]: [latMin, latMax]}, lng:{[Op.between]: [lngMin, lngMax]}}
 
   //* Obtain number of rows without pagination
   let pets = await Pets.findAndCountAll(query);

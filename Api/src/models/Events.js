@@ -10,6 +10,8 @@ module.exports = sequelize => {
       initDate: { type: DataTypes.DATE, allowNull: false },
       endDate: { type: DataTypes.DATE, allowNull: false },
       direction: { type: DataTypes.STRING, allowNull: false },
+      lat: { type: DataTypes.FLOAT },
+      lng: { type: DataTypes.FLOAT }
     },
     { sequelize: sequelize, modelName: "Events", timestamps: true, paranoid: true }
   );

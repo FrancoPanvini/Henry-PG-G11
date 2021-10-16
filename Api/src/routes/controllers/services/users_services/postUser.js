@@ -4,7 +4,7 @@ const { Users } = require("../../../../db");
 const { deleteUserDB } = require("./deleteUser");
 
 const postUser = async (req, res) => {
-  const { name, mail, phone, direction, password, photo, responsable, dni, description, link_web, link_instagram, link_facebook, link_donaciones, Cityid, UsersTypeid } = req.body;
+  const { name, mail, phone, direction, password, photo, responsable, dni, description, link_web, link_instagram, link_facebook, link_donaciones, Cityid, UsersTypeid, lng, lat } = req.body;
 
   //* Encrypt password for DB storage
   const encryptedPass = bcrypt.hashSync(password, 10);
@@ -27,6 +27,8 @@ const postUser = async (req, res) => {
         link_instagram,
         link_facebook,
         link_donaciones,
+        lat,
+        lng
       },
     });
     if (!created) throw new Error(`${mail} has allready been use to create a User`);

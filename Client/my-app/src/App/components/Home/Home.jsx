@@ -7,12 +7,16 @@ import {
   getPetsAdopHome,
   getProvinces,
   getShelters,
+  setUser,
 } from '../../redux/actions';
 import SliderContainer from './SliderContainer';
 import Onboarding from './Onboarding';
 import IconosHome from './IconosHome';
+import { useHistory } from 'react-router';
+import jwt from "jsonwebtoken";
 
 function Home() {
+  const history = useHistory()
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -22,7 +26,15 @@ function Home() {
     dispatch(getPetsAdopHome());
     dispatch(getLostPetsHome());
     dispatch(getShelters());
-  }, [dispatch]);
+    const url = window.location.href
+    if(url.includes('loginGoogle=true')){
+      let token = url.slice(1).split("&")[1].slice(2).split("#")[0];
+      let user = jwt.decode(token)
+      localStorage.setItem("token", token);
+      dispatch(setUser(user))
+      history.push('/')
+    }
+  }, [dispatch, history]);
 
   return (
     <div className="">

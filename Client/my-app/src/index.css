@@ -2,8 +2,35 @@
 @tailwind components;
 @tailwind utilities;
 
+/* Scrollbar always visible & styles */
+html {
+  overflow: -moz-scrollbars-vertical;
+  overflow-y: scroll;
+}
+::-webkit-scrollbar {
+  width: 13px;
+  height: 5px;
+}
+::-webkit-scrollbar-thumb {
+  @apply bg-primary;
+    border-radius: 6px;
+}
+::-webkit-scrollbar-thumb:hover {
+  @apply bg-primaryDark;
+}
+::-webkit-scrollbar-track {
+  background: #e5e7eb;
+  border-radius: 0px;
+  /* box-shadow: inset 0px 0px 0px 0px #f0f0f0; */
+}
+/* End Scrollbar always visible & styles */
+
+.background {
+  @apply bg-gradient-to-r from-thirty to-fourty;
+}
+
 .btn {
-  @apply border-b-2 shadow-md transition-all;
+  @apply border-b-2 shadow-xl transition-all;
 }
 
 .btn-nav {
@@ -18,41 +45,55 @@
   @apply shadow-lg filter brightness-110;
 }
 
+.btn-adogtame {
+  @apply border-b-2 shadow-buttonShadow transition-all;
+}
+
+.btn-adogtame:hover {
+  @apply filter brightness-110 shadow-lg;
+}
+
 .navButtonActive {
   @apply opacity-50;
 }
 
 .path {
-  clip-path: circle(50.0% at 50% 1%);;
+  clip-path: circle(50% at 50% 1%);
 }
 .path2 {
   clip-path: polygon(0 6%, 100% 0, 100% 100%, 0% 100%);
 }
 
-
+/* .card{
+  width: 250px;
+  height: 250px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+} */
 
 /* .btn-action {
   @apply bg-yellow-600 text-white border-yellow-700;
 } */
 
 .onboarding-transparency-right::after {
-  content: "";
+  content: '';
   position: absolute;
   inset: 0;
   z-index: 1;
-  background: linear-gradient(90deg, rgba(0,0,0,0) 80%, #4b8591 100%);
+  background: linear-gradient(90deg, rgba(0, 0, 0, 0) 80%, #4b8591 100%);
 }
 
 .onboarding-transparency-left::after {
-  content: "";
+  content: '';
   position: absolute;
   inset: 0;
   z-index: 1;
-  background: linear-gradient(90deg, #4F768E 0%, rgba(0,0,0,0) 20%);
+  background: linear-gradient(90deg, #4f768e 0%, rgba(0, 0, 0, 0) 20%);
 }
 
 .floorShadowCircle::before {
-  content: "";
+  content: '';
   position: absolute;
   left: 0;
   right: 0;
@@ -78,6 +119,58 @@ code {
     monospace;
 }*/
 
-.card {
+/* .card {
   @apply rounded overflow-hidden shadow-lg;
+} */
+
+.card {
+  @apply rounded-xl overflow-hidden text-center cursor-pointer bg-primary transition-all;
+}
+
+.card:hover {
+  @apply shadow-lg filter brightness-105;
+}
+
+.card-size-lg {
+  @apply w-80 h-96;
+}
+
+.card-size-md {
+  @apply w-52 h-64;
+}
+
+.card-transparency-bottom::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  background: linear-gradient(180deg, rgba(0, 0, 0, 0) 88%, #f5b561e0 98%, #f5b461 100%);
+}
+
+.panel {
+  @apply p-8 rounded-xl border-2 border-white border-opacity-50 shadow;
+}
+
+progress {
+  @apply rounded-lg bg-thirtyDark;
+}
+progress::-webkit-progress-bar {
+  @apply rounded-lg bg-thirtyDark;
+}
+progress::-webkit-progress-value {
+  @apply rounded-lg bg-thirtyLight;
+}
+progress::-moz-progress-bar {
+  @apply rounded-lg bg-thirtyLight;
+}
+
+.formAdopcion {
+  position: 'fixed';
+  top: '50%';
+  left: '50%';
+  transform: 'translate(-50%, -50%)';
+  background-color: '#8a9bad';
+  padding: '50px';
+  z-index: 1000;
+  border-radius: 25;
 }

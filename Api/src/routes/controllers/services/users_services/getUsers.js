@@ -1,8 +1,8 @@
-const { where } = require("sequelize");
+const { where, Op  } = require("sequelize");
 const { Users, Cities, Provinces, Countries, UsersType } = require("../../../../db");
 
 const getUsers = async (req, res) => {
-  const { city, province, country, type, paglimit, pagnumber } = req.query;
+  const { city, province, country, type, paglimit, pagnumber, latMax, latMin, lngMax, lngMin } = req.query;
   const query = {
     where: {},
     order: ["createdAt"],
@@ -32,6 +32,9 @@ const getUsers = async (req, res) => {
   if (!city && !province) {
     if (country) query.include[0].include.where = { CountryId: country };
   }
+
+    //*Add filter by coordinates
+    if(latMax && latMin && lngMax && lngMin) query.where = { ...query.where, lat:{[Op.between]: [latMin, latMax]}, lng:{[Op.between]: [lngMin, lngMax]}}
 
   //* Obtain number of rows without pagination
   let users = await Users.findAndCountAll(query);
