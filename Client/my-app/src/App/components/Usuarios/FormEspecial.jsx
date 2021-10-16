@@ -158,6 +158,7 @@ const FormEspecial = () => {
       }
       return true;
     }
+    /* falta agregar para deshabilitar en caso de refugio, pero algo está roto y no sé qué es...... */
   };
 
   const handleSubmit = async (e) => {
