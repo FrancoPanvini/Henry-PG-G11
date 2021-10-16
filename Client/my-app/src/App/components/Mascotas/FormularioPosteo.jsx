@@ -1,33 +1,35 @@
-import React, { useState } from 'react';
-import { Link, useHistory } from 'react-router-dom';
-import UploadImage from './../cargue-fotos/UploadImage';
-import { postPets } from '../../redux/actions/index';
-import { FaExclamationCircle, FaWindowClose } from 'react-icons/fa';
+import React, { useState } from "react";
+import { Link, useHistory } from "react-router-dom";
+import UploadImage from "./../cargue-fotos/UploadImage";
+import { postPets } from "../../redux/actions/index";
+import { FaExclamationCircle, FaWindowClose } from "react-icons/fa";
+
+import axios from "axios";
 
 function FormularioPosteo() {
   const history = useHistory();
   const [mascota, setMascota] = useState({
-    name: '',
-    size: '',
-    sex: '',
+    name: "",
+    size: "",
+    sex: "",
     age: null,
-    description: '',
-    Ownerid: localStorage.getItem('userId'),
-    PetsTypeid: '',
-    Cityid: localStorage.getItem('userCityid'),
+    description: "",
+    Ownerid: localStorage.getItem("userId"),
+    PetsTypeid: "",
+    Cityid: localStorage.getItem("userCityid"),
   });
   const [url, setUrl] = useState([]);
   const [errors, setErrors] = useState({});
-  
 
+  const [sent, setSent] = useState(false);
 
   const validate = ({ name, PetsTypeid }) => {
     let errors = {};
     if (!name) {
-      errors.name = 'Tu mascota debe tener un nombre';
+      errors.name = "Tu mascota debe tener un nombre";
     }
-    if (PetsTypeid === '') {
-      errors.PetsTypeid = 'Debes seleccionar si tu mascota es perro o gato';
+    if (PetsTypeid === "") {
+      errors.PetsTypeid = "Debes seleccionar si tu mascota es perro o gato";
     }
     // if (Cityid === '') {
     //   errors.Cityid = "Debes seleccionar la ciudad donde está tu mascota"
@@ -45,13 +47,13 @@ function FormularioPosteo() {
   };
 
   const handleDisabled = () => {
-    if (mascota.name !== '' && Object.keys(errors).length === 0) {
+    if (mascota.name !== "" && Object.keys(errors).length === 0) {
       return false;
     }
     return true;
   };
 
-  const handlePublicar = (e) => {
+  const handlePublicar = async (e) => {
     e.preventDefault();
     let newMascota = {
       ...mascota,
@@ -59,8 +61,17 @@ function FormularioPosteo() {
     };
     postPets(newMascota);
     setUrl([]);
-    alert('¡Listo!');
-    history.push('/adopciones');
+    setSent(true);
+    try {
+      axios.post("http://localhost:3001/sendmail", {
+        name: mascota.name,
+      })
+      console.log('correo enviado');
+    } catch (err) {
+      console.log(err);
+    }
+    alert("¡Listo!");
+    history.push("/adopciones");
   };
 
   return (
@@ -73,7 +84,7 @@ function FormularioPosteo() {
           />
         </Link>
         <label>
-          Nombre de la mascota:{' '}
+          Nombre de la mascota:{" "}
           {errors.name && (
             <FaExclamationCircle
               title={errors.name}
@@ -83,6 +94,7 @@ function FormularioPosteo() {
         </label>
         <input
           name="name"
+          value={mascota.name}
           onChange={handleChange}
           className="rounded-md px-1"
         />
@@ -91,7 +103,7 @@ function FormularioPosteo() {
         <div className="flex justify-evenly">
           <div className="text-center w-2/5 rounded-2xl bg-secondaryDark px-4 py-2">
             <label>
-              Especie:{' '}
+              Especie:{" "}
               {errors.PetsTypeid && (
                 <FaExclamationCircle
                   title={errors.PetsTypeid}
@@ -109,7 +121,7 @@ function FormularioPosteo() {
                   onChange={handleChange}
                 />
                 Gato
-              </label>{' '}
+              </label>{" "}
               <label htmlFor="perro">
                 <input
                   name="PetsTypeid"
@@ -134,7 +146,7 @@ function FormularioPosteo() {
                   onChange={handleChange}
                 />
                 Hembra
-              </label>{' '}
+              </label>{" "}
               <label htmlFor="macho">
                 <input
                   name="sex"
@@ -174,7 +186,7 @@ function FormularioPosteo() {
                   onChange={handleChange}
                 />
                 Chico
-              </label>{' '}
+              </label>{" "}
               <label htmlFor="mediano">
                 <input
                   name="size"
@@ -184,7 +196,7 @@ function FormularioPosteo() {
                   onChange={handleChange}
                 />
                 Mediano
-              </label>{' '}
+              </label>{" "}
               <label htmlFor="grande">
                 <input
                   name="size"
@@ -231,7 +243,7 @@ function FormularioPosteo() {
             <UploadImage setUrl={setUrl} />
           </div>
           <div className="w-32 h-32 bg-secondaryDark border-2 border-secondary">
-            {url === '' ? (
+            {url === "" ? (
               <div className="h-full flex justify-center items-center text-center text-secondaryLight">
                 previsualización de imagen
               </div>

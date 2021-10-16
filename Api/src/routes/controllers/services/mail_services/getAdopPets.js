@@ -2,7 +2,7 @@
 
 var nodemailer = require("nodemailer");
 
-const postAdopPets = (req, res) => {
+const getAdopPets = (req, res) => {
   let { text, mail, name } = req.body;
   var transporter = nodemailer.createTransport({
     //host: "smtp.ethereal.email",
@@ -367,4 +367,4 @@ const postAdopPets = (req, res) => {
   console.log("Email Enviado");
 };
 
-module.exports = postAdopPets;
+module.exports = getAdopPets;
