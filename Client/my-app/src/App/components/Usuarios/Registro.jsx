@@ -21,6 +21,7 @@ function Registro() {
   const dispatch = useDispatch();
   const [phoneCode, setPhoneCode] = useState('');
   const [location, setLocation] = useState({});
+  const [displayDirection, setDisplayDirection] = useState('')
   const history = useHistory();
 
   useEffect(() => {
@@ -53,10 +54,10 @@ function Registro() {
       errors.mail = 'Debe ser un email válido';
     }
     if (!phone) {
-      errors.phone = 'Ingresa tu número telefónico';
+      errors.phone = 'Ingresa un número telefónico de contacto';
     }
     if (!direction) {
-      errors.direction = 'Ingresa la zona donde resides';
+      errors.direction = 'Ingresa tu ubicación';
     }
     if (!password || password.length < 8) {
       errors.password = 'Debe tener al menos 8 caracteres';
@@ -74,7 +75,6 @@ function Registro() {
 
         const phoneNumber = parsePhoneNumber(e.target.value, phoneCode);
         if (phoneNumber?.isValid()) {
-          //console.log('Is Valid');
           const newInput = {
             ...input,
             [e.target.name]: phoneNumber.number.substring(1),
@@ -108,6 +108,7 @@ function Registro() {
     let lat = document.getElementById('lat')?.innerHTML;
     let lng = document.getElementById('lng')?.innerHTML;
     document.getElementById('direction').innerHTML = adress;
+    setDisplayDirection(`${adress}, ${province}, ${country}`);
     setLocation({
       city,
       province,
@@ -261,7 +262,7 @@ function Registro() {
                 type='text'
                 id='direction'
                 name='direction'
-                value={input.direction}
+                value={displayDirection}
                 onChange={handleOnChange}
                 className='rounded-md px-1 text-white'
               />
@@ -277,7 +278,7 @@ function Registro() {
               type='submit'
               disabled={handleDisabled()}
               className='mt-2 btn btn-lg bg-primary text-white border-yellow-600 flex justify-center items-center'>
-              <FaPaw className='text-3xl inline mr-4' /> Registrate
+              {input.UsersTypeid === 'i' ? <FaPaw className='text-white text-3xl inline mr-4' /> : <FaHome className='text-white text-3xl inline mr-4' />} Registrate
             </button>
             <span className='mt-2 text-center text-white hover:underline'>
               <Link to='/login'>¿Ya tienes una cuenta? Inicia sesión</Link>
