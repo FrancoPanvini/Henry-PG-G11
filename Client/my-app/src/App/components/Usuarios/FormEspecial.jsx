@@ -15,7 +15,6 @@ import { getCities, getProvinces, initialUser, getCountries } from '../../redux/
 import { editUserData } from '../../services/editUserData';
 
 //? Icons
-import { FaExclamationCircle } from 'react-icons/fa';
 import { FaPaw, FaHome } from 'react-icons/fa';
 
 const FormEspecial = () => {
