@@ -23,7 +23,7 @@ const FormEspecial = () => {
     lat: '',
     lng: '',
     CityId: '',
-    UsersTypeid: 'i',
+    UsersTypeId: '',
     responsable: '',
     description: '',
     link_donaciones: '',
@@ -128,7 +128,7 @@ const FormEspecial = () => {
               <div className='flex justify-evenly mb-2'>
                 <button
                   value='i'
-                  name='UsersTypeid'
+                  name='UsersTypeId'
                   onClick={handleOnChange}
                   className={`w-16 btn-nav text-white ${
                     input.UsersTypeid === 'i' ? 'border-b-2 border-opacity-0 bg-thirtyDark' : 'btn bg-thirtyLight'
@@ -137,7 +137,7 @@ const FormEspecial = () => {
                 </button>
                 <button
                   value='r'
-                  name='UsersTypeid'
+                  name='UsersTypeId'
                   onClick={handleOnChange}
                   className={`w-16 btn-nav text-white ${
                     input.UsersTypeid === 'r' ? 'border-b-2 border-opacity-0 bg-thirtyDark' : 'btn bg-thirtyLight'
@@ -194,9 +194,9 @@ const FormEspecial = () => {
                 {/* <button type="button" onClick={() => auxButtonClick()}>Confirm</button> */}
               </div>
               </div>
-              {input.UsersTypeid === 'r' ?
+              {input.UsersTypeId === 'r' ?
               <div className='flex p-2 m-2 flex-wrap'>
-                  <label className='text-white m-2'> Descripcion
+                  <label className='m-2'> Descripcion
                     <input
                     type='text'
                     id='description'
@@ -205,7 +205,7 @@ const FormEspecial = () => {
                     >
                     </input>
                     </label>
-                    <label className='text-white m-2'> Responsable del refugio
+                    <label className='m-2'> Responsable del refugio
                     <input
                     type='text'
                     id='responsable'
@@ -214,7 +214,7 @@ const FormEspecial = () => {
                     >
                     </input>
                     </label>
-                    <label className='text-white m-2'> link_donaciones
+                    <label className='m-2'> link_donaciones
                     <input
                     type='text'
                     id='link_donaciones'
@@ -223,7 +223,7 @@ const FormEspecial = () => {
                     >
                     </input>
                     </label>
-                    <label className='text-white m-2'>  link_instagram
+                    <label className='m-2'>  link_instagram
                     <input
                     type='text'
                     id='link_instagram'
@@ -232,7 +232,7 @@ const FormEspecial = () => {
                     >
                     </input>
                     </label>
-                    <label className='text-white m-2'> link_facebook
+                    <label className='m-2'> link_facebook
                     <input
                     type='text'
                     id='link_facebook'
@@ -241,7 +241,7 @@ const FormEspecial = () => {
                     >
                     </input>
                     </label>
-                    <label className='text-white m-2'> link_web
+                    <label className='m-2'> link_web
                     <input
                     type='text'
                     id='link_web'
