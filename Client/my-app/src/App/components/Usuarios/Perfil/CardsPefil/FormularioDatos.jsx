@@ -9,6 +9,7 @@ import {
 } from '../../../../redux/actions';
 import { editUserData } from '../../../../services/editUserData';
 import { BiX } from 'react-icons/bi';
+import ErrorIconPulsing from '../../../ErrorIconPulsing';
 import MapPost from '../../../Maps/MapPost'
 import axios from 'axios';
 
@@ -38,6 +39,8 @@ function FormularioDatos({ user, close, type }) {
   const dispatch = useDispatch();
   const [location, setLocation] = useState({});
   
+  //* estado para controlar errores en los links (deben empezar con `http`)
+  const [linkErrors, setLinkErrors] = useState({});
 
   useEffect(() => {
     dispatch(getCountries());
@@ -125,6 +128,34 @@ function FormularioDatos({ user, close, type }) {
     //onClose();
   }; */
 
+  const validateLink = ({ link_donaciones, link_web, link_facebook, link_instagram }) => {
+    let linkErrors = {};
+    if (link_donaciones && !link_donaciones.startsWith('http')) {
+      linkErrors.link_donaciones = 'El enlace debe empezar con http:// o https://';
+    }
+    if (link_web && !link_web.startsWith('http')) {
+      linkErrors.link_web = 'El enlace debe empezar con http:// o https://';
+    }
+    if (link_facebook && !link_facebook.startsWith('http')) {
+      linkErrors.link_facebook = 'El enlace debe empezar con http:// o https://';
+    }
+    if (link_instagram && !link_instagram.startsWith('http')) {
+      linkErrors.link_instagram = 'El enlace debe empezar con http:// o https://';
+    }
+    return linkErrors;
+  };
+
+  const handleLinkChange = (e) => {
+    let links = {
+      link_donaciones: input.link_donaciones ? input.link_donaciones : null,
+      link_web: input.link_web ? input.link_web : null,
+      link_facebook: input.link_facebook ? input.link_facebook : null,
+      link_instagram: input.link_instagram ? input.link_instagram : null,
+      [e.target.name]: e.target.value,
+    };
+    setLinkErrors(validateLink(links));
+    handleOnChange(e);
+  };
 
   const onSubmit = async(e) => {
     e.preventDefault();
@@ -281,46 +312,46 @@ function FormularioDatos({ user, close, type }) {
           />
         </div>
         <div className='w-1/3 p-2 m-2 flex flex-col'>
-          <label>Link Donaciones</label>
+          <label>Link Donaciones <ErrorIconPulsing error={linkErrors.link_donaciones} color='attentionLight' /></label>
           <input
             type='text'
             id='link_donaciones'
             name='link_donaciones'
             value={input.link_donaciones}
-            onChange={handleOnChange}
+            onChange={handleLinkChange}
             className='rounded-md p-1 mb-2'
           />
         </div>
         <div className='w-1/3 p-2 m-2 flex flex-col'>
-          <label>Link Instagram </label>
+          <label>Link Instagram <ErrorIconPulsing error={linkErrors.link_instagram} color='attentionLight' /></label>
           <input
             type='text'
             id='link_instagram'
             name='link_instagram'
             value={input.link_instagram}
-            onChange={handleOnChange}
+            onChange={handleLinkChange}
             className='rounded-md p-1 mb-2'
           />
         </div>
         <div className='w-1/3 p-2 m-2 flex flex-col'>
-          <label>Link Facebook </label>
+          <label>Link Facebook <ErrorIconPulsing error={linkErrors.link_facebook} color='attentionLight' /></label>
           <input
             type='text'
             id='link_facebook'
             name='link_facebook'
             value={input.link_facebook}
-            onChange={handleOnChange}
+            onChange={handleLinkChange}
             className='rounded-md p-1 mb-2'
           />
         </div>
         <div className='w-1/3 p-2 m-2 flex flex-col'>
-          <label >Link Web </label>
+          <label >Sitio Web <ErrorIconPulsing error={linkErrors.link_web} color='attentionLight' /></label>
           <input
             type='text'
             id='link_web'
             name='link_web'
             value={input.link_web}
-            onChange={handleOnChange}
+            onChange={handleLinkChange}
             className='rounded-md p-1 mb-2'
           />
         </div>
