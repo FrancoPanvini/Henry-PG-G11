@@ -12,7 +12,7 @@ import RadioSelectButtons from '../RadioSelectButtons';
 import ErrorIconPulsing from '../ErrorIconPulsing';
 
 //? Services
-import { getCities, getCountries, getProvinces, postUsers } from '../../redux/actions/index';
+import { getCities, getCountries, getProvinces, postUsers, logInUsers } from '../../redux/actions/index';
 
 //? Icons
 import { FaPaw, FaHome } from 'react-icons/fa';
@@ -142,8 +142,12 @@ function Registro() {
     let auxInput = { ...input, Cityid: city.data.id };
     dispatch(postUsers(auxInput));
 
-    alert('¡Registro exitoso! ahora puede iniciar sesión');
-    history.push('/login');
+    dispatch(logInUsers({
+      mail: input.mail,
+      password: input.password,
+    }));
+    alert('¡Te damos la bienvenida a ADOGTAME!');
+    history.push('/');
   };
 
   return (
