@@ -157,12 +157,16 @@ const FormEspecial = () => {
       }
       return true;
     }
-    /* falta agregar para deshabilitar en caso de refugio, pero algo está roto y no sé qué es...... */
+    if (input.UsersTypeid === 'r') {
+      if (Object.keys(errors).length === 0 && Object.keys(linkErrors).length === 0 ) {
+        return false;
+      } 
+      return true;
+    }
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log(e);
     let city = await axios.post('/locations', location);
     let auxInput = { ...input, CityId: city.data.id };
     editUserData(userId, auxInput);
@@ -277,7 +281,7 @@ const FormEspecial = () => {
           datos, ¡Muchas gracias!
         </span>
         <div>
-          <div className='ml-12 mr-auto mt-4 bg-gatitosWeb bg-bottom bg-cover relative lg:w-60 lg:h-60 xl:h-80 xl:w-80 2xl:h-96 2xl:w-96 rounded-full shadow-similBorderWhite floorShadowCircle' />
+          <div className='ml-12 mr-auto mt-4 bg-gatitosWeb bg-leftish-center bg-cover relative lg:w-60 lg:h-60 xl:h-80 xl:w-80 2xl:h-96 2xl:w-96 rounded-full shadow-similBorderWhite floorShadowCircle' />
         </div>
       </div>
     </div>
