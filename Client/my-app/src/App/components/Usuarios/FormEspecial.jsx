@@ -49,8 +49,11 @@ const FormEspecial = () => {
     dispatch(getCities());
   }, [dispatch]);
 
-  const validate = ({ phone, responsable, direction }) => {
+  const validate = ({ UsersTypeId, phone, responsable, direction }) => {
     let errors = {};
+    if (!UsersTypeId) {
+      errors.UsersTypeId = 'Debe seleccionar un tipo de cuenta';
+    }
     if (!phone) {
       errors.phone = 'Ingresa un número telefónico de contacto';
     }
@@ -151,16 +154,16 @@ const FormEspecial = () => {
   };
 
   const handleDisabled = () => {
-    if (input.UsersTypeid === 'i') {
+    if (input.UsersTypeId === 'i') {
       if (input.direction !== '' && !errors.hasOwnProperty('direction') && !errors.hasOwnProperty('phone')) {
         return false;
       }
       return true;
     }
-    if (input.UsersTypeid === 'r') {
-      if (Object.keys(errors).length === 0 && Object.keys(linkErrors).length === 0 ) {
+    if (input.UsersTypeId === 'r') {
+      if (Object.keys(errors).length === 0 && Object.keys(linkErrors).length === 0) {
         return false;
-      } 
+      }
       return true;
     }
   };
@@ -183,11 +186,11 @@ const FormEspecial = () => {
           className='flex flex-col h-auto p-4 py-10 ml-auto mr-4 bg-thirty rounded-lg w-10/12 min-w-min shadow-xl border-2 border-fourty border-opacity-50'>
           <div className='flex gap-8'>
             <div className='w-5/12 flex flex-col relative'>
-              <label className='text-white'>Tipo de cuenta:</label>
+              <label className='text-white'>Tipo de cuenta: <ErrorIconPulsing error={errors.UsersTypeId} color='primary' /></label>
               <div className='flex justify-start mb-2'>
                 <RadioSelectButtons
                   state={input}
-                  name='UsersTypeid'
+                  name='UsersTypeId'
                   options={['Personal', 'Refugios']}
                   values={['i', 'r']}
                   onSelection={handleOnChange}
@@ -195,7 +198,7 @@ const FormEspecial = () => {
                   colorsOff='bg-thirtyLight border-thirtyDark mx-1'
                 />
                 <div className='mx-auto flex justify-center items-center bg-fourty w-16 h-16 rounded-full absolute top-0 right-0'>
-                  {input.UsersTypeid === 'i' ? <FaPaw className='text-white text-3xl' /> : <FaHome className='text-white text-3xl' />}
+                  {input.UsersTypeId === 'r' ? <FaHome className='text-white text-3xl' /> : <FaPaw className='text-white text-3xl' />}
                 </div>
               </div>
               <div className='flex gap-2 '>
@@ -219,7 +222,7 @@ const FormEspecial = () => {
                   />
                 </div>
               </div>
-              {input.UsersTypeid === 'r' && (
+              {input.UsersTypeId === 'r' && (
                 <>
                   <label className='text-white'>
                     Responsable del refugio: <ErrorIconPulsing error={errors.responsable} color='primary' />
