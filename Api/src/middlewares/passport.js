@@ -96,7 +96,7 @@ passport.use(
             user = await Users.create({
               name: googleUser.name,
               mail: googleUser.email,
-              image: googleUser.picture,
+              photo: googleUser.picture,
               CityId: 1,
               UsersTypeId:'i'
             })

@@ -32,7 +32,7 @@ const FormEspecial = () => {
     lat: '',
     lng: '',
     CityId: '',
-    UsersTypeid: 'i',
+    UsersTypeId: '',
     responsable: '',
     description: '',
     link_donaciones: '',
