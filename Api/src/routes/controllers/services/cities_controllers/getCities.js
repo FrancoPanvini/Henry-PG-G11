@@ -1,11 +1,11 @@
-const { Users, Countries, Provinces, Cities } = require('../../../../db');
+const { Cities } = require('../../../../db');
 const { Op } = require('sequelize');
 
 const getCities = async (req, res) => {
   const { name, provinceId } = req.query;
   const query = {
     where: { name: { [Op.substring]: name } },
-    order: [[name]],
+    order: [['name']],
   };
   let cities;
   if (name && provinceId) {

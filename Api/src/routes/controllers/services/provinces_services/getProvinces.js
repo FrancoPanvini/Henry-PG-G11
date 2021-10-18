@@ -1,13 +1,12 @@
-const { Users, Countries, Provinces, Cities } = require('../../../../db');
+const { Provinces, Cities } = require('../../../../db');
 const { Op } = require('sequelize');
-
-const axios = require('axios');
 
 const getProvinces = async (req, res) => {
   const { name, countryId } = req.query;
   const query = {
     where: { name: { [Op.substring]: name } },
     include: [{ model: Cities, attributes: ['id', 'name'] }],
+    order: [['name']],
   };
   let provinces;
   if (name && countryId) {
