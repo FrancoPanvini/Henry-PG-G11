@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import ReactDom from "react-dom";
+import swal from "sweetalert";
 
 //? Components
 import FormularioAdopcionSelect from "./FormularioAdopcionSelect";
@@ -45,7 +46,11 @@ function FormularioAdopcion({ onClose, name, petId }) {
   const handleClick = e => {
     e.preventDefault();
     postAdoption(input);
-    alert('se envio tu solicitud con éxito')
+    swal({
+      text: "¡Tu solicitud fue enviada con Exito!",
+      icon: "success",
+      timer: "3000",
+    });
     onClose();
   };
 

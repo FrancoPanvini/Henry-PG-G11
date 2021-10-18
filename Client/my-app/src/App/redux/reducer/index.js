@@ -111,11 +111,6 @@ function rootReducer(state = initialState, action) {
         ...state,
         userData: action.payload.data,
       };
-    case 'GET_USER_PETS':
-      return {
-        ...state,
-        userPets: action.payload.data,
-      };
     case 'GET_EVENTS':
       return { ...state, events: action.payload };
 
