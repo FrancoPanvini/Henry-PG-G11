@@ -191,13 +191,14 @@ export const getLostPetsFilter = (filters) => {
   };
 };
 
-export const getLostPetsHome = () => {
+/* export const getLostPetsHome = () => {
   return function (dispatch) {
     axios.get(`/lostpets?found=false&paglimit=6&pagnumber=1`).then((data) => {
       dispatch({ type: 'GET_LOST_PETS_HOME', payload: data });
     });
   };
-};
+}; */
+
 export const setActive = (payload) => {
   return function (dispatch) {
     dispatch({ type: 'SET_ACTIVE', payload });
