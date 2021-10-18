@@ -3,7 +3,7 @@ import jwt from 'jsonwebtoken';
 
 export const getPetsAdop = () => {
   return function (dispatch) {
-    axios.get(`/pets?adopted=false`).then((data) => {
+    axios.get(`/pets?adopted=false`).then(data => {
       dispatch({ type: 'GET_PETS', payload: data });
     });
   };
@@ -11,13 +11,13 @@ export const getPetsAdop = () => {
 
 export const getPetsAdopHome = () => {
   return function (dispatch) {
-    axios.get(`/pets?adopted=false&paglimit=6&pagnumber=1`).then((data) => {
+    axios.get(`/pets?adopted=false&paglimit=6&pagnumber=1`).then(data => {
       dispatch({ type: 'GET_PETS_HOME', payload: data });
     });
   };
 };
 
-export const getPetsAdopFilter = (filters) => {
+export const getPetsAdopFilter = filters => {
   let url = '/pets?adopted=false';
   let keys = Object.keys(filters);
   let values = Object.values(filters);
@@ -27,29 +27,61 @@ export const getPetsAdopFilter = (filters) => {
   }
 
   return function (dispatch) {
-    axios.get(url).then((data) => {
+    axios.get(url).then(data => {
       dispatch({ type: 'GET_PETS_FILTERED', payload: data });
     });
   };
 };
 
-export const getPetAdopDetail = (id) => {
+export const getPetAdopDetail = id => {
   return function (dispatch) {
-    axios.get(`/pets/${id}`).then((data) => {
+    axios.get(`/pets/${id}`).then(data => {
       dispatch({ type: 'GET_PET_DETAIL', payload: data });
+    });
+  };
+};
+
+export const getLostPets = () => {
+  return function (dispatch) {
+    axios.get(`/lostpets?found=false`).then(data => {
+      dispatch({ type: 'GET_LOST_PETS', payload: data });
+    });
+  };
+};
+
+export const getLostPetsHome = () => {
+  return function (dispatch) {
+    axios.get(`/lostpets?found=false&paglimit=6&pagnumber=1`).then(data => {
+      dispatch({ type: 'GET_LOST_PETS_HOME', payload: data });
+    });
+  };
+};
+
+export const getLostPetsFilter = filters => {
+  let url = '/lostpets?found=false';
+  let keys = Object.keys(filters);
+  let values = Object.values(filters);
+
+  for (let i = 0; i < keys.length; i++) {
+    url = url + '&' + keys[i] + '=' + values[i];
+  }
+
+  return function (dispatch) {
+    axios.get(url).then(data => {
+      dispatch({ type: 'GET_LOST_PETS_FILTERED', payload: data });
     });
   };
 };
 
 export const getShelters = () => {
   return function (dispatch) {
-    axios.get(`/users?type=r`).then((data) => {
+    axios.get(`/users?type=r`).then(data => {
       dispatch({ type: 'GET_SHELTERS', payload: data });
     });
   };
 };
 
-export const getSheltersFilter = (filters) => {
+export const getSheltersFilter = filters => {
   let url = '/users?type=r';
   let keys = Object.keys(filters);
   let values = Object.values(filters);
@@ -59,7 +91,7 @@ export const getSheltersFilter = (filters) => {
   }
 
   return function (dispatch) {
-    axios.get(url).then((data) => {
+    axios.get(url).then(data => {
       dispatch({ type: 'GET_SHELTERS_FILTERED', payload: data });
     });
   };
@@ -81,7 +113,7 @@ export async function postPets(payload) {
 }
 
 export function setUser(user) {
-  return async (dispatch) => {
+  return async dispatch => {
     dispatch({
       type: 'SET_USER',
       payload: user,
@@ -98,7 +130,7 @@ export function logInUsers(payload) {
   return async function (dispatch) {
     const response = await axios
       .post('login/', payload)
-      .then((res) => {
+      .then(res => {
         if (res.data.message) {
           alert('error1');
         } else {
@@ -109,17 +141,15 @@ export function logInUsers(payload) {
           axios.defaults.headers.common['Authorization'] = `Bearer ${token}`;
         }
       })
-      .catch((err) => {
+      .catch(err => {
         alert(`${err}`);
       });
     return response;
   };
 }
 
-
-
 export function logOutUser() {
-  return (dispatch) => {
+  return dispatch => {
     localStorage.removeItem('token');
     localStorage.removeItem('userId');
     localStorage.removeItem('userName');
@@ -130,47 +160,15 @@ export function logOutUser() {
   };
 }
 
-export const getLostPets = () => {
-  return function (dispatch) {
-    axios.get(`/lostpets?found=false`).then((data) => {
-      dispatch({ type: 'GET_LOST_PETS', payload: data });
-    });
-  };
-};
-
-export const getLostPetsFilter = (filters) => {
-  let url = '/lostpets?found=false';
-  let keys = Object.keys(filters);
-  let values = Object.values(filters);
-
-  for (let i = 0; i < keys.length; i++) {
-    url = url + '&' + keys[i] + '=' + values[i];
-  }
-
-  return function (dispatch) {
-    axios.get(url).then((data) => {
-      dispatch({ type: 'GET_LOST_PETS_FILTERED', payload: data });
-    });
-  };
-};
-
-/* export const getLostPetsHome = () => {
-  return function (dispatch) {
-    axios.get(`/lostpets?found=false&paglimit=6&pagnumber=1`).then((data) => {
-      dispatch({ type: 'GET_LOST_PETS_HOME', payload: data });
-    });
-  };
-}; */
-
-export const setActive = (payload) => {
+export const setActive = payload => {
   return function (dispatch) {
     dispatch({ type: 'SET_ACTIVE', payload });
   };
 };
 
-export const initialUser = (userId) => {
+export const initialUser = userId => {
   return function (dispatch) {
-    axios.get(`users/${userId}`).then((data) => {
+    axios.get(`users/${userId}`).then(data => {
       dispatch({ type: 'INITIAL_USER', payload: data });
     });
   };
@@ -178,13 +176,13 @@ export const initialUser = (userId) => {
 
 export const getEvents = () => {
   return function (dispatch) {
-    axios.get(`/events`).then((data) => {
+    axios.get(`/events`).then(data => {
       dispatch({ type: 'GET_EVENTS', payload: data.data.rows });
     });
   };
 };
 
-export const getEventsFilter = (filters) => {
+export const getEventsFilter = filters => {
   let url = '/events';
   let keys = Object.keys(filters);
   let values = Object.values(filters);
@@ -198,7 +196,7 @@ export const getEventsFilter = (filters) => {
   }
 
   return function (dispatch) {
-    axios.get(url).then((data) => {
+    axios.get(url).then(data => {
       dispatch({ type: 'GET_EVENTS', payload: data.data.rows });
     });
   };

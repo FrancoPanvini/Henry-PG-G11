@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import parsePhoneNumber from 'libphonenumber-js';
 import { useDispatch } from 'react-redux';
 import { Link } from 'react-router-dom';
@@ -13,7 +13,7 @@ import RadioSelectButtons from '../RadioSelectButtons';
 import ErrorIconPulsing from '../ErrorIconPulsing';
 
 //? Services
-import { getCities, getCountries, getProvinces, postUsers, logInUsers } from '../../redux/actions/index';
+import { postUsers, logInUsers } from '../../redux/actions/index';
 
 //? Icons
 import { FaPaw, FaHome } from 'react-icons/fa';
@@ -22,7 +22,7 @@ function Registro() {
   const dispatch = useDispatch();
   const [phoneCode, setPhoneCode] = useState('');
   const [location, setLocation] = useState({});
-  const [displayDirection, setDisplayDirection] = useState('')
+  const [displayDirection, setDisplayDirection] = useState('');
   const history = useHistory();
 
   const [input, setInput] = useState({
@@ -62,7 +62,7 @@ function Registro() {
     }
     return errors;
   };
-  const handleOnChange = (e) => {
+  const handleOnChange = e => {
     e.preventDefault();
     if (e.target.name === 'phone') {
       if (e.target?.value) {
@@ -112,7 +112,7 @@ function Registro() {
     lat = parseFloat(lat);
     lng = parseFloat(lng);
 
-    setInput((prevState) => {
+    setInput(prevState => {
       return {
         ...prevState,
         direction: adress,
@@ -121,36 +121,37 @@ function Registro() {
       };
     });
 
-    //setDireccion(adress)
     setErrors(validate({ ...input, direction: adress, lat: lat, lng: lng }));
   };
 
   //* Maneja el codigo de area del telefono
-  const handlePhoneCodeChange = (e) => {
+  const handlePhoneCodeChange = e => {
     setPhoneCode(e.target.value);
   };
 
   //* Maneja el submit del form registro
-  const handleSubmit = async (e) => {
+  const handleSubmit = async e => {
     e.preventDefault();
     let city = await axios.post('/locations', location);
     let auxInput = { ...input, Cityid: city.data.id };
     dispatch(postUsers(auxInput));
-    dispatch(logInUsers({
-      mail: input.mail,
-      password: input.password,
-    }));
+    dispatch(
+      logInUsers({
+        mail: input.mail,
+        password: input.password,
+      })
+    );
     swal({
-      title: "Registro Exitoso!",
-      text: "Ahora puede iniciar sesión",
-      icon: "success",
-    })
+      title: 'Registro Exitoso!',
+      text: 'Ahora puede iniciar sesión',
+      icon: 'success',
+    });
     try {
-      axios.post("http://localhost:3001/sendmail/postregister", {
+      axios.post('http://localhost:3001/sendmail/postregister', {
         name: input.name,
         mail: input.mail,
       });
-      console.log("correo enviado");
+      console.log('correo enviado');
     } catch (err) {
       console.log(err);
     }
@@ -163,13 +164,9 @@ function Registro() {
         <div className='ml-auto mr-12 bg-cachorroWeb bg-bottom bg-cover relative h-96 w-96 rounded-full shadow-similBorderWhite floorShadowCircle' />
       </div>
       <div className='flex justify-center items-center w-3/5 z-1 h-full'>
-        <form
-          onSubmit={(e) => handleSubmit(e)}
-          className='p-4 w-11/12 flex flex-col bg-thirty rounded-lg min-w-min shadow-xl border-2 border-fourty border-opacity-50'>
+        <form onSubmit={e => handleSubmit(e)} className='p-4 w-11/12 flex flex-col bg-thirty rounded-lg min-w-min shadow-xl border-2 border-fourty border-opacity-50'>
           <div className='pb-4 border-b-2 border-thirtyDark border-opacity-50'>
-            <a
-              href='http://localhost:3001/auth/google'
-              className='btn btn-lg bg-white text-gray-600 border-gray-400 flex justify-center items-center'>
+            <a href='http://localhost:3001/auth/google' className='btn btn-lg bg-white text-gray-600 border-gray-400 flex justify-center items-center'>
               <img src='https://freesvg.org/img/1534129544.png' alt='Log in con Google' className='h-7 w-7 inline mr-4' />
               Registra tu cuenta usando Google
             </a>
@@ -196,50 +193,22 @@ function Registro() {
               <label className='text-white'>
                 {input.UsersTypeid === 'r' ? 'Nombre del refugio' : 'Nombre y apellido'}: <ErrorIconPulsing error={errors.name} color='primary' />
               </label>
-              <input
-                type='text'
-                id='name'
-                name='name'
-                // value={input.name}
-                onChange={handleOnChange}
-                className='rounded-md px-1 mb-2'
-              />
+              <input type='text' id='name' name='name' onChange={handleOnChange} className='rounded-md px-1 mb-2' />
 
               <label className='text-white'>
                 E-mail: <ErrorIconPulsing error={errors.mail} color='primary' />
               </label>
-              <input
-                type='text'
-                id='mail'
-                name='mail'
-                // value={input.mail}
-                onChange={handleOnChange}
-                className='rounded-md px-1 mb-2'
-              />
+              <input type='text' id='mail' name='mail' onChange={handleOnChange} className='rounded-md px-1 mb-2' />
 
               <label className='text-white'>
                 Contraseña: <ErrorIconPulsing error={errors.password} color='primary' />
               </label>
-              <input
-                type='password'
-                id='password'
-                name='password'
-                // value={input.password}
-                onChange={handleOnChange}
-                className='rounded-md px-1 mb-2'
-              />
+              <input type='password' id='password' name='password' onChange={handleOnChange} className='rounded-md px-1 mb-2' />
 
               <label className='text-white'>
                 Repetir contraseña: <ErrorIconPulsing error={errors.confirmPassword} color='primary' />
               </label>
-              <input
-                type='password'
-                // id='password'
-                name='confirmPassword'
-                // value={input.confirmPassword}
-                onChange={handleOnChange}
-                className='rounded-md px-1 mb-2'
-              />
+              <input type='password' name='confirmPassword' onChange={handleOnChange} className='rounded-md px-1 mb-2' />
 
               <div className='flex gap-2'>
                 <div className='w-1/4'>
@@ -252,14 +221,7 @@ function Registro() {
                   <label className='text-white'>
                     Teléfono: <ErrorIconPulsing error={errors.phone} color='primary' />
                   </label>
-                  <input
-                    type='number'
-                    id='phone'
-                    name='phone'
-                    // value={input.phone}
-                    onChange={handleOnChange}
-                    className='rounded-md px-1 mb-2'
-                  />
+                  <input type='number' id='phone' name='phone' onChange={handleOnChange} className='rounded-md px-1 mb-2' />
                 </div>
               </div>
             </div>
@@ -268,27 +230,15 @@ function Registro() {
               <label className='text-white'>
                 Dirección: (Seleccionar en el mapa) <ErrorIconPulsing error={errors.direction} color='primary' />
               </label>
-              <input
-                disabled
-                type='text'
-                id='direction'
-                name='direction'
-                value={displayDirection}
-                onChange={handleOnChange}
-                className='rounded-md px-1 text-white'
-              />
+              <input disabled type='text' id='direction' name='direction' value={displayDirection} onChange={handleOnChange} className='rounded-md px-1 text-white' />
               <div className='h-full pt-2'>
                 <MapPost onLocationChange={handleLocation} onChange={handleOnChange} className='' />
-                {/* <button type="button" onClick={() => auxButtonClick()}>Confirm</button> */}
               </div>
             </div>
           </div>
 
           <div className='flex flex-col'>
-            <button
-              type='submit'
-              disabled={handleDisabled()}
-              className='mt-2 btn btn-lg bg-primary text-white border-yellow-600 flex justify-center items-center'>
+            <button type='submit' disabled={handleDisabled()} className='mt-2 btn btn-lg bg-primary text-white border-yellow-600 flex justify-center items-center'>
               {input.UsersTypeid === 'i' ? <FaPaw className='text-white text-3xl inline mr-4' /> : <FaHome className='text-white text-3xl inline mr-4' />} Registrate
             </button>
             <span className='mt-2 text-center text-white hover:underline'>

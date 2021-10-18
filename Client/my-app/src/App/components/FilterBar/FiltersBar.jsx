@@ -121,11 +121,6 @@ function FiltersBar() {
     }
   };
 
-  const handleSend = e => {
-    e.preventDefault();
-    sendFilters(urlFilter);
-  };
-
   const handleResetFilters = e => {
     e.preventDefault();
     currentLocation === '/adopciones'
