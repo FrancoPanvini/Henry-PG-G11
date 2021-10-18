@@ -62,11 +62,7 @@ const List = ({
                   refProp={petRefs[i]}
                 /> */}
                 <CardRefugio
-                  photo={
-                    pet.photo
-                      ? pet.photo
-                      : "https://drpp-ny.org/wp-content/uploads/2014/07/sorry-image-not-available.png"
-                  }
+                  photo={pet.photo}
                   name={pet.name}
                   phone={pet.phone}
                   country={pet.country}
@@ -75,7 +71,7 @@ const List = ({
                   id={pet.id}
                   description={pet.description}
                   responsable={pet.responsable}
-                  socialNet={pet.link_web}
+                  web={pet.link_web}
                   instagram={pet.link_instagram}
                   facebook={pet.link_facebook}
                   donaciones={pet.link_donaciones}
