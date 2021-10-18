@@ -7,10 +7,10 @@ import swal from "sweetalert";
 import UploadImage from './../cargue-fotos/UploadImage';
 import MapPost from '../Maps/MapPost';
 import RadioSelectButtons from '../RadioSelectButtons';
+import ErrorIconPulsing from '../ErrorIconPulsing';
 
 //? Icons
 import { IoIosCloseCircle } from "react-icons/io";
-import { FaExclamationCircle } from "react-icons/fa";
 
 //? Services
 import { postLostPet } from "../../services/postLostPet";
@@ -33,6 +33,9 @@ function FormularioPosteoPerdido({ onClose, onPostPet }) {
     province: "",
     country: "",
   });
+
+  //* displayLocation es el texto que se le mostrará al usuario, compuesta de `${ciudad}, ${provincia}, ${país}`
+  const [displayLocation, setDisplayLocation] = useState('');
 
   //* "errors" es el objeto que la función validate del input manipula
   const [errors, setErrors] = useState({});
@@ -85,6 +88,7 @@ function FormularioPosteoPerdido({ onClose, onPostPet }) {
         lng: lng,
       };
     });
+    setDisplayLocation(`${city}, ${province}, ${country}`);
   };
 
   //* función que desactiva el botón Publicar cuando no todos los datos están completados
@@ -132,7 +136,7 @@ function FormularioPosteoPerdido({ onClose, onPostPet }) {
           <div className='flex justify-between h-full w-full'>
             <div className='flex flex-col w-1/2'>
               {/* ↓ Nombre de la mascota */}
-              <label>Responde al nombre de: {errors.name && <FaExclamationCircle title={errors.name} className='inline text-thirty align-baseline' />}</label>
+              <label>Responde al nombre de: <ErrorIconPulsing error={errors.name} color='thirty' /></label>
               <input name='name' onChange={handleChange} className='rounded-md px-1 mb-4' />
 
               {/* ↓ Especie de la mascota */}
@@ -191,7 +195,7 @@ function FormularioPosteoPerdido({ onClose, onPostPet }) {
             <div className='h-auto w-1/2 flex flex-col justify-center ml-4'>
               {/* ↓ Mapa de ubicación de la mascota */}
               <div>Zona en la que se perdió la mascota:</div>
-              <input disabled type='text' id='direction' name='direction' value={location.city} className='rounded-md px-1 mb-2 text-white' />
+              <input disabled type='text' id='direction' name='direction' value={displayLocation} className='rounded-md px-1 mb-2 text-white' />
               <MapPost onLocationChange={handleLocation} onChange={handleChange} className='h-full' />
               {/* ↓ botón Publicar */}
               <div className="w-full text-center mt-4">

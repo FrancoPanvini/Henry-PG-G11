@@ -6,13 +6,13 @@ import axios from 'axios';
 import UploadImage from '../cargue-fotos/UploadImage';
 import MapPost from '../Maps/MapPost';
 import RadioSelectButtons from '../RadioSelectButtons';
+import ErrorIconPulsing from '../ErrorIconPulsing';
 
 //? Actions
 import { postPets } from '../../redux/actions/index';
 
 //? Icons
 import { IoIosCloseCircle } from "react-icons/io";
-import { FaExclamationCircle } from "react-icons/fa";
 import swal from "sweetalert";
 
 function FormularioPosteo({ onClose, onPostPet }) {
@@ -40,6 +40,9 @@ function FormularioPosteo({ onClose, onPostPet }) {
     country: "",
   });
 
+  //* La dirección que se le mostrará al usuario, compuesta de `${ciudad}, ${provincia}, ${país}`
+  const [displayLocation, setDisplayLocation] = useState('');
+
   const validate = ({ name, PetsTypeid, lat }) => {
     let errors = {};
     if (!name) {
@@ -47,6 +50,9 @@ function FormularioPosteo({ onClose, onPostPet }) {
     }
     if (PetsTypeid === "") {
       errors.PetsTypeid = "Debes seleccionar si tu mascota es perro o gato";
+    }
+    if (lat === '') {
+      errors.direction = 'Tu mascota debe tener una ubicación';
     }
     return errors;
   };
@@ -117,6 +123,8 @@ function FormularioPosteo({ onClose, onPostPet }) {
         lng: lng,
       };
     });
+    setErrors(validate({ ...mascota, lat, lng }));
+    setDisplayLocation(`${city}, ${province}, ${country}`);
   };
 
   return ReactDom.createPortal(
@@ -129,13 +137,13 @@ function FormularioPosteo({ onClose, onPostPet }) {
           <div className='flex justify-between h-full'>
             <div className='flex flex-col w-1/2'>
               {/* ↓ Nombre de la mascota */}
-              <label>Nombre de la mascota: {errors.name && <FaExclamationCircle title={errors.name} className='inline text-thirty align-baseline' />}</label>
+              <label>Nombre de la mascota: <ErrorIconPulsing error={errors.name} color='thirty' /></label>
               <input name='name' onChange={handleChange} className='rounded-md px-1 mb-4' />
 
               <div className="flex">
                 {/* ↓ Especie de la mascota */}
                 <div className='text-center w-1/2 rounded-2xl px-4 py-2'>
-                  <label>Especie: {errors.PetsTypeid && <FaExclamationCircle title={errors.PetsTypeid} className='inline text-thirty align-baseline' />}</label>
+                  <label>Especie: <ErrorIconPulsing error={errors.PetsTypeid} color='thirty' /></label>
                   <div className='flex justify-evenly items-center'>
                     <RadioSelectButtons
                       state={mascota}
@@ -215,13 +223,13 @@ function FormularioPosteo({ onClose, onPostPet }) {
 
             <div className='h-auto w-1/2 flex flex-col justify-center ml-4'>
               {/* ↓ Mapa de ubicación de la mascota */}
-              <div>Ubicación de la Mascota:</div>
+              <div>Ubicación de la Mascota: <ErrorIconPulsing error={errors.direction} color='thirty' /></div>
               <input
                 disabled
                 type="text"
                 id="direction"
                 name="direction"
-                value={location.city}
+                value={displayLocation}
                 className="rounded-md px-1 mb-2 text-white"
               />
               <MapPost onLocationChange={handleLocation} className="h-full" />
