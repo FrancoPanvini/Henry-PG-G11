@@ -60,7 +60,7 @@ const getLostPets = async (req, res) => {
   lostPets.rows = lostPets.rows.map(pet => {
     pet = {
       ...pet.dataValues,
-      owner: pet.dataValues.User.name,
+      owner: pet.dataValues.User?.name,
       country: pet.dataValues.City.Province.Country.name,
       province: pet.dataValues.City.Province.name,
       city: pet.dataValues.City.name,

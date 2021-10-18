@@ -1,12 +1,13 @@
 import React, { useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 import {
-  // getCities,
-  // getCountries,
-  // getLostPetsHome,
-  // getPetsAdopHome,
-  // getProvinces,
-  // getShelters,
+  getCities,
+  getCountries,
+  getLostPets,
+  //getLostPetsHome,
+  getPetsAdopHome,
+  getProvinces,
+  getShelters,
   setUser,
 } from '../../redux/actions';
 import SliderContainer from './SliderContainer';
@@ -20,12 +21,13 @@ function Home() {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    // dispatch(getCountries());
-    // dispatch(getProvinces());
-    // dispatch(getCities());
-    // dispatch(getPetsAdopHome());
-    // dispatch(getLostPetsHome());
-    // dispatch(getShelters());
+    dispatch(getCountries());
+    dispatch(getProvinces());
+    dispatch(getCities());
+    dispatch(getPetsAdopHome());
+    //dispatch(getLostPetsHome());
+    dispatch(getLostPets());
+    dispatch(getShelters());
     const url = window.location.href
     if(url.includes('loginGoogle=true')){
       let token = url.slice(1).split("&")[1].slice(2).split("#")[0];
