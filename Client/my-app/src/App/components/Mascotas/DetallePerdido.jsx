@@ -65,8 +65,8 @@ function CardPopUpPetDetail({ onClose, petId }) {
                       <b>Descripción:</b> <br /> {pet.description}
                     </p>
                   )}
-                  <p className=' text-lg p-6 text-justify text-white italic capitalize'>
-                    <b>Zona en la que se perdió:</b> {`${pet.city}, ${pet.province}, ${pet.country} `}<br />
+                  <p className='text-lg p-6 text-justify text-white italic'>
+                    <b>Zona en la que se perdió:</b> <span className='capitalize'>{`${pet.city}, ${pet.province}, ${pet.country} `}</span><br />
                     {/* <span className='capitalize mb-4 pb-4'>{`${pet.city}, ${pet.province}, ${pet.country} `}</span> <br /> */}
                     <div className='h-80 w-full'>
                       <GoogleMap
