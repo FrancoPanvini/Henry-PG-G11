@@ -21,6 +21,6 @@ router.post("/", postLostPet);
 router.put("/found/:id", putFoundLostPet);
 
 //Eliminar una mascota
-router.delete("/", deleteLostPet);
+router.delete("/:id", deleteLostPet);
 
 module.exports = router;

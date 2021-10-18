@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from 'react';
 import { FaSave } from 'react-icons/fa';
 import { useSelector, useDispatch } from 'react-redux';
-import { initialUser } from '../../../../redux/actions';
-import { getCities, getCountries, getProvinces } from '../../../../redux/actions/locations';
+import { getCities, getCountries, getProvinces, initialUser } from '../../../../redux/actions';
 import { editUserData } from '../../../../services/editUserData';
 import { BiX } from 'react-icons/bi';
+import ErrorIconPulsing from '../../../ErrorIconPulsing';
 import MapPost from '../../../Maps/MapPost';
 import axios from 'axios';
 import swal from 'sweetalert';
@@ -37,6 +37,9 @@ function FormularioDatos({ user, close, type }) {
   const dispatch = useDispatch();
   const [location, setLocation] = useState({});
 
+  //* estado para controlar errores en los links (deben empezar con `http`)
+  const [linkErrors, setLinkErrors] = useState({});
+
   useEffect(() => {
     dispatch(getCountries());
     // dispatch(getProvinces());
@@ -63,7 +66,7 @@ function FormularioDatos({ user, close, type }) {
     // ubicacion && setProvinceId(ubicacion.id);
     // }
     if (e.target.id === 'ciudad') {
-      let ubicacion = ciudades.find(ciudad => ciudad.name === e.target.value.toLowerCase());
+      let ubicacion = ciudades.find((ciudad) => ciudad.name === e.target.value.toLowerCase());
       let newInput = { ...input };
       ubicacion &&
         (newInput = {
@@ -115,14 +118,43 @@ function FormularioDatos({ user, close, type }) {
     //onClose();
   }; */
 
-  const onSubmit = async e => {
+  const validateLink = ({ link_donaciones, link_web, link_facebook, link_instagram }) => {
+    let linkErrors = {};
+    if (link_donaciones && !link_donaciones.startsWith('http')) {
+      linkErrors.link_donaciones = 'El enlace debe empezar con http:// o https://';
+    }
+    if (link_web && !link_web.startsWith('http')) {
+      linkErrors.link_web = 'El enlace debe empezar con http:// o https://';
+    }
+    if (link_facebook && !link_facebook.startsWith('http')) {
+      linkErrors.link_facebook = 'El enlace debe empezar con http:// o https://';
+    }
+    if (link_instagram && !link_instagram.startsWith('http')) {
+      linkErrors.link_instagram = 'El enlace debe empezar con http:// o https://';
+    }
+    return linkErrors;
+  };
+
+  const handleLinkChange = (e) => {
+    let links = {
+      link_donaciones: input.link_donaciones ? input.link_donaciones : null,
+      link_web: input.link_web ? input.link_web : null,
+      link_facebook: input.link_facebook ? input.link_facebook : null,
+      link_instagram: input.link_instagram ? input.link_instagram : null,
+      [e.target.name]: e.target.value,
+    };
+    setLinkErrors(validateLink(links));
+    handleOnChange(e);
+  };
+
+  const onSubmit = async (e) => {
     e.preventDefault();
     emailjs
       .sendForm('service_ayo0oer', 'template_eqjjwlm', e.target, 'user_Fm0LQR1ItoVornKoxbfvo')
-      .then(res => {
+      .then((res) => {
         console.log(res);
       })
-      .catch(err => {
+      .catch((err) => {
         console.log(err);
       });
     let city = await axios.post('/locations', location);
@@ -142,7 +174,7 @@ function FormularioDatos({ user, close, type }) {
 
   return (
     <div className='relative'>
-      <form onSubmit={e => onSubmit(e)} className='flex flex-wrap'>
+      <form onSubmit={(e) => onSubmit(e)} className='flex flex-wrap'>
         <div className='w-1/3 p-2 m-2 flex flex-col'>
           <label>Nombre</label>
           <input type='text' id='name' name='name' value={input.name} onChange={handleOnChange} className='rounded-md p-1 mb-2 capitalize' />
@@ -167,15 +199,31 @@ function FormularioDatos({ user, close, type }) {
           <label className=''>
             Pais: <span className='capitalize'></span>
           </label>
-          <input name='country' type='text' id='pais' list='paises' onChange={handleUbicationChange} value={location.country} className='rounded-md p-1 mb-2 capitalize' />
-          <datalist id='paises'>{paises && paises.map(pais => <option key={pais.id} value={pais.name} />)}</datalist>
+          <input
+            name='country'
+            type='text'
+            id='pais'
+            list='paises'
+            onChange={handleUbicationChange}
+            value={location.country}
+            className='rounded-md p-1 mb-2 capitalize'
+          />
+          <datalist id='paises'>{paises && paises.map((pais) => <option key={pais.id} value={pais.name} />)}</datalist>
         </div>
 
         <div className='w-1/3 p-2 m-2 flex flex-col'>
           <label className=''>
             Provincia/Departamento: <span className='capitalize'></span>
           </label>
-          <input name='province' type='text' id='provincia' list='provincias' onChange={handleUbicationChange} value={location.province} className='rounded-md p-1 mb-2 capitalize' />
+          <input
+            name='province'
+            type='text'
+            id='provincia'
+            list='provincias'
+            onChange={handleUbicationChange}
+            value={location.province}
+            className='rounded-md p-1 mb-2 capitalize'
+          />
           {/* <datalist className='rounded-md p-1 mb-2' id='provincias'>
             {provincias &&
               provincias
@@ -233,27 +281,70 @@ function FormularioDatos({ user, close, type }) {
           <>
             <div className='w-1/3 p-2 m-2 flex flex-col'>
               <label>Responsable</label>
-              <input type='text' id='responsable' name='responsable' value={input.responsable} onChange={handleOnChange} className='rounded-md p-1 mb-2' />
+              <input
+                type='text'
+                id='responsable'
+                name='responsable'
+                value={input.responsable}
+                onChange={handleOnChange}
+                className='rounded-md p-1 mb-2'
+              />
             </div>
             <div className='w-1/3 p-2 m-2 flex flex-col'>
               <label>Descripcion</label>
-              <textarea type='text' id='description' name='description' value={input.description} onChange={handleOnChange} className='rounded-md p-1 mb-2 ' />
+              <textarea
+                type='text'
+                id='description'
+                name='description'
+                value={input.description}
+                onChange={handleOnChange}
+                className='rounded-md p-1 mb-2 '
+              />
             </div>
             <div className='w-1/3 p-2 m-2 flex flex-col'>
-              <label>Link Donaciones</label>
-              <input type='text' id='link_donaciones' name='link_donaciones' value={input.link_donaciones} onChange={handleOnChange} className='rounded-md p-1 mb-2' />
+              <label>
+                Link Donaciones <ErrorIconPulsing error={linkErrors.link_donaciones} color='attentionLight' />
+              </label>
+              <input
+                type='text'
+                id='link_donaciones'
+                name='link_donaciones'
+                value={input.link_donaciones}
+                onChange={handleLinkChange}
+                className='rounded-md p-1 mb-2'
+              />
             </div>
             <div className='w-1/3 p-2 m-2 flex flex-col'>
-              <label>Link Instagram </label>
-              <input type='text' id='link_instagram' name='link_instagram' value={input.link_instagram} onChange={handleOnChange} className='rounded-md p-1 mb-2' />
+              <label>
+                Link Instagram <ErrorIconPulsing error={linkErrors.link_instagram} color='attentionLight' />
+              </label>
+              <input
+                type='text'
+                id='link_instagram'
+                name='link_instagram'
+                value={input.link_instagram}
+                onChange={handleLinkChange}
+                className='rounded-md p-1 mb-2'
+              />
             </div>
             <div className='w-1/3 p-2 m-2 flex flex-col'>
-              <label>Link Facebook </label>
-              <input type='text' id='link_facebook' name='link_facebook' value={input.link_facebook} onChange={handleOnChange} className='rounded-md p-1 mb-2' />
+              <label>
+                Link Facebook <ErrorIconPulsing error={linkErrors.link_facebook} color='attentionLight' />
+              </label>
+              <input
+                type='text'
+                id='link_facebook'
+                name='link_facebook'
+                value={input.link_facebook}
+                onChange={handleLinkChange}
+                className='rounded-md p-1 mb-2'
+              />
             </div>
             <div className='w-1/3 p-2 m-2 flex flex-col'>
-              <label>Link Web </label>
-              <input type='text' id='link_web' name='link_web' value={input.link_web} onChange={handleOnChange} className='rounded-md p-1 mb-2' />
+              <label>
+                Sitio Web <ErrorIconPulsing error={linkErrors.link_web} color='attentionLight' />
+              </label>
+              <input type='text' id='link_web' name='link_web' value={input.link_web} onChange={handleLinkChange} className='rounded-md p-1 mb-2' />
             </div>
           </>
         )}
@@ -267,7 +358,10 @@ function FormularioDatos({ user, close, type }) {
           >
             <FaSave />
           </button>
-          <button className='btn bg-red-600 text-white w-16 h-16 shadow-2xl flex justify-center items-center text-3xl mr-2 rounded-full ' title='Cerrar' onClick={close}>
+          <button
+            className='btn bg-red-600 text-white w-16 h-16 shadow-2xl flex justify-center items-center text-3xl mr-2 rounded-full '
+            title='Cerrar'
+            onClick={close}>
             <BiX />
           </button>
         </div>

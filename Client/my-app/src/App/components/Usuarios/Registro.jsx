@@ -5,23 +5,24 @@ import { Link } from 'react-router-dom';
 import axios from 'axios';
 import { useHistory } from 'react-router-dom';
 import swal from 'sweetalert';
-import emailjs from 'emailjs-com';
 
 //? Components
 import MapPost from '../Maps/MapPost';
 import PhoneCodes from './phoneRegionInput';
 import RadioSelectButtons from '../RadioSelectButtons';
+import ErrorIconPulsing from '../ErrorIconPulsing';
 
 //? Services
-import { postUsers } from '../../redux/actions/index';
+import { getCities, getCountries, getProvinces, postUsers, logInUsers } from '../../redux/actions/index';
 
-//? Styles
-import { FaPaw, FaExclamationCircle } from 'react-icons/fa';
+//? Icons
+import { FaPaw, FaHome } from 'react-icons/fa';
 
 function Registro() {
   const dispatch = useDispatch();
   const [phoneCode, setPhoneCode] = useState('');
   const [location, setLocation] = useState({});
+  const [displayDirection, setDisplayDirection] = useState('')
   const history = useHistory();
 
   const [input, setInput] = useState({
@@ -48,10 +49,10 @@ function Registro() {
       errors.mail = 'Debe ser un email válido';
     }
     if (!phone) {
-      errors.phone = 'Ingresa tu número telefónico';
+      errors.phone = 'Ingresa un número telefónico de contacto';
     }
     if (!direction) {
-      errors.direction = 'Ingresa la zona donde resides';
+      errors.direction = 'Ingresa tu ubicación';
     }
     if (!password || password.length < 8) {
       errors.password = 'Debe tener al menos 8 caracteres';
@@ -61,7 +62,7 @@ function Registro() {
     }
     return errors;
   };
-  const handleOnChange = e => {
+  const handleOnChange = (e) => {
     e.preventDefault();
     if (e.target.name === 'phone') {
       if (e.target?.value) {
@@ -102,6 +103,7 @@ function Registro() {
     let lat = document.getElementById('lat')?.innerHTML;
     let lng = document.getElementById('lng')?.innerHTML;
     document.getElementById('direction').innerHTML = adress;
+    setDisplayDirection(`${adress}, ${province}, ${country}`);
     setLocation({
       city,
       province,
@@ -110,7 +112,7 @@ function Registro() {
     lat = parseFloat(lat);
     lng = parseFloat(lng);
 
-    setInput(prevState => {
+    setInput((prevState) => {
       return {
         ...prevState,
         direction: adress,
@@ -124,29 +126,34 @@ function Registro() {
   };
 
   //* Maneja el codigo de area del telefono
-  const handlePhoneCodeChange = e => {
+  const handlePhoneCodeChange = (e) => {
     setPhoneCode(e.target.value);
   };
 
   //* Maneja el submit del form registro
-  const handleSubmit = async e => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    emailjs
-      .sendForm('service_ayo0oer', 'template_yvy3l7h', e.target, 'user_Fm0LQR1ItoVornKoxbfvo')
-      .then(res => {
-        console.log(res);
-      })
-      .catch(err => {
-        console.log(err);
-      });
     let city = await axios.post('/locations', location);
     let auxInput = { ...input, Cityid: city.data.id };
-    swal({
-      title: 'Registro Exitoso!',
-      text: 'Ahora puede iniciar sesión',
-      icon: 'success',
-    });
     dispatch(postUsers(auxInput));
+    dispatch(logInUsers({
+      mail: input.mail,
+      password: input.password,
+    }));
+    swal({
+      title: "Registro Exitoso!",
+      text: "Ahora puede iniciar sesión",
+      icon: "success",
+    })
+    try {
+      axios.post("http://localhost:3001/sendmail/postregister", {
+        name: input.name,
+        mail: input.mail,
+      });
+      console.log("correo enviado");
+    } catch (err) {
+      console.log(err);
+    }
     history.push('/login');
   };
 
@@ -156,33 +163,38 @@ function Registro() {
         <div className='ml-auto mr-12 bg-cachorroWeb bg-bottom bg-cover relative h-96 w-96 rounded-full shadow-similBorderWhite floorShadowCircle' />
       </div>
       <div className='flex justify-center items-center w-3/5 z-1 h-full'>
-        <form onSubmit={e => handleSubmit(e)} className='p-4 w-11/12 flex flex-col bg-thirty rounded-lg min-w-min shadow-xl border-2 border-fourty border-opacity-50'>
-          <div className='mx-auto mb-4 flex justify-center items-center bg-fourty w-16 h-16 rounded-full'>
-            <FaPaw className='text-white text-3xl' />
+        <form
+          onSubmit={(e) => handleSubmit(e)}
+          className='p-4 w-11/12 flex flex-col bg-thirty rounded-lg min-w-min shadow-xl border-2 border-fourty border-opacity-50'>
+          <div className='pb-4 border-b-2 border-thirtyDark border-opacity-50'>
+            <a
+              href='http://localhost:3001/auth/google'
+              className='btn btn-lg bg-white text-gray-600 border-gray-400 flex justify-center items-center'>
+              <img src='https://freesvg.org/img/1534129544.png' alt='Log in con Google' className='h-7 w-7 inline mr-4' />
+              Registra tu cuenta usando Google
+            </a>
           </div>
 
-          <div className='flex gap-8 overflow-auto mb-4'>
-            <div className='flex flex-col w-2/5'>
+          <div className='flex gap-8 overflow-auto my-4'>
+            <div className='flex flex-col w-2/5 relative'>
               <label className='text-white'>Tipo de cuenta:</label>
-              <div className='flex justify-evenly mb-2'>
+              <div className='flex justify-start mb-2'>
                 <RadioSelectButtons
                   state={input}
                   name='UsersTypeid'
                   options={['Personal', 'Refugios']}
                   values={['i', 'r']}
                   onSelection={handleOnChange}
-                  colorsOn='bg-thirtyDark'
-                  colorsOff='bg-thirtyLight border-thirtyDark'
+                  colorsOn='bg-thirtyDark mx-2'
+                  colorsOff='bg-thirtyLight border-thirtyDark mx-2'
                 />
+                <div className='mx-auto flex justify-center items-center bg-fourty w-16 h-16 rounded-full absolute top-0 right-0'>
+                  {input.UsersTypeid === 'i' ? <FaPaw className='text-white text-3xl' /> : <FaHome className='text-white text-3xl' />}
+                </div>
               </div>
 
               <label className='text-white'>
-                {input.UsersTypeid === 'r' ? 'Nombre del refugio' : 'Nombre y apellido'}:{' '}
-                {errors.name && (
-                  <span title={errors.name}>
-                    <FaExclamationCircle className='inline text-primary align-baseline' />
-                  </span>
-                )}
+                {input.UsersTypeid === 'r' ? 'Nombre del refugio' : 'Nombre y apellido'}: <ErrorIconPulsing error={errors.name} color='primary' />
               </label>
               <input
                 type='text'
@@ -194,12 +206,7 @@ function Registro() {
               />
 
               <label className='text-white'>
-                E-mail:{' '}
-                {errors.mail && (
-                  <span title={errors.mail}>
-                    <FaExclamationCircle className='inline text-primary align-baseline' />
-                  </span>
-                )}
+                E-mail: <ErrorIconPulsing error={errors.mail} color='primary' />
               </label>
               <input
                 type='text'
@@ -211,12 +218,7 @@ function Registro() {
               />
 
               <label className='text-white'>
-                Contraseña:{' '}
-                {errors.password && (
-                  <span title={errors.password}>
-                    <FaExclamationCircle className='inline text-primary align-baseline' />
-                  </span>
-                )}
+                Contraseña: <ErrorIconPulsing error={errors.password} color='primary' />
               </label>
               <input
                 type='password'
@@ -228,12 +230,7 @@ function Registro() {
               />
 
               <label className='text-white'>
-                Repetir contraseña:{' '}
-                {errors.confirmPassword && (
-                  <span title={errors.confirmPassword}>
-                    <FaExclamationCircle className='inline text-primary align-baseline' />
-                  </span>
-                )}
+                Repetir contraseña: <ErrorIconPulsing error={errors.confirmPassword} color='primary' />
               </label>
               <input
                 type='password'
@@ -253,12 +250,7 @@ function Registro() {
                 </div>
                 <div className='w-3/4 flex flex-col'>
                   <label className='text-white'>
-                    Teléfono:
-                    {errors.phone && (
-                      <span title={errors.phone}>
-                        <FaExclamationCircle className='inline text-primary align-baseline' />
-                      </span>
-                    )}
+                    Teléfono: <ErrorIconPulsing error={errors.phone} color='primary' />
                   </label>
                   <input
                     type='number'
@@ -274,14 +266,17 @@ function Registro() {
 
             <div className='flex flex-col w-3/5 '>
               <label className='text-white'>
-                Dirección: (Seleccionar en el mapa)
-                {errors.direction && (
-                  <span title={errors.direction}>
-                    <FaExclamationCircle className='inline text-primary align-baseline' />
-                  </span>
-                )}
+                Dirección: (Seleccionar en el mapa) <ErrorIconPulsing error={errors.direction} color='primary' />
               </label>
-              <input disabled type='text' id='direction' name='direction' value={input.direction} onChange={handleOnChange} className='rounded-md px-1 text-white' />
+              <input
+                disabled
+                type='text'
+                id='direction'
+                name='direction'
+                value={displayDirection}
+                onChange={handleOnChange}
+                className='rounded-md px-1 text-white'
+              />
               <div className='h-full pt-2'>
                 <MapPost onLocationChange={handleLocation} onChange={handleOnChange} className='' />
                 {/* <button type="button" onClick={() => auxButtonClick()}>Confirm</button> */}
@@ -290,10 +285,13 @@ function Registro() {
           </div>
 
           <div className='flex flex-col'>
-            <button type='submit' disabled={handleDisabled()} className='btn btn-lg bg-primary text-white border-yellow-600'>
-              Registrate
+            <button
+              type='submit'
+              disabled={handleDisabled()}
+              className='mt-2 btn btn-lg bg-primary text-white border-yellow-600 flex justify-center items-center'>
+              {input.UsersTypeid === 'i' ? <FaPaw className='text-white text-3xl inline mr-4' /> : <FaHome className='text-white text-3xl inline mr-4' />} Registrate
             </button>
-            <span className='text-center text-white hover:underline'>
+            <span className='mt-2 text-center text-white hover:underline'>
               <Link to='/login'>¿Ya tienes una cuenta? Inicia sesión</Link>
             </span>
           </div>
