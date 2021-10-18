@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 // import { useSelector } from "react-redux";
 import ReactCardFlip from 'react-card-flip';
 // import Modal from "../pop-up/modal";
@@ -9,6 +9,10 @@ import {
   FaDonate,
   // FaPaw,
 } from 'react-icons/fa';
+import { IoMdAddCircle } from 'react-icons/io';
+import { getPetsByUser } from '../../services/getPetsByUser';
+import { getEventsByUserId } from '../../services/getEventsByUserId';
+import DetalleRefugio from '../Refugios/DetalleRefugio';
 // import { useSelector } from 'react-redux';
 
 function CardRefugio({
@@ -24,14 +28,37 @@ function CardRefugio({
   instagram,
   facebook,
   donaciones,
+  id,
 }) {
   const [isFlipped, setIsFlipped] = useState(false);
-  // const [isOpen, setIsOpen] = useState(false);
-  // const isLogged = useSelector((state) => state.isLogged);
+  const [isOpen, setIsOpen] = useState(false);
+  //const isLogged = useSelector((state) => state.isLogged);
+  const [pets, setPets] = useState([]);
+  const [events, setEvents] = useState([]);
 
   const handleClick = () => {
     setIsFlipped(!isFlipped);
   };
+  console.log(!id ? 'cargando id' : id)
+  useEffect(() => {
+    /*   const getPetsLost = async (id) => {
+      const rta = await getLostPetsByUser(id);
+      setPets1(rta);
+    }; */
+    /*   getPetsLost(userId);*/
+
+    const getEvents = async (id) => {
+      const rta = await getEventsByUserId(id);
+      setEvents(rta.data.rows);
+    };
+    getEvents(id);
+
+    const getPetsAdop = async (id) => {
+      const rta = await getPetsByUser(id);
+      setPets(rta);
+    };
+    getPetsAdop(id);
+  }, [id]);
 
   return (
     <div className='w-auto h-5/6'>
@@ -52,14 +79,32 @@ function CardRefugio({
             <div className='font-bold text-xl p-6 text-fourty capitalize flex items-start gap-3 '>
               {name}
               {/* Button & PopUp card for detail */}
-              {/*    <div className="">
+              <div className=''>
                 <IoMdAddCircle
-                  title="Ver más detalles"
-                  onClick={() => setIsOpenDetail(true)}
-                  className="text-fourty absolute text-3xl hover:text-fourtyLight cursor-pointer transition-all bg-white rounded-full"
+                  title='Ver más detalles'
+                  onClick={() => setIsOpen(true)}
+                  className='text-fourty absolute text-3xl hover:text-fourtyLight cursor-pointer transition-all bg-white rounded-full'
                 />
-                {isOpenDetail && <CardPopUpPetDetail onClose={() => setIsOpenDetail(false)} petId={id} />}
-              </div> */}
+                {isOpen && (
+                  <DetalleRefugio
+                    pets={pets}
+                    events={events}
+                    onClose={() => setIsOpen(false)}
+                    photo={photo}
+                    name={name}
+                    phone={phone}
+                    country={country}
+                    province={province}
+                    city={city}
+                    web={socialNet}
+                    responsable={responsable}
+                    description={description}
+                    instagram={instagram}
+                    facebook={facebook}
+                    donaciones={donaciones}
+                  />
+                )}
+              </div>
             </div>
 
             <div className='text-center'>
@@ -78,10 +123,10 @@ function CardRefugio({
                 Ciudad: <span className='text-fourty capitalize'>{city}</span>
               </h3>
               <h3 className='p-1 text-white font-bold'>
-                Descripcion:<span className='text-fourty'> {description}</span>
-              </h3>
-              <h3 className='p-1 text-white font-bold'>
-                Telefono: <a href={`https://wa.me/${phone}`} ><span className='text-fourty '>{phone}</span></a>
+                Telefono:{' '}
+                <a href={`https://wa.me/${phone}`}>
+                  <span className='text-fourty '>{phone}</span>
+                </a>
               </h3>
               <h3 className='p-1 text-white font-bold'>
                 Redes:{' '}

@@ -60,6 +60,7 @@ function Slider({ title }) {
                       instagram={p.link_instagram}
                       facebook={p.link_facebook}
                       donaciones={p.link_donaciones}
+                      id={p.id}
                     />
                   )}
                 </div>
