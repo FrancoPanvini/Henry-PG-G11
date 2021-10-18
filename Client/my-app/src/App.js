@@ -21,6 +21,7 @@ import PrivateRoute from './App/components/Routes/PrivateRoute';
 import PublicRoute from './App/components/Routes/PublicRoute';
 import Forgot from './App/components/Usuarios/ForgotPassword';
 import Reset from './App/components/Usuarios/ResetPassword';
+import { initialUser } from './App/redux/actions';
 
 function App() {
   const dispatch = useDispatch();
@@ -32,6 +33,7 @@ function App() {
       if (user.mail) {
         dispatch(setUser(user));
         axios.defaults.headers.common['Authorization'] = `Bearer ${token}`;
+        dispatch(initialUser(user.id));
       }
     }
   }, [dispatch]);
@@ -62,7 +64,7 @@ function App() {
             <Route path='/nosotros' exact component={Nosotros} />
             <Route path='/faq' exact component={FAQ} />
             <PublicRoute path='/login/forgot' exact component={Forgot} restricted={true} />
-            <PublicRoute path='/login/reset'  component={Reset} restricted={true} />
+            <PublicRoute path='/login/reset' component={Reset} restricted={true} />
           </Switch>
           <Footer />
         </div>

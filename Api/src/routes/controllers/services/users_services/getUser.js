@@ -1,5 +1,5 @@
-const { where } = require("sequelize");
-const { Users, Cities, Provinces, Countries, UsersType } = require("../../../../db");
+const { where } = require('sequelize');
+const { Users, Cities, Provinces, Countries, UsersType } = require('../../../../db');
 
 const getUser = async (req, res) => {
   const { id } = req.params;
@@ -10,11 +10,11 @@ const getUser = async (req, res) => {
     include: [
       {
         model: Cities,
-        attributes: ["name", "ProvinceId"],
+        attributes: ['name', 'ProvinceId'],
         required: true,
-        include: { model: Provinces, attributes: ["name", "CountryId"], required: true, where: {}, include: { model: Countries, required: true, attributes: ["name", "code"] } },
+        include: { model: Provinces, attributes: ['name', 'CountryId'], required: true, where: {}, include: { model: Countries, required: true, attributes: ['name'] } },
       },
-      { model: UsersType, attributes: ["type"] },
+      { model: UsersType, attributes: ['type'] },
     ],
   };
 

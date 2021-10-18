@@ -11,7 +11,7 @@ import RadioSelectButtons from '../RadioSelectButtons';
 import ErrorIconPulsing from '../ErrorIconPulsing';
 
 //? Services
-import { getCities, getProvinces, initialUser, getCountries } from '../../redux/actions';
+import { initialUser } from '../../redux/actions';
 import { editUserData } from '../../services/editUserData';
 
 //? Icons
@@ -43,12 +43,6 @@ const FormEspecial = () => {
 
   const [displayDirection, setDisplayDirection] = useState('');
 
-  useEffect(() => {
-    dispatch(getCountries());
-    dispatch(getProvinces());
-    dispatch(getCities());
-  }, [dispatch]);
-
   const validate = ({ UsersTypeId, phone, responsable, direction }) => {
     let errors = {};
     if (!UsersTypeId) {
@@ -66,7 +60,7 @@ const FormEspecial = () => {
     return errors;
   };
 
-  const handlePhoneCodeChange = (e) => {
+  const handlePhoneCodeChange = e => {
     setPhoneCode(e.target.value);
   };
 
@@ -87,7 +81,7 @@ const FormEspecial = () => {
     lat = parseFloat(lat);
     lng = parseFloat(lng);
 
-    setInput((prevState) => {
+    setInput(prevState => {
       return {
         ...prevState,
         direction: adress,
@@ -98,7 +92,7 @@ const FormEspecial = () => {
     setErrors(validate({ ...input, direction: adress, lat: lat, lng: lng }));
   };
 
-  const handleOnChange = (e) => {
+  const handleOnChange = e => {
     e.preventDefault();
     if (e.target.name === 'phone') {
       if (e.target?.value) {
@@ -141,7 +135,7 @@ const FormEspecial = () => {
     return linkErrors;
   };
 
-  const handleLinkChange = (e) => {
+  const handleLinkChange = e => {
     let links = {
       link_donaciones: input.link_donaciones ? input.link_donaciones : null,
       link_web: input.link_web ? input.link_web : null,
@@ -168,7 +162,7 @@ const FormEspecial = () => {
     }
   };
 
-  const handleSubmit = async (e) => {
+  const handleSubmit = async e => {
     e.preventDefault();
     let city = await axios.post('/locations', location);
     let auxInput = { ...input, CityId: city.data.id };
@@ -181,12 +175,12 @@ const FormEspecial = () => {
   return (
     <div className='h-screen82 flex items-center justify-around bg-gradient-to-r from-thirty to-fourty'>
       <div className='w-3/5'>
-        <form
-          onSubmit={(e) => handleSubmit(e)}
-          className='flex flex-col h-auto p-4 py-10 ml-auto mr-4 bg-thirty rounded-lg w-10/12 min-w-min shadow-xl border-2 border-fourty border-opacity-50'>
+        <form onSubmit={e => handleSubmit(e)} className='flex flex-col h-auto p-4 py-10 ml-auto mr-4 bg-thirty rounded-lg w-10/12 min-w-min shadow-xl border-2 border-fourty border-opacity-50'>
           <div className='flex gap-8'>
             <div className='w-5/12 flex flex-col relative'>
-              <label className='text-white'>Tipo de cuenta: <ErrorIconPulsing error={errors.UsersTypeId} color='primary' /></label>
+              <label className='text-white'>
+                Tipo de cuenta: <ErrorIconPulsing error={errors.UsersTypeId} color='primary' />
+              </label>
               <div className='flex justify-start mb-2'>
                 <RadioSelectButtons
                   state={input}
@@ -258,15 +252,7 @@ const FormEspecial = () => {
               <label className='text-white'>
                 Dirección: (Seleccionar en el mapa) <ErrorIconPulsing error={errors.direction} color='primary' />
               </label>
-              <input
-                disabled
-                type='text'
-                id='direction'
-                name='direction'
-                value={displayDirection}
-                onChange={handleOnChange}
-                className='rounded-md px-1 text-white'
-              />
+              <input disabled type='text' id='direction' name='direction' value={displayDirection} onChange={handleOnChange} className='rounded-md px-1 text-white' />
               <div className='h-96 py-4'>
                 <MapPost onLocationChange={handleLocation} onChange={handleOnChange} />
                 {/* <button type="button" onClick={() => auxButtonClick()}>Confirm</button> */}
@@ -280,8 +266,7 @@ const FormEspecial = () => {
       </div>
       <div className='w-2/5'>
         <span className='font-bold text-white text-opacity-90 lg:text-xl xl:text-2xl 2xl:text-3xl lg:w-60 xl:w-80 2xl:w-96 block text-center ml-12 mr-auto'>
-          ¡Hola! para poder utilizar todas las funcionalidades de <span className='text-primary'>ADOGTAME</span> te pedimos por favor completes estos
-          datos, ¡Muchas gracias!
+          ¡Hola! para poder utilizar todas las funcionalidades de <span className='text-primary'>ADOGTAME</span> te pedimos por favor completes estos datos, ¡Muchas gracias!
         </span>
         <div>
           <div className='ml-12 mr-auto mt-4 bg-gatitosWeb bg-leftish-center bg-cover relative lg:w-60 lg:h-60 xl:h-80 xl:w-80 2xl:h-96 2xl:w-96 rounded-full shadow-similBorderWhite floorShadowCircle' />

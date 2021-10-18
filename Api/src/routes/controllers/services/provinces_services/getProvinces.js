@@ -1,32 +1,27 @@
-const { Users, Countries, Provinces, Cities } = require("../../../../db");
-const { Op } = require("sequelize");
+const { Provinces, Cities } = require('../../../../db');
+const { Op } = require('sequelize');
 
-const axios = require('axios')
-
-
-
-const getProvinces = async(req, res) => {
-  const {name, countryId} = req.query
+const getProvinces = async (req, res) => {
+  const { name, countryId } = req.query;
   const query = {
-    where: { name: {[Op.substring]: name}},
-    include:[{ model: Cities, attributes:["id","name"] }]
+    where: { name: { [Op.substring]: name } },
+    include: [{ model: Cities, attributes: ['id', 'name'] }],
+    order: [['name']],
   };
   let provinces;
-  if(name && countryId) {
-    query.where = {...query.where, "CountryId": countryId}
-    provinces = await Provinces.findAll(query)
+  if (name && countryId) {
+    query.where = { ...query.where, CountryId: countryId };
+    provinces = await Provinces.findAll(query);
+  } else if (countryId) {
+    query.where = { CountryId: countryId };
+    provinces = await Provinces.findAll(query);
+  } else if (name) {
+    provinces = await Provinces.findAll(query);
+  } else {
+    provinces = await Provinces.findAll();
   }
-  else if (countryId){
-    query.where = {"CountryId": countryId}
-    provinces = await Provinces.findAll(query)
-  }
-  else if(name) {
-    provinces = await Provinces.findAll(query)}
-  else {
-    provinces = await Provinces.findAll()}
 
-  res.json(provinces)
-}
-
+  res.status(200).json(provinces);
+};
 
 module.exports = getProvinces;

@@ -25,12 +25,6 @@ function Registro() {
   const [displayDirection, setDisplayDirection] = useState('')
   const history = useHistory();
 
-  useEffect(() => {
-    dispatch(getCountries());
-    dispatch(getProvinces());
-    dispatch(getCities());
-  }, [dispatch]);
-
   const [input, setInput] = useState({
     name: '',
     mail: '',

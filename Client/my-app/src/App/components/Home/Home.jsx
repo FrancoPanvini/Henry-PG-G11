@@ -1,9 +1,8 @@
 import React, { useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 import {
-  getCities,
-  getCountries,
-  getLostPetsHome,
+  getLostPets,
+  //getLostPetsHome,
   getPetsAdopHome,
   getProvinces,
   getShelters,
@@ -13,36 +12,34 @@ import SliderContainer from './SliderContainer';
 import Onboarding from './Onboarding';
 import IconosHome from './IconosHome';
 import { useHistory } from 'react-router';
-import jwt from "jsonwebtoken";
+import jwt from 'jsonwebtoken';
 
 function Home() {
-  const history = useHistory()
+  const history = useHistory();
   const dispatch = useDispatch();
 
   useEffect(() => {
-    dispatch(getCountries());
-    dispatch(getProvinces());
-    dispatch(getCities());
     dispatch(getPetsAdopHome());
-    dispatch(getLostPetsHome());
+    //dispatch(getLostPetsHome());
+    dispatch(getLostPets());
     dispatch(getShelters());
-    const url = window.location.href
-    if(url.includes('loginGoogle=true')){
-      let token = url.slice(1).split("&")[1].slice(2).split("#")[0];
-      let user = jwt.decode(token)
-      localStorage.setItem("token", token);
-      dispatch(setUser(user))
-      history.push('/')
+    const url = window.location.href;
+    if (url.includes('loginGoogle=true')) {
+      let token = url.slice(1).split('&')[1].slice(2).split('#')[0];
+      let user = jwt.decode(token);
+      localStorage.setItem('token', token);
+      dispatch(setUser(user));
+      history.push('/');
     }
   }, [dispatch, history]);
 
   return (
-    <div className="">
+    <div className=''>
       <Onboarding />
       <IconosHome />
-      <SliderContainer title="ADOPCION" className=" bg-gradient-to-r from-thirty to-fourty text-white" />
-      <SliderContainer title="PERDIDOS" className=" bg-gray-200 text-primary" />
-      <SliderContainer title="REFUGIOS" className=" bg-gradient-to-r from-thirty to-fourty text-white" />
+      <SliderContainer title='ADOPCION' className=' bg-gradient-to-r from-thirty to-fourty text-white' />
+      <SliderContainer title='PERDIDOS' className=' bg-gray-200 text-primary' />
+      <SliderContainer title='REFUGIOS' className=' bg-gradient-to-r from-thirty to-fourty text-white' />
     </div>
   );
 }
