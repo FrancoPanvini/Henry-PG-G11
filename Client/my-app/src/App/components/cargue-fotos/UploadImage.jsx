@@ -12,13 +12,6 @@ function UploadImage({ url, setUrl }) {
     }
   };
 
-  //* Para eliminar una foto
-  const handleDeletePhoto = (e) => {
-    e.preventDefault(e);
-    const filtered = url.filter((picture) => picture !== e.target.id);
-    setUrl(filtered);
-  };
-
   const handleUpload = (e) => {
     e.preventDefault();
     image.forEach((el) => {
