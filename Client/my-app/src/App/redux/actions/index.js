@@ -1,6 +1,5 @@
 import axios from 'axios';
 import jwt from 'jsonwebtoken';
-/* import { setUser } from '../redux/actions'; */
 
 export const getPetsAdop = () => {
   return function (dispatch) {
@@ -87,8 +86,11 @@ export function setUser(user) {
       type: 'SET_USER',
       payload: user,
     });
+    let name = user.name;
+    let capitalize = name.charAt(0).toUpperCase() + name.slice(1);
+    localStorage.setItem('userMail', user.mail);
     localStorage.setItem('userId', user.id);
-    localStorage.setItem('userName', user.name);
+    localStorage.setItem('userName', capitalize);
     localStorage.setItem('userCityid', user.CityId); // ← OJO que ""CityId"" está con mayúscula acá, pero en minúscula en la DB !!! REVISAR!!!!
   };
 }
@@ -114,43 +116,7 @@ export function logInUsers(payload) {
   };
 }
 
-export const getCountries = () => {
-  return function (dispatch) {
-    axios.get('/countries').then((response) => {
-      const data = response.data.map((country) => ({
-        ...country,
-        name: country.name.replace(
-          /(^|[^A-Za-zÁÉÍÓÚÑáéíóúñ])([a-záéíóúñ])/g,
-          (l) => l.toUpperCase()
-        ),
-      }));
-      dispatch({ type: 'GET_COUNTRIES', payload: data });
-    });
-  };
-};
 
-export const getProvinces = () => {
-  return function (dispatch) {
-    axios.get('/provinces').then((response) => {
-      const data = response.data.map((province) => ({
-        ...province,
-        name: province.name.replace(
-          /(^|[^A-Za-zÁÉÍÓÚÑáéíóúñ])([a-záéíóúñ])/g,
-          (l) => l.toUpperCase()
-        ),
-      }));
-      dispatch({ type: 'GET_PROVINCES', payload: data });
-    });
-  };
-};
-
-export const getCities = () => {
-  return function (dispatch) {
-    axios.get('/cities').then((data) => {
-      dispatch({ type: 'GET_CITIES', payload: data });
-    });
-  };
-};
 
 export function logOutUser() {
   return (dispatch) => {
@@ -188,13 +154,14 @@ export const getLostPetsFilter = (filters) => {
   };
 };
 
-export const getLostPetsHome = () => {
+/* export const getLostPetsHome = () => {
   return function (dispatch) {
     axios.get(`/lostpets?found=false&paglimit=6&pagnumber=1`).then((data) => {
       dispatch({ type: 'GET_LOST_PETS_HOME', payload: data });
     });
   };
-};
+}; */
+
 export const setActive = (payload) => {
   return function (dispatch) {
     dispatch({ type: 'SET_ACTIVE', payload });
@@ -205,14 +172,6 @@ export const initialUser = (userId) => {
   return function (dispatch) {
     axios.get(`users/${userId}`).then((data) => {
       dispatch({ type: 'INITIAL_USER', payload: data });
-    });
-  };
-};
-
-export const getPetsAdopByUser = (id) => {
-  return function (dispatch) {
-    axios.get(`/pets?owner=${id}`).then((data) => {
-      dispatch({ type: 'GET_USER_PETS', payload: data });
     });
   };
 };

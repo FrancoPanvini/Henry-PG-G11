@@ -80,7 +80,7 @@ function rootReducer(state = initialState, action) {
       return { ...state, provinces: action.payload };
 
     case 'GET_CITIES':
-      return { ...state, cities: action.payload.data };
+      return { ...state, cities: action.payload };
 
     case 'LOG_OUT_USER':
       return {
@@ -90,16 +90,16 @@ function rootReducer(state = initialState, action) {
       };
 
     case 'GET_LOST_PETS':
-      return { ...state, lostPets: action.payload.data };
+      return { ...state, lostPets: action.payload.data, lostPetsHome: action.payload.data, };
 
     case 'GET_LOST_PETS_FILTERED':
       return { ...state, lostPets: action.payload.data };
 
-    case 'GET_LOST_PETS_HOME':
+   /*  case 'GET_LOST_PETS_HOME':
       return {
         ...state,
-        lostPets: action.payload.data,
-      };
+        lostPetsHome: action.payload.data,
+        }; */
 
     case 'SET_ACTIVE':
       return {
@@ -110,11 +110,6 @@ function rootReducer(state = initialState, action) {
       return {
         ...state,
         userData: action.payload.data,
-      };
-    case 'GET_USER_PETS':
-      return {
-        ...state,
-        userPets: action.payload.data,
       };
     case 'GET_EVENTS':
       return { ...state, events: action.payload };

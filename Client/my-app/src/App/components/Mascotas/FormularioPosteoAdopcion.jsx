@@ -1,15 +1,21 @@
-import React, { useState } from 'react';
-import ReactDom from 'react-dom';
-import axios from 'axios';
+import React, { useState } from "react";
+import ReactDom from "react-dom";
+import axios from "axios";
 
 //? Components
+<<<<<<< HEAD
 import UploadImage from '../cargue-fotos/UploadImage';
 import MapPost from '../Maps/MapPost';
 import RadioSelectButtons from '../RadioSelectButtons';
 import ErrorIconPulsing from '../ErrorIconPulsing';
+=======
+import UploadImage from "../cargue-fotos/UploadImage";
+import MapPost from "../Maps/MapPost";
+import RadioSelectButtons from "../RadioSelectButtons";
+>>>>>>> develop
 
 //? Actions
-import { postPets } from '../../redux/actions/index';
+import { postPets } from "../../redux/actions/index";
 
 //? Icons
 import { IoIosCloseCircle } from "react-icons/io";
@@ -27,10 +33,14 @@ function FormularioPosteo({ onClose, onPostPet }) {
     Cityid: localStorage.getItem("userCityid"),
     lat: "",
     lng: "",
+    userMail: localStorage.getItem("userMail"),
+    userName: localStorage.getItem("userName"),
   });
 
   //* estado en el que guardaremos las fotos de la mascota
   const [url, setUrl] = useState([]);
+
+  const [, setSent] = useState(false);
 
   const [errors, setErrors] = useState({});
 
@@ -57,7 +67,7 @@ function FormularioPosteo({ onClose, onPostPet }) {
     return errors;
   };
 
-  const handleChange = e => {
+  const handleChange = (e) => {
     e.preventDefault();
     const newMascota = {
       ...mascota,
@@ -82,22 +92,35 @@ function FormularioPosteo({ onClose, onPostPet }) {
       photo: url,
       Cityid: city.data.id,
     };
+    postPets(newMascota);
+    onPostPet();
+    setUrl([]);
+    setSent(true);
     swal({
-      title: "Mascota en Adopcion",
-      text: "Estas seguro que deseas poner en adopción esta mascota?",
-      icon: "warning",
-      buttons: ["No", "Si"],
-    }).then((res) => {
-      if (res) {
-        swal({
-          text: "La Mascota fue postulada en adopción",
-          icon: "success",
-          timer: "3000",
-        }).then(postPets(newMascota), onPostPet(), setUrl([]));
-      }
+      text: "La Mascota fue postulada en adopción",
+      icon: "success",
+      timer: "3000",
     });
+    
+    try {
+      axios.post("http://localhost:3001/sendmail/postadop", {
+        name: mascota.name,
+        mail: mascota.userMail,
+        userName: mascota.userName,
+        url: url[0],
+        sex: mascota.sex,
+        size: mascota.size,
+        age: mascota.age,
+        owner: mascota.userName, 
+      });
+      console.log("correo enviado");
+    } catch (err) {
+      console.log(err);
+    }
     onClose();
   };
+
+  console.log(url[0]);
 
   const handleLocation = () => {
     let city = document.getElementById(
@@ -133,10 +156,15 @@ function FormularioPosteo({ onClose, onPostPet }) {
       <div className="fixed inset-0 z-50 flex justify-center items-center">
         <form className="panel flex flex-col w-4/5 min-w-max mx-auto bg-gradient-to-r from-primaryDark to-primary relative">
           {/* ↓ botón para cancelar y volver atrás */}
-          <IoIosCloseCircle title='Cancelar y volver a Adopciones' onClick={onClose}  className='text-thirty absolute top-3 right-3 text-3xl hover:text-thirtyLight cursor-pointer transition-all' />
-          <div className='flex justify-between h-full'>
-            <div className='flex flex-col w-1/2'>
+          <IoIosCloseCircle
+            title="Cancelar y volver a Adopciones"
+            onClick={onClose}
+            className="text-thirty absolute top-3 right-3 text-3xl hover:text-thirtyLight cursor-pointer transition-all"
+          />
+          <div className="flex justify-between h-full">
+            <div className="flex flex-col w-1/2">
               {/* ↓ Nombre de la mascota */}
+<<<<<<< HEAD
               <label>Nombre de la mascota: <ErrorIconPulsing error={errors.name} color='thirty' /></label>
               <input name='name' onChange={handleChange} className='rounded-md px-1 mb-4' />
 
@@ -145,29 +173,59 @@ function FormularioPosteo({ onClose, onPostPet }) {
                 <div className='text-center w-1/2 rounded-2xl px-4 py-2'>
                   <label>Especie: <ErrorIconPulsing error={errors.PetsTypeid} color='thirty' /></label>
                   <div className='flex justify-evenly items-center'>
+=======
+              <label>
+                Nombre de la mascota:{" "}
+                {errors.name && (
+                  <FaExclamationCircle
+                    title={errors.name}
+                    className="inline text-thirty align-baseline"
+                  />
+                )}
+              </label>
+              <input
+                name="name"
+                onChange={handleChange}
+                className="rounded-md px-1 mb-4"
+              />
+
+              <div className="flex">
+                {/* ↓ Especie de la mascota */}
+                <div className="text-center w-1/2 rounded-2xl px-4 py-2">
+                  <label>
+                    Especie:{" "}
+                    {errors.PetsTypeid && (
+                      <FaExclamationCircle
+                        title={errors.PetsTypeid}
+                        className="inline text-thirty align-baseline"
+                      />
+                    )}
+                  </label>
+                  <div className="flex justify-evenly items-center">
+>>>>>>> develop
                     <RadioSelectButtons
                       state={mascota}
-                      name='PetsTypeid'
-                      options={['Gato', 'Perro']}
-                      values={['g', 'p']}
+                      name="PetsTypeid"
+                      options={["Gato", "Perro"]}
+                      values={["g", "p"]}
                       onSelection={handleChange}
-                      colorsOff='bg-thirtyLight border-thirtyDark'
-                      colorsOn='bg-thirtyDark'
+                      colorsOff="bg-thirtyLight border-thirtyDark"
+                      colorsOn="bg-thirtyDark"
                     />
                   </div>
                 </div>
                 {/* ↓ Sexo de la mascota */}
-                <div className='text-center w-1/2 px-8 py-2 border-l-2 border-primaryLight'>
+                <div className="text-center w-1/2 px-8 py-2 border-l-2 border-primaryLight">
                   <label>Sexo:</label>
-                  <div className='flex justify-evenly items-centert'>
-                  <RadioSelectButtons
+                  <div className="flex justify-evenly items-centert">
+                    <RadioSelectButtons
                       state={mascota}
-                      name='sex'
-                      options={['Hembra', 'Macho']}
-                      values={['h', 'm']}
+                      name="sex"
+                      options={["Hembra", "Macho"]}
+                      values={["h", "m"]}
                       onSelection={handleChange}
-                      colorsOff='bg-thirtyLight border-thirtyDark'
-                      colorsOn='bg-thirtyDark'
+                      colorsOff="bg-thirtyLight border-thirtyDark"
+                      colorsOn="bg-thirtyDark"
                     />
                   </div>
                 </div>
@@ -189,15 +247,15 @@ function FormularioPosteo({ onClose, onPostPet }) {
                 {/* ↓ Tamaño de la mascota */}
                 <div className="text-center w-3/5 px-8 py-4 border-l-2 border-primaryLight">
                   <label>Tamaño aproximado de la raza:</label>
-                  <div className='flex justify-evenly items-center'>
+                  <div className="flex justify-evenly items-center">
                     <RadioSelectButtons
                       state={mascota}
-                      name='size'
-                      options={['Chico', 'Mediano', 'Grande']}
-                      values={['c', 'm', 'g']}
+                      name="size"
+                      options={["Chico", "Mediano", "Grande"]}
+                      values={["c", "m", "g"]}
                       onSelection={handleChange}
-                      colorsOff='bg-thirtyLight border-thirtyDark'
-                      colorsOn='bg-thirtyDark'
+                      colorsOff="bg-thirtyLight border-thirtyDark"
+                      colorsOn="bg-thirtyDark"
                     />
                   </div>
                 </div>
@@ -213,15 +271,17 @@ function FormularioPosteo({ onClose, onPostPet }) {
               />
 
               {/* ↓ Fotos */}
-              <div className='flex justify-between items-center bg-gradient-to-r from-primary to-primaryLight px-4 py-2'>
-                <div className='w-full'>
-                  <label>Foto: (preferentemente la mascota al centro de la imagen)</label>
+              <div className="flex justify-between items-center bg-gradient-to-r from-primary to-primaryLight px-4 py-2">
+                <div className="w-full">
+                  <label>
+                    Foto: (preferentemente la mascota al centro de la imagen)
+                  </label>
                   <UploadImage url={url} setUrl={setUrl} />
                 </div>
               </div>
             </div>
 
-            <div className='h-auto w-1/2 flex flex-col justify-center ml-4'>
+            <div className="h-auto w-1/2 flex flex-col justify-center ml-4">
               {/* ↓ Mapa de ubicación de la mascota */}
               <div>Ubicación de la Mascota: <ErrorIconPulsing error={errors.direction} color='thirty' /></div>
               <input

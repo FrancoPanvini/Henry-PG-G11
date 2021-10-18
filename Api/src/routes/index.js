@@ -11,6 +11,7 @@ const loginRouter = require('./controllers/login')
 const citiesRouter = require ('./controllers/cities')
 const provincesRouter = require ('./controllers/provinces')
 const countriesRouter = require ('./controllers/countries')
+const mailRouter = require ('./controllers/mailPostPetAdop')
 const authRouter = require ('./controllers/auth')
 
 const router = Router()
@@ -27,6 +28,7 @@ router.use('/login', loginRouter)
 router.use('/cities', citiesRouter)
 router.use('/provinces', provincesRouter)
 router.use('/countries', countriesRouter)
+router.use('/sendmail', mailRouter)
 router.use('/auth', authRouter)
 
 

@@ -8,7 +8,7 @@ const getLostPets = async (req, res) => {
 
   let query = {
     where: {},
-    attributes: ["id", "name", "size", "description", "found", "lat", "lng", "createdAt", "photo"],
+    attributes: ["id", "name", "size", "description", "found", "lat", "lng", "createdAt", "photo", "updatedAt"],
     order: [["createdAt", "DESC"]],
     include: [
       {
@@ -60,7 +60,7 @@ const getLostPets = async (req, res) => {
   lostPets.rows = lostPets.rows.map(pet => {
     pet = {
       ...pet.dataValues,
-      owner: pet.dataValues.User.name,
+      owner: pet.dataValues.User?.name,
       country: pet.dataValues.City.Province.Country.name,
       province: pet.dataValues.City.Province.name,
       city: pet.dataValues.City.name,
