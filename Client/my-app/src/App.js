@@ -19,6 +19,8 @@ import axios from 'axios';
 import AppMap from './App/components/Maps/MapsFilter/AppMap';
 import PrivateRoute from './App/components/Routes/PrivateRoute';
 import PublicRoute from './App/components/Routes/PublicRoute';
+import Forgot from './App/components/Usuarios/ForgotPassword';
+import Reset from './App/components/Usuarios/ResetPassword';
 
 function App() {
   const dispatch = useDispatch();
@@ -59,6 +61,8 @@ function App() {
             <PrivateRoute path='/perfil' exact component={Perfil} linkRedirect='/login' />
             <Route path='/nosotros' exact component={Nosotros} />
             <Route path='/faq' exact component={FAQ} />
+            <PublicRoute path='/login/forgot' exact component={Forgot} restricted={true} />
+            <PublicRoute path='/login/reset'  component={Reset} restricted={true} />
           </Switch>
           <Footer />
         </div>

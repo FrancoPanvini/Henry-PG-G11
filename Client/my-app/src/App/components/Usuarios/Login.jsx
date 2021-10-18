@@ -120,6 +120,9 @@ function Login() {
           <a href="http://localhost:3001/auth/google">
           <GoogleLogin/>
           </a>
+          <Link to='/login/forgot'>
+          <h2>Forgot password</h2>
+          </Link>
       </div>
     </div>
   );
