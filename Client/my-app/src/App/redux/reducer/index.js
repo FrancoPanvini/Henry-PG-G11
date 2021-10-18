@@ -80,7 +80,7 @@ function rootReducer(state = initialState, action) {
       return { ...state, provinces: action.payload };
 
     case 'GET_CITIES':
-      return { ...state, cities: action.payload.data };
+      return { ...state, cities: action.payload };
 
     case 'LOG_OUT_USER':
       return {

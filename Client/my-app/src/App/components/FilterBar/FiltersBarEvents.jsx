@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { getEventsFilter, getEvents } from '../../redux/actions';
-import SelectUbication from './SelectCountries/SelectUbication';
+import SelectUbication from './Opciones/SelectUbication';
 
 function FiltersBarEvents() {
   const dispatch = useDispatch();

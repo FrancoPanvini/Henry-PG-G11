@@ -1,17 +1,14 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { useLocation } from 'react-router';
-import { getCities, getCountries, getLostPets, getLostPetsFilter, getPetsAdop, getPetsAdopFilter, getProvinces, getShelters, getSheltersFilter } from '../../redux/actions';
-import SelectUbication from './SelectCountries/SelectUbication';
+import { getLostPets, getLostPetsFilter, getPetsAdop, getPetsAdopFilter, getShelters, getSheltersFilter } from '../../redux/actions';
+
+//? Components
+import SelectUbication from './Opciones/SelectUbication';
+import SelectEspecie from './Opciones/SelectEspecie';
 
 function FiltersBar() {
   const dispatch = useDispatch();
-
-  useEffect(() => {
-    dispatch(getCountries());
-    dispatch(getProvinces());
-    dispatch(getCities());
-  }, [dispatch]);
 
   const [urlFilter, setUrlFilter] = useState({
     type: '',
@@ -148,28 +145,10 @@ function FiltersBar() {
       {currentLocation === '/adopciones' ? (
         <div className='w-full px-2 py-4 bg-transparent rounded-sm '>
           <div className='p-1 mb-2 flex flex-col justify-start border-b-2 border-thirtyLight border-opacity-50'>
-            <label className='w-full h-7 font-bold'>
-              Especie
-              {urlFilter.type && (
-                <button value='' name='type' title='Resetear filtro de Especie' onClick={handleSetUrl} className='w-4 btn btn-nav text-white bg-primary'>
-                  x
-                </button>
-              )}
-            </label>
-            <div className='h-7'>
-              <button value='p' name='type' onClick={handleSetUrl} className={`w-16 btn-nav text-white ${urlFilter.type === 'p' ? ' bg-thirtyDark' : 'btn bg-thirtyLight'}`}>
-                Perro
-              </button>
-            </div>
-            <div className='h-7 mb-2'>
-              <button value='g' name='type' onClick={handleSetUrl} className={`w-16 btn-nav text-white ${urlFilter.type === 'g' ? ' bg-thirtyDark' : 'btn bg-thirtyLight'}`}>
-                Gato
-              </button>
-            </div>
-          </div>
-
-          <div className='p-1 mb-2 flex flex-col justify-start border-b-2 border-thirtyLight border-opacity-50'>
             <SelectUbication urlFilter={urlFilter} handleSetUrl={handleSetUrl} />
+          </div>
+          <div className='p-1 mb-2 flex flex-col justify-start border-b-2 border-thirtyLight border-opacity-50'>
+            <SelectEspecie urlFilter={urlFilter} handleSetUrl={handleSetUrl} />
           </div>
 
           <div className='p-1 mb-2 flex flex-wrap justify-between items-center border-b-2 border-thirtyLight border-opacity-50'>
@@ -252,14 +231,18 @@ function FiltersBar() {
         </div>
       ) : currentLocation === '/perdidos' ? (
         <div className='w-full px-2 py-4 bg-transparent rounded-sm'>
-          <SelectUbication urlFilter={urlFilterLost} handleSetUrl={handleSetUrlLost} />
+          <div className='p-1 mb-2 flex flex-col justify-start border-b-2 border-thirtyLight border-opacity-50'>
+            <SelectUbication urlFilter={urlFilter} handleSetUrl={handleSetUrl} />
+          </div>
           <button className='btn bg-primary py-1 px-3 rounded-lg' onClick={handleResetFilters}>
             Reset
           </button>
         </div>
       ) : (
         <div className='w-full px-2 py-4 bg-transparent rounded-sm'>
-          <SelectUbication urlFilter={urlShelter} handleSetUrl={handleSetUrlShelter} />
+          <div className='p-1 mb-2 flex flex-col justify-start border-b-2 border-thirtyLight border-opacity-50'>
+            <SelectUbication urlFilter={urlFilter} handleSetUrl={handleSetUrl} />
+          </div>
           <button className='btn bg-primary py-1 px-3 rounded-lg' onClick={handleResetFilters}>
             Reset
           </button>
