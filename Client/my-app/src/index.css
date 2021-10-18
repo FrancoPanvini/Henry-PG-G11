@@ -30,7 +30,7 @@ html {
 }
 
 .btn {
-  @apply border-b-2 shadow-xl transition-all;
+  @apply border-b-2 shadow-xl transition-all cursor-pointer;
 }
 
 .btn-nav {
