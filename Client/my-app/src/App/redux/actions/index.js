@@ -87,8 +87,11 @@ export function setUser(user) {
       type: 'SET_USER',
       payload: user,
     });
+    let name = user.name;
+    let capitalize = name.charAt(0).toUpperCase() + name.slice(1);
+    localStorage.setItem('userMail', user.mail);
     localStorage.setItem('userId', user.id);
-    localStorage.setItem('userName', user.name);
+    localStorage.setItem('userName', capitalize);
     localStorage.setItem('userCityid', user.CityId); // ← OJO que ""CityId"" está con mayúscula acá, pero en minúscula en la DB !!! REVISAR!!!!
   };
 }
