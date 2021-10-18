@@ -1,17 +1,17 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { useLocation } from 'react-router';
-import { getCities, getCountries, getLostPets, getLostPetsFilter, getPetsAdop, getPetsAdopFilter, getProvinces, getShelters, getSheltersFilter } from '../../redux/actions';
-import SelectUbication from './SelectCountries/SelectUbication';
+import { getLostPets, getLostPetsFilter, getPetsAdop, getPetsAdopFilter, getShelters, getSheltersFilter } from '../../redux/actions';
+
+//? Components
+import SelectUbication from './Opciones/SelectUbication';
+import SelectEspecie from './Opciones/SelectEspecie';
+import SelectEdad from './Opciones/SelectEdad';
+import SelectTamaño from './Opciones/SelectTamaño';
+import SelectSexo from './Opciones/SelectSexo';
 
 function FiltersBar() {
   const dispatch = useDispatch();
-
-  useEffect(() => {
-    dispatch(getCountries());
-    dispatch(getProvinces());
-    dispatch(getCities());
-  }, [dispatch]);
 
   const [urlFilter, setUrlFilter] = useState({
     type: '',
@@ -37,26 +37,58 @@ function FiltersBar() {
   let currentLocation = location.pathname;
 
   const handleSetUrl = e => {
-    e.preventDefault();
+    if (e.preventDefault) e.preventDefault();
     if (e.target.value !== 'Seleccionar') {
       let updateFilter = {
         ...urlFilter,
         [e.target.name]: e.target.value,
       };
+      if (e.target.name === 'country') {
+        updateFilter = {
+          ...updateFilter,
+          province: '',
+          city: '',
+        };
+      }
+      if (e.target.name === 'province') {
+        updateFilter = {
+          ...updateFilter,
+          city: '',
+        };
+      }
+      if (e.target.name === 'resetEdad') {
+        updateFilter = {
+          ...updateFilter,
+          agemin: '',
+          agemax: '',
+        };
+      }
 
       setUrlFilter(updateFilter);
-
       sendFilters(updateFilter);
     }
   };
 
   const handleSetUrlLost = e => {
-    e.preventDefault();
+    if (e.preventDefault) e.preventDefault();
     if (e.target.value !== 'Seleccionar') {
       let updateFilter = {
         ...urlFilterLost,
         [e.target.name]: e.target.value,
       };
+      if (e.target.name === 'country') {
+        updateFilter = {
+          ...updateFilter,
+          province: '',
+          city: '',
+        };
+      }
+      if (e.target.name === 'province') {
+        updateFilter = {
+          ...updateFilter,
+          city: '',
+        };
+      }
 
       setUrlFilterLost(updateFilter);
       sendFilters(updateFilter);
@@ -70,32 +102,23 @@ function FiltersBar() {
         ...urlShelter,
         [e.target.name]: e.target.value,
       };
+      if (e.target.name === 'country') {
+        updateFilter = {
+          ...updateFilter,
+          province: '',
+          city: '',
+        };
+      }
+      if (e.target.name === 'province') {
+        updateFilter = {
+          ...updateFilter,
+          city: '',
+        };
+      }
 
       setUrlShelter(updateFilter);
       sendFilters(updateFilter);
     }
-  };
-
-  const handleSetAge = e => {
-    e.preventDefault();
-    let value = e.target.value;
-
-    let updateFilter = {
-      ...urlFilter,
-      [e.target.name]: value,
-    };
-    setUrlFilter(updateFilter);
-  };
-
-  //* botón para resetar los filtros de edad
-  const handleResetAge = () => {
-    let updateFilter = {
-      ...urlFilter,
-      agemin: '',
-      agemax: '',
-    };
-    setUrlFilter(updateFilter);
-    sendFilters(updateFilter);
   };
 
   const handleSend = e => {
@@ -148,121 +171,51 @@ function FiltersBar() {
       {currentLocation === '/adopciones' ? (
         <div className='w-full px-2 py-4 bg-transparent rounded-sm '>
           <div className='p-1 mb-2 flex flex-col justify-start border-b-2 border-thirtyLight border-opacity-50'>
-            <label className='w-full h-7 font-bold'>
-              Especie
-              {urlFilter.type && (
-                <button value='' name='type' title='Resetear filtro de Especie' onClick={handleSetUrl} className='w-4 btn btn-nav text-white bg-primary'>
-                  x
-                </button>
-              )}
-            </label>
-            <div className='h-7'>
-              <button value='p' name='type' onClick={handleSetUrl} className={`w-16 btn-nav text-white ${urlFilter.type === 'p' ? ' bg-thirtyDark' : 'btn bg-thirtyLight'}`}>
-                Perro
-              </button>
-            </div>
-            <div className='h-7 mb-2'>
-              <button value='g' name='type' onClick={handleSetUrl} className={`w-16 btn-nav text-white ${urlFilter.type === 'g' ? ' bg-thirtyDark' : 'btn bg-thirtyLight'}`}>
-                Gato
-              </button>
-            </div>
-          </div>
-
-          <div className='p-1 mb-2 flex flex-col justify-start border-b-2 border-thirtyLight border-opacity-50'>
             <SelectUbication urlFilter={urlFilter} handleSetUrl={handleSetUrl} />
+          </div>
+          <div className='p-1 mb-2 flex flex-col justify-start border-b-2 border-thirtyLight border-opacity-50'>
+            <SelectEspecie urlFilter={urlFilter} handleSetUrl={handleSetUrl} />
           </div>
 
           <div className='p-1 mb-2 flex flex-wrap justify-between items-center border-b-2 border-thirtyLight border-opacity-50'>
-            <label className='w-full h-7 font-bold mt-2'>
-              Edad
-              {(urlFilter.agemin || urlFilter.agemax) && (
-                <button title='Resetear filtro de Edad' onClick={handleResetAge} className='w-4 btn btn-nav text-white bg-primary'>
-                  x
-                </button>
-              )}
-            </label>
-            <div className='flex justify-start w-full'>
-              <div>
-                Min:
-                <br />
-                <input type='number' name='agemin' min={0} max={20} value={urlFilter.agemin} className='mb-2 w-12 px-1 rounded-md mr-8' onChange={handleSetAge} />
-              </div>
-              <div>
-                Max:
-                <br />
-                <input type='number' name='agemax' min={0} max={20} className='mb-2 w-12 px-1 rounded-md' value={urlFilter.agemax} onChange={handleSetAge} />
-              </div>
-            </div>
-            <button type='submit' className={urlFilter.agemin || urlFilter.agemax ? 'btn bg-primary p-1 rounded-lg disabled:opacity-50 mb-2' : 'btn p-1 mb-2 invisible'} onClick={handleSend}>
-              Aplicar
-            </button>
+            <SelectEdad urlFilter={urlFilter} handleSetUrl={handleSetUrl} />
           </div>
 
           <div className='p-1 mb-2 flex flex-col justify-start border-b-2 border-thirtyLight border-opacity-50'>
-            <label className='w-full h-7 font-bold'>
-              Tamaño{' '}
-              {urlFilter.size && (
-                <button value='' name='size' title='Resetear filtro de Tamaño' onClick={handleSetUrl} className='w-4 btn btn-nav text-white bg-primary'>
-                  x
-                </button>
-              )}
-            </label>
-            <div className='h-7'>
-              <button value='c' name='size' onClick={handleSetUrl} className={`w-20 btn-nav text-white transition-all ${urlFilter.size === 'c' ? ' bg-thirtyDark' : 'btn bg-thirtyLight'}`}>
-                Pequeño
-              </button>
-            </div>
-            <div className='h-7'>
-              <button value='m' name='size' onClick={handleSetUrl} className={`w-20 btn-nav text-white transition-all ${urlFilter.size === 'm' ? ' bg-thirtyDark' : 'btn bg-thirtyLight'}`}>
-                Mediano
-              </button>
-            </div>
-            <div className='h-7 mb-2'>
-              <button value='g' name='size' onClick={handleSetUrl} className={`w-20 btn-nav text-white transition-all ${urlFilter.size === 'g' ? ' bg-thirtyDark' : 'btn bg-thirtyLight'}`}>
-                Grande
-              </button>
-            </div>
+            <SelectTamaño urlFilter={urlFilter} handleSetUrl={handleSetUrl} />
           </div>
 
           <div className='p-1 mb-2 flex flex-col justify-start border-b-2 border-thirtyLight border-opacity-50'>
-            <label className='w-full h-7 font-bold'>
-              Sexo{' '}
-              {urlFilter.gender && (
-                <button value='' name='gender' title='Resetear filtro de Sexo' onClick={handleSetUrl} className='w-4 btn btn-nav text-white bg-primary'>
-                  x
-                </button>
-              )}
-            </label>
-            <div className='h-7'>
-              <button value='m' name='gender' onClick={handleSetUrl} className={`w-20 btn-nav text-white transition-all ${urlFilter.gender === 'm' ? ' bg-thirtyDark' : 'btn bg-thirtyLight'}`}>
-                Macho
-              </button>
-            </div>
-            <div className='h-7 mb-2'>
-              <button value='h' name='gender' onClick={handleSetUrl} className={`w-20 btn-nav text-white transition-all ${urlFilter.gender === 'h' ? ' bg-thirtyDark' : 'btn bg-thirtyLight'}`}>
-                Hembra
-              </button>
-            </div>
+            <SelectSexo urlFilter={urlFilter} handleSetUrl={handleSetUrl} />
           </div>
           <br />
-
-          <button className='btn bg-primary py-1 px-3 rounded-lg' onClick={handleResetFilters}>
-            Reset
-          </button>
+          <div className='text-center'>
+            <button className='btn bg-primary py-1 px-3 rounded-lg' onClick={handleResetFilters}>
+              Reset
+            </button>
+          </div>
         </div>
       ) : currentLocation === '/perdidos' ? (
         <div className='w-full px-2 py-4 bg-transparent rounded-sm'>
-          <SelectUbication urlFilter={urlFilterLost} handleSetUrl={handleSetUrlLost} />
-          <button className='btn bg-primary py-1 px-3 rounded-lg' onClick={handleResetFilters}>
-            Reset
-          </button>
+          <div className='p-1 mb-2 flex flex-col justify-start border-b-2 border-thirtyLight border-opacity-50'>
+            <SelectUbication urlFilter={urlFilterLost} handleSetUrl={handleSetUrlLost} />
+          </div>
+          <div className='text-center'>
+            <button className='btn bg-primary py-1 px-3 rounded-lg' onClick={handleResetFilters}>
+              Reset
+            </button>
+          </div>
         </div>
       ) : (
         <div className='w-full px-2 py-4 bg-transparent rounded-sm'>
-          <SelectUbication urlFilter={urlShelter} handleSetUrl={handleSetUrlShelter} />
-          <button className='btn bg-primary py-1 px-3 rounded-lg' onClick={handleResetFilters}>
-            Reset
-          </button>
+          <div className='p-1 mb-2 flex flex-col justify-start border-b-2 border-thirtyLight border-opacity-50'>
+            <SelectUbication urlFilter={urlShelter} handleSetUrl={handleSetUrlShelter} />
+          </div>
+          <div className='text-center'>
+            <button className='btn bg-primary py-1 px-3 rounded-lg' onClick={handleResetFilters}>
+              Reset
+            </button>
+          </div>
         </div>
       )}
     </div>
