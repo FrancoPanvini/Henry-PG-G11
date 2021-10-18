@@ -13,7 +13,7 @@ import PhoneCodes from './phoneRegionInput';
 import RadioSelectButtons from '../RadioSelectButtons';
 
 //? Services
-import { getCities, getCountries, getProvinces, postUsers } from '../../redux/actions/index';
+import { postUsers } from '../../redux/actions/index';
 
 //? Styles
 import { FaPaw, FaExclamationCircle } from 'react-icons/fa';
@@ -23,12 +23,6 @@ function Registro() {
   const [phoneCode, setPhoneCode] = useState('');
   const [location, setLocation] = useState({});
   const history = useHistory();
-
-  useEffect(() => {
-    dispatch(getCountries());
-    dispatch(getProvinces());
-    dispatch(getCities());
-  }, [dispatch]);
 
   const [input, setInput] = useState({
     name: '',
@@ -75,7 +69,6 @@ function Registro() {
 
         const phoneNumber = parsePhoneNumber(e.target.value, phoneCode);
         if (phoneNumber?.isValid()) {
-          //console.log('Is Valid');
           const newInput = {
             ...input,
             [e.target.name]: phoneNumber.number.substring(1),
@@ -138,14 +131,21 @@ function Registro() {
   //* Maneja el submit del form registro
   const handleSubmit = async e => {
     e.preventDefault();
-    emailjs.sendForm('service_ayo0oer', 'template_yvy3l7h', e.target, "user_Fm0LQR1ItoVornKoxbfvo").then(res => {console.log (res)}).catch(err=>{console.log(err)})
+    emailjs
+      .sendForm('service_ayo0oer', 'template_yvy3l7h', e.target, 'user_Fm0LQR1ItoVornKoxbfvo')
+      .then(res => {
+        console.log(res);
+      })
+      .catch(err => {
+        console.log(err);
+      });
     let city = await axios.post('/locations', location);
     let auxInput = { ...input, Cityid: city.data.id };
     swal({
-      title: "Registro Exitoso!",
-      text: "Ahora puede iniciar sesión",
-      icon: "success",
-    }) 
+      title: 'Registro Exitoso!',
+      text: 'Ahora puede iniciar sesión',
+      icon: 'success',
+    });
     dispatch(postUsers(auxInput));
     history.push('/login');
   };
@@ -165,12 +165,12 @@ function Registro() {
             <div className='flex flex-col w-2/5'>
               <label className='text-white'>Tipo de cuenta:</label>
               <div className='flex justify-evenly mb-2'>
-                <RadioSelectButtons 
+                <RadioSelectButtons
                   state={input}
-                  name='UsersTypeid' 
-                  options={['Personal', 'Refugios']} 
-                  values={['i', 'r']} 
-                  onSelection={handleOnChange} 
+                  name='UsersTypeid'
+                  options={['Personal', 'Refugios']}
+                  values={['i', 'r']}
+                  onSelection={handleOnChange}
                   colorsOn='bg-thirtyDark'
                   colorsOff='bg-thirtyLight border-thirtyDark'
                 />

@@ -1,6 +1,5 @@
 import axios from 'axios';
 import jwt from 'jsonwebtoken';
-/* import { setUser } from '../redux/actions'; */
 
 export const getPetsAdop = () => {
   return function (dispatch) {
@@ -114,43 +113,7 @@ export function logInUsers(payload) {
   };
 }
 
-export const getCountries = () => {
-  return function (dispatch) {
-    axios.get('/countries').then((response) => {
-      const data = response.data.map((country) => ({
-        ...country,
-        name: country.name.replace(
-          /(^|[^A-Za-zÁÉÍÓÚÑáéíóúñ])([a-záéíóúñ])/g,
-          (l) => l.toUpperCase()
-        ),
-      }));
-      dispatch({ type: 'GET_COUNTRIES', payload: data });
-    });
-  };
-};
 
-export const getProvinces = () => {
-  return function (dispatch) {
-    axios.get('/provinces').then((response) => {
-      const data = response.data.map((province) => ({
-        ...province,
-        name: province.name.replace(
-          /(^|[^A-Za-zÁÉÍÓÚÑáéíóúñ])([a-záéíóúñ])/g,
-          (l) => l.toUpperCase()
-        ),
-      }));
-      dispatch({ type: 'GET_PROVINCES', payload: data });
-    });
-  };
-};
-
-export const getCities = () => {
-  return function (dispatch) {
-    axios.get('/cities').then((data) => {
-      dispatch({ type: 'GET_CITIES', payload: data });
-    });
-  };
-};
 
 export function logOutUser() {
   return (dispatch) => {
