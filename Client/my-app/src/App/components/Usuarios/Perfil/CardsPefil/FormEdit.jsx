@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from 'react';
-import { useDispatch } from 'react-redux';
 
 //? Components
 // import UploadImage from '../../../cargue-fotos/UploadImage';
@@ -8,13 +7,12 @@ import RadioSelectButtons from '../../../RadioSelectButtons';
 //? Services and actions
 import { editPetsData } from '../../../../services/editPetData';
 import { getPetDetail } from '../../../../services/getPetDetail';
-import { getPetsAdopByUser } from '../../../../redux/actions';
 
 //? Icons
 import { FaExclamationCircle, FaAsterisk } from 'react-icons/fa';
+// import { editPetsLostData } from '../../../../services/setFoundPetLost';
 
-function FormEdit({ name, size, sex, age, photo, type, petId, onClose, userId }) {
-  const dispatch = useDispatch();
+function FormEdit({ name, size, sex, age, photo, type, petId, onClose, onPostPet }) {
   const [mascota, setMascota] = useState({
     name,
     size,
@@ -87,9 +85,9 @@ function FormEdit({ name, size, sex, age, photo, type, petId, onClose, userId })
       ...mascota,
       photo,
     };
-    await editPetsData(newMascota, petId);
-    dispatch(getPetsAdopByUser(userId));
+   await editPetsData(newMascota, petId);
     alert('¡Listo!');
+    onPostPet();
     onClose();
   };
 
@@ -107,7 +105,7 @@ function FormEdit({ name, size, sex, age, photo, type, petId, onClose, userId })
         <br />
 
         <div className='grid grid-cols-2 gap-3 justify-items-center'>
-          <div className='text-center w-full px-4 py-2'>
+          {type && <div className='text-center w-full px-4 py-2'>
             <label>
               Especie:{' '}
               {originalData.PetsTypeid !== mascota.PetsTypeid && (
@@ -125,8 +123,8 @@ function FormEdit({ name, size, sex, age, photo, type, petId, onClose, userId })
                 colorsOn='bg-thirtyDark'
               />
             </div>
-          </div>
-          <div className='text-center w-full px-4 py-2'>
+          </div>}
+         { type && <div className='text-center w-full px-4 py-2'>
             <label>
               Sexo:
               {originalData.sex !== mascota.sex && (
@@ -144,9 +142,9 @@ function FormEdit({ name, size, sex, age, photo, type, petId, onClose, userId })
                 colorsOn='bg-thirtyDark'
               />
             </div>
-          </div>
+          </div>}
 
-          <div className='text-center px-4 py-2'>
+         {type && <div className='text-center px-4 py-2'>
             <label>
               Edad (en años):
               {originalData.age !== parseInt(mascota.age) && (
@@ -155,7 +153,7 @@ function FormEdit({ name, size, sex, age, photo, type, petId, onClose, userId })
             </label>{' '}
             <br />
             <input name='age' type='number' min='0' max='50' value={mascota.age} onChange={handleChange} className='rounded-md px-1' />
-          </div>
+          </div>}
           <div className='text-center w-full px-4 py-2'>
             <label>
               Tamaño:

@@ -1,32 +1,53 @@
 import React, { useEffect, useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-
-import { getPetsAdopByUser } from '../../../../redux/actions';
+import { getAdopPetsByUser } from '../../../../services/getAdopPetsByUser';
+import { getLostPetsByUser } from '../../../../services/getLostPetsByUser';
 import FormularioPosteoAdopcion from '../../../Mascotas/FormularioPosteoAdopcion';
 import FormularioPosteoPerdido from '../../../Mascotas/FormularioPosteoPerdido';
 import CardPublicacion from '../CardsPefil/CardPublicacion';
 
 function Publicaciones({ userId }) {
-  const dispatch = useDispatch();
   const [isOpen, setIsOpen] = useState(false);
   const [isOpen2, setIsOpen2] = useState(false);
-
+  const [pets1, setPets1] = useState([]);
+  const [pets2, setPets2] = useState([]);
   const [petPosted, setPetPosted] = useState(false);
-
+  const pets = pets1.concat(pets2);
   //* cuando el botón de postear mascota se presiona, activa el re-renderizado (useEffect)
   const onPostPet = () => {
     setPetPosted(true);
   };
-
-  useEffect(() => {
-    if (petPosted) {
-      /*       dispatch(getPetsAdopByUser(userId)); */
-      setPetPosted(false);
+  
+  const compare = (a, b) => {
+    if (a < b ) {
+      return 1;
     }
-    dispatch(getPetsAdopByUser(userId));
-  }, [dispatch, userId, petPosted]);
+    if (a > b ) {
+      return -1;
+    }
+    // a debe ser igual b
+    return 0;
+  }
+  
+  pets.sort((a,b) => compare(a.createdAt, b.createdAt))
+  useEffect(  () => {
+    if (petPosted) {
+      setPetPosted(false);
+    };
 
-  const pets = useSelector(state => state.userPets.rows);
+    const getPetsLost = async (id) => {
+      const rta = await getLostPetsByUser(id);
+      setPets1(rta);
+    };
+    const getPetsAdop = async (id) => {
+      const rta = await getAdopPetsByUser(id);
+      setPets2(rta);
+    };
+      
+  getPetsLost(userId);
+  getPetsAdop(userId);
+ 
+  }, [userId, petPosted]);
+
 
   return (
     <div className='container mx-auto  flex flex-col'>
@@ -62,6 +83,9 @@ function Publicaciones({ userId }) {
                   type={p.type}
                   sex={p.sex}
                   created={p.createdAt}
+                  onPostPet={onPostPet}
+                  found={p.found}
+                  updated={p.updatedAt}
                 />
               </div>
             );
