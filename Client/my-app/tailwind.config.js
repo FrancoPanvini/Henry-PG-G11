@@ -79,7 +79,8 @@ module.exports = {
       boxShadow: {
         'activeNavBar': '0 -1.8em 5px -24px #f5b461 inset;', // ← difuminado en la NavBar, para quitarlo remplazar el tercer valor ('5px') por '0'
         'similBorderWhite': '0 20px 25px -5px #0003, 0 0 3px 3px #FFF6 inset;',
-        'buttonShadow':'0px 5px 15px 2px #0003;'
+        'buttonShadow':'0px 5px 15px 2px #0003;',
+        'emptyPagination': '0 0 0 2px #8a9bad inset',
       }
     },
   },
