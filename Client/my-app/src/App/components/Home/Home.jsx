@@ -3,7 +3,8 @@ import { useDispatch } from 'react-redux';
 import {
   getCities,
   getCountries,
-  getLostPetsHome,
+  getLostPets,
+  //getLostPetsHome,
   getPetsAdopHome,
   getProvinces,
   getShelters,
@@ -24,7 +25,8 @@ function Home() {
     dispatch(getProvinces());
     dispatch(getCities());
     dispatch(getPetsAdopHome());
-    dispatch(getLostPetsHome());
+    //dispatch(getLostPetsHome());
+    dispatch(getLostPets());
     dispatch(getShelters());
     const url = window.location.href
     if(url.includes('loginGoogle=true')){
