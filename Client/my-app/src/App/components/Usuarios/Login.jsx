@@ -102,6 +102,9 @@ function Login() {
             <Link to='/registro'>¿No tienes una cuenta? Registrate</Link>
           </span>
         </form>
+        <Link to='/login/forgot'>
+          <h2>Forgot password</h2>
+        </Link>
       </div>
     </div>
   );
