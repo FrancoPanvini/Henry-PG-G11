@@ -2,9 +2,13 @@ import React, { useEffect, useState } from 'react';
 import { IoCheckmarkSharp, IoTimeOutline } from 'react-icons/io5';
 import { getPetDetail } from '../../../../services/getPetDetail';
 import { AiOutlineClose } from 'react-icons/ai';
+import { BiTrash } from 'react-icons/bi';
+import PopUpDeletePostulation from './PopUpDeletePostulation';
 
-function CardPostulacion({ PetId, state }) {
+function CardPostulacion({ PetId, state, adopId, update }) {
   const [pet, setPet] = useState(null);
+  const [isOpenD, setIsOpenD] = useState(false);
+
   useEffect(() => {
     const getPet = async (id) => {
       const pet = await getPetDetail(id);
@@ -31,31 +35,56 @@ function CardPostulacion({ PetId, state }) {
           {pet?.name}
         </span>
       </div>
+      <div className=' text-gray-200 text-xl mr-8 col-span-2'>
+        {state === 'p' ? (
+          <div className='flex justify-center items-center'>
+            <span>Pendiente</span>
+          </div>
+        ) : state === 'c' ? (
+          <div className='flex justify-center items-center'>
+            <span>Cerrado</span>
+          </div>
+        ) : (
+          <div className='flex justify-center items-center'>
+            <span>Aceptado</span>
+          </div>
+        )}
+      </div>
+      <div className=' text-gray-200 text-xl mr-8 col-span-2'>
+        {state === 'p' ? (
+          <div className='flex justify-center items-center'>
+            <span className='text-white bg-yellow-600 font-bold text-2xl ml-8 rounded-full p-2 shadow-2xl'>
+              <IoTimeOutline />
+            </span>
+          </div>
+        ) : state === 'c' ? (
+          <div className='flex justify-center items-center'>
+            <span className='text-white bg-red-600 font-bold text-2xl ml-8 rounded-full p-2 shadow-2xl'>
+              <AiOutlineClose />
+            </span>
+          </div>
+        ) : (
+          <div className='flex justify-center items-center'>
+            <span className='text-white bg-green-600 font-bold text-2xl ml-8 rounded-full p-2 shadow-2xl'>
+              <IoCheckmarkSharp />
+            </span>
+          </div>
+        )}
+      </div>
       <div className='col-span-2'>
-        <div className=' text-gray-200 text-xl mr-8 '>
-          {state === 'p' ? (
-            <div className='flex justify-center items-center'>
-              <span>Pendiente</span>
-              <span className='text-white bg-yellow-600 font-bold text-2xl ml-8 rounded-full p-2 shadow-2xl'>
-                <IoTimeOutline />
-              </span>
-            </div>
-          ) : state === 'c' ? (
-            <div className='flex justify-center items-center'>
-              <h2>Cerrado</h2>
-              <span className='text-white bg-red-600 font-bold text-2xl ml-8 rounded-full p-2 shadow-2xl'>
-                <AiOutlineClose />
-              </span>
-            </div>
-          ) : (
-            <div className='flex justify-center items-center'>
-              <span>Aceptado</span>
-              <span className='text-white bg-green-600 font-bold text-2xl ml-8 rounded-full p-2 shadow-2xl'>
-                <IoCheckmarkSharp />
-              </span>
-            </div>
-          )}
-        </div>
+        <button
+          className='btn bg-gray-200 text-red-600 w-10 h-10 flex justify-center items-center text-2xl mr-2 rounded-lg shadow-inner hover:bg-red-600 hover:text-white'
+          title='Eliminar postulacion'
+          onClick={() => setIsOpenD(true)}>
+          <BiTrash />
+        </button>
+        {isOpenD && (
+          <PopUpDeletePostulation
+            onClose={() => setIsOpenD(false)}
+            adopId={adopId}
+            update={update}
+          />
+        )}
       </div>
     </div>
   );

@@ -209,14 +209,6 @@ export const initialUser = (userId) => {
   };
 };
 
-export const getPetsAdopByUser = (id) => {
-  return function (dispatch) {
-    axios.get(`/pets?owner=${id}`).then((data) => {
-      dispatch({ type: 'GET_USER_PETS', payload: data });
-    });
-  };
-};
-
 export const getEvents = () => {
   return function (dispatch) {
     axios.get(`/events`).then((data) => {

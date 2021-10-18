@@ -3,19 +3,16 @@ import ReactDom from "react-dom";
 
 //? Services
 import { IoIosCloseCircle } from "react-icons/io";
-import { useDispatch } from "react-redux";
-import { getPetsAdopByUser } from "../../../../redux/actions";
 import { deletePet } from "../../../../services/deletePet";
+import { deletePetLost } from "../../../../services/deletePetLost";
 //? Icons
 
-function PopUpDelete({ onClose, petId, userId }) {
-  const dispatch = useDispatch();
+function PopUpDelete({ onClose, petId, onPostPet, type}) {
   //* Seteamos en el estado los datos de la pet con su id
   const delPet = async  () => {
-      await deletePet(petId);
-      dispatch(getPetsAdopByUser(userId));
+      type ? await deletePet(petId) :  await deletePetLost(petId);
+      onPostPet();
       onClose();
-
   }
   //* Definir
 
