@@ -1,15 +1,19 @@
 import React from 'react';
 
-function SelectEspecie(urlFilter,handleSetUrl) {
+//? Icons
+import { IoIosCloseCircle } from 'react-icons/io';
+
+function SelectEspecie({ urlFilter, handleSetUrl }) {
+  const resetFilterEspecie = e => {
+    e.preventDefault();
+    handleSetUrl({ target: { name: 'type', value: '' } });
+  };
+
   return (
-    <> 
-      <label className='w-full h-7 font-bold'>
+    <>
+      <label className='w-full h-7 font-bold flex items-center '>
         Especie
-        {urlFilter.type && (
-          <button value='' name='type' title='Resetear filtro de Especie' onClick={handleSetUrl} className='w-4 btn btn-nav text-white bg-primary'>
-            x
-          </button>
-        )}
+        {urlFilter.type && <IoIosCloseCircle title='Reset' onClick={resetFilterEspecie} className='text-primary text-3xl hover:text-primaryLight cursor-pointer transition-all' />}
       </label>
       <div className='h-7'>
         <button value='p' name='type' onClick={handleSetUrl} className={`w-16 btn-nav text-white ${urlFilter.type === 'p' ? ' bg-thirtyDark' : 'btn bg-thirtyLight'}`}>

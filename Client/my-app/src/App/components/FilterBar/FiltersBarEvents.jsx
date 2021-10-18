@@ -14,20 +14,33 @@ function FiltersBarEvents() {
   });
 
   //* Función para manejar el cambio del estado de filtros y el filtrado
-  const handleSetUrl = (e) => {
+  const handleSetUrl = e => {
     e.preventDefault();
     if (e.target.value !== 'Seleccionar') {
       let updateFilter = {
         ...urlFilter,
         [e.target.name]: e.target.value,
       };
+      if (e.target.name === 'country') {
+        updateFilter = {
+          ...updateFilter,
+          province: '',
+          city: '',
+        };
+      }
+      if (e.target.name === 'province') {
+        updateFilter = {
+          ...updateFilter,
+          city: '',
+        };
+      }
 
       setUrlFilter(updateFilter);
 
       sendFilters(updateFilter);
     }
   };
-  const sendFilters = (filters) => {
+  const sendFilters = filters => {
     let cleanFilter = { ...filters };
 
     cleanFilter.country === '' && delete cleanFilter.country;
@@ -38,7 +51,7 @@ function FiltersBarEvents() {
   };
 
   //* Funcion para resetear los filtros y volver a cargar todos los eventos
-  const handleResetFilters = (e) => {
+  const handleResetFilters = e => {
     e.preventDefault();
     setUrlFilter({
       country: '',
@@ -50,19 +63,16 @@ function FiltersBarEvents() {
 
   return (
     <div className=' h-full mt-44'>
-      <div className='px-2 pt-2 w-full font-bold text-thirty text-xl border-t-2 border-thirtyLight border-opacity-50 text-center'>
-        Filtrar eventos:
-      </div>
+      <div className='px-2 pt-2 w-full font-bold text-thirty text-xl border-t-2 border-thirtyLight border-opacity-50 text-center'>Filtrar eventos:</div>
       <div className='w-full px-2 py-4 bg-transparent rounded-sm '>
         <div className='p-1 mb-2 flex flex-col justify-start border-b-2 border-thirtyLight border-opacity-50'>
           <SelectUbication urlFilter={urlFilter} handleSetUrl={handleSetUrl} />
         </div>
-
-        <button
-          className='btn bg-primary py-1 px-3 rounded-lg'
-          onClick={handleResetFilters}>
-          Reset
-        </button>
+        <div className='text-center'>
+          <button className='btn bg-primary py-1 px-3 rounded-lg' onClick={handleResetFilters}>
+            Reset
+          </button>
+        </div>
       </div>
     </div>
   );

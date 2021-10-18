@@ -27,3 +27,7 @@ export const getCities = provinceId => {
     });
   };
 };
+
+export const resetCities = () => {
+  return { type: 'GET_CITIES', payload: [] };
+};

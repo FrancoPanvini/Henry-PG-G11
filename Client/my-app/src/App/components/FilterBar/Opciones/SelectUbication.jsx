@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { getCountries, getProvinces, getCities } from '../../../redux/actions/locations';
+import { getCountries, getProvinces, getCities, resetCities } from '../../../redux/actions/locations';
 
 function SelectUbication({ urlFilter, handleSetUrl }) {
   const dispatch = useDispatch();
@@ -19,10 +19,12 @@ function SelectUbication({ urlFilter, handleSetUrl }) {
   const handleFilterCountry = async e => {
     handleSetUrl(e);
     setCountryId(e.target.value);
+    setProvinceId(null);
   };
   useEffect(() => {
     if (countryId) {
       dispatch(getProvinces(countryId));
+      dispatch(resetCities());
     }
     //eslint-disable-next-line
   }, [countryId]);
@@ -59,7 +61,7 @@ function SelectUbication({ urlFilter, handleSetUrl }) {
         ))}
       </select>
       <br />
-      <select onChange={handleSetUrl} value={urlFilter.city} className='w-full rounded-md px-1 my-2' /* id="provincias" */ name='city'>
+      <select onChange={handleSetUrl} value={urlFilter.city} className='w-full rounded-md px-1 my-2' name='city'>
         <option>Seleccionar</option>
         {ciudad &&
           ciudad
