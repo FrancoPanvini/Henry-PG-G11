@@ -43,7 +43,7 @@ function Mascotas({ title }) {
 
         <FiltersBar className='place-self-center fixed' />
       </div>
-      <div className=' col-span-6 w-full min-h-screen'>
+      <div className=' col-span-6 w-full'>
         {isLogged && userData.phone ? (
           <div>
             <button className='btn btn-lg bg-primary text-white absolute top-18 right-18' onClick={() => setIsOpen(true)}>

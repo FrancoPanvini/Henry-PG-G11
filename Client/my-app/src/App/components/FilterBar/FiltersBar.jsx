@@ -231,14 +231,18 @@ function FiltersBar() {
         </div>
       ) : currentLocation === '/perdidos' ? (
         <div className='w-full px-2 py-4 bg-transparent rounded-sm'>
-          <SelectUbication urlFilter={urlFilterLost} handleSetUrl={handleSetUrlLost} />
+          <div className='p-1 mb-2 flex flex-col justify-start border-b-2 border-thirtyLight border-opacity-50'>
+            <SelectUbication urlFilter={urlFilter} handleSetUrl={handleSetUrl} />
+          </div>
           <button className='btn bg-primary py-1 px-3 rounded-lg' onClick={handleResetFilters}>
             Reset
           </button>
         </div>
       ) : (
         <div className='w-full px-2 py-4 bg-transparent rounded-sm'>
-          <SelectUbication urlFilter={urlShelter} handleSetUrl={handleSetUrlShelter} />
+          <div className='p-1 mb-2 flex flex-col justify-start border-b-2 border-thirtyLight border-opacity-50'>
+            <SelectUbication urlFilter={urlFilter} handleSetUrl={handleSetUrl} />
+          </div>
           <button className='btn bg-primary py-1 px-3 rounded-lg' onClick={handleResetFilters}>
             Reset
           </button>
