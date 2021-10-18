@@ -18,7 +18,8 @@ module.exports = sequelize => {
       link_facebook: { type: DataTypes.STRING },
       link_donaciones: { type: DataTypes.STRING },
       lat: { type: DataTypes.FLOAT },
-      lng: { type: DataTypes.FLOAT }
+      lng: { type: DataTypes.FLOAT },
+      resetToken: {type: DataTypes.STRING}
     },
     { sequelize: sequelize, modelName: "Users", timestamps: true }
   );

@@ -2,8 +2,8 @@ import React, { useState } from 'react';
 import { logInUsers } from '../../redux/actions/index';
 import { Link, useHistory } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
-import { FaPaw, FaExclamationCircle } from 'react-icons/fa';
-import GoogleLogin from './GoogleLogin';
+import { FaPaw } from 'react-icons/fa';
+import ErrorIconPulsing from '../ErrorIconPulsing';
 /* import axios from 'axios'
 import jwt from "jsonwebtoken" */
 
@@ -21,11 +21,7 @@ function Login() {
 
   // ↓ deshabilito el botón LogIn si aún no pusieron info válida
   const handleDisabled = () => {
-    if (
-      usuario.mail.includes('@') &&
-      usuario.mail.includes('.') &&
-      usuario.password.length >= 8
-    ) {
+    if (usuario.mail.includes('@') && usuario.mail.includes('.') && usuario.password.length >= 8) {
       return false;
     }
     return true;
@@ -72,31 +68,20 @@ function Login() {
           <div className='mx-auto flex justify-center items-center bg-fourty w-20 h-20 rounded-full'>
             <FaPaw className='text-white text-3xl' />
           </div>
+          <br />
 
-          <br />
-          <label className='text-white'>
-            E-mail:{' '}
-            {errors.mail && (
-              <span title={errors.mail}>
-                <FaExclamationCircle className='inline text-primary align-baseline' />
-              </span>
-            )}
+          <a href='http://localhost:3001/auth/google' title='Inicia sesión usando tu cuenta de Google' className='btn btn-lg bg-white text-gray-600 border-gray-400 flex justify-center items-center'>
+            <img src='https://freesvg.org/img/1534129544.png' alt='Log in con Google' className='h-7 w-7 inline mr-4' />
+            Log in
+          </a>
+          <br className='' />
+          <label className='pt-4 text-white border-t-2 border-thirtyDark border-opacity-50'>
+            E-mail: <ErrorIconPulsing error={errors.mail} color='primary' />
           </label>
-          <input
-            type='text'
-            name='mail'
-            value={usuario.mail}
-            onChange={handleUsuario}
-            className='rounded-md px-2'
-          />
+          <input type='text' name='mail' value={usuario.mail} onChange={handleUsuario} className='rounded-md px-2' />
           <br />
           <label className='text-white'>
-            Contraseña:{' '}
-            {errors.password && (
-              <span title={errors.password}>
-                <FaExclamationCircle className='inline text-primary align-baseline' />
-              </span>
-            )}
+            Contraseña: <ErrorIconPulsing error={errors.password} color='primary' />
           </label>
           <input
             type='password'
@@ -109,17 +94,17 @@ function Login() {
           <button
             disabled={handleDisabled()}
             type='submit'
-            className='btn btn-lg bg-primary text-white border-yellow-600'>
-            Log in
+            className='btn btn-lg bg-primary text-white border-yellow-600 flex justify-center items-center'>
+            <FaPaw className='text-3xl inline mr-4' /> Log in
           </button>
           <br />
           <span className='text-center text-white hover:underline'>
             <Link to='/registro'>¿No tienes una cuenta? Registrate</Link>
           </span>
         </form>
-          <a href="http://localhost:3001/auth/google">
-          <GoogleLogin/>
-          </a>
+        <Link to='/login/forgot'>
+          <h2>Forgot password</h2>
+        </Link>
       </div>
     </div>
   );
