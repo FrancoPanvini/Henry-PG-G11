@@ -1,33 +1,25 @@
-import React, { useState, useEffect, createRef } from "react";
-import {
-  CircularProgress,
-  Grid,
-  Typography,
-} from "@material-ui/core";
+import React, { useState, useEffect, createRef } from 'react';
+import { CircularProgress, Box, Typography } from '@material-ui/core';
 
-import useStyles from "./style";
+import useStyles from './style';
 //import PetsDetail from "../PetsDetail/PetsDetail";
-import CardRefugio from "../../../../Cards/CardRefugio";
+import CardRefugio from '../../../../Cards/CardRefugio';
 
-const List = ({
-  items,
-  childClicked,
-  isLoading,
-}) => {
+const List = ({ items, childClicked, isLoading }) => {
   const classes = useStyles();
   /*   const [type, setType] = useState("p");
   const [sex, setSex] = useState("m");
   const [size, setSize] = useState("p"); */
 
   const [petRefs, setPetRefs] = useState([]);
- /*  const [prueba, setPrueba] = useState({
+  /*  const [prueba, setPrueba] = useState({
     type: "",
     sex: "",
     size: "",
   }); */
 
   useEffect(() => {
-    setPetRefs((refs) =>
+    setPetRefs(refs =>
       Array(items?.length)
         .fill()
         .map((_, i) => refs[i] || createRef())
@@ -41,28 +33,20 @@ const List = ({
 
   return (
     <div className={classes.container}>
-      <Typography variant="h4">Refugios</Typography>
+      <Typography variant='h5'>Refugios</Typography>
       {isLoading ? (
         <div className={classes.loading}>
-          <CircularProgress size="5rem" />
+          <CircularProgress size='5rem' />
         </div>
       ) : (
-        <>
-          <Grid container spacing={3} className={classes.list}>
+        <div className='h-full'>
+          <div className='h-full w-full mt-2 grid justify-items-center gap-4'>
             {items?.map((pet, i) => (
-              <Grid
-                ref={petRefs[i]}
-                key={i}
-                xs={12}
-                style={{ padding: "20px", margin: '20px' }}
-              >
-                {/*  <PetsDetail
-                  pet={pet}
-                  selected={Number(childClicked) === i}
-                  refProp={petRefs[i]}
-                /> */}
+              <Box ref={petRefs[i]} key={i} xs={12} style={{ padding: '20px', margin: '20px' }}>
                 <CardRefugio
-                  photo={pet.photo}
+
+                  photo={pet.photo ? pet.photo : 'https://drpp-ny.org/wp-content/uploads/2014/07/sorry-image-not-available.png'}
+
                   name={pet.name}
                   phone={pet.phone}
                   country={pet.country}
@@ -79,10 +63,10 @@ const List = ({
                   refProp={petRefs[i]}
                   className='grid justify-items-center'
                 />
-              </Grid>
+              </Box>
             ))}
-          </Grid>
-        </>
+          </div>
+        </div>
       )}
     </div>
   );
