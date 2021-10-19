@@ -1,5 +1,6 @@
 import axios from 'axios';
 import jwt from 'jsonwebtoken';
+import swal from 'sweetalert';
 
 export const getPetsAdop = () => {
   return function (dispatch) {
@@ -132,18 +133,20 @@ export function logInUsers(payload) {
       .post('login/', payload)
       .then(res => {
         if (res.data.message) {
-          alert('error1');
+          swal({
+            text: res.data.message,
+            icon: 'error',
+            timer: 4000,
+          });
         } else {
           const token = res.data;
           const user = jwt.decode(token);
           localStorage.setItem('token', token);
           dispatch(setUser(user));
           axios.defaults.headers.common['Authorization'] = `Bearer ${token}`;
+          window.location.replace('/');
         }
       })
-      .catch(err => {
-        alert(`${err}`);
-      });
     return response;
   };
 }
