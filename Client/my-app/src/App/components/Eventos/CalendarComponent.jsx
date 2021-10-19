@@ -35,6 +35,7 @@ function CalendarComponent({ eventos }) {
             <Badge
               status={item.type}
               text={item.content}
+              className='capitalize'
               onClick={(e) => handleOpenDetail(e, item.id)}
             />
           </li>
@@ -65,7 +66,7 @@ function CalendarComponent({ eventos }) {
       <ul className={styles.events}>
         {eventos.map((evento, index) => (
           <li key={index}>
-            <Badge status={evento.type} text={`${evento.day} ${evento.name}`} />
+            <Badge status={evento.type} text={`${evento.day} ${evento.name}`} className='capitalize' />
           </li>
         ))}
       </ul>

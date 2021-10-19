@@ -37,7 +37,7 @@ function Slider({ title }) {
                     />
                   ) : title === "PERDIDOS" ? (
                     <CardLost
-                      photo={p.petPi}
+                      photo={p.petPic}
                       name={p.name}
                       size={p.size}
                       country={p.country}
