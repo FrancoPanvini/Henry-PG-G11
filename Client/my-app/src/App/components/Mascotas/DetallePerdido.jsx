@@ -74,9 +74,6 @@ function CardPopUpPetDetail({ onClose, petId }) {
                         center={{ lat: pet.lat, lng: pet.lng }}
                         zoom={15}
                         options={options}
-                        // bootstrapURLKeys={{ key: 'AIzaSyC9FtL0Nsz0ROcYVY7hOkp9JL2tU4ECjqY' }}
-                        // margin={[50, 50, 50, 50]}
-                        // options={{ gestureHandling: 'greedy', clickableIcons: false }}
                       >
                         <div lat={pet.lat} lng={pet.lng}>
                           <Marker

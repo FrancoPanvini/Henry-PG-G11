@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { FaSave } from 'react-icons/fa';
-import { useSelector, useDispatch } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import { initialUser } from '../../../../redux/actions';
 import { editUserData } from '../../../../services/editUserData';
 import { BiX } from 'react-icons/bi';
@@ -9,8 +9,11 @@ import MapPost from '../../../Maps/MapPost';
 import axios from 'axios';
 import swal from 'sweetalert';
 import emailjs from 'emailjs-com';
+import PopUpPhoto from './PopUpPhoto';
 
 function FormularioDatos({ user, close, type }) {
+  const [isOpen, setIsOpen] = useState(false);
+  const [url, setUrl] = useState([]);
   const [input, setInput] = useState({
     name: user?.name,
     phone: user.phone,
@@ -24,13 +27,14 @@ function FormularioDatos({ user, close, type }) {
     direction: '',
     province: user.province,
     city: user.city,
-    lat: '',
-    lng: '',
+    lat: null,
+    lng: null,
     mail: user.mail,
+    photo: user.photo
   });
-  const paises = useSelector(state => state.countries);
+  /* const paises = useSelector(state => state.countries); */
   // const provincias = useSelector((state) => state.provinces);
-  const ciudades = useSelector(state => state.cities);
+  /* const ciudades = useSelector(state => state.cities); */
   // const [countryId, setCountryId] = useState(null);
   // const [provinceId, setProvinceId] = useState(null);
   //const [cityId, setCityId] = useState(null);
@@ -48,7 +52,7 @@ function FormularioDatos({ user, close, type }) {
     });
   };
 
-  const handleUbicationChange = e => {
+  /* const handleUbicationChange = e => {
     // if (e.target.id === 'pais') {
     //   let ubicacion = paises.find((pais) => pais.name === e.target.value);
     // ubicacion && setCountryId(ubicacion.id);
@@ -69,7 +73,7 @@ function FormularioDatos({ user, close, type }) {
         });
       setInput(newInput);
     }
-  };
+  }; */
 
   const handleLocation = () => {
     let city = document.getElementById('administrative_area_level_2')?.innerHTML;
@@ -141,8 +145,9 @@ function FormularioDatos({ user, close, type }) {
     handleOnChange(e);
   };
 
-  const onSubmit = async e => {
+  const onSubmit = async (e) => {
     e.preventDefault();
+    let newInput = {}
     emailjs
       .sendForm('service_ayo0oer', 'template_eqjjwlm', e.target, 'user_Fm0LQR1ItoVornKoxbfvo')
       .then(res => {
@@ -151,11 +156,21 @@ function FormularioDatos({ user, close, type }) {
       .catch(err => {
         console.log(err);
       });
-    let city = await axios.post('/locations', location);
-    let newInput = {
-      ...input,
-      CityId: city.data.id,
-    };
+      console.log(Object.keys(location).length !== 0)
+      newInput = {
+        ...input,
+        photo: url[0],
+        
+      };
+      if(Object.keys(location).length !== 0) {
+        await axios.post('/locations', location).then((res) => {
+          newInput ={
+            ...input,
+            CityId: res.data.id
+          }
+        })
+      }
+    /* let city = await axios.post('/locations', location); */
     editUserData(user.id, newInput);
     swal({
       title: 'Datos Actualizados!',
@@ -168,6 +183,7 @@ function FormularioDatos({ user, close, type }) {
 
   return (
     <div className='relative'>
+      {isOpen && <PopUpPhoto onClose={() => setIsOpen(false)} url={url} setUrl={setUrl} />}
       <form onSubmit={e => onSubmit(e)} className='flex flex-wrap'>
         <div className='w-1/3 p-2 m-2 flex flex-col'>
           <label>Nombre</label>
@@ -178,81 +194,23 @@ function FormularioDatos({ user, close, type }) {
           <label>Mail</label>
           <input type='text' id='mail' name='mail' value={input.mail} onChange={handleOnChange} className='rounded-md p-1 mb-2' />
         </div>
-
+        
         <div className='w-1/3 p-2 m-2 flex flex-col'>
           <label>Telefono</label>
           <input type='number' id='phone' name='phone' value={input.phone} onChange={handleOnChange} className='rounded-md p-1 mb-2' />
         </div>
+       <button type= 'button' title='Editar foto de usuario' onClick={() => setIsOpen(true)}>
         <img
-          src={user.photo ? user.photo : 'https://cdn.icon-icons.com/icons2/1378/PNG/512/avatardefault_92824.png'}
+          src={url[0] ? url[0] : input.photo ? input.photo : 'https://cdn.icon-icons.com/icons2/1378/PNG/512/avatardefault_92824.png'}
           alt='foto de usuario'
-          className='object-cover w-60 h-60 rounded-full absolute right-28 mx-auto top-0 ring ring-offset-4 ring-offset-gray-200'
+          className='img object-cover w-60 h-60 rounded-full absolute right-28 mx-auto top-0 ring ring-offset-4 ring-offset-gray-200 hover:bg-opacity-50 '
         />
+        </button>
 
-        <div className='w-1/3 p-2 m-2 flex flex-col'>
-          <label className=''>
-            Pais: <span className='capitalize'></span>
-          </label>
-          <input name='country' type='text' id='pais' list='paises' onChange={handleUbicationChange} value={location.country} className='rounded-md p-1 mb-2 capitalize' />
-          <datalist id='paises'>{paises && paises.map(pais => <option key={pais.id} value={pais.name} />)}</datalist>
-        </div>
-
-        <div className='w-1/3 p-2 m-2 flex flex-col'>
-          <label className=''>
-            Provincia/Departamento: <span className='capitalize'></span>
-          </label>
-          <input name='province' type='text' id='provincia' list='provincias' onChange={handleUbicationChange} value={location.province} className='rounded-md p-1 mb-2 capitalize' />
-          {/* <datalist className='rounded-md p-1 mb-2' id='provincias'>
-            {provincias &&
-              provincias
-                .filter(
-                  (provincia) =>
-                    parseInt(provincia.CountryId) === parseInt(countryId)
-                )
-                .sort((a, b) =>
-                  a.name > b.name ? 1 : a.name < b.name ? -1 : 0
-                )
-                .map((provincia) => (
-                  <option key={provincia.id} value={provincia.name} />
-                ))}
-          </datalist> */}
-        </div>
-
-        <div className='w-1/3 h-80 p-2 m-2 flex flex-col'>
-          <label className=''>
-            Ciudad: <span className='capitalize'></span>
-          </label>
-          <input type='text' id='direction' name='direction' value={location.city} className='text-black rounded-md p-1 mb-2 capitalize' />
+        <div className='w-1/3 h-80 p-2 m-2 flex flex-col'> 
           <MapPost className='w-full h-full p-2 m-2 flex flex-col' onLocationChange={handleLocation} />
           <input type='text' id='direction' name='direction' value={input.direction} className='text-black rounded-md p-1 mb-2 capitalize' />
-          {/* <input
-            name='city'
-            type='text'
-            id='ciudad'
-            list='ciudades'
-            onChange={handleUbicationChange}
-            className='rounded-md p-1 mb-2 capitalize'
-          />
-          <datalist className='rounded-md p-1 mb-2' id='ciudades'>
-            {ciudades &&
-              ciudades
-                .filter(
-                  (ciudad) =>
-                    parseInt(ciudad.ProvinceId) === parseInt(provinceId)
-                )
-                .sort((a, b) =>
-                  a.name > b.name ? 1 : a.name < b.name ? -1 : 0
-                )
-                .map((ciudad) => (
-                  <option
-                    key={ciudad.id}
-                    value={ciudad.name.replace(
-                      /(^|[^A-Za-zÁÉÍÓÚÑáéíóúñ])([a-záéíóúñ])/g,
-                      (l) => l.toUpperCase()
-                    )}
-                  />
-                ))}
-          </datalist> */}
+          
         </div>
 
         {type === 'r' && (

@@ -93,7 +93,7 @@ function FormEdit({ name, size, sex, age, photo, type, petId, onClose, onPostPet
 
   return (
     <div className='w-full max-w-3xl'>
-      <form className='flex flex-col w-full max-w-3xl mx-auto p-8 rounded-lg bg-primaryDark relative'>
+      <form className='panel flex flex-col w-full max-w-3xl mx-auto p-8 rounded-lg bg-primaryDark relative'>
         <label>
           Nombre de la mascota:{' '}
           {errors.name && <FaExclamationCircle title={errors.name} className='inline text-thirty align-baseline animate-pulse' />}
