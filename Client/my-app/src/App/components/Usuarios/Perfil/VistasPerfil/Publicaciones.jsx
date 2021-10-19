@@ -86,6 +86,7 @@ function Publicaciones({ userId }) {
                   onPostPet={onPostPet}
                   found={p.found}
                   updated={p.updatedAt}
+                  description={p.description}
                 />
               </div>
             );

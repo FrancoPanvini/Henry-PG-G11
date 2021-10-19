@@ -11,13 +11,13 @@ const getLostPets = async (req, res) => {
     attributes: ["id", "name", "size", "description", "found", "lat", "lng", "createdAt", "photo", "updatedAt", "UserId"],
     order: [["createdAt", "DESC"]],
     include: [
+      { model: Users, attributes: ["name"] },
       {
         model: Cities,
         attributes: ["name", "ProvinceId"],
         required: true,
         include: { model: Provinces, attributes: ["name", "CountryId"], required: true, where: {}, include: { model: Countries, required: true, attributes: ["name"] } },
       },
-      { model: Users, attributes: ["name"] },
 
       { model: LostPetsPics, attributes: ["url"] }
 

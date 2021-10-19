@@ -12,7 +12,7 @@ export const getPetsAdop = () => {
 export const getPetsAdopHome = () => {
   return function (dispatch) {
     axios.get(`/pets?adopted=false&paglimit=6&pagnumber=1`).then(data => {
-      dispatch({ type: 'GET_PETS_HOME', payload: data });
+      dispatch({ type: 'GET_PETS', payload: data });
     });
   };
 };
@@ -52,7 +52,7 @@ export const getLostPets = () => {
 export const getLostPetsHome = () => {
   return function (dispatch) {
     axios.get(`/lostpets?found=false&paglimit=6&pagnumber=1`).then(data => {
-      dispatch({ type: 'GET_LOST_PETS_HOME', payload: data });
+      dispatch({ type: 'GET_LOST_PETS', payload: data });
     });
   };
 };
