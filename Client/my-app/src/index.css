@@ -174,3 +174,11 @@ progress::-moz-progress-bar {
   z-index: 1000;
   border-radius: 25;
 }
+
+.img{
+  @apply  shadow-xl transition-all cursor-pointer
+}
+
+.img:hover{
+  @apply  filter brightness-75
+}
