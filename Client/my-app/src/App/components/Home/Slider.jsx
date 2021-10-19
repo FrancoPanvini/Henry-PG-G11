@@ -61,6 +61,8 @@ function Slider({ title }) {
                       facebook={p.link_facebook}
                       donaciones={p.link_donaciones}
                       id={p.id}
+                      lat={p.lat}
+                      lng={p.lng}
                     />
                   )}
                 </div>

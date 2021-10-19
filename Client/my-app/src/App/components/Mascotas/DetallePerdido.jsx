@@ -11,7 +11,6 @@ import { IoIosCloseCircle } from 'react-icons/io';
 import Carousel from 'react-elastic-carousel';
 
 //? mapas para mostrar la ubicación de la mascota
-// import GoogleMapReact from 'google-map-react';
 import { GoogleMap, Marker } from '@react-google-maps/api';
 const options = {
   mapTypeControl: false,
