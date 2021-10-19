@@ -7,20 +7,7 @@ import PopUpDelete from './PopUpDelete';
 import PopUpEdit from './PopUpEdit';
 import PopUpSetFound from './PopUpSetFound';
 
-function CardPublicacion({
-  photo,
-  name,
-  petId,
-  userId,
-  age,
-  size,
-  type,
-  sex,
-  created,
-  onPostPet,
-  found,
-  updated
-}) {
+function CardPublicacion({ photo, name, petId, userId, age, size, type, sex, created, onPostPet, found, updated, description }) {
   const [isOpen, setIsOpen] = useState(false);
   const [isOpenD, setIsOpenD] = useState(false);
   const [isOpenE, setIsOpenE] = useState(false);
@@ -63,9 +50,7 @@ function CardPublicacion({
       </div>
       {type ? (
         <div className='col-span-3 flex items-center'>
-          <span className='text-gray-200 text-lg mr-8'>
-            Solicitudes: {forms ? forms : 0}
-          </span>
+          <span className='text-gray-200 text-lg mr-8'>Solicitudes: {forms ? forms : 0}</span>
           <button
             className='btn bg-gray-200 text-white w-10 h-10 flex justify-center items-center mr-2 text-2xl rounded-lg shadow-inner'
             title='Ver Solicitudes'>
@@ -74,31 +59,26 @@ function CardPublicacion({
           {isOpen && <FormSlider onClose={() => setIsOpen(false)} id={petId} />}
         </div>
       ) : (
-        <div className='col-span-3 flex items-center'></div>
+        <div className='col-span-3 flex items-center'>
+          {!found && (
+            <button
+              className='btn bg-gray-200 text-green-600 w-10 h-10 flex justify-center items-center text-2xl mr-2 rounded-lg shadow-inner'
+              title='¡Ya lo encontré!'
+              onClick={() => setIsOpenF(true)}>
+              <BiHappyBeaming />
+            </button>
+          )}
+        </div>
       )}
       <div className='flex'>
-        {type ? (
-          <button
-            className='btn bg-gray-200 text-green-600 w-10 h-10 flex justify-center items-center text-2xl mr-2 rounded-lg shadow-inner'
-            title='Editar publicacion'
-            onClick={() => setIsOpenE(true)}>
-            <BiEdit />
-          </button>
-        ) : !found && (
-          <button
-            className='btn bg-gray-200 text-green-600 w-10 h-10 flex justify-center items-center text-2xl mr-2 rounded-lg shadow-inner'
-            title='Ya lo encontre!!!'
-            onClick={() => setIsOpenF(true)}>
-            <BiHappyBeaming />
-          </button>
-        )}
+        <button
+          className='btn bg-gray-200 text-green-600 w-10 h-10 flex justify-center items-center text-2xl mr-2 rounded-lg shadow-inner'
+          title='Editar publicacion'
+          onClick={() => setIsOpenE(true)}>
+          <BiEdit />
+        </button>
 
-        {isOpenF &&  <PopUpSetFound
-            onClose={() => setIsOpenF(false)}
-            petId={petId}
-            userId={userId}
-            onPostPet={onPostPet}
-          />}
+        {isOpenF && <PopUpSetFound onClose={() => setIsOpenF(false)} petId={petId} userId={userId} onPostPet={onPostPet} />}
 
         {isOpenE && (
           <PopUpEdit
@@ -112,6 +92,7 @@ function CardPublicacion({
             sex={sex}
             userId={userId}
             onPostPet={onPostPet}
+            description={description}
           />
         )}
         <button
@@ -120,15 +101,7 @@ function CardPublicacion({
           onClick={() => setIsOpenD(true)}>
           <BiTrash />
         </button>
-        {isOpenD && (
-          <PopUpDelete
-            onClose={() => setIsOpenD(false)}
-            petId={petId}
-            userId={userId}
-            onPostPet={onPostPet}
-            type={type}
-          />
-        )}
+        {isOpenD && <PopUpDelete onClose={() => setIsOpenD(false)} petId={petId} userId={userId} onPostPet={onPostPet} type={type} />}
       </div>
     </div>
   );

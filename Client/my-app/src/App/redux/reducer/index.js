@@ -2,7 +2,6 @@
 
 const initialState = {
   petsAdop: [],
-  petsHome: [],
   user: {},
   shelters: {},
   isLogged: false,
@@ -10,7 +9,6 @@ const initialState = {
   provinces: [],
   cities: [],
   lostPets: [],
-  lostPetsHome: [],
   active: 'Mis Datos',
   userData: [],
   userPets: [],
@@ -20,12 +18,6 @@ const initialState = {
 function rootReducer(state = initialState, action) {
   switch (action.type) {
     case 'GET_PETS':
-      return {
-        ...state,
-        petsAdop: action.payload.data,
-      };
-
-    case 'GET_PETS_HOME':
       return {
         ...state,
         petsAdop: action.payload.data,
@@ -90,16 +82,10 @@ function rootReducer(state = initialState, action) {
       };
 
     case 'GET_LOST_PETS':
-      return { ...state, lostPets: action.payload.data, lostPetsHome: action.payload.data, };
+      return { ...state, lostPets: action.payload.data };
 
     case 'GET_LOST_PETS_FILTERED':
       return { ...state, lostPets: action.payload.data };
-
-   /*  case 'GET_LOST_PETS_HOME':
-      return {
-        ...state,
-        lostPetsHome: action.payload.data,
-        }; */
 
     case 'SET_ACTIVE':
       return {

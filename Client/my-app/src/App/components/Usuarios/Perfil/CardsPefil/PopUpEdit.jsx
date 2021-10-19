@@ -19,6 +19,8 @@ function PopUpEdit({
   sex,
   type,
   userId,
+  onPostPet,
+  description,
 }) {
   // const dispatch = useDispatch();
   //* Seteamos en el estado los datos de la pet con su id
@@ -53,6 +55,8 @@ function PopUpEdit({
               photo={photo}
               onClose={onClose}
               userId={userId}
+              onPostPet={onPostPet}
+              description={description}
             />
           </div>
         </div>

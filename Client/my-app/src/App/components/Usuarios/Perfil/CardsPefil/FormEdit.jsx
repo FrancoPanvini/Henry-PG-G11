@@ -6,18 +6,20 @@ import RadioSelectButtons from '../../../RadioSelectButtons';
 
 //? Services and actions
 import { editPetsData } from '../../../../services/editPetData';
+import { editLostPetsData } from '../../../../services/editLostPetData';
 import { getPetDetail } from '../../../../services/getPetDetail';
+import { getLostPetDetail } from '../../../../services/getLostPetDetail';
 
 //? Icons
 import { FaExclamationCircle, FaAsterisk } from 'react-icons/fa';
 // import { editPetsLostData } from '../../../../services/setFoundPetLost';
 
-function FormEdit({ name, size, sex, age, photo, type, petId, onClose, onPostPet }) {
+function FormEdit({ name, size, sex, age, photo, type, petId, onClose, onPostPet, description }) {
   const [mascota, setMascota] = useState({
     name,
     size,
     sex,
-    age,
+    age: age ? age : '',
     PetsTypeid: type === 'Perro' ? 'p' : 'g',
     Ownerid: localStorage.getItem('userId'),
     Cityid: localStorage.getItem('userCityid'),
@@ -28,24 +30,39 @@ function FormEdit({ name, size, sex, age, photo, type, petId, onClose, onPostPet
     name,
     size,
     sex,
-    age,
+    age: age ? age : '',
     PetsTypeid: type === 'Perro' ? 'p' : 'g',
   });
+
+  const publicacionTipoAdopcion = description !== ''  && !description;
 
   //* Obtengo los datos faltantes: descripción y todas las fotos
   useEffect(() => {
     const getDetails = async () => {
-      const response = await getPetDetail(petId);
-      setMascota({
-        ...mascota,
-        description: response.data.description,
-        photo: response.data.petPics,
-      });
-      setOriginalData({
-        ...originalData,
-        description: response.data.description,
-        photo: response.data.petPics,
-      });
+      let response;
+      if (publicacionTipoAdopcion) {
+        response = await getPetDetail(petId);
+        setMascota({
+          ...mascota,
+          description: response.data.description,
+          photo: response.data.petPics,
+        });
+        setOriginalData({
+          ...originalData,
+          description: response.data.description,
+          photo: response.data.petPics,
+        });
+      } else {
+        response = await getLostPetDetail(petId);
+        setMascota({
+          ...mascota,
+          photo: response.data.petPics,
+        });
+        setOriginalData({
+          ...originalData,
+          photo: response.data.petPics,
+        });
+      }
     };
     getDetails();
     // eslint-disable-next-line
@@ -85,7 +102,8 @@ function FormEdit({ name, size, sex, age, photo, type, petId, onClose, onPostPet
       ...mascota,
       photo,
     };
-   await editPetsData(newMascota, petId);
+    if (publicacionTipoAdopcion) await editPetsData(newMascota, petId);
+    else await editLostPetsData(newMascota, petId);
     alert('¡Listo!');
     onPostPet();
     onClose();
@@ -104,7 +122,7 @@ function FormEdit({ name, size, sex, age, photo, type, petId, onClose, onPostPet
         <input name='name' value={mascota.name} onChange={handleChange} className='rounded-md px-1 capitalize' />
         <br />
 
-        <div className='grid grid-cols-2 gap-3 justify-items-center'>
+        <div className={`${publicacionTipoAdopcion && 'grid grid-cols-2 gap-3'} justify-items-center`}>
           {type && <div className='text-center w-full px-4 py-2'>
             <label>
               Especie:{' '}
@@ -124,7 +142,7 @@ function FormEdit({ name, size, sex, age, photo, type, petId, onClose, onPostPet
               />
             </div>
           </div>}
-         { type && <div className='text-center w-full px-4 py-2'>
+          {type && <div className='text-center w-full px-4 py-2'>
             <label>
               Sexo:
               {originalData.sex !== mascota.sex && (
@@ -144,7 +162,7 @@ function FormEdit({ name, size, sex, age, photo, type, petId, onClose, onPostPet
             </div>
           </div>}
 
-         {type && <div className='text-center px-4 py-2'>
+          {type && <div className='text-center px-4 py-2'>
             <label>
               Edad (en años):
               {originalData.age !== parseInt(mascota.age) && (
