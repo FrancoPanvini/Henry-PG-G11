@@ -7,24 +7,8 @@ import { useSelector } from "react-redux";
 import { IoIosCloseCircle } from "react-icons/io";
 import { FaWhatsapp, FaMailBulk } from "react-icons/fa";
 
-//? services
-import { postAdoption } from "../../services/postAdoption";
-
 function FormularioAdopcion({ onClose, name, petId }) {
   const [user, setUser] = useState({ id: "", name: "" });
-
-  const [input, setInput] = useState({
-    residence: "",
-    residents: "",
-    adult: false,
-    dedication: "",
-    otherPets: false,
-    otherPetsDesc: "",
-    oldPets: false,
-    oldPetsDesc: "",
-    Userid: localStorage.getItem("userId"),
-    Petid: petId,
-  });
 
   const owner = useSelector((state) => state.userData);
 
@@ -37,16 +21,6 @@ function FormularioAdopcion({ onClose, name, petId }) {
       name: localStorage.getItem("userName"),
     });
   }, []);
-
-  //* Handle submit onClick
-  const handleClick = (e) => {
-    e.preventDefault();
-    /* swal({
-      text: "¡Tu solicitud fue enviada con Exito!",
-      icon: "success",
-      timer: "3000",
-    }); */
-  };
 
   return ReactDom.createPortal(
     <>
