@@ -23,7 +23,7 @@ function CardRefugio({ selected, refProp, photo, name, phone, country, province,
   const handleClick = () => {
     setIsFlipped(!isFlipped);
   };
-  console.log(!id ? 'cargando id' : id);
+
   useEffect(() => {
 
     /*   const getPetsLost = async (id) => {
