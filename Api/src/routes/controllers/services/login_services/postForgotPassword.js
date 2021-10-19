@@ -10,7 +10,7 @@ const forgotPassword = async (req, res) => {
     }
 
     const token = jwt.sign({ mail }, "jwt-secret", { expiresIn: "10m" });
-    const verificationLink = `http://localhost:3000/login/reset/${token}`;
+    const verificationLink = `https://adogtame.vercel.app/login/reset/${token}`;
     user.update({
       ...user,
       resetToken: token,
