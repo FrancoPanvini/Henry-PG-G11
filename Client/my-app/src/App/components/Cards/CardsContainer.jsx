@@ -122,6 +122,7 @@ function ContenedorCard({ className, title }) {
                     province={p.province}
                     city={p.city}
                     id={p.id}
+                    phone={p.phone}
                   />
 
                 ) : (
@@ -129,7 +130,6 @@ function ContenedorCard({ className, title }) {
                   <CardRefugio
                     photo={p.photo}
                     name={p.name}
-                    phone={p.phone}
                     country={p.country}
                     province={p.province}
                     city={p.city}

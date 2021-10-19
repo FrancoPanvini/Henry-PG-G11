@@ -5,14 +5,15 @@ import { useSelector } from 'react-redux';
 //? Components
 import DetallePerdido from '../Mascotas/DetallePerdido';
 import ReactCardFlip from 'react-card-flip';
+import ContactoPerdido from '../pop-up/ContactoPerdido'
 
 //? Icons
 import { FaPaw } from 'react-icons/fa';
 
-function CardLost({ photo, name, size, country, province, city, id }) {
+function CardLost({ photo, name, size, country, province, city, id, phone }) {
   const [isFlipped, setIsFlipped] = useState(false);
   const isLogged = useSelector((state) => state.isLogged);
-  // const [isOpen, setIsOpen] = useState(false);
+  const [isOpen, setIsOpen] = useState(false);
   const [isOpenDetail, setIsOpenDetail] = useState(false);
   const userData = useSelector((state) => state.userData);
 
@@ -66,17 +67,22 @@ function CardLost({ photo, name, size, country, province, city, id }) {
 
             {/* Button & PopUp form for adoptions */}
             {isLogged && userData.phone ? (
-              <button className='btn-adogtame bg-fourty text-white border-fourtyDark rounded-2xl'>
+              <button className='btn-adogtame bg-fourty text-white border-fourtyDark rounded-2xl' onClick={() => setIsOpen(true)}>
                 <h2 className='p-2 flex items-center tracking-wide'>
                   C
                   <FaPaw />
                   NTACTATE
                 </h2>
               </button>
+
+            ) : <> </>}
+            {isOpen && <ContactoPerdido name={name} phone={phone} onClose={() => setIsOpen(false)} petId={id} onClick />}
+
             ) : (
               <> </>
             )}
-            {/* {isOpen && <FormularioAdopcion name={name} onClose={() => setIsOpen(false)} petId={id} onClick />} */}
+        
+
           </div>
         </div>
       </ReactCardFlip>
