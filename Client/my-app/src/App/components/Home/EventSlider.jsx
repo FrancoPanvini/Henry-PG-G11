@@ -14,59 +14,55 @@ function EventSlider() {
   }, [index, size]); */
 
   return (
-    <div className='w-full h-5/6 pt-32 px-32 pb-8 text-left overflow-hidden bg-gray-200'>
+    <div className='w-full h-120 px-32 pt-32  text-left overflow-hidden bg-gray-200'>
       <span className='text-primary font-bold text-xl ml-4 '>EVENTOS</span>
-      <Fade
-        className='h-120'
-        duration={6000}
-        arrows={false}
-        pauseOnHover={false}>
+      <Fade duration={6000} arrows={false} pauseOnHover={false}>
         {events &&
           events?.map((e) => {
             return (
-              <div className='each-fade flex w-2/3 h-3/4 mx-auto rounded-lg bg-primary my-auto'>
+              <div className='each-fade flex w-2/3 h-104 mx-auto rounded-lg overflow-auto px-2 justify-between bg-primary my-auto'>
                 <div className='w-1/3 flex flex-col justify-around uppercase text-gray-200'>
-                  <div className= 'w-full pl-2'>
-                    <h3 className='font-bold text-xl  text-center text-white capitalize'>
-                      {e.name}
-                    </h3>
-                    <h3 className='font-bold text-lg text-center text-white'>
-                      Organizado por {e.organizer}
-                    </h3>
-                    {/* ↓ mostramos la fecha de inicio y fin  */}
+                  <h3 className='font-bold text-xl  text-center text-white capitalize'>
+                    {e.name}
+                  </h3>
+                  <h3 className='font-bold text-lg text-center text-white'>
+                    Organizado por {e.organizer}
+                  </h3>
+                  {/* ↓ mostramos la fecha de inicio y fin  */}
+                  <p className=' text-md p-2 text-justify text-white italic border-b-2 border-fourty border-opacity-25'>
+                    <span className='not-italic'>&#x1F4C5;</span>
+                    <br />
+                    <b>Fecha de inicio:</b> <br />
+                    <span className='capitalize'>{`${new Date(e.initDate)
+                      .toLocaleString()
+                      .slice(0, -3)}`}</span>
+                    <br />
+                    <b>Fecha de fin:</b> <br />
+                    <span className='capitalize'>{`${new Date(e.endDate)
+                      .toLocaleString()
+                      .slice(0, -3)}`}</span>
+                  </p>
+                  {/* ↓ mostramos la descripción (si tiene) */}
+                  {e.description && (
                     <p className=' text-md p-2 text-justify text-white italic border-b-2 border-fourty border-opacity-25'>
-                      <span className='not-italic'>&#x1F4C5;</span>
-                      <br />
-                      <b>Fecha de inicio:</b> <br />
-                      <span className='capitalize'>{`${new Date(e.initDate)
-                        .toLocaleString()
-                        .slice(0, -3)}`}</span>
-                      <br />
-                      <b>Fecha de fin:</b> <br />
-                      <span className='capitalize'>{`${new Date(e.endDate)
-                        .toLocaleString()
-                        .slice(0, -3)}`}</span>
+                      <b>Descripción:</b> <br /> {e.description}
                     </p>
-                    {/* ↓ mostramos la descripción (si tiene) */}
-                    {e.description && (
-                      <p className=' text-md p-2 text-justify text-white italic border-b-2 border-fourty border-opacity-25'>
-                        <b>Descripción:</b> <br /> {e.description}
-                      </p>
-                    )}
-                    <p className=' text-md p-2 text-justify text-white italic'>
-                      <b>Ubicación:</b> <br />
-                      <span className='capitalize'>{`${e.direction}`}</span>
-                      <br />
-                      <span className='capitalize'>{`${e.city}, ${e.province}, ${e.country} `}</span>
-                      <span className='not-italic'>&#127758;</span>
-                    </p>
-                  </div>
+                  )}
+                  <p className=' text-md p-2 text-justify text-white italic'>
+                    <b>Ubicación:</b> <br />
+                    <span className='capitalize'>{`${e.direction}`}</span>
+                    <br />
+                    <span className='capitalize'>{`${e.city}, ${e.province}, ${e.country} `}</span>
+                    <span className='not-italic'>&#127758;</span>
+                  </p>
                 </div>
-                <img
-                  src={e.photo}
-                  alt='foto evento'
-                  className='p-4 w-2/3 object-contain rounded-xl'
-                />
+                <div className='h-full w-2/3 '>
+                  <img
+                    src={e.photo}
+                    alt='foto evento'
+                    className=' py-2 w-full h-full object-cover rounded-xl'
+                  />
+                </div>
               </div>
             );
           })}
