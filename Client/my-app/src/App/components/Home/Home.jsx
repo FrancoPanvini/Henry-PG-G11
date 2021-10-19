@@ -9,7 +9,8 @@ import Onboarding from './Onboarding';
 import IconosHome from './IconosHome';
 
 //? Actions
-import { getLostPetsHome, getPetsAdopHome, getShelters, setUser } from '../../redux/actions';
+import { getEvents, getLostPetsHome, getPetsAdopHome, getShelters, setUser } from '../../redux/actions';
+import EventSlider from './EventSlider';
 
 function Home() {
   const history = useHistory();
@@ -19,6 +20,7 @@ function Home() {
     dispatch(getPetsAdopHome());
     dispatch(getLostPetsHome());
     dispatch(getShelters());
+    dispatch(getEvents());
     const url = window.location.href;
     if (url.includes('loginGoogle=true')) {
       let token = url.slice(1).split('&')[1].slice(2).split('#')[0];
@@ -33,9 +35,16 @@ function Home() {
     <div className=''>
       <Onboarding />
       <IconosHome />
-      <SliderContainer title='ADOPCION' className=' bg-gradient-to-r from-thirty to-fourty text-white' />
+      <SliderContainer
+        title='ADOPCION'
+        className=' bg-gradient-to-r from-thirty to-fourty text-white'
+      />
       <SliderContainer title='PERDIDOS' className=' bg-gray-200 text-primary' />
-      <SliderContainer title='REFUGIOS' className=' bg-gradient-to-r from-thirty to-fourty text-white' />
+      <SliderContainer
+        title='REFUGIOS'
+        className=' bg-gradient-to-r from-thirty to-fourty text-white'
+      />
+      <EventSlider />
     </div>
   );
 }
