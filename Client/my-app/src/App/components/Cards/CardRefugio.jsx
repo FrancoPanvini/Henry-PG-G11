@@ -8,7 +8,6 @@ import DetalleRefugio from '../Refugios/DetalleRefugio';
 import { getPetsByUser } from '../../services/getPetsByUser';
 import { getEventsByUserId } from '../../services/getEventsByUserId';
 import { FaFacebookSquare, FaInstagram, FaGlobe, FaDonate } from 'react-icons/fa';
-import { IoMdAddCircle } from 'react-icons/io';
 
 
 function CardRefugio({ selected, refProp, photo, name, phone, country, province, city, description, socialNet, responsable, instagram, facebook, donaciones, id, lat, lng }) {
@@ -25,14 +24,6 @@ function CardRefugio({ selected, refProp, photo, name, phone, country, province,
   };
 
   useEffect(() => {
-
-    /*   const getPetsLost = async (id) => {
-      const rta = await getLostPetsByUser(id);
-      setPets1(rta);
-    }; */
-    /*   getPetsLost(userId);*/
-
-    
 
     const getEvents = async (id) => {
 
@@ -54,7 +45,7 @@ function CardRefugio({ selected, refProp, photo, name, phone, country, province,
         <div onClick={handleClick} className='card card-size-lg'>
           <div className='w-full h-4/5 card-transparency-bottom relative object-cover'>
 
-            <img src={photo} alt='' className='h-full w-full object-cover' />
+            <img src={photo ? photo : 'https://drpp-ny.org/wp-content/uploads/2014/07/sorry-image-not-available.png'} alt='' className='h-full w-full object-cover' />
 
           </div>
           <div className='z-50 flex justify-center items-center pb-2 w-full h-1/5 text-white font-bold text-2xl capitalize'>{name}</div>
@@ -65,35 +56,6 @@ function CardRefugio({ selected, refProp, photo, name, phone, country, province,
           <div onClick={handleClick} className='flex flex-col h-full items-center w-full  cursor-pointer'>
             <div className='font-bold text-xl p-6 text-fourty capitalize flex items-start gap-3 '>
               {name}
-              {/* Button & PopUp card for detail */}
-              <div className=''>
-                <IoMdAddCircle
-                  title='Ver más detalles'
-                  onClick={() => setIsOpen(true)}
-                  className='text-fourty absolute text-3xl hover:text-fourtyLight cursor-pointer transition-all bg-white rounded-full'
-                />
-                {isOpen && (
-                  <DetalleRefugio
-                    pets={pets}
-                    events={events}
-                    onClose={() => setIsOpen(false)}
-                    photo={photo}
-                    name={name}
-                    phone={phone}
-                    country={country}
-                    province={province}
-                    city={city}
-                    web={socialNet}
-                    responsable={responsable}
-                    description={description}
-                    instagram={instagram}
-                    facebook={facebook}
-                    donaciones={donaciones}
-                    lat={lat}
-                    lng={lng}
-                  />
-                )}
-              </div>
             </div>
 
 
