@@ -15,31 +15,19 @@ import { getEventsByUserId } from '../../services/getEventsByUserId';
 import DetalleRefugio from '../Refugios/DetalleRefugio';
 // import { useSelector } from 'react-redux';
 
-function CardRefugio({
-  photo,
-  name,
-  phone,
-  country,
-  province,
-  city,
-  description,
-  socialNet,
-  responsable,
-  instagram,
-  facebook,
-  donaciones,
-  id,
-}) {
+function CardRefugio({ selected, refProp, photo, name, phone, country, province, city, description, socialNet, responsable, instagram, facebook, donaciones, id }) {
   const [isFlipped, setIsFlipped] = useState(false);
   const [isOpen, setIsOpen] = useState(false);
   //const isLogged = useSelector((state) => state.isLogged);
   const [pets, setPets] = useState([]);
   const [events, setEvents] = useState([]);
 
+  if (selected) refProp?.current?.scrollIntoView({ behavior: 'smooth', block: 'end' });
+
   const handleClick = () => {
     setIsFlipped(!isFlipped);
   };
-  console.log(!id ? 'cargando id' : id)
+  console.log(!id ? 'cargando id' : id);
   useEffect(() => {
     /*   const getPetsLost = async (id) => {
       const rta = await getLostPetsByUser(id);
@@ -47,13 +35,13 @@ function CardRefugio({
     }; */
     /*   getPetsLost(userId);*/
 
-    const getEvents = async (id) => {
+    const getEvents = async id => {
       const rta = await getEventsByUserId(id);
       setEvents(rta.data.rows);
     };
     getEvents(id);
 
-    const getPetsAdop = async (id) => {
+    const getPetsAdop = async id => {
       const rta = await getPetsByUser(id);
       setPets(rta);
     };
@@ -67,15 +55,11 @@ function CardRefugio({
           <div className='w-full h-4/5 card-transparency-bottom relative object-cover'>
             <img src={photo} alt='' className='h-full w-full object-cover' />
           </div>
-          <div className='z-50 flex justify-center items-center pb-2 w-full h-1/5 text-white font-bold text-2xl capitalize'>
-            {name}
-          </div>
+          <div className='z-50 flex justify-center items-center pb-2 w-full h-1/5 text-white font-bold text-2xl capitalize'>{name}</div>
         </div>
 
         <div className='card card-size-lg relative '>
-          <div
-            onClick={handleClick}
-            className='flex flex-col h-full items-center w-full  cursor-pointer'>
+          <div onClick={handleClick} className='flex flex-col h-full items-center w-full  cursor-pointer'>
             <div className='font-bold text-xl p-6 text-fourty capitalize flex items-start gap-3 '>
               {name}
               {/* Button & PopUp card for detail */}

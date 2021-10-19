@@ -10,17 +10,17 @@ import DetalleAdopcion from '../Mascotas/DetalleAdopcion';
 import { FaPaw } from 'react-icons/fa';
 
 function CardAdopcion({ selected, refProp, photo, name, age, size, country, province, city, sex, id }) {
-  const isLogged = useSelector((state) => state.isLogged);
+  const isLogged = useSelector(state => state.isLogged);
   const [isFlipped, setIsFlipped] = useState(false);
   const [isOpen, setIsOpen] = useState(false);
   const [isOpenDetail, setIsOpenDetail] = useState(false);
-  const userData = useSelector((state) => state.userData)
+  const userData = useSelector(state => state.userData);
 
   const handleClick = () => {
     setIsFlipped(!isFlipped);
   };
 
-  if (selected) refProp?.current?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  if (selected) refProp?.current?.scrollIntoView({ behavior: 'smooth' , block: 'end' });
 
   return (
     <div className='w-auto h-5/6'>
@@ -44,10 +44,7 @@ function CardAdopcion({ selected, refProp, photo, name, age, size, country, prov
               )}
               {size && (
                 <h3 className='p-1 text-white font-bold'>
-                  Tamaño:{' '}
-                  <span className='text-fourty capitalize'>
-                    {size === 'c' ? 'pequeño' : size === 'm' ? 'mediano' : size === 'g' ? 'grande' : null}
-                  </span>
+                  Tamaño: <span className='text-fourty capitalize'>{size === 'c' ? 'pequeño' : size === 'm' ? 'mediano' : size === 'g' ? 'grande' : null}</span>
                 </h3>
               )}
               {sex && (
@@ -90,12 +87,13 @@ function CardAdopcion({ selected, refProp, photo, name, age, size, country, prov
                   GTAME
                 </h2>
               </button>
-            ) : <> </>
-          }
-          {isOpen && <FormularioAdopcion name={name} onClose={() => setIsOpen(false)} petId={id} onClick />}
+            ) : (
+              <> </>
+            )}
+            {isOpen && <FormularioAdopcion name={name} onClose={() => setIsOpen(false)} petId={id} onClick />}
+          </div>
         </div>
-      </div>
-    </ReactCardFlip>
+      </ReactCardFlip>
     </div>
   );
 }

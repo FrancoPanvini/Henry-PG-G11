@@ -9,16 +9,18 @@ import ReactCardFlip from 'react-card-flip';
 //? Icons
 import { FaPaw } from 'react-icons/fa';
 
-function CardLost({ photo, name, size, country, province, city, id }) {
+function CardLost({ selected, refProp, photo, name, size, country, province, city, id }) {
   const [isFlipped, setIsFlipped] = useState(false);
-  const isLogged = useSelector((state) => state.isLogged);
+  const isLogged = useSelector(state => state.isLogged);
   // const [isOpen, setIsOpen] = useState(false);
   const [isOpenDetail, setIsOpenDetail] = useState(false);
-  const userData = useSelector((state) => state.userData)
+  const userData = useSelector(state => state.userData);
 
   const handleClick = () => {
     setIsFlipped(!isFlipped);
   };
+
+  if (selected) refProp?.current?.scrollIntoView({ behavior: 'smooth', block: 'end' });
 
   return (
     <div className='w-auto h-5/6'>
@@ -69,7 +71,9 @@ function CardLost({ photo, name, size, country, province, city, id }) {
                   NTACTATE
                 </h2>
               </button>
-            ) : <> </>}
+            ) : (
+              <> </>
+            )}
             {/* {isOpen && <FormularioAdopcion name={name} onClose={() => setIsOpen(false)} petId={id} onClick />} */}
           </div>
         </div>
