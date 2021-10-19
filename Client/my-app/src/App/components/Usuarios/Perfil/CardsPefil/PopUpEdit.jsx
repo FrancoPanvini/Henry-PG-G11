@@ -34,7 +34,7 @@ function PopUpEdit({
     <>
       <div className='fixed inset-0 bg-gray-50 bg-opacity-70 z-40' />
       <div className='fixed inset-0 z-50 overflow-y-scroll '>
-        <div className='panel relative top-10 mx-auto w-2/4 max-w-3xl grid justify-items-center'>
+        <div className='relative top-10 mx-auto w-2/4 max-w-3xl grid justify-items-center'>
           <div>
             <IoIosCloseCircle
               title='Cancelar y volver'
@@ -42,7 +42,7 @@ function PopUpEdit({
               onClick={onClose}
             />
           </div>
-          <div className='panel w-full max-w-3xl'>
+          <div className='w-full max-w-3xl'>
             <FormEdit
               petId={petId}
               name={name}

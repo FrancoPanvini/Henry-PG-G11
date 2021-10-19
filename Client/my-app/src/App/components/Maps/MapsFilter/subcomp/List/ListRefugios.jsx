@@ -44,7 +44,9 @@ const List = ({ items, childClicked, isLoading }) => {
             {items?.map((pet, i) => (
               <Box ref={petRefs[i]} key={i} xs={12} style={{ padding: '20px', margin: '20px' }}>
                 <CardRefugio
+
                   photo={pet.photo ? pet.photo : 'https://drpp-ny.org/wp-content/uploads/2014/07/sorry-image-not-available.png'}
+
                   name={pet.name}
                   phone={pet.phone}
                   country={pet.country}
@@ -53,7 +55,7 @@ const List = ({ items, childClicked, isLoading }) => {
                   id={pet.id}
                   description={pet.description}
                   responsable={pet.responsable}
-                  socialNet={pet.link_web}
+                  web={pet.link_web}
                   instagram={pet.link_instagram}
                   facebook={pet.link_facebook}
                   donaciones={pet.link_donaciones}

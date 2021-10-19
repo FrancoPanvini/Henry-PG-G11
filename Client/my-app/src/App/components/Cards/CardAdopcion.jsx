@@ -14,7 +14,9 @@ function CardAdopcion({ selected, refProp, photo, name, age, size, country, prov
   const [isFlipped, setIsFlipped] = useState(false);
   const [isOpen, setIsOpen] = useState(false);
   const [isOpenDetail, setIsOpenDetail] = useState(false);
+
   const userData = useSelector(state => state.userData);
+
 
   const handleClick = () => {
     setIsFlipped(!isFlipped);
@@ -27,7 +29,11 @@ function CardAdopcion({ selected, refProp, photo, name, age, size, country, prov
       <ReactCardFlip isFlipped={isFlipped} flipDirection='horizontal'>
         <div onClick={handleClick} className='card card-size-lg'>
           <div className='w-full h-4/5 card-transparency-bottom relative object-cover'>
-            <img src={photo} alt='' className='h-full w-full object-cover' />
+            <img
+              src={photo ? photo : 'https://drpp-ny.org/wp-content/uploads/2014/07/sorry-image-not-available.png'}
+              alt=''
+              className='h-full w-full object-cover'
+            />
           </div>
           <div className='z-50 flex justify-center items-center pb-2 w-full h-1/5 text-white font-bold text-2xl capitalize'>{name}</div>
         </div>

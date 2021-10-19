@@ -1,18 +1,27 @@
 import React from 'react';
 import ReactDom from 'react-dom';
-import CardAdopcion from '../Cards/CardAdopcion';
 
 //? Services
 
 //? Icons
 import { IoIosCloseCircle } from 'react-icons/io';
 import { GrInstagram, GrFacebook } from 'react-icons/gr';
-import {BiWorld } from 'react-icons/bi';
-
-//? Carousel, seteamos que muestre una sola foto por página
-import Carousel from 'react-elastic-carousel';
-import CalendarComponent from '../Eventos/CalendarComponent';
+import { BiWorld } from 'react-icons/bi';
 import { FaDonate, FaWhatsapp } from 'react-icons/fa';
+
+//? Components
+import Carousel from 'react-elastic-carousel';
+import CardAdopcion from '../Cards/CardAdopcion';
+import CalendarComponent from '../Eventos/CalendarComponent';
+import { GoogleMap, Marker } from '@react-google-maps/api';
+const options = {
+  mapTypeControl: false,
+  panControl: true,
+  zoomControl: true,
+  scaleControl: false,
+  streetViewControl: false,
+  clickableIcons: false,
+};
 
 function DetalleRefugio({
   onClose,
@@ -30,99 +39,160 @@ function DetalleRefugio({
   instagram,
   facebook,
   donaciones,
+  lat,
+  lng,
 }) {
   //* Seteamos en el estado los datos de la pet con su id
-  console.log(pets);
+  // console.log(pets);
 
   return ReactDom.createPortal(
     <>
       <div className='fixed inset-0 bg-gray-50 bg-opacity-70 z-40' />
-      <div className='fixed inset-0 z-50 overflow-y-scroll '>
-        <div className='panel relative top-32 mx-auto w-9/12 h-auto p-6 bg-gradient-to-r from-fourtyLight to-fourtyDark'>
+      <div className='fixed inset-0 z-50'>
+        <div className='panel relative top-20 mx-auto w-9/12 h-screen82 p-6 bg-gradient-to-r from-fourtyLight to-fourtyDark overflow-y-scroll'>
           <IoIosCloseCircle
-            className='text-primary absolute top-3 right-3 text-3xl hover:text-primaryLight cursor-pointer transition-all'
+            className='text-primary top-0 sticky text-3xl hover:text-primaryLight cursor-pointer transition-all'
             onClick={onClose}
             title='Cerrar'
           />
-           <img
-              src={photo ? photo : 'https://cdn.icon-icons.com/icons2/1378/PNG/512/avatardefault_92824.png'}
-              alt='foto de usuario'
-              className='object-cover w-60 h-60 rounded-lg absolute right-28 mx-auto top-3 ring ring-offset-4 ring-offset-gray-200'
-            />
-          <span className='text-white text-2xl font-bold py-4'>{name}</span><br/>
-          <span className='text-white text-xl font-bold py-4'>{`Responsable: ${responsable}`}</span><br/>
-          <span className='text-white text-xl font-bold py-4'>{`${city}, ${province}, ${country}`}</span><br/>
-          <span className='text-white text-xl font-bold py-4'>Descripcion:</span>
-          <span className='text-white text-lg font-bold py-4'>{` ${description}`}</span><br/>
-          <div className='w-1/3 p-2 m-2 flex justify-around text-2xl items-center'>
-              <a
-                href={instagram} target='_blank' rel='noreferrer'
-                className='p-2 bg-gradient-to-b from-instagram via-red-500  to-yellow-500 rounded-lg text-white'>
-                <GrInstagram title='Instagram' />
-              </a>
-              <a
-                href={facebook} target='_blank' rel='noreferrer'
-                className='p-2 bg-facebook rounded-lg text-white'>
-                <GrFacebook title='Facebook' />
-              </a>
-              <a
-                href={`https://wa.me/${phone}`} target='_blank' rel='noreferrer'
-                className='p-2 bg-green-600 rounded-lg text-white'>
-                <FaWhatsapp title='WhatsApp' />
-              </a>
-              <a
-                href={web} target='_blank' rel='noreferrer'
-                className='p-2 bg-primary rounded-lg text-white'>
-                <BiWorld title='Web' />
-              </a>
-              <a
-                href={donaciones} target='_blank' rel='noreferrer'
-                className='p-2 bg-donations rounded-lg text-white'>
-                <FaDonate title='Donaciones' />
-              </a>
+          <div className='flex mx-16 border-b-2 border-fourtyDark border-opacity-25'>
+            <div className='w-full flex flex-col'>
+              <span className='py-1 text-primary text-3xl font-bold capitalize text-center'>{name}</span>
+
+              <div className='py-6 border-b-2 border-fourtyDark border-opacity-25'>
+                {description && (
+                  <span className='text-white text-xl font-bold text-justify'>
+                    Descripción: <br />
+                    {description}
+                  </span>
+                )}
+                <br />
+                {responsable && (
+                  <span className='text-white text-xl font-bold text-justify'>
+                    Este refugio está a cargo de: <span className='capitalize'>{responsable}.</span>
+                  </span>
+                )}
+              </div>
+              <div className='w-full p-2 mb-2 ml-1 mr-4 flex justify-around items-center border-t-2 border-fourtyLight border-opacity-25'>
+                {donaciones && (
+                  <div className='w-1/4 p-2 h-full'>
+                    <a
+                      href={donaciones}
+                      target='_blank'
+                      rel='noreferrer'
+                      className='btn w-full h-full p-2 flex flex-col justify-center items-center bg-donations rounded-lg text-white border-gray-600 tracking-wider'>
+                      <FaDonate title='Donaciones' className='mr-2 text-3xl' /> DONACIONES
+                    </a>
+                  </div>
+                )}
+                <div className='w-3/4 grid grid-cols-2 gap-2 p-2'>
+                  {web && (
+                    <a
+                      href={web}
+                      target='_blank'
+                      rel='noreferrer'
+                      className='btn p-2 flex items-center justify-start bg-primary rounded-lg text-gray-700 border-gray-600'>
+                      <BiWorld title='Web' className='inline mr-2' /> Sitio Web
+                    </a>
+                  )}
+                  {phone && (
+                    <a
+                      href={`https://wa.me/${phone}`}
+                      target='_blank'
+                      rel='noreferrer'
+                      className='btn p-2 flex items-center justify-start bg-green-600 rounded-lg text-white border-gray-600'>
+                      <FaWhatsapp title='WhatsApp' className='inline mr-2' /> {phone}
+                    </a>
+                  )}
+                  {instagram && (
+                    <a
+                      href={instagram}
+                      target='_blank'
+                      rel='noreferrer'
+                      className='btn p-2 flex items-center justify-start bg-instagram2 rounded-lg text-white border-gray-600'>
+                      <GrInstagram title='Instagram' className='inline mr-2' /> Página de Instagram
+                    </a>
+                  )}
+                  {facebook && (
+                    <a
+                      href={facebook}
+                      target='_blank'
+                      rel='noreferrer'
+                      className='btn p-2 flex items-center justify-start bg-facebook rounded-lg text-white border-gray-600'>
+                      <GrFacebook title='Facebook' className='inline mr-2' /> Página de Facebook
+                    </a>
+                  )}
+                </div>
+              </div>
             </div>
+            {photo && (
+              <div className='w-1/3 p-4 aspect-w-1 aspect-h-1'>
+                <img
+                  src={photo}
+                  alt='foto de usuario'
+                  className='object-cover w-full h-full max-h-64 rounded-lg mx-auto ring ring-offset-4 ring-offset-gray-200'
+                />
+              </div>
+            )}
+          </div>
 
-          {pets.length !== 0 &&
-            <div className='mx-auto flex flex-col items-center'>
-              <span className='text-white text-xl font-bold py-4'>
-                Nuestras mascotas en adopcion
-              </span>
-
-              <Carousel  itemsToShow={3}>
-                {pets?.map((p) => {
-                  return (
-                    <div key={p.id}>
-                      <CardAdopcion
-                        photo={
-                          p.petPic
-                            ? p.petPic
-                            : 'https://drpp-ny.org/wp-content/uploads/2014/07/sorry-image-not-available.png'
-                        }
-                        name={p.name}
-                        age={p.age}
-                        size={p.size}
-                        sex={p.sex}
-                        country={p.country}
-                        province={p.province}
-                        city={p.city}
-                        id={p.id}
-                        className='card-size-md'
-                      />
-                    </div>
-                  );
-                })}
-              </Carousel>
+          <div className='pt-4 flex border-t-2 border-fourtyLight border-opacity-25'>
+            <div className={`${pets.length === 0 ? 'w-full' : 'w-1/2'} p-4 mx-auto border-r-2 border-fourtyDark border-opacity-25`}>
+              <span className='py-4 text-white text-xl font-bold capitalize inline-block'>Ubicación: {`${city}, ${province}, ${country}`}</span>
+              <div className='h-96 w-full'>
+                <GoogleMap
+                  mapContainerStyle={{ width: '100%', height: '100%', borderRadius: '10px' }}
+                  center={{ lat, lng }}
+                  zoom={15}
+                  options={options}>
+                  <div>
+                    <Marker
+                      position={{ lat, lng }}
+                      icon={{
+                        url: '/1084899.svg',
+                        scaledSize: new window.google.maps.Size(30, 30),
+                        origin: new window.google.maps.Point(0, 0),
+                        anchor: new window.google.maps.Point(15, 15),
+                      }}
+                    />
+                  </div>
+                </GoogleMap>
+              </div>
             </div>
-          }
+            {pets.length !== 0 && (
+              <div className='w-1/2 p-4 mx-auto flex flex-col items-center border-l-2 border-fourtyLight border-opacity-25'>
+                <span className='py-4 text-white text-2xl font-bold'>Nuestras Mascotas en Adopción</span>
 
-          {events.length !== 0 && 
+                <Carousel itemsToShow={1}>
+                  {pets?.map((p) => {
+                    return (
+                      <div key={p.id}>
+                        <CardAdopcion
+                          photo={p.petPic ? p.petPic : 'https://drpp-ny.org/wp-content/uploads/2014/07/sorry-image-not-available.png'}
+                          name={p.name}
+                          age={p.age}
+                          size={p.size}
+                          sex={p.sex}
+                          country={p.country}
+                          province={p.province}
+                          city={p.city}
+                          id={p.id}
+                          className='card-size-md'
+                        />
+                      </div>
+                    );
+                  })}
+                </Carousel>
+              </div>
+            )}
+          </div>
+
+          {events.length !== 0 && (
             <div className='w-2/3 mx-auto flex flex-col items-center'>
-              <span className='text-white text-xl font-bold py-4'>
-                Eventos
-              </span>
+              <span className='text-white text-xl font-bold py-4'>Eventos</span>
               <CalendarComponent eventos={events} />
             </div>
-          }
+          )}
         </div>
       </div>
     </>,
