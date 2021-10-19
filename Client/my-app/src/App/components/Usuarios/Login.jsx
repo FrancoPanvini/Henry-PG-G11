@@ -1,15 +1,12 @@
 import React, { useState } from 'react';
 import { logInUsers } from '../../redux/actions/index';
-import { Link, useHistory } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import { FaPaw } from 'react-icons/fa';
 import ErrorIconPulsing from '../ErrorIconPulsing';
-/* import axios from 'axios'
-import jwt from "jsonwebtoken" */
 
 function Login() {
   const dispatch = useDispatch();
-  const history = useHistory();
   const [usuario, setUsuario] = useState({
     mail: '',
     password: '',
@@ -53,7 +50,6 @@ function Login() {
   const handleSubmit = (e) => {
     e.preventDefault(e);
     dispatch(logInUsers(usuario));
-    history.push('/');
   };
 
   return (
@@ -64,13 +60,16 @@ function Login() {
       <div className='flex justify-center items-center w-3/5 z-10'>
         <form
           onSubmit={(e) => handleSubmit(e)}
-          className='flex flex-col ml-12 mr-auto bg-thirty py-12 px-8 rounded-lg w-2/5 min-w-sign shadow-xl border-2 border-fourty border-opacity-50'>
+          className='flex flex-col ml-12 mr-auto bg-thirty xl:py-8 2xl:py-12 px-8 rounded-lg w-2/5 min-w-sign shadow-xl border-2 border-fourty border-opacity-50'>
           <div className='mx-auto flex justify-center items-center bg-fourty w-20 h-20 rounded-full'>
             <FaPaw className='text-white text-3xl' />
           </div>
           <br />
 
-          <a href='http://localhost:3001/auth/google' title='Inicia sesión usando tu cuenta de Google' className='btn btn-lg bg-white text-gray-600 border-gray-400 flex justify-center items-center'>
+          <a
+            href='http://localhost:3001/auth/google'
+            title='Inicia sesión usando tu cuenta de Google'
+            className='btn btn-lg bg-white text-gray-600 border-gray-400 flex justify-center items-center'>
             <img src='https://freesvg.org/img/1534129544.png' alt='Log in con Google' className='h-7 w-7 inline mr-4' />
             Log in
           </a>
@@ -98,13 +97,13 @@ function Login() {
             <FaPaw className='text-3xl inline mr-4' /> Log in
           </button>
           <br />
-          <span className='text-center text-white hover:underline'>
+          <span className='text-center mb-2 text-white hover:underline'>
             <Link to='/registro'>¿No tienes una cuenta? Registrate</Link>
           </span>
+          <span className='text-center text-white hover:underline'>
+            <Link to='/login/forgot'>¿Olvidaste tu contraseña?</Link>
+          </span>
         </form>
-        <Link to='/login/forgot'>
-          <h2>Forgot password</h2>
-        </Link>
       </div>
     </div>
   );
