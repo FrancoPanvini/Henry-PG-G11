@@ -1,32 +1,30 @@
+const { where, Op } = require('sequelize');
 
-const { where, Op } = require("sequelize");
-
-const { LostPets, Users, Cities, Provinces, Countries, LostPetsPics } = require("../../../../db");
+const { LostPets, Users, Cities, Provinces, Countries, LostPetsPics } = require('../../../../db');
 
 const getLostPets = async (req, res) => {
-  const { found, paglimit, pagnumber, city, province, country, latMax, latMin, lngMax, lngMin } = req.query;
+  const { found, paglimit, pagnumber, owner, city, province, country, latMax, latMin, lngMax, lngMin } = req.query;
 
   let query = {
     where: {},
-    attributes: ["id", "name", "size", "description", "found", "lat", "lng", "createdAt", "photo", "updatedAt", "UserId"],
-    order: [["createdAt", "DESC"]],
+    attributes: ['id', 'name', 'size', 'description', 'found', 'lat', 'lng', 'createdAt', 'photo', 'updatedAt', 'UserId'],
+    order: [['createdAt', 'DESC']],
     include: [
-      { model: Users, attributes: ["name"] },
+      { model: Users, attributes: ['name'] },
       {
         model: Cities,
-        attributes: ["name", "ProvinceId"],
+        attributes: ['name', 'ProvinceId'],
         required: true,
-        include: { model: Provinces, attributes: ["name", "CountryId"], required: true, where: {}, include: { model: Countries, required: true, attributes: ["name"] } },
+        include: { model: Provinces, attributes: ['name', 'CountryId'], required: true, where: {}, include: { model: Countries, required: true, attributes: ['name'] } },
       },
 
-      { model: LostPetsPics, attributes: ["url"] }
-
+      { model: LostPetsPics, attributes: ['url'] },
     ],
   };
 
   //* Add filter by not found
-  if (found === "true") query.where = {...query.where, found: true };
-  if (found === "false") query.where = {...query.where, found: false };
+  if (found === 'true') query.where = { ...query.where, found: true };
+  if (found === 'false') query.where = { ...query.where, found: false };
 
   //* Add filter by city
   if (city) query.where = { ...query.where, CityId: city };
@@ -41,9 +39,11 @@ const getLostPets = async (req, res) => {
     if (country) query.include[0].include.where = { CountryId: country };
   }
 
-    //*Add filter by coordinates
-    if(latMax && latMin && lngMax && lngMin) query.where = { ...query.where, lat:{[Op.between]: [latMin, latMax]}, lng:{[Op.between]: [lngMin, lngMax]}}
+  //* Add filter by owner of pet
+  if (owner) query.where = { ...query.where, UserId: owner };
 
+  //*Add filter by coordinates
+  if (latMax && latMin && lngMax && lngMin) query.where = { ...query.where, lat: { [Op.between]: [latMin, latMax] }, lng: { [Op.between]: [lngMin, lngMax] } };
 
   //* Obtain number of rows without pagination
   let lostPets = await LostPets.findAndCountAll(query);
