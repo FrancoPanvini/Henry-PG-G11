@@ -67,7 +67,7 @@ function Login() {
           <br />
 
           <a
-            href='http://adogtameapi.herokuapp.com/auth/google'
+            href='https://adogtameapi.herokuapp.com/auth/google'
             title='Inicia sesión usando tu cuenta de Google'
             className='btn btn-lg bg-white text-gray-600 border-gray-400 flex justify-center items-center'>
             <img src='https://freesvg.org/img/1534129544.png' alt='Log in con Google' className='h-7 w-7 inline mr-4' />
