@@ -10,7 +10,7 @@ import { getEventsByUserId } from '../../services/getEventsByUserId';
 import { FaFacebookSquare, FaInstagram, FaGlobe, FaDonate } from 'react-icons/fa';
 
 
-function CardRefugio({ selected, refProp, photo, name, phone, country, province, city, description, socialNet, responsable, instagram, facebook, donaciones, id, lat, lng }) {
+function CardRefugio({ selected, refProp, photo, name, phone, country, province, city, description, web, responsable, instagram, facebook, donaciones, id, lat, lng }) {
 
   const [isFlipped, setIsFlipped] = useState(false);
   const [isOpen, setIsOpen] = useState(false);
@@ -84,11 +84,11 @@ function CardRefugio({ selected, refProp, photo, name, phone, country, province,
                   </a>
                 </h3>
               )}
-              {(socialNet || facebook || instagram) && (
+              {(web || facebook || instagram) && (
                 <h3 className='p-1 text-white font-bold'>
                   Redes:
-                  {socialNet && (
-                    <a href={socialNet}>
+                  {web && (
+                    <a href={web}>
                       <FaGlobe className='inline text-fourty mx-1 text-xl' />
                     </a>
                   )}
@@ -131,7 +131,7 @@ function CardRefugio({ selected, refProp, photo, name, phone, country, province,
                 country={country}
                 province={province}
                 city={city}
-                web={socialNet}
+                web={web}
                 responsable={responsable}
                 description={description}
                 instagram={instagram}
