@@ -3,6 +3,7 @@ import { useDispatch } from 'react-redux';
 import { useHistory } from 'react-router';
 import axios from 'axios';
 import parsePhoneNumber from 'libphonenumber-js';
+import swal from "sweetalert"
 
 //? Components
 import PhoneCodes from './phoneRegionInput';
@@ -167,7 +168,11 @@ const FormEspecial = () => {
     let city = await axios.post('/locations', location);
     let auxInput = { ...input, CityId: city.data.id };
     editUserData(userId, auxInput);
-    alert('Se actualizaron los datos correctamente');
+    swal({
+      text: 'Se actualizaron los datos correctamente',
+      icon: "success",
+      timer: "3000",
+    })
     dispatch(initialUser(userId));
     history.push('/');
   };
