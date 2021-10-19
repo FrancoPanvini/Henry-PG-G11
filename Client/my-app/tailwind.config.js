@@ -65,6 +65,7 @@ module.exports = {
         facebook: '#4267B2',
         donations: '#D4AF37 ',
         instagram: '#405DE6',
+        instagram2: '#C13584',
         attention: '#C84B31',
         attentionLight: '#de8775',
       },
@@ -87,5 +88,7 @@ module.exports = {
   variants: {
     extend: {},
   },
-  plugins: [],
+  plugins: [
+    require('@tailwindcss/aspect-ratio'),
+  ],
 };
