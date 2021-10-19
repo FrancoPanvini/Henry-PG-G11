@@ -41,7 +41,7 @@ function CardRefugio({ selected, refProp, photo, name, phone, country, province,
 
   return (
     <div className='w-auto h-5/6'>
-      <ReactCardFlip isFlipped={isFlipped} flipDirection='vertical'>
+      <ReactCardFlip isFlipped={isFlipped} flipDirection='horizontal'>
         <div onClick={handleClick} className='card card-size-lg'>
           <div className='w-full h-4/5 card-transparency-bottom relative object-cover'>
 
