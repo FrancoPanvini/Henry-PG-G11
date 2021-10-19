@@ -10,8 +10,7 @@ import DatePick from "./DatePick";
 
 //? Icons
 import { IoIosCloseCircle } from "react-icons/io";
-/* import { FaExclamationCircle } from 'react-icons/fa';
- */
+
 //? Services
 import { postEvent } from "../../services/postEvent";
 
@@ -39,27 +38,6 @@ function FormularioPosteoEvento({ onClose }) {
     country: "",
   });
 
-  //* "errors" es el objeto que la función validate del input manipula
-  /*   const [errors, setErrors] = useState({});
-   */
-  //* validate recibe el input, si encuentra errores le agrega propiedades al estado de errors, el cuál desactiva el botón "Publicar"
-  /* const validate = ({ name, initDate, endDate, lat }) => {
-    let errors = {};
-    if (name) {
-      errors.name = 'Debes ingresar el nombre del evento';
-    }
-    // if (!endDate) {
-    //   errors.name = 'Debes ingresar la fecha y hora de fin ';
-    // }
-    // if (!initDate) {
-    //   errors.name = 'Debes ingresar la fecha y hora de inicio';
-    // }
-    // if (lat === '') {
-    //   errors.coords = 'Debes seleccionar la ubicación donde está tu mascota';
-    // }
-    return errors;
-  }; */
-
   //* input change handler
   const handleChange = (e) => {
     const newEvento = {
@@ -67,7 +45,6 @@ function FormularioPosteoEvento({ onClose }) {
       [e.target.name]: e.target.value,
     };
     setEvento(newEvento);
-    // setErrors(validate(newEvento));
   };
 
   //* Init datePick handler
@@ -120,7 +97,7 @@ function FormularioPosteoEvento({ onClose }) {
 
   //* función que desactiva el botón Publicar cuando no todos los datos están completados
   const handleDisabled = () => {
-    if (evento.name !== "" /* && Object.keys(errors).length === 0 */) {
+    if (evento.name !== "") {
       return false;
     }
     return true;
@@ -168,11 +145,10 @@ function FormularioPosteoEvento({ onClose }) {
             onClick={onClose}
           />
           <div className="flex justify-between h-full">
-            <div className="flex flex-col">
+            <div className="flex flex-col w-1/2">
               {/* ↓ Nombre del evento */}
               <label>
-                Nombre del evento:{" "}
-                {/* {errors.name && <FaExclamationCircle title={errors.name} className='inline text-fourtyLight align-baseline' />} */}
+                Nombre del evento:
               </label>
               <input
                 name="name"
@@ -209,29 +185,14 @@ function FormularioPosteoEvento({ onClose }) {
               />
 
               {/* ↓ Fotos */}
-              <div className="flex justify-evenly items-center bg-gradient-to-r from-primary to-primaryLight px-4 py-2">
-                <div>
-                  <label>Foto: (incluir una única foto)</label>
-                  <UploadImage setUrl={setUrl} url={url} />
-                </div>
-                <div className="w-32 h-32 bg-primaryDark border-2 border-primaryDark">
-                  {url.length === 0 ? (
-                    <div className="h-full flex justify-center items-center text-center text-primaryLight">
-                      previsualización de imagen
-                    </div>
-                  ) : (
-                    <img
-                      src={url}
-                      alt="previsualización de imagen"
-                      className="w-full h-full object-cover"
-                    />
-                  )}
-                </div>
+              <div className="flex flex-col bg-gradient-to-r from-primary to-primaryLight px-4 py-2">
+                <label>Foto: (incluir una única foto)</label>
+                <UploadImage setUrl={setUrl} url={url} />
               </div>
               <br />
             </div>
 
-            <div className="h-auto w-full flex flex-col justify-center ml-4">
+            <div className="h-auto w-1/2 flex flex-col justify-center ml-4">
               {/* ↓ Mapa de ubicación del evento */}
               <div>Ubicación del evento:</div>
               <input
