@@ -21,7 +21,7 @@ function EventSlider() {
           events?.map((e) => {
             return (
               <div className='each-fade flex w-2/3 h-104 mx-auto rounded-lg overflow-auto px-2 justify-between bg-primary my-auto'>
-                <div className='w-1/3 flex flex-col justify-around uppercase text-gray-200'>
+                <div className='w-1/3 flex flex-col pr-2 justify-around uppercase text-gray-200'>
                   <h3 className='font-bold text-xl  text-center text-white capitalize'>
                     {e.name}
                   </h3>
