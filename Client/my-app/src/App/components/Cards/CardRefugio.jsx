@@ -8,9 +8,10 @@ import DetalleRefugio from '../Refugios/DetalleRefugio';
 import { getPetsByUser } from '../../services/getPetsByUser';
 import { getEventsByUserId } from '../../services/getEventsByUserId';
 import { FaFacebookSquare, FaInstagram, FaGlobe, FaDonate } from 'react-icons/fa';
+import { IoMdAddCircle } from 'react-icons/io';
 
 
-function CardRefugio({ selected, refProp, photo, name, phone, country, province, city, description, web, responsable, instagram, facebook, donaciones, id, lat, lng }) {
+function CardRefugio({ selected, refProp, photo, name, phone, country, province, city, description, socialNet, responsable, instagram, facebook, donaciones, id, lat, lng }) {
 
   const [isFlipped, setIsFlipped] = useState(false);
   const [isOpen, setIsOpen] = useState(false);
@@ -88,6 +89,8 @@ function CardRefugio({ selected, refProp, photo, name, phone, country, province,
                     instagram={instagram}
                     facebook={facebook}
                     donaciones={donaciones}
+                    lat={lat}
+                    lng={lng}
                   />
                 )}
               </div>
@@ -119,11 +122,11 @@ function CardRefugio({ selected, refProp, photo, name, phone, country, province,
                   </a>
                 </h3>
               )}
-              {(web || facebook || instagram) && (
+              {(socialNet || facebook || instagram) && (
                 <h3 className='p-1 text-white font-bold'>
                   Redes:
-                  {web && (
-                    <a href={web}>
+                  {socialNet && (
+                    <a href={socialNet}>
                       <FaGlobe className='inline text-fourty mx-1 text-xl' />
                     </a>
                   )}
@@ -166,7 +169,7 @@ function CardRefugio({ selected, refProp, photo, name, phone, country, province,
                 country={country}
                 province={province}
                 city={city}
-                web={web}
+                web={socialNet}
                 responsable={responsable}
                 description={description}
                 instagram={instagram}

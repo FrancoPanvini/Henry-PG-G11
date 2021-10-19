@@ -27,8 +27,8 @@ function FormularioDatos({ user, close, type }) {
     direction: '',
     province: user.province,
     city: user.city,
-    lat: null,
-    lng: null,
+    lat: user.lat,
+    lng: user.lng,
     mail: user.mail,
     photo: user.photo
   });

@@ -1,6 +1,6 @@
 import React from 'react';
 import GoogleMapReact from 'google-map-react';
-import { Paper, Typography, useMediaQuery } from '@material-ui/core';
+import { useMediaQuery } from '@material-ui/core';
 import LocationOnOutlinedIcon from '@material-ui/icons/LocationOnOutlined';
 
 import useStyles from './styles';
@@ -37,7 +37,7 @@ const Map = ({ setCoordinates, setBounds, coordinates, items, setChildClicked })
             ) : (
               <div className='w-20 h-32 absolute rounded-xl overflow-hidden bg-primary transition-all cursor-pointer'>
                 <div id={i} className='relative w-full h-4/5 object-cover card-transparency-bottom'>
-                  <img alt='not available' src={pet.petPic ? pet.petPic : 'https://drpp-ny.org/wp-content/uploads/2014/07/sorry-image-not-available.png'} className='h-full w-full object-cover' />
+                  <img alt='not available' src={pet.photo? pet.photo : pet.petPic ? pet.petPic : 'https://drpp-ny.org/wp-content/uploads/2014/07/sorry-image-not-available.png'} className='h-full w-full object-cover' />
                 </div>
                 <p className=' w-full h-1/5 text-center leading-loose text-white text-sm font-bold capitalize'>{pet.name}</p>
               </div>

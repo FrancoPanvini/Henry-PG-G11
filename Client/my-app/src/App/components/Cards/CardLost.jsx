@@ -5,7 +5,7 @@ import { useSelector } from 'react-redux';
 //? Components
 import DetallePerdido from '../Mascotas/DetallePerdido';
 import ReactCardFlip from 'react-card-flip';
-import ContactoPerdido from '../pop-up/ContactoPerdido'
+/* import ContactoPerdido from '../pop-up/ContactoPerdido' */
 
 //? Icons
 import { FaPaw } from 'react-icons/fa';
@@ -14,7 +14,7 @@ import { FaPaw } from 'react-icons/fa';
 function CardLost({ selected, refProp, photo, name, size, country, province, city, id, phone }) {
   const [isFlipped, setIsFlipped] = useState(false);
   const isLogged = useSelector(state => state.isLogged);
-  // const [isOpen, setIsOpen] = useState(false);
+  const [, setIsOpen] = useState(false);
   const [isOpenDetail, setIsOpenDetail] = useState(false);
   const userData = useSelector(state => state.userData);
 

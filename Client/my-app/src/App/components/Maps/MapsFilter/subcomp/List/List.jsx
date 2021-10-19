@@ -1,5 +1,5 @@
 import React, { useState, useEffect, createRef } from 'react';
-import { CircularProgress, Typography, InputLabel, MenuItem, FormControl, Select, Grid, Box } from '@material-ui/core';
+import { CircularProgress, Typography, InputLabel, MenuItem, FormControl, Select, Box } from '@material-ui/core';
 import { useLocation } from 'react-router';
 
 import useStyles from './style';
