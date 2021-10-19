@@ -11,7 +11,7 @@ const getUsers = async (req, res) => {
         model: Cities,
         attributes: ["name", "ProvinceId"],
         required: true,
-        include: { model: Provinces, attributes: ["name", "CountryId"], required: true, where: {}, include: { model: Countries, required: true, attributes: ["name", "code"] } },
+        include: { model: Provinces, attributes: ["name", "CountryId"], required: true, where: {}, include: { model: Countries, required: true, attributes: ["name"] } },
       },
       { model: UsersType, attributes: ["type"] },
     ],

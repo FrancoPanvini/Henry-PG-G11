@@ -102,7 +102,7 @@ function ContenedorCard({ className, title }) {
               <div key={p.id} className='flex justify-center'>
                 {title === 'ADOPCIONES' ? (
                   <CardAdopcion
-                    photo={p.petPic ? p.petPic : 'https://drpp-ny.org/wp-content/uploads/2014/07/sorry-image-not-available.png'}
+                    photo={p.petPic}
                     name={p.name}
                     age={p.age}
                     size={p.size}
@@ -115,31 +115,33 @@ function ContenedorCard({ className, title }) {
 
                 ) : title === 'PERDIDOS' ? (
                   <CardLost
-                    photo={p.petPic ? p.petPic : 'https://drpp-ny.org/wp-content/uploads/2014/07/sorry-image-not-available.png'}
+                    photo={p.petPic}
                     name={p.name}
                     size={p.size}
                     country={p.country}
                     province={p.province}
                     city={p.city}
                     id={p.id}
+                    phone={p.phone}
                   />
 
                 ) : (
                   // case title === 'REFUGIOS'
                   <CardRefugio
-                    photo={p.photo ? p.photo : 'https://drpp-ny.org/wp-content/uploads/2014/07/sorry-image-not-available.png'}
+                    photo={p.photo}
                     name={p.name}
-                    phone={p.phone}
                     country={p.country}
                     province={p.province}
                     city={p.city}
                     description={p.description}
                     responsable={p.responsable}
-                    socialNet={p.link_web}
+                    web={p.link_web}
                     instagram={p.link_instagram}
                     facebook={p.link_facebook}
                     donaciones={p.link_donaciones}
                     id={p.id}
+                    lat={p.lat}
+                    lng={p.lng}
                   />
                 )}
 

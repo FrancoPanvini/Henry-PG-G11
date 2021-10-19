@@ -1,18 +1,15 @@
 import React, { useEffect } from 'react';
 import { useDispatch } from 'react-redux';
-import {
-  getLostPets,
-  //getLostPetsHome,
-  getPetsAdopHome,
-  getProvinces,
-  getShelters,
-  setUser,
-} from '../../redux/actions';
+import { useHistory } from 'react-router';
+import jwt from 'jsonwebtoken';
+
+//?Components
 import SliderContainer from './SliderContainer';
 import Onboarding from './Onboarding';
 import IconosHome from './IconosHome';
-import { useHistory } from 'react-router';
-import jwt from 'jsonwebtoken';
+
+//? Actions
+import { getLostPetsHome, getPetsAdopHome, getShelters, setUser } from '../../redux/actions';
 
 function Home() {
   const history = useHistory();
@@ -20,8 +17,7 @@ function Home() {
 
   useEffect(() => {
     dispatch(getPetsAdopHome());
-    //dispatch(getLostPetsHome());
-    dispatch(getLostPets());
+    dispatch(getLostPetsHome());
     dispatch(getShelters());
     const url = window.location.href;
     if (url.includes('loginGoogle=true')) {

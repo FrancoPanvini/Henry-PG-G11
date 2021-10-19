@@ -13,14 +13,14 @@ html {
 }
 ::-webkit-scrollbar-thumb {
   @apply bg-primary;
-    border-radius: 6px;
+  border-radius: 6px;
 }
 ::-webkit-scrollbar-thumb:hover {
   @apply bg-primaryDark;
 }
 ::-webkit-scrollbar-track {
-  background: #e5e7eb;
-  border-radius: 0px;
+  background: #e5e7eb80;
+  border-radius: 99px;
   /* box-shadow: inset 0px 0px 0px 0px #f0f0f0; */
 }
 /* End Scrollbar always visible & styles */
@@ -173,4 +173,12 @@ progress::-moz-progress-bar {
   padding: '50px';
   z-index: 1000;
   border-radius: 25;
+}
+
+.img{
+  @apply  shadow-xl transition-all cursor-pointer
+}
+
+.img:hover{
+  @apply  filter brightness-75
 }
