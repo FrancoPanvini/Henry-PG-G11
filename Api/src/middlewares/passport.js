@@ -6,6 +6,7 @@ const JWTstrategy = require("passport-jwt").Strategy;
 const ExtractJWT = require("passport-jwt").ExtractJwt;
 const jwt = require("jsonwebtoken")
 const { Users } = require("../db")
+const GoogleStrategy = require("passport-google-oauth20").Strategy;
 
 passport.use(
     "login",
@@ -78,6 +79,36 @@ passport.use(
       }
     })
   );
+
+  passport.use(
+    new GoogleStrategy(
+      {
+        clientID: "35151553938-tfc222svo6g482tcv97mancdkr8gkmel.apps.googleusercontent.com",
+        clientSecret: "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",
+        callbackURL: `http://localhost:3001/auth/google/callback`,
+        session: false,
+      },
+      async (accessToken, refreshToken, profile, done) => {
+        const googleUser = profile._json;
+        try {
+          let user = await Users.findOne({ where: {mail: googleUser.email} })
+          if(!user){
+            user = await Users.create({
+              name: googleUser.name,
+              mail: googleUser.email,
+              photo: googleUser.picture,
+              CityId: 1,
+              UsersTypeId:'i'
+            })
+          }
+          return done(null, user);
+        } catch (err) {
+          done(err);
+        }
+      }
+    )
+  );
+  
 
 passport.use(
     new BearerStrategy((token, done) => {

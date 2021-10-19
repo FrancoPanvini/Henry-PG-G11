@@ -1,34 +1,26 @@
-import React from "react";
-import GoogleMapReact from "google-map-react";
-import { Paper, Typography, useMediaQuery } from "@material-ui/core";
-import LocationOnOutlinedIcon from "@material-ui/icons/LocationOnOutlined";
+import React from 'react';
+import GoogleMapReact from 'google-map-react';
+import { useMediaQuery } from '@material-ui/core';
+import LocationOnOutlinedIcon from '@material-ui/icons/LocationOnOutlined';
 
-import useStyles from "./styles";
-/* import CardAdopcion from "../../../../Cards/CardAdopcion"; */
-
+import useStyles from './styles';
 
 const Map = ({ setCoordinates, setBounds, coordinates, items, setChildClicked }) => {
   const classes = useStyles();
-  const isDesktop = useMediaQuery("(min-width:600px)");
-
-//bounds.ne.lat  latMax lngMin
-//bounds.sw.lat  latMin lngMax
+  const isDesktop = useMediaQuery('(min-width:600px)');
 
   return (
     <div className={classes.mapContainer}>
-      
       <GoogleMapReact
-        bootstrapURLKeys={{ key: "AIzaSyC9FtL0Nsz0ROcYVY7hOkp9JL2tU4ECjqY" }}
-        /* defaultCenter={coordinates} */
+        bootstrapURLKeys={{ key: 'AIzaSyC9FtL0Nsz0ROcYVY7hOkp9JL2tU4ECjqY' }}
         center={coordinates}
         defaultZoom={15}
         margin={[50, 50, 50, 50]}
-        options={{gestureHandling: "greedy", clickableIcons: false}}
-        onChange={(e) => {
+        options={{ gestureHandling: 'greedy', clickableIcons: false }}
+        onChange={e => {
           setCoordinates({ lat: e.center.lat, lng: e.center.lng });
-          setBounds({ latMin: e.bounds.sw.lat, latMax: e.bounds.ne.lat, lngMin: e.bounds.sw.lng, lngMax: e.bounds.ne.lng  });
+          setBounds({ latMin: e.bounds.sw.lat, latMax: e.bounds.ne.lat, lngMin: e.bounds.sw.lng, lngMax: e.bounds.ne.lng });
         }}
-        onChildClick={(child)=>setChildClicked(child)}
       >
         {items?.map((pet, i) => (
           <div
@@ -36,33 +28,20 @@ const Map = ({ setCoordinates, setBounds, coordinates, items, setChildClicked })
             lat={Number(pet.lat)}
             lng={Number(pet.lng)}
             key={i}
+            onClick={event => {
+              setChildClicked(event.target.id);
+            }}
           >
-            
-         { !isDesktop ? (
-              <LocationOnOutlinedIcon color="primary" fontSize="large" />
+            {!isDesktop ? (
+              <LocationOnOutlinedIcon color='primary' fontSize='large' />
             ) : (
-                 /*  <CardAdopcion
-                  photo={pet.petPic ? pet.petPic : 'https://drpp-ny.org/wp-content/uploads/2014/07/sorry-image-not-available.png'}
-                  name={pet.name}
-                  age={pet.age}
-                  size={pet.size}
-                  sex={pet.sex}
-                  country={pet.country}
-                  province={pet.province}
-                  city={pet.city}
-                  id={pet.id}/>  */
-              <Paper elevation={3} className={classes.paper}>
-                   <Typography className={classes.typography} variant="subtitle2" gutterBottom>
-                      {pet.name}
-                  </Typography>
-                  <img
-                  alt=""
-                  className={classes.pointer}
-                  src={pet.petPic ? pet.petPic : 'https://drpp-ny.org/wp-content/uploads/2014/07/sorry-image-not-available.png'}
-                  //alt={pet.name}
-                  /> 
-              </Paper> 
-            )} 
+              <div className='w-20 h-32 absolute rounded-xl overflow-hidden bg-primary transition-all cursor-pointer'>
+                <div id={i} className='relative w-full h-4/5 object-cover card-transparency-bottom'>
+                  <img alt='not available' src={pet.photo? pet.photo : pet.petPic ? pet.petPic : 'https://drpp-ny.org/wp-content/uploads/2014/07/sorry-image-not-available.png'} className='h-full w-full object-cover' />
+                </div>
+                <p className=' w-full h-1/5 text-center leading-loose text-white text-sm font-bold capitalize'>{pet.name}</p>
+              </div>
+            )}
           </div>
         ))}
       </GoogleMapReact>

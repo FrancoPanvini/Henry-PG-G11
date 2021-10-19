@@ -8,7 +8,7 @@ module.exports = sequelize => {
       mail: { type: DataTypes.STRING, allowNull: false, unique: true, isEmail: true },
       phone: { type: DataTypes.STRING },
       direction: { type: DataTypes.STRING },
-      password: { type: DataTypes.STRING, allowNull: false },
+      password: { type: DataTypes.STRING },
       photo: { type: DataTypes.STRING },
       responsable: { type: DataTypes.STRING },
       dni: { type: DataTypes.INTEGER },
@@ -18,7 +18,8 @@ module.exports = sequelize => {
       link_facebook: { type: DataTypes.STRING },
       link_donaciones: { type: DataTypes.STRING },
       lat: { type: DataTypes.FLOAT },
-      lng: { type: DataTypes.FLOAT }
+      lng: { type: DataTypes.FLOAT },
+      resetToken: {type: DataTypes.STRING}
     },
     { sequelize: sequelize, modelName: "Users", timestamps: true }
   );

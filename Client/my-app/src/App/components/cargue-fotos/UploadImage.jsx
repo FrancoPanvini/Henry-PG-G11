@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
 import { storage } from './firebase/index';
+import PhotoMiniSlider from './PhotoMiniSlider';
 
-function UploadImage({ photo, setUrl }) {
+function UploadImage({ url, setUrl }) {
   const [image, setImage] = useState([]);
   const [progress, setProgress] = useState(0);
 
@@ -31,24 +32,28 @@ function UploadImage({ photo, setUrl }) {
             .getDownloadURL()
             .then((url) => {
               setUrl((prevUrl) => [...prevUrl, url]);
+              setImage([]);
             });
         }
       );
     });
   };
-  //Comentar el div de progress si hace mal a la vista
 
   return (
-    <div className='flex flex-col justify-between items-center p-2'>
-      <input name={photo} type='file' multiple onChange={handleChange} />
-      <div className={image.length === 0 ? 'invisible ' : 'w-full text-center'}>
-        <button onClick={handleUpload} className='btn btn-nav bg-thirty px-8 rounded-xl border-b-fourty mt-1'>
-          Subir foto seleccionada y previsualizar
-        </button>
-        <div className="flex items-center justify-center">
-          <progress value={progress} max='100' className="w-3/5 mr-2" title='Progreso de subida' />{progress}%
+    <div className='flex w-full items-center'>
+      <div className='w-7/12'>
+        <input type='file' multiple onChange={handleChange} className='mb-4' />
+        <div className='w-full h-full text-center'>
+          <button onClick={handleUpload} disabled={image.length === 0} className='btn btn-nav bg-thirty px-8 rounded-xl border-fourty mt-1 mb-4'>
+            Subir foto(s) seleccionada(s)
+          </button>
+          <div className='flex items-center justify-center'>
+            <progress value={progress} max='100' className='w-3/5 mr-2' title='Progreso de subida' />
+            {progress}%
+          </div>
         </div>
       </div>
+      <PhotoMiniSlider photos={url} setUrl={setUrl} />
     </div>
   );
 }

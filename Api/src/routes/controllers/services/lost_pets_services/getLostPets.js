@@ -1,33 +1,32 @@
 
 const { where, Op } = require("sequelize");
 
-const { LostPets, Users, Cities, Provinces, Countries, /* PetsPics */ } = require("../../../../db");
+const { LostPets, Users, Cities, Provinces, Countries, LostPetsPics } = require("../../../../db");
 
 const getLostPets = async (req, res) => {
-  const { lost, paglimit, pagnumber, city, province, country, latMax, latMin, lngMax, lngMin } = req.query;
+  const { found, paglimit, pagnumber, city, province, country, latMax, latMin, lngMax, lngMin } = req.query;
 
   let query = {
     where: {},
-    attributes: ["id", "name", "size", "description", "found", "lat", "lng", "createdAt", "photo"],
+    attributes: ["id", "name", "size", "description", "found", "lat", "lng", "createdAt", "photo", "updatedAt", "UserId"],
     order: [["createdAt", "DESC"]],
     include: [
+      { model: Users, attributes: ["name"] },
       {
         model: Cities,
         attributes: ["name", "ProvinceId"],
         required: true,
         include: { model: Provinces, attributes: ["name", "CountryId"], required: true, where: {}, include: { model: Countries, required: true, attributes: ["name"] } },
       },
-      { model: Users, attributes: ["name"] },
 
-      // { model: PetsPics, attributes: ["url"] }
+      { model: LostPetsPics, attributes: ["url"] }
 
     ],
   };
 
   //* Add filter by not found
-  if (lost) query.where = { ...query.where, found: !lost };
-
-  
+  if (found === "true") query.where = {...query.where, found: true };
+  if (found === "false") query.where = {...query.where, found: false };
 
   //* Add filter by city
   if (city) query.where = { ...query.where, CityId: city };
@@ -61,12 +60,11 @@ const getLostPets = async (req, res) => {
   lostPets.rows = lostPets.rows.map(pet => {
     pet = {
       ...pet.dataValues,
-      owner: pet.dataValues.User.name,
+      owner: pet.dataValues.User?.name,
       country: pet.dataValues.City.Province.Country.name,
       province: pet.dataValues.City.Province.name,
       city: pet.dataValues.City.name,
-      // petPics: pet.PetsPics.map(pic => pic.url)
-
+      petPic: pet.LostPetsPics[0]?.url,
     };
     const { City, User, ...rest } = pet;
     return rest;
