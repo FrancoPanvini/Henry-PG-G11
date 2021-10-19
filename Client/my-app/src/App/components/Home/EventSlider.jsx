@@ -14,18 +14,18 @@ function EventSlider() {
   }, [index, size]); */
 
   return (
-    <div className='w-full h-auto  text-left px-32 py-16 bg-gray-200'>
+    <div className='w-full h-5/6 pt-32 px-32 pb-8 text-left overflow-hidden bg-gray-200'>
       <span className='text-primary font-bold text-xl ml-4 '>EVENTOS</span>
       <Fade
-        className='my-12'
+        className='h-120'
         duration={6000}
         arrows={false}
         pauseOnHover={false}>
         {events &&
           events?.map((e) => {
             return (
-              <div className='each-fade flex w-2/3 h-full  mx-auto rounded-lg bg-primary my-auto'>
-                <div className='  w-1/3 flex flex-col justify-around uppercase text-gray-200'>
+              <div className='each-fade flex w-2/3 h-3/4 mx-auto rounded-lg bg-primary my-auto'>
+                <div className='w-1/3 flex flex-col justify-around uppercase text-gray-200'>
                   <div className= 'w-full pl-2'>
                     <h3 className='font-bold text-xl  text-center text-white capitalize'>
                       {e.name}
@@ -65,7 +65,7 @@ function EventSlider() {
                 <img
                   src={e.photo}
                   alt='foto evento'
-                  className='p-4 w-2/3 object-cover rounded-xl'
+                  className='p-4 w-2/3 object-contain rounded-xl'
                 />
               </div>
             );
