@@ -51,15 +51,15 @@ function DetalleRefugio({
       <div className='fixed inset-0 z-50'>
         <div className='panel relative top-20 mx-auto w-9/12 h-screen82 p-6 bg-gradient-to-r from-fourtyLight to-fourtyDark overflow-y-scroll'>
           <IoIosCloseCircle
-            className='text-primary top-0 sticky text-3xl hover:text-primaryLight cursor-pointer transition-all'
+            className='text-primary top-4 right-4 absolute text-3xl hover:text-primaryLight cursor-pointer transition-all'
             onClick={onClose}
             title='Cerrar'
           />
-          <div className='flex mx-16 border-b-2 border-fourtyDark border-opacity-25'>
-            <div className='w-full flex flex-col'>
+          <div className='flex justify-center mx-16 border-b-2 border-fourtyDark border-opacity-25'>
+            <div className='w-2/3 flex flex-col mr-8'>
               <span className='py-1 text-primary text-3xl font-bold capitalize text-center'>{name}</span>
 
-              <div className='py-6 border-b-2 border-fourtyDark border-opacity-25'>
+              <div className='py-6 px-5 border-b-2 border-fourtyDark border-opacity-25'>
                 {description && (
                   <span className='text-white text-xl font-bold text-justify'>
                     Descripción: <br />
@@ -126,11 +126,11 @@ function DetalleRefugio({
               </div>
             </div>
             {photo && (
-              <div className='w-1/3 p-4 aspect-w-1 aspect-h-1'>
+              <div className='w-1/3 p-4'>
                 <img
                   src={photo}
                   alt='foto de usuario'
-                  className='object-cover w-full h-full max-h-64 rounded-lg mx-auto ring ring-offset-4 ring-offset-gray-200'
+                  className='object-cover w-full max-w-md max-h-96 rounded-lg mx-auto ring ring-offset-4 ring-offset-gray-200'
                 />
               </div>
             )}
