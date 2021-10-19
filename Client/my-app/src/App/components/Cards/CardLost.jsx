@@ -5,19 +5,18 @@ import { useSelector } from 'react-redux';
 //? Components
 import DetallePerdido from '../Mascotas/DetallePerdido';
 import ReactCardFlip from 'react-card-flip';
-/* import ContactoPerdido from '../pop-up/ContactoPerdido' */
+import ContactoPerdido from '../pop-up/ContactoPerdido'
 
 //? Icons
 import { FaPaw } from 'react-icons/fa';
 
 
-function CardLost({ selected, refProp, photo, name, size, country, province, city, id, phone }) {
+function CardLost({ selected, refProp, photo, name, size, country, province, city, id, phone, userId }) {
   const [isFlipped, setIsFlipped] = useState(false);
   const isLogged = useSelector(state => state.isLogged);
-  const [, setIsOpen] = useState(false);
+  const [isOpen, setIsOpen] = useState(false);
   const [isOpenDetail, setIsOpenDetail] = useState(false);
   const userData = useSelector(state => state.userData);
-
 
   const handleClick = () => {
     setIsFlipped(!isFlipped);
@@ -79,10 +78,8 @@ function CardLost({ selected, refProp, photo, name, size, country, province, cit
                 </h2>
               </button>
 
-            ) : (
-              <> </>
-            )}
-            {/* {isOpen && <FormularioAdopcion name={name} onClose={() => setIsOpen(false)} petId={id} onClick />} */}
+            ) : (<></>)}
+              {isOpen && (<ContactoPerdido name={name} onClose={() => setIsOpen(false)} petId={id} onClick userId={userId} />)}
 
           </div>
         </div>

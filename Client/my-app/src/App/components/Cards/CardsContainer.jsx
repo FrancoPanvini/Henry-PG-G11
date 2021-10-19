@@ -123,6 +123,7 @@ function ContenedorCard({ className, title }) {
                     city={p.city}
                     id={p.id}
                     phone={p.phone}
+                    userId={p.UserId}
                   />
 
                 ) : (

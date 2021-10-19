@@ -1,18 +1,15 @@
 import React, { useEffect, useState } from "react";
 import ReactDom from "react-dom";
 //import swal from "sweetalert";
-import { useSelector } from "react-redux";
-
+import {getUserById} from '../../services/getUserById';
 //? Icons
 import { IoIosCloseCircle } from "react-icons/io";
 import { FaWhatsapp, FaMailBulk } from "react-icons/fa";
 
-function FormularioAdopcion({ onClose, name, petId }) {
+function ContactoPerdido({ onClose, name, petId, userId }) {
   const [user, setUser] = useState({ id: "", name: "" });
+  const [owner, setOwner] = useState([])
 
-  const owner = useSelector((state) => state.userData);
-
-  console.log(owner.phone);
 
   //* Setear la información del usuario desde el localStorage
   useEffect(() => {
@@ -20,7 +17,14 @@ function FormularioAdopcion({ onClose, name, petId }) {
       id: localStorage.getItem("userId"),
       name: localStorage.getItem("userName"),
     });
-  }, []);
+
+    const getUser = async(userId) => {
+    const rta = await getUserById(userId)
+    setOwner(rta?.data)
+  }
+  getUser(userId)
+
+  }, [userId]);
 
   return ReactDom.createPortal(
     <>
@@ -49,9 +53,9 @@ function FormularioAdopcion({ onClose, name, petId }) {
                 <div>
                   <h3 className="p-1 text-white font-bold">
                     WhatsApp:{" "}
-                    <a href={`https://wa.me/${owner.phone}`}>
+                    <a href={`https://wa.me/${owner?.phone}`}>
                       <FaWhatsapp className="inline text-white mx-1 text-xl" />
-                      <span className="text-white ">{owner.phone}</span>
+                      <span className="text-white ">{owner?.phone}</span>
                     </a>
                   </h3>
 
@@ -96,4 +100,4 @@ function FormularioAdopcion({ onClose, name, petId }) {
   );
 }
 
-export default FormularioAdopcion;
+export default ContactoPerdido;

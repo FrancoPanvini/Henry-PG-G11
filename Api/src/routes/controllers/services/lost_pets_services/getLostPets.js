@@ -8,7 +8,7 @@ const getLostPets = async (req, res) => {
 
   let query = {
     where: {},
-    attributes: ["id", "name", "size", "description", "found", "lat", "lng", "createdAt", "photo", "updatedAt"],
+    attributes: ["id", "name", "size", "description", "found", "lat", "lng", "createdAt", "photo", "updatedAt", "UserId"],
     order: [["createdAt", "DESC"]],
     include: [
       {
