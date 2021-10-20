@@ -38,7 +38,7 @@ const Reset = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    resetPassword(input, url.slice(34).toString());
+    resetPassword(input, url.slice(40).toString());
     swal({
       text: '¡Listo, tu contraseña fue actualizada! Ahora puedes iniciar sesión',
       icon: 'success',

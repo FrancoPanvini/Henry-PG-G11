@@ -176,21 +176,13 @@ function Registro() {
       <div className="w-2/5">
         <div className="ml-auto mr-12 bg-cachorroWeb bg-bottom bg-cover relative h-96 w-96 rounded-full shadow-similBorderWhite floorShadowCircle" />
       </div>
-      <div className="flex justify-center items-center w-3/5 z-1 h-full">
-        <form
-          onSubmit={(e) => handleSubmit(e)}
-          className="p-4 w-11/12 flex flex-col bg-thirty rounded-lg min-w-min shadow-xl border-2 border-fourty border-opacity-50"
-        >
-          <div className="pb-4 border-b-2 border-thirtyDark border-opacity-50">
-            <a
-              href="http://localhost:3001/auth/google"
-              className="btn btn-lg bg-white text-gray-600 border-gray-400 flex justify-center items-center"
-            >
-              <img
-                src="https://freesvg.org/img/1534129544.png"
-                alt="Log in con Google"
-                className="h-7 w-7 inline mr-4"
-              />
+
+      <div className='flex justify-center items-center w-3/5 z-1 h-full'>
+        <form onSubmit={e => handleSubmit(e)} className='p-4 w-11/12 flex flex-col bg-thirty rounded-lg min-w-min shadow-xl border-2 border-fourty border-opacity-50'>
+          <div className='pb-4 border-b-2 border-thirtyDark border-opacity-50'>
+            <a href='https://adogtameapi.herokuapp.com/auth/google' className='btn btn-lg bg-white text-gray-600 border-gray-400 flex justify-center items-center'>
+              <img src='https://freesvg.org/img/1534129544.png' alt='Log in con Google' className='h-7 w-7 inline mr-4' />
+
               Registra tu cuenta usando Google
             </a>
           </div>

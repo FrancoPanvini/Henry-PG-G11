@@ -85,7 +85,7 @@ passport.use(
       {
         clientID: "35151553938-tfc222svo6g482tcv97mancdkr8gkmel.apps.googleusercontent.com",
         clientSecret: "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",
-        callbackURL: `http://localhost:3001/auth/google/callback`,
+        callbackURL: `http://adogtameapi.herokuapp.com/auth/google/callback`,
         session: false,
       },
       async (accessToken, refreshToken, profile, done) => {
