@@ -111,7 +111,7 @@ function FormularioPosteoPerdido({ onClose, onPostPet }) {
     postLostPet(newMascota);
     onPostPet();
     swal({
-      text: 'La Mascota fue postulada en adopción',
+      text: 'Tu mascota fue publicada entre las perdidas',
       icon: 'success',
       timer: '3000',
     });

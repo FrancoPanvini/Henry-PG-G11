@@ -97,7 +97,7 @@ function FormularioPosteo({ onClose, onPostPet }) {
     setUrl([]);
     setSent(true);
     swal({
-      text: 'La Mascota fue postulada en adopción',
+      text: 'Tu mascota fue publicada en adopción',
       icon: 'success',
       timer: '3000',
     });
