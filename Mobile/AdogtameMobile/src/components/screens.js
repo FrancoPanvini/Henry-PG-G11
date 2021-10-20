@@ -1,8 +1,10 @@
 import React from "react";
 import "intl";
 import 'intl/locale-data/jsonp/en'
-import { View, Text, StyleSheet, Button, Switch, Image, TouchableOpacity, ScrollView } from "react-native";
+import { View, Text, StyleSheet, Button, Alert, Switch, Image, TouchableOpacity, ScrollView } from "react-native";
 import { DataTable } from 'react-native-paper';
+import logoutUser from '../context/actions/auth/logout'
+import Input from '../components/Common/input/index';
 
 /* import ImagePicker from '../common/ImagePicker'; */
 
@@ -24,27 +26,82 @@ const styles = StyleSheet.create({
   });
 
   const ScreenContainer = ({ children }) => (
-    <View style={styles.container}>{children}</View>
+    <ScrollView>
+      <View>{children}</View>
+      </ScrollView>
   );
-  
-  
 
 
 
 
 
-  export const Profile = ({usuario}) => (
+  export const Profile = ({usuario, authDispatch}) => {
+    const onUserLogout = () => {
+      Alert.alert("Cerrando Sesión!", "Está seguro que desea continuar?",[{
+        text: "Cancelar",
+        onPress: () => {},
+      },
+      {
+        text: "OK",
+        onPress: () =>{ logoutUser()(authDispatch)}
+      }])
+    }
+    return(
+    
     <ScreenContainer>
-      <Text>{usuario.name}</Text>
-      <Text>{usuario.mail}</Text>
-      <Text>{usuario.phone}</Text>
-      <Text>{usuario.direction}</Text>
-      <Text>{usuario.city}</Text>
-      <Text>{usuario.province}</Text>
-      <Text>{usuario.country}</Text>
-      <Button title="Log Out" color="red" onPress={()=> console.log("Andate")}></Button>
+      <Input
+            label="Nombre"
+            placeholder="Ingrese Contraseña"
+            value={usuario.name}
+            onChangeText={(value) => {}}
+            
+          />
+      <Input
+            label="Mail"
+            placeholder="Ingrese Contraseña"
+            value={usuario.mail}
+            onChangeText={(value) => {}}
+            
+          />
+      <Input
+            label="Teléfono"
+            placeholder="Ingrese Contraseña"
+            value={usuario.phone}
+            onChangeText={(value) => {}}
+           
+          />
+      <Input
+            label="Dirección"
+            placeholder="Ingrese Contraseña"
+            value={usuario.direction}
+            onChangeText={(value) => {}}
+            
+          />
+      <Input
+            label="Ciudad"
+            placeholder="Ingrese Contraseña"
+            value={usuario.city}
+            onChangeText={(value) => {}}
+            
+          />
+      <Input
+            label="Provincia"
+            placeholder="Ingrese Contraseña"
+            value={usuario.province}
+            onChangeText={(value) => {}}
+            
+          />
+      <Input
+            label="Pais"
+            placeholder="Ingrese Contraseña"
+            value={usuario.country}
+            onChangeText={(value) => {}}
+            
+          />
+
+      <Button title="Log Out" color="red" onPress={()=> onUserLogout()}></Button>
     </ScreenContainer>
-  );
+  )};
 
 
 

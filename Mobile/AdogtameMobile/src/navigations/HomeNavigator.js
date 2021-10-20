@@ -1,10 +1,11 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useContext } from "react";
 import { BottomNavigation, Text, withTheme } from 'react-native-paper';
 import { createStackNavigator } from '@react-navigation/stack';
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import axios from "axios";
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import PostPet from '../screens/CreatePet/index'
+import { GlobalContext } from "../context/Provider";
 
 import {
   SignIn,
@@ -34,6 +35,7 @@ const HomeNavigator = () => {
   ]);
   const [user, setUser] = useState({})
   const [publications, setPublications] = useState([])
+  const {authDispatch} = useContext(GlobalContext);
 
   
 
@@ -63,7 +65,7 @@ const HomeNavigator = () => {
 
   const PublishedRoute = () => <Publications publications={publications}/>;
   
-  const ProfileRoute = () => <Profile usuario={user}/>;
+  const ProfileRoute = () => <Profile authDispatch={authDispatch} usuario={user}/>;
   
   const PublishRoute = () => <PostPet/>;
 

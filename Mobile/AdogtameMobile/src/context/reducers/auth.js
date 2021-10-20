@@ -22,7 +22,7 @@ const auth = (state, {type, payload}) => {
           isLoggedIn: true,
         };
   
-      case "LOGOUT_USER":
+      case "Logout":
         return {
           ...state,
           loading: false,
