@@ -97,7 +97,7 @@ function FormularioPosteo({ onClose, onPostPet }) {
     });
 
     try {
-      axios.post('http://localhost:3001/sendmail/postadop', {
+      axios.post('/sendmail/postadop', {
         name: mascota.name,
         mail: mascota.userMail,
         userName: mascota.userName,
@@ -244,7 +244,9 @@ function FormularioPosteo({ onClose, onPostPet }) {
               <MapPost onLocationChange={handleLocation} className='h-full' />
               {/* ↓ botón Publicar */}
               <div className='w-full text-center mt-4 '>
-                <button disabled={handleDisabled()} onClick={handlePublicar} className='btn btn-lg bg-thirty text-white border-fourty'>
+                <button disabled={handleDisabled()} onClick={handlePublicar} className={`${
+                handleDisabled() ? "opacity-50 cursor-default border-b-2 border-thirty" : "btn"
+              } btn-lg bg-fourty text-white border-thirty`}>
                   Publicar
                 </button>
               </div>

@@ -27,7 +27,7 @@ server.use((_req, res, next) => {
   next();
 });
 
-server.all("http://localhost:3000", function (req, res, next) {
+server.all("*", function (req, res, next) {
   passport.authenticate("bearer", (err, user) => {
     if (err) return next(err);
     if (user) {

@@ -93,7 +93,7 @@ function Login() {
           <button
             disabled={handleDisabled()}
             type='submit'
-            className='btn btn-lg bg-primary text-white border-yellow-600 flex justify-center items-center'>
+            className={`${handleDisabled() ? "opacity-50 cursor-default" : "btn"} mt-2 btn-lg bg-primary text-white border-yellow-600 flex justify-center items-center`}>
             <FaPaw className='text-3xl inline mr-4' /> Log in
           </button>
           <br />
