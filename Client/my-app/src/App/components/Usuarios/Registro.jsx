@@ -322,7 +322,9 @@ function Registro() {
             <button
               type="submit"
               disabled={handleDisabled()}
-              className="mt-2 btn btn-lg bg-primary text-white border-yellow-600 flex justify-center items-center"
+              className={`${
+                handleDisabled() ? "opacity-50 cursor-default" : "btn"
+              } mt-2 btn-lg bg-primary text-white border-yellow-600 flex justify-center items-center`}
             >
               {input.UsersTypeid === "i" ? (
                 <FaPaw className="text-white text-3xl inline mr-4" />
