@@ -1,5 +1,6 @@
 import React, {useState} from "react";
 import { View, Text, StyleSheet, Button, Switch, Image, TouchableOpacity, ScrollView } from "react-native";
+import { RadioButton, Text as TextPaper } from 'react-native-paper';
 import Input from '../Common/input/index'
 import CustomButton from '../Common/button/index'
 import PhotoPicker from "../Common/photopicker";
@@ -24,28 +25,100 @@ const styles = StyleSheet.create({
     );
     
     const CreatePetComponent = ({onChange, onSubmit, form, sheetRef, openSheet, closeSheet, onFileSelected}) => {
-  const [photo, setPhoto] =useState({})
-  return (
-      <View>
+    const [photo, setPhoto] =useState({})
+    const [especie, setEspecie] = React.useState('');
+    const [tamaño, setTamaño] = React.useState('');
+    const [sexo, setSexo] = React.useState('');
+    return (
+      <ScrollView>
       <ScreenContainer>
           <View>
           <Text>Postulá tu Mascota</Text>
           <Input
           label="Nombre"
-          placeholder="Ingrese E-mail"/>
+          placeholder="Ingrese Nombre"/>
+
           <Input
-          label="Tipo"
-          placeholder="Ingrese E-mail"/>
+          label="Especie"
+          value={especie}
+          disabled={true}
+          placeholder="Ingrese Tipo"/>
+
+
+                  <RadioButton.Group
+                    onValueChange={newValue => setEspecie(newValue)}
+                    value={especie}
+                  >
+                    <RadioButton.Item
+                      label="Perro"
+                      value="Perro"
+                      color="#1E6DAD"
+                    />
+                    <RadioButton.Item
+                      label="Gato"
+                      value="Gato"
+                      color="#1E6DAD"
+                    />
+                  </RadioButton.Group>
+
           <Input
-          label={photo.path}
+          label="Sexo"
+          value={sexo}
+          disabled={true}
+          placeholder="Ingrese Tipo"/>
+                  <RadioButton.Group
+                    onValueChange={newValue => setSexo(newValue)}
+                    value={sexo}
+                  >
+                    <RadioButton.Item
+                      label="Macho"
+                      value="Macho"
+                      color="#1E6DAD"
+                    />
+                    <RadioButton.Item
+                      label="Hembra"
+                      value="Hembra"
+                      color="#1E6DAD"
+                    />
+                  </RadioButton.Group>
+
+
+          <Input
+          label="Edad"
+          placeholder="Ingrese Años Cumplidos"/>
+
+          <Input
+          label="Tamaño"
+          value={tamaño}
+          disabled={true}
           placeholder="Ingrese E-mail"/>
+
+                  <RadioButton.Group
+                    onValueChange={newValue => setTamaño(newValue)}
+                    value={tamaño}
+                  >
+                    <RadioButton.Item
+                      label="Chico"
+                      value="Chico"
+                      color="#1E6DAD"
+                    />
+                    <RadioButton.Item
+                      label="Mediano"
+                      value="Mediano"
+                      color="#1E6DAD"
+                    />
+                    <RadioButton.Item
+                      label="Grande"
+                      value="Grande"
+                      color="#1E6DAD"
+                    />
+                  </RadioButton.Group>
+
           <Input
           label="Descripción"
-          placeholder="Ingrese E-mail"/>
-          <Input
-          label="Ubicación"
+          placeholder="Ingrese Descripción"/>
 
-          placeholder="Ingrese E-mail"/>
+          
           <Image
           style={{marginLeft:125}}
           width={150}
@@ -61,7 +134,7 @@ const styles = StyleSheet.create({
           
         </ScreenContainer>
         <PhotoPicker setPhoto={setPhoto} onFileSelected={onFileSelected} ref={sheetRef}/>
-        </View>
+        </ScrollView>
     );
   };
 
