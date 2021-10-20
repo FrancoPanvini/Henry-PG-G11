@@ -18,6 +18,7 @@ function ContenedorCard({ className, title, petPosted, petFiltered }) {
 
   useEffect(() => {
     dispatch(title === 'ADOPCIONES' ? getPetsAdop() : title === 'PERDIDOS' ? getLostPets() : getShelters());
+    setCurrentPage(1);
   }, [dispatch, title, petPosted]);
 
   useEffect(() => {
@@ -118,7 +119,7 @@ function ContenedorCard({ className, title, petPosted, petFiltered }) {
           })
         ) : (
           <div className='w-full h-full col-span-3 flex flex-col items-center mt-8'>
-            <h2 className='text-3xl font-bold text-primaryDark'>No se encontraron mascotas con esos parámetros</h2>
+            <h2 className='text-3xl font-bold text-primaryDark'>No se encontraron {title === 'REFUGIOS' ? 'refugios' : 'mascotas'} con esos parámetros</h2>
             <img src={'https://i.pinimg.com/originals/18/0d/95/180d95834d68ad0add738b765a82c97a.gif'} alt='' className='h-96 w-100 mt-4' />
           </div>
         )}

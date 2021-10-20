@@ -153,7 +153,7 @@ function FiltersBar({ onFilterPet }) {
     cleanFilter.city === '' && delete cleanFilter.city;
     cleanFilter.province === '' && delete cleanFilter.province;
 
-    onFilterPet();
+    onFilterPet && onFilterPet();
 
     currentLocation === '/adopciones'
       ? dispatch(getPetsAdopFilter(cleanFilter))

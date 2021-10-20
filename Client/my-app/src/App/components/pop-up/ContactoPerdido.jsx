@@ -6,7 +6,7 @@ import { getUserById } from '../../services/getUserById';
 import { IoIosCloseCircle } from 'react-icons/io';
 import { FaWhatsapp, FaMailBulk } from 'react-icons/fa';
 
-function ContactoPerdido({ onClose, name, petId, userId }) {
+function ContactoPerdido({ onClose, name, userId }) {
   const [user, setUser] = useState({ id: '', name: '' });
   const [owner, setOwner] = useState([]);
 
