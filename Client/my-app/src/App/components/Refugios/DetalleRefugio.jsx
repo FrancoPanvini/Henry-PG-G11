@@ -69,7 +69,7 @@ function DetalleRefugio({
                 <br />
                 {responsable && (
                   <span className='text-white text-xl font-bold text-justify'>
-                    Este refugio está a cargo de: <span className='capitalize'>{responsable}.</span>
+                    Este refugio está a cargo de: <span className='capitalize'>{responsable}</span>
                   </span>
                 )}
               </div>
