@@ -24,10 +24,3 @@ const postLocations = async (req, res) => {
 
 module.exports = postLocations;
 
-//* Data expected
-//* Query
-// localhost:3001/location?country=argentina
-//* body
-/*  [
-    ["Rosario","Santa Fe"],["Santa Fe","Santa Fe"],["Córdoba","Córdoba"],["Buenos Aires","Capital"],["La Plata","Buenos Aires"]
-    ]   */

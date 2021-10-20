@@ -119,7 +119,7 @@ function FormularioPosteoEvento({ onClose }) {
       timer: "3000",
     });
     try {
-      axios.post("http://localhost:3001/sendmail/postevent", {
+      axios.post("/sendmail/postevent", {
         name: evento.name,
         mail: evento.userMail,
         userName: evento.userName,

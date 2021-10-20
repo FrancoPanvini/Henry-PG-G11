@@ -97,7 +97,7 @@ function FormularioPosteo({ onClose, onPostPet }) {
     });
 
     try {
-      axios.post('http://localhost:3001/sendmail/postadop', {
+      axios.post('/sendmail/postadop', {
         name: mascota.name,
         mail: mascota.userMail,
         userName: mascota.userName,
