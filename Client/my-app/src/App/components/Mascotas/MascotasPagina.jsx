@@ -21,10 +21,14 @@ function Mascotas({ title }) {
 
   //* interruptor para re-renderizar tarjetas cuando se postea una mascota
   const [petPosted, setPetPosted] = useState(false);
+  const [petFiltered, setPetFiltered] = useState(false);
 
   //* cuando el botón de postear mascota se presiona, activa el re-renderizado (useEffect)
   const onPostPet = () => {
     setPetPosted(true);
+  };
+  const onFilterPet = () => {
+    setPetFiltered(true);
   };
 
   useEffect(() => {
@@ -33,6 +37,11 @@ function Mascotas({ title }) {
       setPetPosted(false);
     }
   }, [petPosted, dispatch, title]);
+  useEffect(() => {
+    if (petFiltered === true) {
+      setPetFiltered(false);
+    }
+  }, [petFiltered]);
 
   return (
     <div className='grid grid-cols-7 auto-cols-min bg-gray-200 relative min-h-screen82'>
@@ -41,7 +50,7 @@ function Mascotas({ title }) {
           <Link to={title === 'ADOPCIONES' ? '/adopciones/map' : '/perdidos/map'}>Buscar por mapa</Link>
         </button>
 
-        <FiltersBar className='place-self-center fixed' />
+        <FiltersBar className='place-self-center fixed' onFilterPet={onFilterPet} />
       </div>
       <div className=' col-span-6 w-full'>
         {isLogged && userData.phone ? (
@@ -59,7 +68,7 @@ function Mascotas({ title }) {
         ) : (
           <> </>
         )}
-        <CardsContainer title={title} />
+        <CardsContainer title={title} petPosted={petPosted} petFiltered={petFiltered} />
       </div>
     </div>
   );

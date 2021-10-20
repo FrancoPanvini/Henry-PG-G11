@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import ReactDom from 'react-dom';
 import axios from 'axios';
+import swal from 'sweetalert';
 
 //? Components
 import MapPost from '../../../Maps/MapPost';
@@ -37,8 +38,6 @@ function FormularioPosteoEvento({
     lat: lat,
     lng: lng
   });
-
-  console.log(eventId)
 
   //* "url" es dir del evento
 /*   const [url, setUrl] = useState([]);
@@ -146,9 +145,11 @@ function FormularioPosteoEvento({
       Cityid: city.data.id,
     };
     updateEvent(eventId, newEvento);
-    alert(
-      '¡Listo! Tu posteo está pendiente de confirmación, ¡muy pronto será publicado!'
-    );
+    swal({
+      text: '¡Listo! Tu evento está  publicado!',
+      icon: 'success',
+      timer: 3000
+    })
     setUpdate();
     onClose();
   };

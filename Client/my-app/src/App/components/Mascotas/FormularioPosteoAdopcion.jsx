@@ -47,13 +47,19 @@ function FormularioPosteo({ onClose, onPostPet }) {
   //* La dirección que se le mostrará al usuario, compuesta de `${ciudad}, ${provincia}, ${país}`
   const [displayLocation, setDisplayLocation] = useState('');
 
-  const validate = ({ name, PetsTypeid, lat }) => {
+  const validate = ({ name, PetsTypeid, lat, size, sex }) => {
     let errors = {};
     if (!name) {
       errors.name = 'Tu mascota debe tener un nombre';
     }
     if (PetsTypeid === '') {
       errors.PetsTypeid = 'Debes seleccionar si tu mascota es perro o gato';
+    }
+    if (!size) {
+      errors.size = 'Debes seleccionar el tamaño aproximado de la raza a partir del primer año';
+    }
+    if (!sex) {
+      errors.sex = 'Debes seleccionar el sexo de la mascota';
     }
     if (lat === '') {
       errors.direction = 'Tu mascota debe tener una ubicación';
@@ -114,7 +120,6 @@ function FormularioPosteo({ onClose, onPostPet }) {
     onClose();
   };
 
-  console.log(url[0]);
 
   const handleLocation = () => {
     let city = document.getElementById('administrative_area_level_2')?.innerHTML;
@@ -179,7 +184,7 @@ function FormularioPosteo({ onClose, onPostPet }) {
                 </div>
                 {/* ↓ Sexo de la mascota */}
                 <div className='text-center w-1/2 px-8 py-2 border-l-2 border-primaryLight'>
-                  <label>Sexo:</label>
+                  <label>Sexo: <ErrorIconPulsing error={errors.sex} color='thirty' /></label>
                   <div className='flex justify-evenly items-centert'>
                     <RadioSelectButtons
                       state={mascota}
@@ -202,7 +207,7 @@ function FormularioPosteo({ onClose, onPostPet }) {
                 </div>
                 {/* ↓ Tamaño de la mascota */}
                 <div className='text-center w-3/5 px-8 py-4 border-l-2 border-primaryLight'>
-                  <label>Tamaño aproximado de la raza:</label>
+                  <label>Tamaño aproximado de la raza: <ErrorIconPulsing error={errors.size} color='thirty' /></label>
                   <div className='flex justify-evenly items-center'>
                     <RadioSelectButtons
                       state={mascota}

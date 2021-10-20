@@ -43,8 +43,6 @@ function DetalleRefugio({
   lng,
 }) {
   //* Seteamos en el estado los datos de la pet con su id
-  // console.log(pets);
-  console.log(lat, lng)
   return ReactDom.createPortal(
     <>
       <div className='fixed inset-0 bg-gray-50 bg-opacity-70 z-40' />

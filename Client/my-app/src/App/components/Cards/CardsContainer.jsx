@@ -6,13 +6,8 @@ import CardLost from './CardLost';
 import CardRefugio from './CardRefugio';
 import { BiChevronsRight, BiChevronsLeft } from 'react-icons/bi';
 
-function ContenedorCard({ className, title }) {
+function ContenedorCard({ className, title, petPosted, petFiltered }) {
   const dispatch = useDispatch();
-
-  useEffect(() => {
-    dispatch(title === 'ADOPCIONES' ? getPetsAdop() : title === 'PERDIDOS' ? getLostPets() : getShelters());
-  }, [dispatch, title]);
-
   const items = useSelector(state => (title === 'ADOPCIONES' ? state.petsAdop.rows : title === 'PERDIDOS' ? state.lostPets.rows : state.shelters.rows));
 
   const [currentPage, setCurrentPage] = useState(1);
@@ -20,6 +15,14 @@ function ContenedorCard({ className, title }) {
   const [pageNumberLimit] = useState(3);
   const [maxPageNumberList, setMaxPageNumberList] = useState(3);
   const [minPageNumberList, setMinPageNumberList] = useState(0);
+
+  useEffect(() => {
+    dispatch(title === 'ADOPCIONES' ? getPetsAdop() : title === 'PERDIDOS' ? getLostPets() : getShelters());
+  }, [dispatch, title, petPosted]);
+
+  useEffect(() => {
+    setCurrentPage(1);
+  }, [petFiltered]);
 
   const handleChangePage = e => {
     setCurrentPage(Number(e.target.id));
@@ -114,7 +117,7 @@ function ContenedorCard({ className, title }) {
             );
           })
         ) : (
-          <div className="w-full h-full col-span-3 flex flex-col items-center mt-8">
+          <div className='w-full h-full col-span-3 flex flex-col items-center mt-8'>
             <h2 className='text-3xl font-bold text-primaryDark'>No se encontraron mascotas con esos parámetros</h2>
             <img src={'https://i.pinimg.com/originals/18/0d/95/180d95834d68ad0add738b765a82c97a.gif'} alt='' className='h-96 w-100 mt-4' />
           </div>
