@@ -18,6 +18,13 @@ const Forgot = () => {
     setInput(newInput);
   };
 
+  const handleDisabled = () => {
+    if (input.mail.includes('@') && input.mail.includes('.')) {
+      return false;
+    }
+    return true;
+  };
+
   const handleSubmit = (e) => {
     e.preventDefault();
     forgotPassword(input);
@@ -52,7 +59,12 @@ const Forgot = () => {
             className='rounded-md px-1 mb-4'
           />
           <br />
-          <button type='submit' className='btn btn-lg bg-primary text-white border-yellow-600 flex justify-center items-center'>
+          <button
+            type='submit'
+            disabled={handleDisabled()}
+            className={`${
+              handleDisabled() ? 'opacity-50 cursor-default border-b-2 border-transparent' : 'btn'
+            } btn-lg bg-primary text-white border-yellow-600 flex justify-center items-center`}>
             Solicitar nueva contraseña
           </button>
           <br />

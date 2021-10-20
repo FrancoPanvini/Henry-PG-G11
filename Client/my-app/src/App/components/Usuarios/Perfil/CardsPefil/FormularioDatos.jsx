@@ -30,7 +30,7 @@ function FormularioDatos({ user, close, type }) {
     lat: user.lat,
     lng: user.lng,
     mail: user.mail,
-    photo: user.photo
+    photo: user.photo,
   });
   /* const paises = useSelector(state => state.countries); */
   // const provincias = useSelector((state) => state.provinces);
@@ -145,9 +145,9 @@ function FormularioDatos({ user, close, type }) {
     handleOnChange(e);
   };
 
-  const onSubmit = async (e) => {
+  const onSubmit = async e => {
     e.preventDefault();
-    let newInput = {}
+    let newInput = {};
     emailjs
       .sendForm('service_ayo0oer', 'template_eqjjwlm', e.target, 'user_Fm0LQR1ItoVornKoxbfvo')
       .then(res => {
@@ -156,20 +156,19 @@ function FormularioDatos({ user, close, type }) {
       .catch(err => {
         console.log(err);
       });
-      console.log(Object.keys(location).length !== 0)
-      newInput = {
-        ...input,
-        photo: url[0],
-        
-      };
-      if(Object.keys(location).length !== 0) {
-        await axios.post('/locations', location).then((res) => {
-          newInput ={
-            ...input,
-            CityId: res.data.id
-          }
-        })
-      }
+    console.log(Object.keys(location).length !== 0);
+    newInput = {
+      ...input,
+      photo: url[0],
+    };
+    if (Object.keys(location).length !== 0) {
+      await axios.post('/locations', location).then(res => {
+        newInput = {
+          ...input,
+          CityId: res.data.id,
+        };
+      });
+    }
     /* let city = await axios.post('/locations', location); */
     editUserData(user.id, newInput);
     swal({
@@ -190,28 +189,22 @@ function FormularioDatos({ user, close, type }) {
           <input type='text' id='name' name='name' value={input.name} onChange={handleOnChange} className='rounded-md p-1 mb-2 capitalize' />
         </div>
 
-        <div className='w-1/3 p-2 m-2 flex flex-col'>
+        {/* <div className='w-1/3 p-2 m-2 flex flex-col'>
           <label>Mail</label>
           <input type='text' id='mail' name='mail' value={input.mail} onChange={handleOnChange} className='rounded-md p-1 mb-2' />
-        </div>
-        
+        </div> */}
+
         <div className='w-1/3 p-2 m-2 flex flex-col'>
           <label>Telefono</label>
           <input type='number' id='phone' name='phone' value={input.phone} onChange={handleOnChange} className='rounded-md p-1 mb-2' />
         </div>
-       <button type= 'button' title='Editar foto de usuario' onClick={() => setIsOpen(true)}>
-        <img
-          src={url[0] ? url[0] : input.photo ? input.photo : 'https://cdn.icon-icons.com/icons2/1378/PNG/512/avatardefault_92824.png'}
-          alt='foto de usuario'
-          className='img object-cover w-60 h-60 rounded-full absolute right-28 mx-auto top-0 ring ring-offset-4 ring-offset-gray-200 hover:bg-opacity-50 '
-        />
+        <button type='button' title='Editar foto de usuario' onClick={() => setIsOpen(true)}>
+          <img
+            src={url[0] ? url[0] : input.photo ? input.photo : 'https://cdn.icon-icons.com/icons2/1378/PNG/512/avatardefault_92824.png'}
+            alt='foto de usuario'
+            className='img object-cover w-60 h-60 rounded-full absolute right-28 mx-auto top-0 ring ring-offset-4 ring-offset-gray-200 hover:bg-opacity-50 '
+          />
         </button>
-
-        <div className='w-1/3 h-80 p-2 m-2 flex flex-col'> 
-          <MapPost className='w-full h-full p-2 m-2 flex flex-col' onLocationChange={handleLocation} />
-          <input type='text' id='direction' name='direction' value={input.direction} className='text-black rounded-md p-1 mb-2 capitalize' />
-          
-        </div>
 
         {type === 'r' && (
           <>
@@ -221,7 +214,15 @@ function FormularioDatos({ user, close, type }) {
             </div>
             <div className='w-1/3 p-2 m-2 flex flex-col'>
               <label>Descripción</label>
-              <textarea type='text' id='description' name='description' value={input.description} placeholder='Ej. Horarios de atención, servicios que brindan, etc' onChange={handleOnChange} className='rounded-md p-1 mb-2' />
+              <textarea
+                type='text'
+                id='description'
+                name='description'
+                value={input.description}
+                placeholder='Ej. Horarios de atención, servicios que brindan, etc'
+                onChange={handleOnChange}
+                className='rounded-md p-1 mb-2'
+              />
             </div>
             <div className='w-1/3 p-2 m-2 flex flex-col'>
               <label>
@@ -250,6 +251,11 @@ function FormularioDatos({ user, close, type }) {
           </>
         )}
 
+        <div className='w-1/3 h-80 p-2 m-2 flex flex-col'>
+          <MapPost className='w-full h-full p-2 m-2 flex flex-col' onLocationChange={handleLocation} />
+          <input disabled type='text' id='direction' name='direction' value={input.direction} className='text-black rounded-md p-1 mb-2 capitalize bg-white' />
+        </div>
+
         <div className='w-1/3 ml-36 py-4 flex'>
           <button
             className='btn bg-green-600 text-white w-16 h-16 flex shadow-2xl justify-center items-center text-3xl mr-2 rounded-full '
@@ -259,7 +265,7 @@ function FormularioDatos({ user, close, type }) {
           >
             <FaSave />
           </button>
-          <button className='btn bg-red-600 text-white w-16 h-16 shadow-2xl flex justify-center items-center text-3xl mr-2 rounded-full ' title='Cerrar' onClick={close}>
+          <button className='btn bg-red-600 text-white w-16 h-16 shadow-2xl flex justify-center items-center text-3xl mr-2 rounded-full ' title='Salir sin guardar' onClick={close}>
             <BiX />
           </button>
         </div>

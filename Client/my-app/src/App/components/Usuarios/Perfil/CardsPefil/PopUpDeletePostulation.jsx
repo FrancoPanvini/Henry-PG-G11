@@ -1,5 +1,6 @@
 import React from 'react';
 import ReactDom from 'react-dom';
+import swal from 'sweetalert'
 
 //? Services
 import { IoIosCloseCircle } from 'react-icons/io';
@@ -11,7 +12,11 @@ function PopUpDeletePostulation({ onClose, adopId, update }) {
   const delPet = async () => {
     await deletePostulation(adopId);
     update();
-    alert('Eliminaste la postulacion')
+    swal({
+      text: 'Eliminaste la postulacion',
+      icon: 'success',
+      timer: 2000
+    })
     onClose();
   };
   //* Definir

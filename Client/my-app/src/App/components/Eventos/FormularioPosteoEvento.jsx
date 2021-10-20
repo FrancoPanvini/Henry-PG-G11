@@ -7,6 +7,7 @@ import swal from "sweetalert";
 import UploadImage from "./../cargue-fotos/UploadImage";
 import MapPost from "../Maps/MapPost";
 import DatePick from "./DatePick";
+import ErrorIconPulsing from "../ErrorIconPulsing";
 
 //? Icons
 import { IoIosCloseCircle } from "react-icons/io";
@@ -28,6 +29,9 @@ function FormularioPosteoEvento({ onClose }) {
     userName: localStorage.getItem("userName"),
   });
 
+  //* errors
+  const [errors, setErrors] = useState({});
+
   //* "url" es dir del evento
   const [url, setUrl] = useState([]);
 
@@ -38,6 +42,24 @@ function FormularioPosteoEvento({ onClose }) {
     country: "",
   });
 
+  //* displayLocation es el texto que se le mostrará al usuario, compuesta de `${ciudad}, ${provincia}, ${país}`
+  const [displayLocation, setDisplayLocation] = useState('');
+
+  //* error validation
+  const validate = ({ name, initDate, endDate, direction }) => {
+    let errors = {};
+    if (!name) {
+      errors.name = 'El evento debe tener un nombre';
+    }
+    if (!initDate || !endDate || initDate >= endDate ) {
+      errors.date = 'El evento debe tener fechas de inicio y finalización válidas';
+    }
+    if (!direction) {
+      errors.direction = 'El evento debe tener una ubicación';
+    }
+    return errors;
+  }
+
   //* input change handler
   const handleChange = (e) => {
     const newEvento = {
@@ -45,6 +67,7 @@ function FormularioPosteoEvento({ onClose }) {
       [e.target.name]: e.target.value,
     };
     setEvento(newEvento);
+    setErrors(validate(newEvento));
   };
 
   //* Init datePick handler
@@ -54,6 +77,7 @@ function FormularioPosteoEvento({ onClose }) {
       initDate: date,
     };
     setEvento(newEvento);
+    setErrors(validate(newEvento));
   };
   //* End datePick handler
   const handleEndDatePickChange = (date) => {
@@ -62,6 +86,7 @@ function FormularioPosteoEvento({ onClose }) {
       endDate: date,
     };
     setEvento(newEvento);
+    setErrors(validate(newEvento));
   };
 
   const handleLocation = () => {
@@ -85,19 +110,20 @@ function FormularioPosteoEvento({ onClose }) {
     });
     lat = parseFloat(lat);
     lng = parseFloat(lng);
-    setEvento((prevState) => {
-      return {
-        ...prevState,
-        direction: adress,
-        lat: lat,
-        lng: lng,
-      };
-    });
+    const newEvento = {
+      ...evento,
+      direction: adress,
+      lat: lat,
+      lng: lng,
+    }
+    setEvento(newEvento);
+    setErrors(validate(newEvento));
+    setDisplayLocation(`${adress}, ${province}, ${country}`);
   };
 
   //* función que desactiva el botón Publicar cuando no todos los datos están completados
   const handleDisabled = () => {
-    if (evento.name !== "") {
+    if (evento.name !== "" && Object.keys(errors).length === 0) {
       return false;
     }
     return true;
@@ -148,7 +174,7 @@ function FormularioPosteoEvento({ onClose }) {
             <div className="flex flex-col w-1/2">
               {/* ↓ Nombre del evento */}
               <label>
-                Nombre del evento:
+                Nombre del evento: <ErrorIconPulsing error={errors.name} color='thirty' />
               </label>
               <input
                 name="name"
@@ -172,6 +198,7 @@ function FormularioPosteoEvento({ onClose }) {
                     minDate={evento.initDate}
                     label="Fecha de finalización"
                   />
+                  <ErrorIconPulsing error={errors.date} color='thirty' />
                 </div>
               </div>
 
@@ -194,13 +221,13 @@ function FormularioPosteoEvento({ onClose }) {
 
             <div className="h-auto w-1/2 flex flex-col justify-center ml-4">
               {/* ↓ Mapa de ubicación del evento */}
-              <div>Ubicación del evento:</div>
+              <div>Ubicación del evento: (Seleccionar en el mapa y confirmar) <ErrorIconPulsing error={errors.direction} color='thirty' /></div>
               <input
                 disabled
                 type="text"
                 id="direction"
                 name="direction"
-                value={location.city}
+                value={displayLocation}
                 className="rounded-md px-1 mb-2 text-white"
               />
               <MapPost
@@ -213,7 +240,9 @@ function FormularioPosteoEvento({ onClose }) {
                 <button
                   disabled={handleDisabled()}
                   onClick={handlePublicar}
-                  className="btn btn-lg bg-thirty text-white border-fourty"
+                  className={`${
+                    handleDisabled() ? "opacity-50 cursor-default border-b-2 border-thirty" : "btn"
+                  } btn-xl bg-fourty text-white border-thirty`}
                 >
                   Publicar
                 </button>
