@@ -17,7 +17,7 @@ const CardAdopcion = ({photo, name, created}) => {
           <span className="text-white text-2xl capitalize font-bold">{name}</span>
         </div>
         <div className="col-span-2">
-          <span className=" text-gray-200 text-lg mr-8">Adoptado hace: {timeAgo}</span>
+          <span className=" text-gray-200 text-lg mr-8">{`Adoptado ${timeAgo}`}</span>
         </div>
       </div>
     )
