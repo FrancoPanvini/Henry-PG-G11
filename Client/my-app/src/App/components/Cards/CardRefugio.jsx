@@ -67,7 +67,7 @@ function CardRefugio({ selected, refProp, photo, name, phone, country, province,
               )}
 
               <h3 className='p-1 text-white font-bold'>
-                Pais: <span className='text-fourty capitalize'>{country}</span>
+                País: <span className='text-fourty capitalize'>{country}</span>
               </h3>
               <h3 className='p-1 text-white font-bold'>
                 Provincia:
@@ -78,7 +78,7 @@ function CardRefugio({ selected, refProp, photo, name, phone, country, province,
               </h3>
               {phone && (
                 <h3 className='p-1 text-white font-bold'>
-                  Telefono:{' '}
+                  Teléfono:{' '}
                   <a href={`https://wa.me/${phone}`}>
                     <span className='text-fourty '>{phone}</span>
                   </a>

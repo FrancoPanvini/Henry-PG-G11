@@ -54,6 +54,7 @@ module.exports = {
       },
       inset: {
         18: '4.5rem',
+        '1/7': '14%',
       },
       colors: {
         fourtyLight: '#5a889b',

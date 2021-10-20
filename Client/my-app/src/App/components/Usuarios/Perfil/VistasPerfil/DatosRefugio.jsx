@@ -45,7 +45,7 @@ const DatosRefugio = () => {
             </div>
 
             <div className='w-1/3 p-2 m-2 flex flex-col'>
-              <label>Telefono</label>
+              <label>Teléfono</label>
               <span className='rounded-md p-1 mb-2 bg-white capitalize'>
                 {user.phone}
               </span>
@@ -57,21 +57,21 @@ const DatosRefugio = () => {
             />
 
             <div className='w-1/3 p-2 m-2 flex flex-col'>
-              <label className=''>Pais: </label>
+              <label className=''>País</label>
               <span className='rounded-md p-1 bg-white mb-2 capitalize'>
                 {user.country}
               </span>
             </div>
 
             <div className='w-1/3 p-2 m-2 flex flex-col'>
-              <label className=''>Provincia/Departamento:</label>
+              <label className=''>Provincia/Departamento</label>
               <span className='rounded-md p-1 bg-white mb-2 capitalize'>
                 {user.province}
               </span>
             </div>
 
             <div className='w-1/3 p-2 m-2 flex flex-col'>
-              <label className=''>Ciudad:</label>
+              <label className=''>Ciudad</label>
               <span className='rounded-md p-1 bg-white mb-2 capitalize'>
                 {user.city}
               </span>
@@ -84,7 +84,7 @@ const DatosRefugio = () => {
               </span>
             </div>
             <div className='w-1/3 p-2 m-2 flex flex-col'>
-              <label>Descripcion</label>
+              <label>Descripción</label>
               <span className='rounded-md p-1 mb-2  bg-white '>
                 {user.description ? user.description : <span className="text-red-600">DEBE COMPLETAR ESTE CAMPO</span>}
               </span>

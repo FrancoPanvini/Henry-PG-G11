@@ -220,8 +220,8 @@ function FormularioDatos({ user, close, type }) {
               <input type='text' id='responsable' name='responsable' value={input.responsable} onChange={handleOnChange} className='rounded-md p-1 mb-2' />
             </div>
             <div className='w-1/3 p-2 m-2 flex flex-col'>
-              <label>Descripcion</label>
-              <textarea type='text' id='description' name='description' value={input.description} onChange={handleOnChange} className='rounded-md p-1 mb-2 ' />
+              <label>Descripción</label>
+              <textarea type='text' id='description' name='description' value={input.description} placeholder='Ej. Horarios de atención, servicios que brindan, etc' onChange={handleOnChange} className='rounded-md p-1 mb-2' />
             </div>
             <div className='w-1/3 p-2 m-2 flex flex-col'>
               <label>

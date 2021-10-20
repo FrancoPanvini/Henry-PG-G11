@@ -25,8 +25,8 @@ const List = ({ items, childClicked, isLoading, type, setType, sex, setSex, size
     );
   }, [items]);
 
-  const handleChange = (event, type) => {
-    let aux = { ...prueba, [type]: event };
+  const handleChange = (event, atributo) => {
+    let aux = { ...prueba, [atributo]: event };
     setPrueba(aux);
   };
 
@@ -40,6 +40,7 @@ const List = ({ items, childClicked, isLoading, type, setType, sex, setSex, size
       ) : (
         <div className='h-full'>
           <div>
+            {location.pathname.includes('adopciones') && (<>
             <FormControl className={classes.formControl}>
               <InputLabel>Tipo</InputLabel>
               <Select defaultValue='all' value={prueba.type} onChange={e => handleChange(e.target.value, 'type')}>
@@ -67,7 +68,8 @@ const List = ({ items, childClicked, isLoading, type, setType, sex, setSex, size
                   Hembra
                 </MenuItem>
               </Select>
-            </FormControl>
+            </FormControl></>)}  
+            
             <FormControl className={classes.formControl}>
               <InputLabel>Tamaño</InputLabel>
               <Select defaultValue='all' value={prueba.size} onChange={e => handleChange(e.target.value, 'size')}>
