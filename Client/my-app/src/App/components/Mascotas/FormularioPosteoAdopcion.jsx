@@ -197,7 +197,7 @@ function FormularioPosteo({ onClose, onPostPet }) {
               <div className='flex justify-evenly border-t-2 border-primaryLight mb-2'>
                 {/* ↓ Edad de la mascota */}
                 <div className='text-center w-2/5 p-4 border-r-2 border-primaryDark'>
-                  <label>Edad (en años):</label>
+                  <label>Edad (en años):</label><br />
                   <input name='age' type='number' min='0' max='50' onChange={handleChange} className='rounded-md px-1' />
                 </div>
                 {/* ↓ Tamaño de la mascota */}
@@ -238,15 +238,15 @@ function FormularioPosteo({ onClose, onPostPet }) {
             <div className='h-auto w-1/2 flex flex-col justify-center ml-4'>
               {/* ↓ Mapa de ubicación de la mascota */}
               <div>
-                Ubicación de la Mascota: <ErrorIconPulsing error={errors.direction} color='thirty' />
+                Ubicación de la Mascota: (Seleccionar en el mapa y confirmar) <ErrorIconPulsing error={errors.direction} color='thirty' />
               </div>
               <input disabled type='text' id='direction' name='direction' value={displayLocation} className='rounded-md px-1 mb-2 text-white' />
               <MapPost onLocationChange={handleLocation} className='h-full' />
               {/* ↓ botón Publicar */}
               <div className='w-full text-center mt-4 '>
                 <button disabled={handleDisabled()} onClick={handlePublicar} className={`${
-                handleDisabled() ? "opacity-50 cursor-default border-b-2 border-thirty" : "btn"
-              } btn-lg bg-fourty text-white border-thirty`}>
+                handleDisabled() ? 'opacity-50 cursor-default border-b-2 border-thirty' : 'btn'
+              } btn-xl bg-fourty text-white border-thirty`}>
                   Publicar
                 </button>
               </div>
