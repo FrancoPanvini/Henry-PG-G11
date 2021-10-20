@@ -87,6 +87,7 @@ function Publicaciones({ userId }) {
                   found={p.found}
                   updated={p.updatedAt}
                   description={p.description}
+                  adopted={p.adopted}
                 />
               </div>
             );

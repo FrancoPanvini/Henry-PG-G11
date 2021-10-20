@@ -6,7 +6,7 @@ const getPets = async (req, res) => {
 
   let query = {
     where: {},
-    attributes: ["id", "name", "size", "sex", "age", "lat", "lng", "createdAt", "updatedAt"],
+    attributes: ["id", "name", "size", "sex", "age", "lat", "lng", "createdAt", "updatedAt","adopted"],
     order: [["createdAt","DESC"]],
     include: [
       {
