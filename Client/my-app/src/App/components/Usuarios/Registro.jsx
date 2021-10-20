@@ -13,7 +13,7 @@ import RadioSelectButtons from "../RadioSelectButtons";
 import ErrorIconPulsing from "../ErrorIconPulsing";
 
 //? Services
-import { postUsers, logInUsers } from "../../redux/actions/index";
+import { postUsers } from "../../redux/actions/index";
 
 //? Icons
 import { FaPaw, FaHome } from "react-icons/fa";
