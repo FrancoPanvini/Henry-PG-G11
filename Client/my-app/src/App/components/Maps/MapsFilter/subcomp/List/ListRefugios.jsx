@@ -2,34 +2,20 @@ import React, { useState, useEffect, createRef } from 'react';
 import { CircularProgress, Box, Typography } from '@material-ui/core';
 
 import useStyles from './style';
-//import PetsDetail from "../PetsDetail/PetsDetail";
 import CardRefugio from '../../../../Cards/CardRefugio';
 
-const List = ({ items, childClicked, isLoading }) => {
+const ListRefugios = ({ items, childClicked, isLoading }) => {
   const classes = useStyles();
-  /*   const [type, setType] = useState("p");
-  const [sex, setSex] = useState("m");
-  const [size, setSize] = useState("p"); */
 
-  const [petRefs, setPetRefs] = useState([]);
-  /*  const [prueba, setPrueba] = useState({
-    type: "",
-    sex: "",
-    size: "",
-  }); */
+  const [shelterRef, setShelterRef] = useState([]);
 
   useEffect(() => {
-    setPetRefs(refs =>
+    setShelterRef((refs) =>
       Array(items?.length)
         .fill()
         .map((_, i) => refs[i] || createRef())
     );
   }, [items]);
-
-  /* const handleChange = (event, type) => {
-    let aux = { ...prueba, [type]: event };
-    setPrueba(aux);
-  }; */
 
   return (
     <div className={classes.container}>
@@ -41,26 +27,26 @@ const List = ({ items, childClicked, isLoading }) => {
       ) : (
         <div className='h-full'>
           <div className='h-full w-full mt-2 grid justify-items-center gap-4'>
-            {items?.map((pet, i) => (
-              <Box ref={petRefs[i]} key={i} xs={12} style={{ padding: '20px', margin: '20px' }}>
+            {items?.map((shelter, i) => (
+              <Box ref={shelterRef[i]} key={i} xs={12} style={{ padding: '20px', margin: '20px' }}>
                 <CardRefugio
-
-                  photo={pet.photo ? pet.photo : 'https://drpp-ny.org/wp-content/uploads/2014/07/sorry-image-not-available.png'}
-
-                  name={pet.name}
-                  phone={pet.phone}
-                  country={pet.country}
-                  province={pet.province}
-                  city={pet.city}
-                  id={pet.id}
-                  description={pet.description}
-                  responsable={pet.responsable}
-                  web={pet.link_web}
-                  instagram={pet.link_instagram}
-                  facebook={pet.link_facebook}
-                  donaciones={pet.link_donaciones}
+                  photo={shelter.photo}
+                  name={shelter.name}
+                  phone={shelter.phone}
+                  country={shelter.country}
+                  province={shelter.province}
+                  city={shelter.city}
+                  id={shelter.id}
+                  description={shelter.description}
+                  responsable={shelter.responsable}
+                  web={shelter.link_web}
+                  instagram={shelter.link_instagram}
+                  facebook={shelter.link_facebook}
+                  donaciones={shelter.link_donaciones}
+                  lat={shelter.lat}
+                  lng={shelter.lng}
                   selected={Number(childClicked) === i}
-                  refProp={petRefs[i]}
+                  refProp={shelterRef[i]}
                   className='grid justify-items-center'
                 />
               </Box>
@@ -72,4 +58,4 @@ const List = ({ items, childClicked, isLoading }) => {
   );
 };
 
-export default List;
+export default ListRefugios;
