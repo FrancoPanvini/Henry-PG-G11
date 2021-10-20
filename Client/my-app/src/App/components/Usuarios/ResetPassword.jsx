@@ -43,7 +43,7 @@ const Reset = () => {
       text: '¡Listo, tu contraseña fue actualizada! Ahora puedes iniciar sesión',
       icon: 'success',
       timer: 3000,
-    })
+    });
     history.push('/login');
   };
 
@@ -52,21 +52,22 @@ const Reset = () => {
       <form
         onSubmit={(e) => handleSubmit(e)}
         className='px-8 py-12 w-1/4 flex flex-col bg-thirty rounded-lg min-w-min shadow-xl border-2 border-fourty border-opacity-50'>
-        <label className='text-white'>Nueva contraseña: <ErrorIconPulsing error={errors.password} color='primary' /></label>
-        <input
-          type='password'
-          id='password'
-          name='password'
-          onChange={handleOnChange}
-          className='rounded-md px-1 mb-2'
-        />
+        <label className='text-white'>
+          Nueva contraseña: <ErrorIconPulsing error={errors.password} color='primary' />
+        </label>
+        <input type='password' id='password' name='password' onChange={handleOnChange} className='rounded-md px-1 mb-2' />
         <br />
         <label className='text-white'>
           Repetir contraseña: <ErrorIconPulsing error={errors.confirmPassword} color='primary' />
         </label>
         <input type='password' name='confirmPassword' onChange={handleOnChange} className='rounded-md px-1 mb-2' />
         <br />
-        <button type='submit' disabled={handleDisabled()} className='btn btn-lg bg-primary text-white border-yellow-600 flex justify-center items-center'>
+        <button
+          type='submit'
+          disabled={handleDisabled()}
+          className={`${
+            handleDisabled() ? 'opacity-50 cursor-default border-b-2 border-transparent' : 'btn'
+          } mt-2 btn-lg bg-primary text-white border-yellow-600 flex justify-center items-center`}>
           Cambiar contraseña
         </button>
       </form>

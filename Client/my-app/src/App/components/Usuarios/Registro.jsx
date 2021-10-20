@@ -315,7 +315,7 @@ function Registro() {
               type="submit"
               disabled={handleDisabled()}
               className={`${
-                handleDisabled() ? "opacity-50 cursor-default" : "btn"
+                handleDisabled() ? 'opacity-50 cursor-default border-b-2 border-transparent' : 'btn'
               } mt-2 btn-lg bg-primary text-white border-yellow-600 flex justify-center items-center`}
             >
               {input.UsersTypeid === "i" ? (
