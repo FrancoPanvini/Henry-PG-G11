@@ -50,12 +50,12 @@ function DetalleRefugio({
       <div className='fixed inset-0 bg-gray-50 bg-opacity-70 z-40' />
       <div className='fixed inset-0 z-50'>
         <div className='panel relative top-20 mx-auto w-9/12 h-screen82 p-6 bg-gradient-to-r from-fourtyLight to-fourtyDark overflow-y-scroll'>
+          <div className='flex justify-center mx-16 border-b-2 border-fourtyDark border-opacity-25'>
           <IoIosCloseCircle
-            className='text-primary top-4 right-4 absolute text-3xl hover:text-primaryLight cursor-pointer transition-all'
+            className='text-primary top-24 right-1/7 fixed text-3xl hover:text-primaryLight cursor-pointer transition-all'
             onClick={onClose}
             title='Cerrar'
           />
-          <div className='flex justify-center mx-16 border-b-2 border-fourtyDark border-opacity-25'>
             <div className='w-2/3 flex flex-col mr-8'>
               <span className='py-1 text-primary text-3xl font-bold capitalize text-center'>{name}</span>
 

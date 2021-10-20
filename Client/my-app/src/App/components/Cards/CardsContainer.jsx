@@ -136,6 +136,7 @@ function ContenedorCard({ className, title }) {
                     city={p.city}
                     description={p.description}
                     responsable={p.responsable}
+                    phone={p.phone}
                     web={p.link_web}
                     instagram={p.link_instagram}
                     facebook={p.link_facebook}
