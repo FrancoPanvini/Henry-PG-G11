@@ -11,7 +11,7 @@ import ContactoPerdido from '../pop-up/ContactoPerdido'
 import { FaPaw } from 'react-icons/fa';
 
 
-function CardLost({ selected, refProp, photo, name, size, country, province, city, id, phone, userId }) {
+function CardLost({ selected, refProp, photo, name, size, country, province, city, id, userId }) {
   const [isFlipped, setIsFlipped] = useState(false);
   const isLogged = useSelector(state => state.isLogged);
   const [isOpen, setIsOpen] = useState(false);
@@ -79,7 +79,7 @@ function CardLost({ selected, refProp, photo, name, size, country, province, cit
               </button>
 
             ) : (<></>)}
-              {isOpen && (<ContactoPerdido name={name} onClose={() => setIsOpen(false)} petId={id} onClick userId={userId} />)}
+              {isOpen && (<ContactoPerdido name={name} onClose={() => setIsOpen(false)} petId={id} userId={userId} />)}
 
           </div>
         </div>
