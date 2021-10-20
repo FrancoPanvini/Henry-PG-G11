@@ -17,7 +17,6 @@ const getLostPets = async (req, res) => {
         required: true,
         include: { model: Provinces, attributes: ['name', 'CountryId'], required: true, where: {}, include: { model: Countries, required: true, attributes: ['name'] } },
       },
-
       { model: LostPetsPics, attributes: ['url'] },
     ],
   };
@@ -31,12 +30,12 @@ const getLostPets = async (req, res) => {
 
   //* Add filter by province
   if (!city) {
-    if (province) query.include[0].where = { ProvinceId: province };
+    if (province) query.include[1].where = { ProvinceId: province };
   }
 
   //* Add filter by country
   if (!city && !province) {
-    if (country) query.include[0].include.where = { CountryId: country };
+    if (country) query.include[1].include.where = { CountryId: country };
   }
 
   //* Add filter by owner of pet

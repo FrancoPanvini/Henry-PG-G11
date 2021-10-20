@@ -58,7 +58,7 @@ function FormularioAdopcion({ onClose, name, petId }) {
     <>
       <div className="fixed inset-0 bg-gray-50 bg-opacity-70 z-40" />
       <div className="fixed inset-0 z-50">
-        <div className="panel relative top-10 mx-auto w-9/12 bg-fourty grid justify-items-center">
+        <div className="panel relative top-32 mx-auto w-9/12 bg-fourty grid justify-items-center">
           <div>
             <form>
               <IoIosCloseCircle className="text-primary absolute top-3 right-3 text-3xl hover:text-primaryLight cursor-pointer transition-all" onClick={onClose} />

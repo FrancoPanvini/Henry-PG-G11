@@ -43,8 +43,6 @@ function DetalleRefugio({
   lng,
 }) {
   //* Seteamos en el estado los datos de la pet con su id
-  // console.log(pets);
-  console.log(lat, lng)
   return ReactDom.createPortal(
     <>
       <div className='fixed inset-0 bg-gray-50 bg-opacity-70 z-40' />
@@ -69,7 +67,7 @@ function DetalleRefugio({
                 <br />
                 {responsable && (
                   <span className='text-white text-xl font-bold text-justify'>
-                    Este refugio está a cargo de: <span className='capitalize'>{responsable}.</span>
+                    Este refugio está a cargo de: <span className='capitalize'>{responsable}</span>
                   </span>
                 )}
               </div>
