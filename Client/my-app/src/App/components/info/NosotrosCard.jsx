@@ -16,19 +16,19 @@ function NosotrosCard({ photo, name, alias, description, strengths, mail, linked
 
   return (
     <div className='m-4 relative'>
-      <div className='z-30 mt-8 p-4 flex floorTinyShadowCircle transition-all transform hover:scale-105'>
-        <div className='z-40 w-5/12 p-4 h-full flex items-center bg-gray-200 bg-opacity-40 rounded-l-lg'>
+      <div className='z-30 mt-8 p-4 flex floorTinyShadowCircle transition-all bg-gradient-to-r from-thirtyDark to-fourtyLight rounded-xl border-2 border-opacity-30 border-white transform hover:scale-105'>
+        <div className='z-40 w-5/12 h-full pr-4 flex items-center rounded-l-lg'>
           <div className='rounded-full w-full aspect-h-1 aspect-w-1'>
             <img src={photo} alt={`Foto de ${name}`} className={`h-full w-full rounded-full object-cover shadow-similBorderWhite ${extraCSS}`} />
           </div>
         </div>
-        <div className='relative z-40 w-7/12 py-4 pr-4 flex flex-col items-start justify-between text-gray-700 bg-gray-200 bg-opacity-40 rounded-r-lg'>
+        <div className='relative z-40 w-7/12 flex flex-col items-start justify-between text-sm text-gray-200 rounded-r-lg'>
           <div className='text-2xl font-bold'>{name}</div>
           <div className='mb-auto text-sm'>alias {alias}</div>
           <div className='text-center italic'>{description}</div>
           <div className='mt-auto'>Fortalezas: {strengths}</div>
           {portfolio && (
-            <div className='hover:underline'>
+            <div className='transition-all hover:underline hover:text-white'>
               <a href={portfolio} target='_blank' rel='noreferrer'>
                 Enlace a mi portfolio <FaExternalLinkAlt className='inline align-baseline text-xs' />
               </a>
@@ -38,7 +38,7 @@ function NosotrosCard({ photo, name, alias, description, strengths, mail, linked
             onClick={copyText}
             value={mail}
             title='¡Click para copiar este mail!'
-            className='text-center mb-2 cursor-pointer hover:underline relative'>
+            className='text-center mb-2 cursor-pointer transition-all hover:underline hover:text-white relative'>
             {mail} <FaRegClipboard className='inline align-baseline text-sm' />
           </div>
           <div
@@ -49,14 +49,14 @@ function NosotrosCard({ photo, name, alias, description, strengths, mail, linked
           </div>
           <div>
             <a href={linkedin} target='_blank' rel='noreferrer'>
-              <FaLinkedin className='inline text-3xl 2xl:mr-8 xl:mr-4' />
+              <FaLinkedin className='inline text-3xl transition-all 2xl:mr-8 xl:mr-4 hover:text-white hover:shadow-md' />
             </a>
             <a href={github} target='_blank' rel='noreferrer'>
-              <FaGithubSquare className='inline text-3xl 2xl:mr-8 xl:mr-4' />
+              <FaGithubSquare className='inline text-3xl transition-all 2xl:mr-8 xl:mr-4 hover:text-white hover:shadow-md' />
             </a>
             {twitter && (
               <a href={twitter} target='_blank' rel='noreferrer'>
-                <FaTwitterSquare className='inline text-3xl 2xl:mr-8 xl:mr-4' />
+                <FaTwitterSquare className='inline text-3xl transition-all 2xl:mr-8 xl:mr-4 hover:text-white hover:shadow-md' />
               </a>
             )}
           </div>

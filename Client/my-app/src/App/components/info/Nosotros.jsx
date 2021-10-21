@@ -5,7 +5,7 @@ import { useHistory } from 'react-router-dom';
 import NosotrosCard from './NosotrosCard';
 import fotoDavid from '../../../images/DavidMendozaLopez.png';
 import fotoAparicio from '../../../images/FrancoAparicio.jpg';
-import fotoPanvini from '../../../images/FrancoPanvini.jpg';
+import fotoPanvini from '../../../images/FrancoPanvini.jfif';
 import fotoPetri from '../../../images/SantiagoPetri.jpg';
 import fotoLucas from '../../../images/LucasChaves.jpg';
 import fotoDamian from '../../../images/DamianDiego.png';
@@ -21,7 +21,7 @@ function Nosotros() {
       <span
         title='Volver'
         onClick={() => history.goBack()}
-        className='absolute top-4 left-4 btn w-8 h-8 flex justify-center items-center rounded-full bg-thirty border-thirtyDark text-white cursor-pointer hover:underline'>
+        className='absolute top-4 left-4 btn w-8 h-8 flex justify-center items-center rounded-full bg-thirtyLight border-thirtyDark text-white cursor-pointer hover:underline'>
         <FaChevronLeft className='relative right-0.5' />
       </span>
       <NosotrosCard
@@ -100,7 +100,7 @@ function Nosotros() {
         github='https://github.com/FrancoPanvini'
         // twitter
         // portfolio
-        extraCSS
+        extraCSS='object-bottom'
       />
     </div>
   );
