@@ -15,14 +15,14 @@ function NosotrosCard({ photo, name, alias, description, strengths, mail, linked
   };
 
   return (
-    <div className='m-8 relative'>
-      <div className='mt-12 flex floorTinyShadowCircle'>
-        <div className='z-40 w-5/12 h-full flex items-center'>
+    <div className='m-4 relative'>
+      <div className='z-30 mt-8 p-4 flex floorTinyShadowCircle transition-all transform hover:scale-105'>
+        <div className='z-40 w-5/12 p-4 h-full flex items-center bg-gray-200 bg-opacity-40 rounded-l-lg'>
           <div className='rounded-full w-full aspect-h-1 aspect-w-1'>
             <img src={photo} alt={`Foto de ${name}`} className={`h-full w-full rounded-full object-cover shadow-similBorderWhite ${extraCSS}`} />
           </div>
         </div>
-        <div className='relative ml-2 z-40 w-7/12 flex flex-col items-start justify-between text-fourtyDark'>
+        <div className='relative z-40 w-7/12 py-4 pr-4 flex flex-col items-start justify-between text-gray-700 bg-gray-200 bg-opacity-40 rounded-r-lg'>
           <div className='text-2xl font-bold'>{name}</div>
           <div className='mb-auto text-sm'>alias {alias}</div>
           <div className='text-center italic'>{description}</div>
