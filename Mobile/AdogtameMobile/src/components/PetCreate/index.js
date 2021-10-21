@@ -24,7 +24,7 @@ const styles = StyleSheet.create({
     <View>{children}</View>
     );
     
-    const CreatePetComponent = ({onChange, onSubmit, form, sheetRef, openSheet, closeSheet, onFileSelected}) => {
+    const CreatePetComponent = ({onChangeText, onSubmit, form, sheetRef, openSheet, closeSheet, onFileSelected}) => {
     const [photo, setPhoto] =useState({})
     const [especie, setEspecie] = React.useState('');
     const [tamaño, setTamaño] = React.useState('');
@@ -36,7 +36,9 @@ const styles = StyleSheet.create({
           <Text>Postulá tu Mascota</Text>
           <Input
           label="Nombre"
-          placeholder="Ingrese Nombre"/>
+          placeholder="Ingrese Nombre"
+          value={form.name}
+          onChangeText={(value)=>onChangeText({name: "name", value:value})}/>
 
           <Input
           label="Especie"
@@ -46,7 +48,9 @@ const styles = StyleSheet.create({
 
 
                   <RadioButton.Group
-                    onValueChange={newValue => setEspecie(newValue)}
+                    onValueChange={newValue => {
+                      onChangeText({name: "PetsTypeid", value:newValue=='Perro' ? 'p' : 'g'})
+                      setEspecie(newValue)}}
                     value={especie}
                   >
                     <RadioButton.Item
@@ -67,7 +71,9 @@ const styles = StyleSheet.create({
           disabled={true}
           placeholder="Ingrese Tipo"/>
                   <RadioButton.Group
-                    onValueChange={newValue => setSexo(newValue)}
+                    onValueChange={newValue => {
+                      onChangeText({name: "sex", value:newValue === 'Macho' ? 'm' : 'h'})
+                      setSexo(newValue)}}
                     value={sexo}
                   >
                     <RadioButton.Item
@@ -85,16 +91,19 @@ const styles = StyleSheet.create({
 
           <Input
           label="Edad"
-          placeholder="Ingrese Años Cumplidos"/>
+          placeholder="Ingrese En Años Cumplidos"
+          value={form.age}
+          onChangeText={(value)=>onChangeText({name: "age", value:value})}/>
 
           <Input
           label="Tamaño"
           value={tamaño}
-          disabled={true}
-          placeholder="Ingrese E-mail"/>
+          disabled={true}/>
 
                   <RadioButton.Group
-                    onValueChange={newValue => setTamaño(newValue)}
+                    onValueChange={newValue => {
+                      onChangeText({name: "size", value:newValue==='Chico' ? 'c' : newValue==='Mediano' ? 'm' : 'g'})
+                      setTamaño(newValue)}}
                     value={tamaño}
                   >
                     <RadioButton.Item
@@ -116,7 +125,9 @@ const styles = StyleSheet.create({
 
           <Input
           label="Descripción"
-          placeholder="Ingrese Descripción"/>
+          placeholder="Ingrese Descripción"
+          value={form.description}
+          onChangeText={(value)=>onChangeText({name: "description", value:value})}/>
 
           
           <Image
@@ -130,6 +141,7 @@ const styles = StyleSheet.create({
           </TouchableOpacity>
           
           <CustomButton onPress={()=>onSubmit()} text="Postular"/>
+          <Text></Text>
           </View>
           
         </ScreenContainer>

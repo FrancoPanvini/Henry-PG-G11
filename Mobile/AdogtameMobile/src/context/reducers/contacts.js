@@ -121,7 +121,7 @@ const contacts = (state, {type, payload}) => {
           },
         };
   
-      case "GET_CONTACTS_LOADING":
+      case "getPetsLoading":
         return {
           ...state,
           getContacts: {
@@ -131,7 +131,7 @@ const contacts = (state, {type, payload}) => {
           },
         };
   
-      case "GET_CONTACTS_SUCCESS":
+      case "getPetsSuccess":
         return {
           ...state,
           getContacts: {
@@ -142,7 +142,7 @@ const contacts = (state, {type, payload}) => {
           },
         };
   
-      case "GET_CONTACTS_FAIL":
+      case "getPetsFail":
         return {
           ...state,
           getContacts: {

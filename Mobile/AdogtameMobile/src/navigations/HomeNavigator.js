@@ -6,6 +6,7 @@ import axios from "axios";
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import PostPet from '../screens/CreatePet/index'
 import { GlobalContext } from "../context/Provider";
+import getPets from '../context/actions/pets/getPets'
 
 import {
   SignIn,
@@ -28,6 +29,7 @@ const Tabs = createBottomTabNavigator();
 
 const HomeNavigator = () => {
   const [index, setIndex] = React.useState(0);
+  const [loading, setLoading] = React.useState(false);
   const [routes] = React.useState([
     { key: 'publicados', title: 'Publicaciones', icon: 'dog' },
     { key: 'publicar', title: 'Publicar', icon: 'plus' },
@@ -36,11 +38,13 @@ const HomeNavigator = () => {
   const [user, setUser] = useState({})
   const [publications, setPublications] = useState([])
   const {authDispatch} = useContext(GlobalContext);
+  
 
   
 
   useEffect(() => {
     try{
+      setLoading(true)
       const getUser = async() => {
         const userId = await AsyncStorage.getItem('user');
         
@@ -48,9 +52,16 @@ const HomeNavigator = () => {
         await axios.get(`http://adogtameapi.herokuapp.com/users/${userId}`)
           .then(res => setUser({...res.data}))
           .catch(err=>console.log(err))
-        await axios.get(`http://adogtameapi.herokuapp.com/pets?owner=${userId}`)
-          .then(res => setPublications(res.data.rows))
+        let userPets = await axios.get(`http://adogtameapi.herokuapp.com/pets?owner=${userId}`)
           .catch(err=>console.log(err))
+        
+        userPets.data.rows.forEach(async el => {
+          let forms = await axios.get(`http://adogtameapi.herokuapp.com/aoptions?pet=${el.id}`)
+          setPublications(prev => {
+            return [...prev, {...el, forms: forms}]
+          })
+        })
+        setLoading(false)
       }
 
       let isMounted = true;
@@ -63,11 +74,11 @@ const HomeNavigator = () => {
   }, [])
 
 
-  const PublishedRoute = () => <Publications publications={publications}/>;
+  const PublishedRoute = () => <Publications loading={loading} publications={publications}/>;
   
   const ProfileRoute = () => <Profile authDispatch={authDispatch} usuario={user}/>;
   
-  const PublishRoute = () => <PostPet/>;
+  const PublishRoute = () => <PostPet usuario={user}/>;
 
 
 
