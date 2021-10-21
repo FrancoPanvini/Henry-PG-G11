@@ -10,7 +10,7 @@ import SelectEdad from './Opciones/SelectEdad';
 import SelectTamaño from './Opciones/SelectTamaño';
 import SelectSexo from './Opciones/SelectSexo';
 
-function FiltersBar() {
+function FiltersBar({ onFilterPet }) {
   const dispatch = useDispatch();
 
   const [urlFilter, setUrlFilter] = useState({
@@ -152,6 +152,8 @@ function FiltersBar() {
     cleanFilter.country === '' && delete cleanFilter.country;
     cleanFilter.city === '' && delete cleanFilter.city;
     cleanFilter.province === '' && delete cleanFilter.province;
+
+    onFilterPet && onFilterPet();
 
     currentLocation === '/adopciones'
       ? dispatch(getPetsAdopFilter(cleanFilter))

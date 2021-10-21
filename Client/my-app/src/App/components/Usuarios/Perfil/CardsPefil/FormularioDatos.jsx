@@ -8,7 +8,6 @@ import ErrorIconPulsing from '../../../ErrorIconPulsing';
 import MapPost from '../../../Maps/MapPost';
 import axios from 'axios';
 import swal from 'sweetalert';
-import emailjs from 'emailjs-com';
 import PopUpPhoto from './PopUpPhoto';
 
 function FormularioDatos({ user, close, type }) {
@@ -109,11 +108,6 @@ function FormularioDatos({ user, close, type }) {
       Cityid: city.data.id,
     };
     editUserData(newInput);
-    //onPostPet();
-    alert(
-      '¡Listo! Tu posteo está pendiente de confirmación, ¡muy pronto será publicado!'
-    );
-    //onClose();
   }; */
 
   const validateLink = ({ link_donaciones, link_web, link_facebook, link_instagram }) => {
@@ -148,15 +142,6 @@ function FormularioDatos({ user, close, type }) {
   const onSubmit = async e => {
     e.preventDefault();
     let newInput = {};
-    emailjs
-      .sendForm('service_ayo0oer', 'template_eqjjwlm', e.target, 'user_Fm0LQR1ItoVornKoxbfvo')
-      .then(res => {
-        console.log(res);
-      })
-      .catch(err => {
-        console.log(err);
-      });
-    console.log(Object.keys(location).length !== 0);
     newInput = {
       ...input,
       photo: url[0],

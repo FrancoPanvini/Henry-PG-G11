@@ -5,7 +5,7 @@ import 'react-slideshow-image/dist/styles.css';
 
 function EventSlider() {
   /*   const [index, setIndex] = useState(0);
-   */ const events = useSelector((state) => state.events);
+   */ const events = useSelector(state => state.events);
   /*   let size = events.length - 1;
 
   useEffect(() => {
@@ -18,29 +18,21 @@ function EventSlider() {
       <span className='text-primary font-bold text-xl ml-4 '>EVENTOS</span>
       <Fade duration={6000} arrows={false} pauseOnHover={false}>
         {events &&
-          events?.map((e) => {
+          events?.map(e => {
             return (
-              <div className='each-fade flex w-2/3 h-104 mx-auto rounded-lg overflow-auto px-2 justify-between bg-primary my-auto'>
+              <div className='each-fade flex w-2/3 h-104 p-2 mx-auto rounded-lg overflow-auto justify-between bg-primary my-auto'>
                 <div className='w-1/3 flex flex-col pr-2 justify-around uppercase text-gray-200'>
-                  <h3 className='font-bold text-xl  text-center text-white capitalize'>
-                    {e.name}
-                  </h3>
-                  <h3 className='font-bold text-lg text-center text-white'>
-                    Organizado por {e.organizer}
-                  </h3>
+                  <h3 className='font-bold text-xl  text-center text-white capitalize'>{e.name}</h3>
+                  <h3 className='font-bold text-lg text-center text-white'>Organizado por {e.organizer}</h3>
                   {/* ↓ mostramos la fecha de inicio y fin  */}
                   <p className=' text-md p-2 text-justify text-white italic border-b-2 border-fourty border-opacity-25'>
                     <span className='not-italic'>&#x1F4C5;</span>
                     <br />
                     <b>Fecha de inicio:</b> <br />
-                    <span className='capitalize'>{`${new Date(e.initDate)
-                      .toLocaleString()
-                      .slice(0, -3)}`}</span>
+                    <span className='capitalize'>{`${new Date(e.initDate).toLocaleString().slice(0, -3)}`}</span>
                     <br />
                     <b>Fecha de fin:</b> <br />
-                    <span className='capitalize'>{`${new Date(e.endDate)
-                      .toLocaleString()
-                      .slice(0, -3)}`}</span>
+                    <span className='capitalize'>{`${new Date(e.endDate).toLocaleString().slice(0, -3)}`}</span>
                   </p>
                   {/* ↓ mostramos la descripción (si tiene) */}
                   {e.description && (
@@ -56,11 +48,11 @@ function EventSlider() {
                     <span className='not-italic'>&#127758;</span>
                   </p>
                 </div>
-                <div className='h-full w-2/3 '>
+                <div className='h-full w-2/3 bg-primaryDark rounded-lg  '>
                   <img
-                    src={e.photo}
+                    src={e.photo ? e.photo : 'https://drpp-ny.org/wp-content/uploads/2014/07/sorry-image-not-available.png'}
                     alt='foto evento'
-                    className=' py-2 w-full h-full object-cover rounded-xl'
+                    className=' py-2 w-full h-full object-contain rounded-xl'
                   />
                 </div>
               </div>

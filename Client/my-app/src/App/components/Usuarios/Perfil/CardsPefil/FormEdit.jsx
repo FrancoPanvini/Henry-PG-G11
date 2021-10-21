@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import swal from 'sweetalert';
 
 //? Components
 // import UploadImage from '../../../cargue-fotos/UploadImage';
@@ -104,7 +105,11 @@ function FormEdit({ name, size, sex, age, photo, type, petId, onClose, onPostPet
     };
     if (publicacionTipoAdopcion) await editPetsData(newMascota, petId);
     else await editLostPetsData(newMascota, petId);
-    alert('¡Listo!');
+    swal({
+      text: 'Datos Actualizados',
+      icon: 'success',
+      timer: 2000
+    })
     onPostPet();
     onClose();
   };

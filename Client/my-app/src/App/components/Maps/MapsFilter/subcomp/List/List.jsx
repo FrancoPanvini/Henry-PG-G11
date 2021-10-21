@@ -103,6 +103,7 @@ const List = ({ items, childClicked, isLoading, type, setType, sex, setSex, size
                         id={pet.id}
                         selected={Number(childClicked) === i}
                         refProp={petRefs[i]}
+                        userId={pet.UserId}
                       />
                     </Box>
                   );

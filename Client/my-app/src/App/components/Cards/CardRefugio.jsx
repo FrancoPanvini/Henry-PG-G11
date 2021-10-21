@@ -9,9 +9,7 @@ import { getPetsByUser } from '../../services/getPetsByUser';
 import { getEventsByUserId } from '../../services/getEventsByUserId';
 import { FaFacebookSquare, FaInstagram, FaGlobe, FaDonate } from 'react-icons/fa';
 
-
 function CardRefugio({ selected, refProp, photo, name, phone, country, province, city, description, web, responsable, instagram, facebook, donaciones, id, lat, lng }) {
-
   const [isFlipped, setIsFlipped] = useState(false);
   const [isOpen, setIsOpen] = useState(false);
   const [pets, setPets] = useState([]);
@@ -24,9 +22,7 @@ function CardRefugio({ selected, refProp, photo, name, phone, country, province,
   };
 
   useEffect(() => {
-
-    const getEvents = async (id) => {
-
+    const getEvents = async id => {
       const rta = await getEventsByUserId(id);
       setEvents(rta.data.rows);
     };
@@ -44,20 +40,14 @@ function CardRefugio({ selected, refProp, photo, name, phone, country, province,
       <ReactCardFlip isFlipped={isFlipped} flipDirection='horizontal'>
         <div onClick={handleClick} className='card card-size-lg'>
           <div className='w-full h-4/5 card-transparency-bottom relative object-cover'>
-
             <img src={photo ? photo : 'https://drpp-ny.org/wp-content/uploads/2014/07/sorry-image-not-available.png'} alt='' className='h-full w-full object-cover' />
-
           </div>
           <div className='z-50 flex justify-center items-center pb-2 w-full h-1/5 text-white font-bold text-2xl capitalize'>{name}</div>
         </div>
 
-
         <div className='card card-size-lg relative '>
           <div onClick={handleClick} className='flex flex-col h-full items-center w-full  cursor-pointer'>
-            <div className='font-bold text-xl p-6 text-fourty capitalize flex items-start gap-3 '>
-              {name}
-            </div>
-
+            <div className='font-bold text-xl p-6 text-fourty capitalize flex items-start gap-3 '>{name}</div>
 
             <div className='text-center'>
               {responsable && (
@@ -78,39 +68,21 @@ function CardRefugio({ selected, refProp, photo, name, phone, country, province,
               </h3>
               {phone && (
                 <h3 className='p-1 text-white font-bold'>
-                  Teléfono:{' '}
-                  <a href={`https://wa.me/${phone}`}>
-                    <span className='text-fourty '>{phone}</span>
-                  </a>
+                  Teléfono: <span className='text-fourty '>{phone}</span>
                 </h3>
               )}
               {(web || facebook || instagram) && (
                 <h3 className='p-1 text-white font-bold'>
-                  Redes:
-                  {web && (
-                    <a href={web}>
-                      <FaGlobe className='inline text-fourty mx-1 text-xl' />
-                    </a>
-                  )}
-                  {facebook && (
-                    <a href={facebook}>
-                      <FaFacebookSquare className='inline text-fourty mx-1 text-xl' />
-                    </a>
-                  )}
-                  {instagram && (
-                    <a href={instagram}>
-                      <FaInstagram className='inline text-fourty mx-1 text-xl' />
-                    </a>
-                  )}
+                  {'Redes: '}
+                  {web && <FaGlobe className='inline text-fourty mx-1 text-xl' />}
+                  {facebook && <FaFacebookSquare className='inline text-fourty mx-1 text-xl' />}
+                  {instagram && <FaInstagram className='inline text-fourty mx-1 text-xl' />}
                 </h3>
               )}
 
               {donaciones && (
                 <h3 className='p-1 text-white font-bold'>
-                  Donaciones:{' '}
-                  <a href={donaciones}>
-                    <FaDonate className='inline text-fourty mx-1 text-xl' />
-                  </a>
+                  Donaciones: <FaDonate className='inline text-fourty mx-1 text-xl' />
                 </h3>
               )}
             </div>

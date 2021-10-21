@@ -49,10 +49,8 @@ const AppMap = () => {
     let aux = { ...filters, [type]: el };
     setFilters(aux);
     let filterAux = Object.entries({ ...filters, [type]: el });
-    console.log(filterAux);
     let auxDeAux = filterAux.reduce((acc, filtered) => {
       if (filtered[1] !== '') {
-        console.log(acc[0], filtered[1]);
         acc = acc.filter(pet => filtered[1] === pet[filtered[0]]);
         return acc;
       } else {
