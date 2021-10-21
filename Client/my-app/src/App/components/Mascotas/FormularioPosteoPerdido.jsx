@@ -116,7 +116,7 @@ function FormularioPosteoPerdido({ onClose, onPostPet }) {
       timer: '3000',
     });
     try {
-      axios.post('http://localhost:3001/sendmail/postlost', {
+      axios.post('/sendmail/postlost', {
         name: mascota.name,
         mail: mascota.userMail,
         url: url[0],
