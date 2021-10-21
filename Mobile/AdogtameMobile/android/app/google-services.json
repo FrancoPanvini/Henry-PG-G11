@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "669871616621",
+    "project_id": "adogtame-proyect",
+    "storage_bucket": "adogtame-proyect.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:669871616621:android:7581ad5a7a2220679e4564",
+        "android_client_info": {
+          "package_name": "com.adogtamemobile"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "669871616621-l6q20p88f7hn6gm3r5bgsqhffu8htcbr.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyA219RxBH-3TLNmasZP_q4WItX_wvMB6Tk"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "669871616621-l6q20p88f7hn6gm3r5bgsqhffu8htcbr.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

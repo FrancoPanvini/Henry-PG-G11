@@ -29,7 +29,7 @@ const AppNavContainer = ({props}) => {
 
   return (
     <>
-      {isLoggedIn  || isAuthenticated ? (
+      {isAuthenticated ? (
         <HomeNavigator />
       ) : (
         <AuthNavigator />

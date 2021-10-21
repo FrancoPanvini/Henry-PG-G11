@@ -71,6 +71,14 @@ const styles = StyleSheet.create({
 });
 
 export const Profile = ({usuario, authDispatch}) => {
+  const [disabled, setDisabled] = React.useState(true)
+  const [edit, setEdit] = React.useState(true)
+  const [editTitle, setEditTitle] = React.useState("EDITAR")
+  const [editedUser, setEditedUser] = React.useState(usuario)
+  const onUserChange = ({name,value}) => {
+    setEditedUser({...editedUser, [name]: value})
+  }
+
   const onUserLogout = () => {
     Alert.alert('Cerrando Sesión!', 'Está seguro que desea continuar?', [
       {
@@ -85,6 +93,21 @@ export const Profile = ({usuario, authDispatch}) => {
       },
     ]);
   };
+const handleEdit = () => {
+  if(edit === true) {
+    setDisabled(false)
+    setEdit(false)
+    setEditTitle("CONFIRMAR")
+  }
+  else{
+    console.log(editedUser)
+    //ACA SE AGREGA EL PUT
+    setDisabled(true)
+    setEdit(true)
+    setEditTitle("EDITAR")
+  }
+}
+
   return (
     <>
       <Appbar.Header>
@@ -97,59 +120,98 @@ export const Profile = ({usuario, authDispatch}) => {
         <Input
           label="Nombre"
           placeholder="Ingrese Contraseña"
-          value={usuario.name}
-          onChangeText={value => {}}
+          value={editedUser.name}
+          onChangeText={value => onUserChange({name: 'name', value: value})}
           style={styles.input}
+          disabled={disabled}
         />
         <Input
           label="Mail"
           placeholder="Ingrese Contraseña"
-          value={usuario.mail}
-          onChangeText={value => {}}
+          value={editedUser.mail}
+          onChangeText={value => onUserChange({name: 'mail', value: value})}
           style={styles.input}
+          disabled={disabled}
         />
         <Input
           label="Teléfono"
           placeholder="Ingrese Contraseña"
-          value={usuario.phone}
-          onChangeText={value => {}}
+          value={editedUser.phone}
+          onChangeText={value => onUserChange({name: 'phone', value: value})}
           style={styles.input}
+          disabled={disabled}
+        />
+        <Input
+          label="Link Web"
+          placeholder="Ingrese Página Web del Refugio"
+          value={editedUser.link_web}
+          onChangeText={value => onUserChange({name: 'link_web', value: value})}
+          style={styles.input}
+          disabled={disabled}
+        />
+        <Input
+          label="Link Donaciones"
+          placeholder="Ingrese Link p/ Recibir Donaciones"
+          value={editedUser.link_donaciones}
+          onChangeText={value => onUserChange({name: 'link_donaciones', value: value})}
+          style={styles.input}
+          disabled={disabled}
+        />
+        <Input
+          label="Responsable"
+          placeholder="Ingrese Responsable del Refugio"
+          value={editedUser.responsable}
+          onChangeText={value => onUserChange({name: 'responsable', value: value})}
+          style={styles.input}
+          disabled={disabled}
+        />
+        <Input
+          label="Descripción"
+          placeholder="Ingrese Descripción del Refugio"
+          value={editedUser.description}
+          onChangeText={value => onUserChange({name: 'description', value: value})}
+          style={styles.input}
+          disabled={disabled}
         />
         <Input
           label="Dirección"
           placeholder="Ingrese Contraseña"
-          value={usuario.direction}
-          onChangeText={value => {}}
+          value={editedUser.direction}
+          onChangeText={value => onUserChange({name: 'phone', value: value})}
           style={styles.input}
+          disabled={true}
         />
         <Input
           label="Ciudad"
           placeholder="Ingrese Contraseña"
-          value={usuario.city}
-          onChangeText={value => {}}
+          value={editedUser.city}
+          onChangeText={value => onUserChange({name: 'phone', value: value})}
           style={styles.input}
+          disabled={true}
         />
         <Input
           label="Provincia"
           placeholder="Ingrese Contraseña"
-          value={usuario.province}
-          onChangeText={value => {}}
+          value={editedUser.province}
+          onChangeText={value => onUserChange({name: 'province', value: value})}
           style={styles.input}
+          disabled={true}
         />
         <Input
           label="Pais"
           placeholder="Ingrese Contraseña"
-          value={usuario.country}
+          value={editedUser.country}
           onChangeText={value => {}}
           style={styles.input}
+          disabled={true}
         />
 
         <View style={styles.containerButtons}>
           <CustomButton
-            text="Editar"
+            text={editTitle}
             style={styles.buttonE}
             icon="pencil"
-            onPress={() => onUserLogout()}></CustomButton>
+            onPress={() => handleEdit()}></CustomButton>
           <CustomButton
             text="Salir"
             style={styles.button}

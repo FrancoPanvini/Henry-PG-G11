@@ -80,6 +80,7 @@ const CreatePetComponent = ({
   const [especie, setEspecie] = React.useState('');
   const [tamaño, setTamaño] = React.useState('');
   const [sexo, setSexo] = React.useState('');
+  const [disabled, setDisabled] = useState(true)
   return (
     <>
       <Appbar.Header>
@@ -96,6 +97,7 @@ const CreatePetComponent = ({
             value={form.name}
             onChangeText={value => onChangeText({name: 'name', value: value})}
             style={styles.input}
+            disabled={true}
           />
 
           <Input
