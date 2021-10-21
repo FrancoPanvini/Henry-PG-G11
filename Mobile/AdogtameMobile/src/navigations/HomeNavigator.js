@@ -56,11 +56,16 @@ const HomeNavigator = () => {
           .catch(err=>console.log(err))
         
         userPets.data.rows.forEach(async el => {
-          let forms = await axios.get(`http://adogtameapi.herokuapp.com/aoptions?pet=${el.id}`)
+          
+          let forms = await axios.get(`http://adogtameapi.herokuapp.com/adoptions?pet=${el.id}`)
+            .catch(err=>console.log(err))
+            
+          
           setPublications(prev => {
-            return [...prev, {...el, forms: forms}]
+            return [...prev, {...el, forms: forms.data}]
           })
         })
+        
         setLoading(false)
       }
 

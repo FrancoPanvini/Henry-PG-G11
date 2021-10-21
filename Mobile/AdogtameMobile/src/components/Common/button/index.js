@@ -3,7 +3,7 @@ import { StyleSheet } from 'react-native';
 import { Button } from 'react-native-paper';
 
 const CustomButton = ({text, onPress, loading, disabled, style}) => (
-  <Button loading={loading} disabled={disabled} style={style} color={style.color} dark={true} mode="contained" onPress={() => onPress()}>
+  <Button loading={loading} disabled={disabled} style={style} color={style?.color} dark={true} mode="contained" onPress={() => onPress()}>
     {text}
   </Button>
 );
