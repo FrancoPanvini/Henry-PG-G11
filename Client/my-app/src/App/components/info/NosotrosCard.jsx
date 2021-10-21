@@ -22,7 +22,7 @@ function NosotrosCard({ photo, name, alias, description, strengths, mail, linked
             <img src={photo} alt={`Foto de ${name}`} className={`h-full w-full rounded-full object-cover shadow-similBorderWhite ${extraCSS}`} />
           </div>
         </div>
-        <div className='relative ml-2 z-40 w-7/12 flex flex-col items-start justify-between text-fourtyDark'>
+        <div className='relative ml-2 z-40 w-7/12 flex flex-col items-start justify-between text-gray-700'>
           <div className='text-2xl font-bold'>{name}</div>
           <div className='mb-auto text-sm'>alias {alias}</div>
           <div className='text-center italic'>{description}</div>
@@ -30,7 +30,7 @@ function NosotrosCard({ photo, name, alias, description, strengths, mail, linked
           {portfolio && (
             <div className='hover:underline'>
               <a href={portfolio} target='_blank' rel='noreferrer'>
-                Enlace a mi portfolio <FaExternalLinkAlt className='inline align-baseline text-sm' />
+                Enlace a mi portfolio <FaExternalLinkAlt className='inline align-baseline text-xs' />
               </a>
             </div>
           )}

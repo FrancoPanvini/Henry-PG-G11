@@ -1,4 +1,7 @@
 import React from 'react';
+import { useHistory } from 'react-router-dom';
+
+//? Components
 import NosotrosCard from './NosotrosCard';
 import fotoDavid from '../../../images/DavidMendozaLopez.png';
 import fotoAparicio from '../../../images/FrancoAparicio.jpg';
@@ -7,10 +10,21 @@ import fotoPetri from '../../../images/SantiagoPetri.jpg';
 import fotoLucas from '../../../images/LucasChaves.jpg';
 import fotoDamian from '../../../images/DamianDiego.png';
 
+//? Icons
+import { FaChevronLeft } from 'react-icons/fa';
+
 function Nosotros() {
+  const history = useHistory();
+
   return (
-    <div className='h-screen82 px-16 grid grid-cols-3 grid-rows-2 gap-4 bg-gradient-to-r from-gray-300 to-thirtyLight'>
-      <NosotrosCard 
+    <div className='relative h-screen82 px-16 grid grid-cols-3 grid-rows-2 gap-4 bg-gradient-to-r from-gray-400 to-thirtyLight'>
+      <span
+        title='Volver'
+        onClick={() => history.goBack()}
+        className='absolute top-4 left-4 btn w-8 h-8 flex justify-center items-center rounded-full bg-thirty border-thirtyDark text-white cursor-pointer hover:underline'>
+        <FaChevronLeft className='relative right-0.5' />
+      </span>
+      <NosotrosCard
         photo={fotoLucas}
         name='Lucas Chaves'
         alias='Luquitas'
@@ -23,7 +37,7 @@ function Nosotros() {
         // portfolio
         extraCSS
       />
-      <NosotrosCard 
+      <NosotrosCard
         photo={fotoDamian}
         name='Damian Diego'
         alias='Dami'
@@ -36,7 +50,7 @@ function Nosotros() {
         portfolio='https://damdiegdevfolio.netlify.app'
         extraCSS
       />
-      <NosotrosCard 
+      <NosotrosCard
         photo={fotoDavid}
         name='David Mendoza Lopez'
         alias='Deivid'
@@ -49,7 +63,7 @@ function Nosotros() {
         portfolio='https://portafolio-ivory.vercel.app'
         extraCSS='object-top'
       />
-      <NosotrosCard 
+      <NosotrosCard
         photo={fotoAparicio}
         name='Franco Aparicio'
         alias='Fran'
@@ -62,7 +76,7 @@ function Nosotros() {
         // portfolio
         extraCSS='object-top'
       />
-      <NosotrosCard 
+      <NosotrosCard
         photo={fotoPetri}
         name='Santiago Petri'
         alias='Petri'
@@ -75,7 +89,7 @@ function Nosotros() {
         // portfolio
         extraCSS
       />
-      <NosotrosCard 
+      <NosotrosCard
         photo={fotoPanvini}
         name='Franco Panvini'
         alias='Panvini'
@@ -89,7 +103,7 @@ function Nosotros() {
         extraCSS
       />
     </div>
-  )
+  );
 }
 
 export default Nosotros;
