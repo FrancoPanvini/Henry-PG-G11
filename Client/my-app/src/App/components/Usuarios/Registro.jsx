@@ -17,6 +17,7 @@ import { postUsers } from '../../redux/actions/index';
 
 //? Icons
 import { FaPaw, FaHome } from 'react-icons/fa';
+import logoGoogle from '../../../images/GoogleLOGO.svg';
 
 function Registro() {
   const dispatch = useDispatch();
@@ -172,7 +173,7 @@ function Registro() {
         <form onSubmit={e => handleSubmit(e)} className='p-4 w-11/12 flex flex-col bg-thirty rounded-lg min-w-min shadow-xl border-2 border-fourty border-opacity-50'>
           <div className='pb-4 border-b-2 border-thirtyDark border-opacity-50'>
             <a href='https://adogtameapi.herokuapp.com/auth/google' className='btn btn-lg bg-white text-gray-600 border-gray-400 flex justify-center items-center'>
-              <img src='https://freesvg.org/img/1534129544.png' alt='Log in con Google' className='h-7 w-7 inline mr-4' />
+              <img src={logoGoogle} alt='Log in con Google' className='h-7 w-7 inline mr-4' />
               Registra tu cuenta usando Google
             </a>
           </div>

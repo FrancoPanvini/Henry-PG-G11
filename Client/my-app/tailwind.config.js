@@ -87,6 +87,7 @@ module.exports = {
           "url('https://images.unsplash.com/photo-1560807707-8cc77767d783?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=435&q=80')",
         gatitosWeb:
           "url('https://images.unsplash.com/photo-1576013488633-fda5098dd03f?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=872&q=80')",
+        fotoDavid: "url('/src/images/DavidMendozaLopez.png')",
       },
       backgroundPosition: {
         'leftish-center': '25% 50%',
