@@ -254,6 +254,9 @@ export const Publications = ({publications, data, loading}) => {
                 <Text style={styles.description}>
                   En adopcion hace: {daysPassed} dias
                 </Text>
+                <Text style={styles.description}>
+                  Cantidad de solicitudes: {pub.forms.length}
+                </Text>
                 <Text
                   style={
                     styles.description
