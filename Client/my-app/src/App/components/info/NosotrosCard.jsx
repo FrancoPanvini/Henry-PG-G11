@@ -10,9 +10,6 @@ function NosotrosCard({ photo, name, alias, description, strengths, mail, linked
   };
 
   const copyText = (e) => {
-    console.log(e.target);
-    console.log(e.target.innerText);
-    console.log(e.target.value);
     navigator.clipboard.writeText(e.target.innerText);
     timer();
   };
