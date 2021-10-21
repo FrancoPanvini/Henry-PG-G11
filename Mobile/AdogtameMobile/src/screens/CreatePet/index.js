@@ -2,7 +2,7 @@ import React, {useState, useRef} from 'react';
 import { Text, View } from 'react-native';
 import CreatePetComponent from '../../components/PetCreate/index'
 
-const CreatePet = () => {
+const CreatePet = ({data, usuario}) => {
     const [form, setForm] = useState({})
 
 
@@ -11,6 +11,17 @@ const CreatePet = () => {
         setForm({...form, [name]: value})
     }
     const onSubmit = () => {
+    
+        console.log(form)
+        const newPet = {
+            ...form,
+            Ownerid: usuario.id,
+            Cityid: 1
+        }
+        console.log(newPet)
+
+        //HACER EL AXIOS POST DE PET
+
     }
 
     const sheetRef = useRef(null)

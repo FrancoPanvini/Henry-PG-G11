@@ -1,7 +1,7 @@
 import React from "react";
 import "intl";
 import 'intl/locale-data/jsonp/en'
-import { View, Text, StyleSheet, Button, Alert, Switch, Image, TouchableOpacity, ScrollView } from "react-native";
+import { View, Text, StyleSheet, Button, Alert, ActivityIndicator,Switch, Image, TouchableOpacity, ScrollView } from "react-native";
 import { DataTable } from 'react-native-paper';
 import logoutUser from '../context/actions/auth/logout'
 import Input from '../components/Common/input/index';
@@ -105,7 +105,7 @@ const styles = StyleSheet.create({
 
 
 
-  export const Publications = ({publications}) => {
+  export const Publications = ({publications, data, loading}) => {
     const [page, setPage] = React.useState(0);
     const [itemsPerPage, setItemsPerPage] = React.useState(optionsPerPage[0]);
     
@@ -113,7 +113,11 @@ const styles = StyleSheet.create({
     setPage(0);
   }, [itemsPerPage]);
   return (
-    <DataTable>
+    <>
+    {loading && <ActivityIndicator/>}
+    {!loading && (
+
+      <DataTable>
       <DataTable.Header>
         <DataTable.Title>Nombre</DataTable.Title>
         <DataTable.Title numeric>Solicitudes</DataTable.Title>
@@ -121,10 +125,10 @@ const styles = StyleSheet.create({
         <DataTable.Title numeric></DataTable.Title>
       </DataTable.Header>
     {publications.map((pub,i) => {
-        const diffDays = new Date().getTime() - new Date(pub.createdAt).getTime();
-        const daysPassed = Math.floor(diffDays / (1000 * 60 * 60 * 24));
+      const diffDays = new Date().getTime() - new Date(pub.createdAt).getTime();
+      const daysPassed = Math.floor(diffDays / (1000 * 60 * 60 * 24));
       return (
-      <DataTable.Row key={i}>
+        <DataTable.Row key={i}>
         <DataTable.Cell>photo {pub.name}</DataTable.Cell>
         <DataTable.Cell numeric onPress={() => alert("Forms")}>5</DataTable.Cell>
         <DataTable.Cell numeric>{daysPassed} días</DataTable.Cell>
@@ -132,7 +136,7 @@ const styles = StyleSheet.create({
 
       </DataTable.Row>
       
-    )})}
+      )})}
       
 
 
@@ -147,11 +151,13 @@ const styles = StyleSheet.create({
         setItemsPerPage={setItemsPerPage}
         showFastPagination
         optionsLabel={'Rows per page'}
-      />
+        />
     </DataTable>
+      )}
+      </>
     
-  );
-  };
+      );
+    };
 
 
   
