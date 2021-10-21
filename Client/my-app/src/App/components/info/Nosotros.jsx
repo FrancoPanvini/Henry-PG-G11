@@ -17,7 +17,7 @@ function Nosotros() {
   const history = useHistory();
 
   return (
-    <div className='relative h-screen82 px-16 grid grid-cols-3 grid-rows-2 gap-4 bg-gradient-to-r from-gray-400 to-thirtyLight'>
+    <div className='relative h-screen82 px-16 grid grid-cols-3 grid-rows-2 gap-4 bg-gradient-to-r from-gray-300 to-thirtyLight'>
       <span
         title='Volver'
         onClick={() => history.goBack()}
