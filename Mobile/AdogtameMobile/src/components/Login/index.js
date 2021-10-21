@@ -59,6 +59,7 @@ const LoginComponent = ({onSubmit, onChange, form, errors, loading}) => {
       fontSize: 20,
       margin: 10,
       textAlign: 'center',
+      backgroundColor: "#f5b461"
     },
     input: {
       paddingHorizontal: 20,
