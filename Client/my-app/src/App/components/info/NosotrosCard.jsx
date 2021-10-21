@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
-import { FaGithubSquare, FaLinkedin, FaTwitterSquare } from 'react-icons/fa';
+import { FaGithubSquare, FaLinkedin, FaTwitterSquare, FaExternalLinkAlt, FaRegClipboard } from 'react-icons/fa';
 
-function NosotrosCard({ photo, name, alias, description, strengths, mail, linkedin, github, twitter, portfolio, extraCSS, }) {
+function NosotrosCard({ photo, name, alias, description, strengths, mail, linkedin, github, twitter, portfolio, extraCSS }) {
   const [showTooltip, setShowTooltip] = useState(false);
 
   const timer = () => {
@@ -30,7 +30,7 @@ function NosotrosCard({ photo, name, alias, description, strengths, mail, linked
           {portfolio && (
             <div className='hover:underline'>
               <a href={portfolio} target='_blank' rel='noreferrer'>
-                Click aquí para ver mi portfolio.
+                Enlace a mi portfolio <FaExternalLinkAlt className='inline align-baseline text-sm' />
               </a>
             </div>
           )}
@@ -39,7 +39,7 @@ function NosotrosCard({ photo, name, alias, description, strengths, mail, linked
             value={mail}
             title='¡Click para copiar este mail!'
             className='text-center mb-2 cursor-pointer hover:underline relative'>
-            {mail}
+            {mail} <FaRegClipboard className='inline align-baseline text-sm' />
           </div>
           <div
             className={`${
