@@ -53,10 +53,10 @@ function Publicaciones({ userId }) {
     <div className='container mx-auto  flex flex-col'>
       <div className='flex flex-row justify-center mt-8 h-full bg-gray-200'>
         <button className='btn btn-lg bg-primary text-white mr-16' onClick={() => setIsOpen(true)}>
-          Postear mascota en adopcion
+          Ofrecer nueva mascota en adopción
         </button>
         <button className='btn btn-lg bg-primary text-white ' onClick={() => setIsOpen2(true)}>
-          Postear mascota perdida
+          Publicar nueva mascota extraviada
         </button>
 
         {isOpen && <FormularioPosteoAdopcion onClose={() => setIsOpen(false)} onPostPet={onPostPet} />}

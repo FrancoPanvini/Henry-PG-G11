@@ -35,10 +35,10 @@ const PopUpForms = ({ UserId, adult, dedication, oldPets, oldPetsDesc, otherPets
           Nombre: <span className='capitalize font-bold'>{user?.name}</span>{' '}
         </h2>
         <h2>
-          Telefono : <span className='font-bold'> {user?.phone}</span>
+          Teléfono : <span className='font-bold'> {user?.phone}</span>
         </h2>
         <h2>
-          Pais: <span className='capitalize font-bold'>{user?.country}</span>{' '}
+          País: <span className='capitalize font-bold'>{user?.country}</span>{' '}
         </h2>
         <h2>
           Provincia: <span className='capitalize font-bold'>{user?.province}</span>{' '}
@@ -51,14 +51,14 @@ const PopUpForms = ({ UserId, adult, dedication, oldPets, oldPetsDesc, otherPets
           <span className='capitalize font-bold'> {adult === true ? 'Si' : 'No'}</span>{' '}
         </h2>
         <h2>
-          Dedicacion: <span className='capitalize font-bold'>{dedication} horas diarias</span>{' '}
+          Dedicación: <span className='capitalize font-bold'>{dedication} horas diarias</span>{' '}
         </h2>
         <h2>
-          Tuvo mascotas en el pasado?
+          ¿Tuvo mascotas en el pasado?
           <span className=' font-bold'>{oldPets ? (oldPetsDesc ? ` ${oldPetsDesc}` : ' Si') : ' No'}</span>
         </h2>
         <h2>
-          Tiene mascotas actualmente?
+          ¿Tiene mascotas actualmente?
           <span className=' font-bold'>{otherPets ? (otherPetsDesc ? ` ${otherPetsDesc}` : ' Si') : ' No'}</span>
         </h2>
         <h2>
@@ -66,7 +66,7 @@ const PopUpForms = ({ UserId, adult, dedication, oldPets, oldPetsDesc, otherPets
           <span className=' font-bold'>{residence === ' app' ? ' Departamento' : ' Casa'}</span>
         </h2>
         <h2>
-          Cuantas personas viven en su propiedad: <span className=' font-bold'>{residents}</span>
+          Cantidad de menores en la residencia: <span className=' font-bold'>{residents}</span>
         </h2>
         <div className='flex w-full justify-around mt-8'>
           {state === 'p' ? (

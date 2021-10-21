@@ -8,7 +8,9 @@ import { BiChevronsRight, BiChevronsLeft } from 'react-icons/bi';
 
 function ContenedorCard({ className, title, petPosted, petFiltered }) {
   const dispatch = useDispatch();
-  const items = useSelector(state => (title === 'ADOPCIONES' ? state.petsAdop.rows : title === 'PERDIDOS' ? state.lostPets.rows : state.shelters.rows));
+  const items = useSelector((state) =>
+    title === 'ADOPCIONES' ? state.petsAdop.rows : title === 'PERDIDOS' ? state.lostPets.rows : state.shelters.rows
+  );
 
   const [currentPage, setCurrentPage] = useState(1);
   const [itemsPerPage] = useState(6);
@@ -25,7 +27,7 @@ function ContenedorCard({ className, title, petPosted, petFiltered }) {
     setCurrentPage(1);
   }, [petFiltered]);
 
-  const handleChangePage = e => {
+  const handleChangePage = (e) => {
     setCurrentPage(Number(e.target.id));
   };
 
@@ -39,10 +41,14 @@ function ContenedorCard({ className, title, petPosted, petFiltered }) {
   const indexOfFirstItem = indexOfLastItem - itemsPerPage;
   let currentItems = items?.slice(indexOfFirstItem, indexOfLastItem);
 
-  const renderPagesNumber = pages.map(p => {
+  const renderPagesNumber = pages.map((p) => {
     if (p < maxPageNumberList + 1 && p > minPageNumberList) {
       return (
-        <button key={p} id={p} onClick={handleChangePage} className='btn bg-primary text-white p-1 rounded-lg m-2'>
+        <button
+          key={p}
+          id={p}
+          onClick={handleChangePage}
+          className={`${currentPage === p ? 'bg-primaryDark filter brightness-95 cursor-default' : 'btn bg-primary'}  text-white p-1 rounded-lg m-2`}>
           {p}
         </button>
       );
@@ -80,20 +86,43 @@ function ContenedorCard({ className, title, petPosted, petFiltered }) {
 
         {renderPagesNumber}
 
-        <button className=' btn bg-primary text-white rounded-full p-1 mr-1' onClick={handleNext} disabled={currentPage === pages[pages.length - 1] ? true : false}>
+        <button
+          className=' btn bg-primary text-white rounded-full p-1 mr-1'
+          onClick={handleNext}
+          disabled={currentPage === pages[pages.length - 1] ? true : false}>
           <BiChevronsRight />
         </button>
       </div>
 
       <div className='grid grid-cols-3 grid-rows-2 gap-4 w-full'>
         {currentItems?.length > 0 ? (
-          currentItems.map(p => {
+          currentItems.map((p) => {
             return (
               <div key={p.id} className='flex justify-center'>
                 {title === 'ADOPCIONES' ? (
-                  <CardAdopcion photo={p.petPic} name={p.name} age={p.age} size={p.size} sex={p.sex} country={p.country} province={p.province} city={p.city} id={p.id} />
+                  <CardAdopcion
+                    photo={p.petPic}
+                    name={p.name}
+                    age={p.age}
+                    size={p.size}
+                    sex={p.sex}
+                    country={p.country}
+                    province={p.province}
+                    city={p.city}
+                    id={p.id}
+                  />
                 ) : title === 'PERDIDOS' ? (
-                  <CardLost photo={p.petPic} name={p.name} size={p.size} country={p.country} province={p.province} city={p.city} id={p.id} phone={p.phone} userId={p.UserId} />
+                  <CardLost
+                    photo={p.petPic}
+                    name={p.name}
+                    size={p.size}
+                    country={p.country}
+                    province={p.province}
+                    city={p.city}
+                    id={p.id}
+                    phone={p.phone}
+                    userId={p.UserId}
+                  />
                 ) : (
                   // case title === 'REFUGIOS'
                   <CardRefugio
@@ -119,7 +148,9 @@ function ContenedorCard({ className, title, petPosted, petFiltered }) {
           })
         ) : (
           <div className='w-full h-full col-span-3 flex flex-col items-center mt-8'>
-            <h2 className='text-3xl font-bold text-primaryDark'>No se encontraron {title === 'REFUGIOS' ? 'refugios' : 'mascotas'} con esos parámetros</h2>
+            <h2 className='text-3xl font-bold text-primaryDark'>
+              No se encontraron {title === 'REFUGIOS' ? 'refugios' : 'mascotas'} con esos parámetros
+            </h2>
             <img src={'https://i.pinimg.com/originals/18/0d/95/180d95834d68ad0add738b765a82c97a.gif'} alt='' className='h-96 w-100 mt-4' />
           </div>
         )}
