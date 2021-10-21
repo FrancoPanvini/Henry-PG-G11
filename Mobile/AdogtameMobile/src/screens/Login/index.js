@@ -31,7 +31,6 @@ import login from '../../context/actions/auth/login';
       onSubmit={onSubmit}
       onChange={onChange}
       form={form}
-  
       error={error}
       loading={loading}/>
     );

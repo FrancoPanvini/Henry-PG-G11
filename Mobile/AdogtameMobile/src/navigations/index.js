@@ -5,22 +5,20 @@ import HomeNavigator from './HomeNavigator';
 import {GlobalContext} from '../context/Provider';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
-
 const AppNavContainer = ({props}) => {
-  const { authState: {isLoggedIn} } = useContext(GlobalContext);
+  const {
+    authState: {isLoggedIn},
+  } = useContext(GlobalContext);
   const [isAuthenticated, setIsAuthenticated] = React.useState(isLoggedIn);
   const [authLoaded, setAuthLoaded] = React.useState(false);
-  
+
   const getUser = async () => {
     try {
       const user = await AsyncStorage.getItem('user');
-      console.log(user)
+      console.log(user);
       if (user) {
-
         setIsAuthenticated(true);
       } else {
-        
-
         setIsAuthenticated(false);
       }
     } catch (error) {}
@@ -29,7 +27,15 @@ const AppNavContainer = ({props}) => {
     getUser();
   }, [isLoggedIn]);
 
-  return <>{isLoggedIn || isAuthenticated ? <HomeNavigator /> : <AuthNavigator />}</>;
+  return (
+    <>
+      {isLoggedIn  || isAuthenticated ? (
+        <HomeNavigator />
+      ) : (
+        <AuthNavigator />
+      )}
+    </>
+  );
 };
 
 export default AppNavContainer;
