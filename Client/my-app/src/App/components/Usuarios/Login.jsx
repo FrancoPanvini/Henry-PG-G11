@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import { FaPaw } from 'react-icons/fa';
 import ErrorIconPulsing from '../ErrorIconPulsing';
+import logoGoogle from '../../../images/GoogleLOGO.svg';
 
 function Login() {
   const dispatch = useDispatch();
@@ -70,7 +71,7 @@ function Login() {
             href='https://adogtameapi.herokuapp.com/auth/google'
             title='Inicia sesión usando tu cuenta de Google'
             className='btn btn-lg bg-white text-gray-600 border-gray-400 flex justify-center items-center'>
-            <img src='https://freesvg.org/img/1534129544.png' alt='Log in con Google' className='h-7 w-7 inline mr-4' />
+            <img src={logoGoogle} alt='Log in con Google' className='h-7 w-7 inline mr-4' />
             Log in
           </a>
           <br className='' />
@@ -93,7 +94,9 @@ function Login() {
           <button
             disabled={handleDisabled()}
             type='submit'
-            className={`${handleDisabled() ? 'opacity-50 cursor-default border-b-2 border-transparent' : 'btn'} mt-2 btn-lg bg-primary text-white border-yellow-600 flex justify-center items-center`}>
+            className={`${
+              handleDisabled() ? 'opacity-50 cursor-default border-b-2 border-transparent' : 'btn'
+            } mt-2 btn-lg bg-primary text-white border-yellow-600 flex justify-center items-center`}>
             <FaPaw className='text-3xl inline mr-4' /> Log in
           </button>
           <br />

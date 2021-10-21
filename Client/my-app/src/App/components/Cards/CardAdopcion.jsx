@@ -43,9 +43,9 @@ function CardAdopcion({ selected, refProp, photo, name, age, size, country, prov
             <div className='font-bold text-xl p-6 text-fourty capitalize flex items-start gap-3 '>{name}</div>
 
             <div className='text-center'>
-              {age && (
+              {(typeof age === 'number') && (
                 <h3 className='p-1 text-white font-bold'>
-                  Edad: <span className='text-fourty '>{age}</span>
+                  Edad: <span className='text-fourty '>{age === 0 ? 'menos de 1 año' : age }</span>
                 </h3>
               )}
               {size && (
