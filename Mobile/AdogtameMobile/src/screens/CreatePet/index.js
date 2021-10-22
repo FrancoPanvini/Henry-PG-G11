@@ -7,6 +7,7 @@ import axios from 'axios'
 const CreatePet = ({data, usuario}) => {
     const [form, setForm] = useState({})
     const [photo, setPhoto] =useState("")
+    const [loading, setLoading] = useState(false)
 
 
 
@@ -15,22 +16,32 @@ const CreatePet = ({data, usuario}) => {
        
     }
     const onSubmit = async() => {
+        setLoading(true)
         console.log(photo.path)
-        let newPhoto = uploadImage(photo)
+        let newPhoto;
+        if(photo.path){
+            newPhoto = uploadImage(photo)
+        }
         await setTimeout(() => {
-            console.log(newPhoto)
             
+            console.log(usuario)
+        
+
             const newPet = {
                 ...form,
                 Ownerid: usuario.id,
-                Cityid: 1,
+                Cityid: usuario.cityId,
+                lat: usuario.lat,
+                lng: usuario.lng,
                 age: Number(form.age),
-                photo:['https://upload.wikimedia.org/wikipedia/en/4/42/Casper_%28character%29.png'/* newPhoto._W */]
+                photo:[newPhoto?._W]
             }
             console.log(newPet)
-            axios.post('adogtameapi.herokuapp.com/pets/', newPet)
+            axios.post('https://adogtameapi.herokuapp.com/pets/', newPet)
+                .catch(err=>console.log(err))
             
         }, 5000);
+        setLoading(false)
         
 
 
@@ -52,7 +63,7 @@ const CreatePet = ({data, usuario}) => {
 
     }
 
-    return <CreatePetComponent photo={photo} setPhoto={setPhoto} onChangeText={onChange} onSubmit={onSubmit} form={form} sheetRef={sheetRef} closeSheet={closeSheet} openSheet={openSheet} onFileSelected={onFileSelected}/>
+    return <CreatePetComponent loading={loading} photo={photo} setPhoto={setPhoto} onChangeText={onChange} onSubmit={onSubmit} form={form} sheetRef={sheetRef} closeSheet={closeSheet} openSheet={openSheet} onFileSelected={onFileSelected}/>
 }
 
 export default CreatePet;

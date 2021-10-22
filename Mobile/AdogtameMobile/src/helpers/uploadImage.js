@@ -10,7 +10,8 @@ export default async(file) => {
     .catch((error) => {
       onError(error);
     });
-  url = await ref.getDownloadURL();
+  url = await ref.getDownloadURL().catch(err=>console.log(err))
+
   console.log('url', url);
   return url
 

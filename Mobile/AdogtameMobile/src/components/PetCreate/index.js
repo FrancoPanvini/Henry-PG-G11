@@ -75,6 +75,7 @@ const CreatePetComponent = ({
   openSheet,
   closeSheet,
   onFileSelected,
+  loading
 }) => {
   const [photo, setPhoto] = useState({});
   const [especie, setEspecie] = React.useState('');
@@ -97,7 +98,7 @@ const CreatePetComponent = ({
             value={form.name}
             onChangeText={value => onChangeText({name: 'name', value: value})}
             style={styles.input}
-            disabled={true}
+            disabled={false}
           />
 
           <Input
@@ -256,6 +257,8 @@ const CreatePetComponent = ({
             text="Postular"
             icon="plus-circle"
             style={styles.buttonE}
+            disabled={loading}
+            loading={loading}
           />
           <Text></Text>
         </View>

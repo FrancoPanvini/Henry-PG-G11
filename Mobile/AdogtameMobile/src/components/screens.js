@@ -13,6 +13,7 @@ import {Appbar, Card} from 'react-native-paper';
 import logoutUser from '../context/actions/auth/logout';
 import Input from '../components/Common/input/index';
 import CustomButton from './Common/button';
+import axios from 'axios';
 
 /* import ImagePicker from '../common/ImagePicker'; */
 
@@ -101,6 +102,7 @@ const handleEdit = () => {
   }
   else{
     console.log(editedUser)
+    axios.put(`http://adogtameapi.herokuapp.com/users/${usuario.id}`, editedUser)
     //ACA SE AGREGA EL PUT
     setDisabled(true)
     setEdit(true)

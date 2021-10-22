@@ -12,7 +12,7 @@ const CustomInput = ({placeholder, onChangeText, label, errors, value, style, se
       label={label}
       value={value ? value : null}
       placeholder={placeholder}
-      disabled={disabled}
+      disabled={disabled? disabled : false}
       onChangeText={text => onChangeText(text)}
       error={errors ? true : false}
       mode='flat'
