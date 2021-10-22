@@ -24,7 +24,9 @@ const AppNavContainer = ({props}) => {
     } catch (error) {}
   };
   useEffect(() => {
+    let isMounted = true;
     getUser();
+    return () => { isMounted = false };
   }, [isLoggedIn]);
 
   return (

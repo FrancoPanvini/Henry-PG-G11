@@ -69,6 +69,18 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     marginTop: 10,
   },
+  refreshButton:{
+    backgroundColor: 'blue',
+    width: 5,
+    height:4,
+    position:'absolute',
+    bottom:45,
+    right: 10,
+    borderRadius:100,
+    justifyContent:'center',
+    alignItems:'center'
+
+  }
 });
 
 export const Profile = ({usuario, authDispatch}) => {
@@ -242,12 +254,13 @@ export const Publications = ({publications, data, loading}) => {
       <ScrollView style={{backgroundColor: '#E5E7EB'}}>
         <Text style={styles.header}>Mis mascotas</Text>
         {loading && <ActivityIndicator />}
-        {publications.map((pub, index) => {
+        {
+        publications.map((pub, index) => {
           const diffDays =
             new Date().getTime() - new Date(pub.createdAt).getTime();
           const daysPassed = Math.floor(diffDays / (1000 * 60 * 60 * 24));
           return (
-            <Card style={styles.card} key={pub.id}>
+            <Card style={styles.card} key={index}>
               <Card.Cover source={{uri: pub.petPic}} />
               <Card.Content>
                 <Text style={styles.title}>
@@ -266,7 +279,11 @@ export const Publications = ({publications, data, loading}) => {
               </Card.Content>
             </Card>
           );
+
         })}
+        <CustomButton
+            style={styles.refreshButton}
+            onPress={() => onUserLogout()}></CustomButton>
       </ScrollView>
     </>
   );

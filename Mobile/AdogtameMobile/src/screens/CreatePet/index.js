@@ -23,10 +23,6 @@ const CreatePet = ({data, usuario}) => {
             newPhoto = uploadImage(photo)
         }
         await setTimeout(() => {
-            
-            console.log(usuario)
-        
-
             const newPet = {
                 ...form,
                 Ownerid: usuario.id,
@@ -40,7 +36,7 @@ const CreatePet = ({data, usuario}) => {
             axios.post('https://adogtameapi.herokuapp.com/pets/', newPet)
                 .catch(err=>console.log(err))
             
-        }, 5000);
+        }, 8000);
         setLoading(false)
         
 
@@ -60,6 +56,7 @@ const CreatePet = ({data, usuario}) => {
     }
     const onFileSelected=(images)=> {
         closeSheet()
+        setPhoto(images)
 
     }
 

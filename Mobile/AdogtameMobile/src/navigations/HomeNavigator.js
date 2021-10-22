@@ -55,38 +55,22 @@ const HomeNavigator = () => {
           .catch(err=>console.log(err))
         let userPets = await axios.get(`http://adogtameapi.herokuapp.com/pets?owner=${userId}&adopted=false`)
           .catch(err=>console.log(err))
-        let petFormsAux = []
+        
         
         userPets.data.rows.forEach(async (el) => {
           
           let forms = await axios.get(`http://adogtameapi.herokuapp.com/adoptions?pet=${el.id}`)
             .catch(err=>console.log(err))
-            console.log('forms', forms.data)
 
-          await forms.data.forEach(async (form) => {
-            
-            let adoptant = await axios.get(`http://adogtameapi.herokuapp.com/users/${form.UserId}`)
-            .catch(err=> console.log(err))
-            adoptant = adoptant.data
-            petFormsAux = [...petFormsAux,{...form, adoptant: adoptant}]
-
-          })
-
-          setTimeout(() => {
-            console.log('COMPLETE FORMS>>>',petFormsAux)
-           
              setPublications(prev => {
-               return [...prev, {...el,forms: petFormsAux}]
+               return [...prev, {...el,forms: forms?.data}]
              })
-             petFormsAux = []
-            
-          }, 4000);
-            
+
         })
         setTimeout(() => {
           setLoading(false)
           
-        }, 10000);
+        }, 5000);
         
         
       }
