@@ -1,0 +1,45 @@
+diff --git a/node_modules/react-native-paper/src/components/BottomNavigation.tsx b/node_modules/react-native-paper/src/components/BottomNavigation.tsx
+index 3d89c97..fe16c23 100644
+--- a/node_modules/react-native-paper/src/components/BottomNavigation.tsx
++++ b/node_modules/react-native-paper/src/components/BottomNavigation.tsx
+@@ -483,25 +483,32 @@ const BottomNavigation = ({
+   }, []);
+ 
+   React.useEffect(() => {
++    let keyboardWillShow
++    let keyboardWillHide
++    let keyboardDidHide
++    let keyboardDidShow
++
+     if (Platform.OS === 'ios') {
+-      Keyboard.addListener('keyboardWillShow', handleKeyboardShow);
+-      Keyboard.addListener('keyboardWillHide', handleKeyboardHide);
++      keyboardWillShow = Keyboard.addListener('keyboardWillShow', handleKeyboardShow);
++      keyboardWillHide = Keyboard.addListener('keyboardWillHide', handleKeyboardHide);
+     } else {
+-      Keyboard.addListener('keyboardDidShow', handleKeyboardShow);
+-      Keyboard.addListener('keyboardDidHide', handleKeyboardHide);
++      keyboardDidShow = Keyboard.addListener('keyboardDidShow', handleKeyboardShow);
++      keyboardDidHide = Keyboard.addListener('keyboardDidHide', handleKeyboardHide);
+     }
+ 
+     return () => {
+       if (Platform.OS === 'ios') {
+-        Keyboard.removeListener('keyboardWillShow', handleKeyboardShow);
+-        Keyboard.removeListener('keyboardWillHide', handleKeyboardHide);
++        keyboardWillShow?.remove();
++        keyboardWillHide?.remove();
+       } else {
+-        Keyboard.removeListener('keyboardDidShow', handleKeyboardShow);
+-        Keyboard.removeListener('keyboardDidHide', handleKeyboardHide);
++        keyboardDidShow?.remove();
++        keyboardDidHide?.remove();
+       }
+     };
+   }, [handleKeyboardHide, handleKeyboardShow]);
+ 
++
++
+   const prevNavigationState = React.useRef<NavigationState>();
+ 
+   React.useEffect(() => {
