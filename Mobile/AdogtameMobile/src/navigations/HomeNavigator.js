@@ -39,11 +39,13 @@ const HomeNavigator = () => {
   const [user, setUser] = useState({})
   const [publications, setPublications] = useState([])
   const {authDispatch} = useContext(GlobalContext);
+  const [refresh, setRefresh] = useState(false)
   
 
   
 
   useEffect(() => {
+    setPublications([]);
     try{
       setLoading(true)
       const getUser = async() => {
@@ -70,7 +72,7 @@ const HomeNavigator = () => {
         setTimeout(() => {
           setLoading(false)
           
-        }, 5000);
+        }, 500);
         
         
       }
@@ -82,10 +84,10 @@ const HomeNavigator = () => {
       return () => { isMounted = false };
     }
     catch(error){console.log(error)}
-  }, [])
+  }, [refresh])
 
 
-  const PublishedRoute = () => <Publications loading={loading} publications={publications}/>;
+  const PublishedRoute = () => <Publications loading={loading} setRefresh={() => setRefresh(prevState => !prevState)} publications={publications}/>;
   
   const ProfileRoute = () => <Profile authDispatch={authDispatch} usuario={user}/>;
   

@@ -1,5 +1,5 @@
 import React, {useState, useRef} from 'react';
-import { Text, View } from 'react-native';
+import { Alert, Text, View } from 'react-native';
 import CreatePetComponent from '../../components/PetCreate/index'
 import uploadImage from '../../helpers/uploadImage';
 import axios from 'axios'
@@ -18,9 +18,11 @@ const CreatePet = ({data, usuario}) => {
     const onSubmit = async() => {
         setLoading(true)
         console.log(photo.path)
+        setForm([])
         let newPhoto;
         if(photo.path){
             newPhoto = uploadImage(photo)
+            console.log(newPhoto)
         }
         await setTimeout(() => {
             const newPet = {
@@ -35,11 +37,23 @@ const CreatePet = ({data, usuario}) => {
             console.log(newPet)
             axios.post('https://adogtameapi.herokuapp.com/pets/', newPet)
                 .catch(err=>console.log(err))
+                setLoading(false)
+                Alert.alert('Publicada!', 'Publicar otra mascota?', [
+                    {
+                      text: 'Si',
+                      onPress: () => {},
+                    },
+                    {
+                      text: 'No',
+                      onPress: () => {},
+                    },
+                  ]);
+            }, 8000);
             
+
         }, 10000);
         setLoading(false)
-        
-
+       
 
     }
 
