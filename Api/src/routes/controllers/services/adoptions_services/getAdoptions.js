@@ -12,6 +12,7 @@ const getAdoptions = async (req, res) => {
       { model: Users }
     ]
   };
+  //Dami no confia en mi
 
   //* Add filter by applicant
   if (applicant) query.where = { ...query.where, UserId: parseInt(applicant) };
