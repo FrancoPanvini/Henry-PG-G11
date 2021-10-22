@@ -2,7 +2,7 @@ const server = require('./src/app.js');
 const { conn, Pets, PetsType, UsersType, Users, Events } = require('./src/db.js');
 
 conn
-  .sync({alter:true})
+  .sync()
   .then(() => {
     server.listen(process.env.PORT, () => {
       console.log(`Server listening at ${process.env.PORT}`);
