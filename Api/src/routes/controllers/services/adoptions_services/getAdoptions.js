@@ -8,7 +8,7 @@ const getAdoptions = async (req, res) => {
     where: {},
     attributes: ["id", "PetId", "UserId", "state", "residence", "residents", "adult", "dedication", "otherPets", "otherPetsDesc", "oldPets", "oldPetsDesc", "createdAt"],
     order: [["createdAt", "ASC"]],
-
+  };
 
   //* Add filter by applicant
   if (applicant) query.where = { ...query.where, UserId: parseInt(applicant) };
