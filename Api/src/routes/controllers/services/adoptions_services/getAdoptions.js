@@ -1,5 +1,5 @@
 const { where } = require("sequelize");
-const { Adoptions } = require("../../../../db");
+const { Adoptions, Users } = require("../../../../db");
 
 const getAdoptions = async (req, res) => {
   const { applicant, pet, state, count } = req.query;
@@ -8,6 +8,9 @@ const getAdoptions = async (req, res) => {
     where: {},
     attributes: ["id", "PetId", "UserId", "state", "residence", "residents", "adult", "dedication", "otherPets", "otherPetsDesc", "oldPets", "oldPetsDesc", "createdAt"],
     order: [["createdAt", "ASC"]],
+    include: [
+      { model: Users }
+    ]
   };
 
   //* Add filter by applicant
