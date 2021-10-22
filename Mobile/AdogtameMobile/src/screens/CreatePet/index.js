@@ -36,7 +36,7 @@ const CreatePet = ({data, usuario}) => {
             axios.post('https://adogtameapi.herokuapp.com/pets/', newPet)
                 .catch(err=>console.log(err))
             
-        }, 8000);
+        }, 10000);
         setLoading(false)
         
 
