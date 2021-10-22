@@ -49,11 +49,8 @@ const CreatePet = ({data, usuario}) => {
                     },
                   ]);
             }, 8000);
-            
-
-        }, 10000);
+        
         setLoading(false)
-       
 
     }
 
