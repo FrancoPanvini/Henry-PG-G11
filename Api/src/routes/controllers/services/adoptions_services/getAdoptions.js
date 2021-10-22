@@ -9,7 +9,7 @@ const getAdoptions = async (req, res) => {
     attributes: ["id", "PetId", "UserId", "state", "residence", "residents", "adult", "dedication", "otherPets", "otherPetsDesc", "oldPets", "oldPetsDesc", "createdAt"],
     order: [["createdAt", "ASC"]],
     include: [
-      { model: Users, attributes: [] }
+      { model: Users }
     ]
   };
 
