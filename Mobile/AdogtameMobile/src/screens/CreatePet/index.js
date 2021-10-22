@@ -48,9 +48,9 @@ const CreatePet = ({data, usuario}) => {
                       onPress: () => {},
                     },
                   ]);
+                  setLoading(false)
             }, 8000);
         
-        setLoading(false)
 
     }
 
