@@ -3,8 +3,8 @@ import { useHistory } from 'react-router-dom';
 
 //? Components
 import NosotrosCard from './NosotrosCard';
-import fotoDavid from '../../../images/DavidMendozaLopez.png';
-import fotoAparicio from '../../../images/FrancoAparicio.jpg';
+import fotoDavid from '../../../images/DavidMendozaLopez2.jpg';
+import fotoAparicio from '../../../images/FrancoAparicio2.jpg';
 import fotoPanvini from '../../../images/FrancoPanvini.jfif';
 import fotoPetri from '../../../images/SantiagoPetri.jpg';
 import fotoLucas from '../../../images/LucasChaves.jpg';
