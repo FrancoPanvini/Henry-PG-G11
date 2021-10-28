@@ -1,4 +1,4 @@
-const { Pets, Adoptions, PetsPics } = require("../../../../db");
+const { Pets, Adoptions, PetsPics } = require('../../../../db');
 
 const deletePetDB = async id => {
   const pet = await Pets.findOne({ where: { id } });

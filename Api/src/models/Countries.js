@@ -8,9 +8,4 @@ module.exports = sequelize => {
     },
     { sequelize: sequelize, modelName: 'Countries', timestamps: false }
   );
-
-  /* Countries.beforeCreate(function (country) {
-    country.name = country.name.toLowerCase();
-    return country;
-  }); */
 };

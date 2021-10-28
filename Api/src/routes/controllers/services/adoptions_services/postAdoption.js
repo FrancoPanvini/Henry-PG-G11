@@ -1,5 +1,5 @@
-const { Adoptions } = require("../../../../db");
-const { deleteAdoptionDB } = require("./deleteAdoption");
+const { Adoptions } = require('../../../../db');
+const { deleteAdoptionDB } = require('./deleteAdoption');
 
 const postAdoption = async (req, res) => {
   const { residence, residents, adult, dedication, otherPets, otherPetsDesc, oldPets, oldPetsDesc, Userid, Petid } = req.body;

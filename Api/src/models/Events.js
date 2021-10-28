@@ -1,4 +1,4 @@
-const { Model, DataTypes } = require("sequelize");
+const { Model, DataTypes } = require('sequelize');
 
 module.exports = sequelize => {
   class Events extends Model {}
@@ -11,9 +11,9 @@ module.exports = sequelize => {
       endDate: { type: DataTypes.DATE, allowNull: false },
       direction: { type: DataTypes.STRING, allowNull: false },
       lat: { type: DataTypes.FLOAT },
-      lng: { type: DataTypes.FLOAT }
+      lng: { type: DataTypes.FLOAT },
     },
-    { sequelize: sequelize, modelName: "Events", timestamps: true, paranoid: true }
+    { sequelize: sequelize, modelName: 'Events', timestamps: true, paranoid: true }
   );
   Events.beforeCreate(function (event) {
     event.name = event.name.toLowerCase();

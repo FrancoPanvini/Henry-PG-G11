@@ -1,4 +1,4 @@
-const { Model, DataTypes } = require("sequelize");
+const { Model, DataTypes } = require('sequelize');
 
 module.exports = sequelize => {
   class Users extends Model {}
@@ -19,9 +19,9 @@ module.exports = sequelize => {
       link_donaciones: { type: DataTypes.STRING },
       lat: { type: DataTypes.FLOAT },
       lng: { type: DataTypes.FLOAT },
-      resetToken: {type: DataTypes.STRING}
+      resetToken: { type: DataTypes.STRING },
     },
-    { sequelize: sequelize, modelName: "Users", timestamps: true }
+    { sequelize: sequelize, modelName: 'Users', timestamps: true }
   );
 
   Users.beforeCreate(function (user) {

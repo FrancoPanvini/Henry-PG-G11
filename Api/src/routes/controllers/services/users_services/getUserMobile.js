@@ -1,20 +1,19 @@
-const { where } = require("sequelize");
-const { Users, Cities, Provinces, Countries, UsersType } = require("../../../../db");
+const { where } = require('sequelize');
+const { Users, Cities, Provinces, Countries, UsersType } = require('../../../../db');
 
 const getUserMobile = async (req, res) => {
   const { id } = req.params;
 
   let query = {
     where: { id },
-    // attributes: ["id", "name", "mail", "phone", "direction", "password", "photo", "responsable", "dni", "description", "link_web", "link_instagram", "link_facebook", "link_donaciones"],
     include: [
       {
         model: Cities,
-        attributes: ["name", "ProvinceId"],
+        attributes: ['name', 'ProvinceId'],
         required: true,
-        include: { model: Provinces, attributes: ["name", "CountryId"], required: true, where: {}, include: { model: Countries, required: true, attributes: ["name", "code"] } },
+        include: { model: Provinces, attributes: ['name', 'CountryId'], required: true, where: {}, include: { model: Countries, required: true, attributes: ['name', 'code'] } },
       },
-      { model: UsersType, attributes: ["type"] },
+      { model: UsersType, attributes: ['type'] },
     ],
   };
 
@@ -43,7 +42,7 @@ const getUserMobile = async (req, res) => {
     type: user.dataValues.UsersType?.type,
     cityId: user.CityId,
     lat: user.lat,
-    lng: user.lng
+    lng: user.lng,
   };
 
   res.status(200).json(user);
