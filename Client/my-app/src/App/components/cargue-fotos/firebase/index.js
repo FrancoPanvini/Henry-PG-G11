@@ -2,7 +2,7 @@ import firebase from "firebase/compat/app";
 import "firebase/compat/storage";
 
 const firebaseConfig = {
-  apiKey: "AIzaSyCYEy8rR4zYTPc5uomXwjxXGxU0ehjeYhg",
+  apiKey: process.env.REACT_APP_FIREBASE_KEY,
   authDomain: "adogtame-proyect.firebaseapp.com",
   projectId: "adogtame-proyect",
   storageBucket: "adogtame-proyect.appspot.com",
