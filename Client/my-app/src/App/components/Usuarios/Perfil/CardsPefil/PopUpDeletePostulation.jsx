@@ -1,6 +1,6 @@
 import React from 'react';
 import ReactDom from 'react-dom';
-import swal from 'sweetalert'
+import swal from 'sweetalert';
 
 //? Services
 import { IoIosCloseCircle } from 'react-icons/io';
@@ -15,11 +15,10 @@ function PopUpDeletePostulation({ onClose, adopId, update }) {
     swal({
       text: 'Eliminaste la postulacion',
       icon: 'success',
-      timer: 2000
-    })
+      timer: 2000,
+    });
     onClose();
   };
-  //* Definir
 
   return ReactDom.createPortal(
     <>
@@ -27,23 +26,14 @@ function PopUpDeletePostulation({ onClose, adopId, update }) {
       <div className='fixed inset-0 z-50 overflow-y-scroll '>
         <div className='relative top-10 mx-auto w-1/4 p-6 bg-fourty rounded-2xl grid justify-items-center  '>
           <div>
-            <IoIosCloseCircle
-              className='text-primary absolute top-3 right-3 text-3xl hover:text-primaryLight cursor-pointer transition-all'
-              onClick={onClose}
-            />
-            <h3 className='font-bold text-xl py-3 px-6 text-center text-white'>
-              Estas seguro de eliminar esta postulacion?
-            </h3>
+            <IoIosCloseCircle className='text-primary absolute top-3 right-3 text-3xl hover:text-primaryLight cursor-pointer transition-all' onClick={onClose} />
+            <h3 className='font-bold text-xl py-3 px-6 text-center text-white'>Estas seguro de eliminar esta postulacion?</h3>
           </div>
           <div className='flex justify-around'>
-            <button
-              className='btn bg-gray-200 p-4 m-4 rounded-lg hover:bg-red-600 hover:text-secondary'
-              onClick={delPet}>
+            <button className='btn bg-gray-200 p-4 m-4 rounded-lg hover:bg-red-600 hover:text-secondary' onClick={delPet}>
               ELIMINAR
             </button>
-            <button
-              className='btn bg-gray-200 p-4 m-4 rounded-lg'
-              onClick={onClose}>
+            <button className='btn bg-gray-200 p-4 m-4 rounded-lg' onClick={onClose}>
               CANCELAR
             </button>
           </div>

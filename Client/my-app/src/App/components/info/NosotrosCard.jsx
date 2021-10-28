@@ -9,7 +9,7 @@ function NosotrosCard({ photo, name, alias, description, strengths, mail, linked
     setTimeout(() => setShowTooltip(false), 1500);
   };
 
-  const copyText = (e) => {
+  const copyText = e => {
     navigator.clipboard.writeText(e.target.innerText);
     timer();
   };
@@ -34,17 +34,14 @@ function NosotrosCard({ photo, name, alias, description, strengths, mail, linked
               </a>
             </div>
           )}
-          <div
-            onClick={copyText}
-            value={mail}
-            title='¡Click para copiar este mail!'
-            className='text-center mb-2 cursor-pointer transition-all hover:underline hover:text-white relative'>
+          <div onClick={copyText} value={mail} title='¡Click para copiar este mail!' className='text-center mb-2 cursor-pointer transition-all hover:underline hover:text-white relative'>
             {mail} <FaRegClipboard className='inline align-baseline text-sm' />
           </div>
           <div
             className={`${
               showTooltip ? 'opacity-100' : 'opacity-0 invisible'
-            } z-50 absolute bottom-0 2xl:right-8 xl:-right-4 lg:-right-12 text-sm text-gray-300 bg-fourtyDark rounded-full py-1 px-3 min-w-max text-center transition-all`}>
+            } z-50 absolute bottom-0 2xl:right-8 xl:-right-4 lg:-right-12 text-sm text-gray-300 bg-fourtyDark rounded-full py-1 px-3 min-w-max text-center transition-all`}
+          >
             ¡Correo copiado en el portapapeles!
           </div>
           <div>

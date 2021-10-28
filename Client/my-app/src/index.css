@@ -21,7 +21,6 @@ html {
 ::-webkit-scrollbar-track {
   background: #e5e7eb80;
   border-radius: 99px;
-  /* box-shadow: inset 0px 0px 0px 0px #f0f0f0; */
 }
 /* End Scrollbar always visible & styles */
 
@@ -68,18 +67,6 @@ html {
   clip-path: polygon(0 6%, 100% 0, 100% 100%, 0% 100%);
 }
 
-/* .card{
-  width: 250px;
-  height: 250px;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-around;
-} */
-
-/* .btn-action {
-  @apply bg-yellow-600 text-white border-yellow-700;
-} */
-
 .onboarding-transparency-right::after {
   content: '';
   position: absolute;
@@ -121,24 +108,6 @@ html {
   filter: blur(7px);
   opacity: 0.4;
 }
-
-/*body {
-  margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-}
-
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
-}*/
-
-/* .card {
-  @apply rounded overflow-hidden shadow-lg;
-} */
 
 .card {
   @apply rounded-xl overflow-hidden text-center cursor-pointer bg-primary transition-all;
@@ -192,10 +161,10 @@ progress::-moz-progress-bar {
   border-radius: 25;
 }
 
-.img{
-  @apply  shadow-xl transition-all cursor-pointer
+.img {
+  @apply shadow-xl transition-all cursor-pointer;
 }
 
-.img:hover{
-  @apply  filter brightness-75
+.img:hover {
+  @apply filter brightness-75;
 }

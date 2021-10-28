@@ -2,8 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { MuiPickersUtilsProvider, DateTimePicker } from '@material-ui/pickers';
 import DateFnsUtils from '@date-io/date-fns';
 
-
-function DatePick({ handleInput, minDate, label, initDate = new Date()}) {
+function DatePick({ handleInput, minDate, label, initDate = new Date() }) {
   const [selectedDate, handleDateChange] = useState(initDate);
 
   useEffect(() => {

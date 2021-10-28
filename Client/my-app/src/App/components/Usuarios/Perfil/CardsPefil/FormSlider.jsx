@@ -12,14 +12,11 @@ const breakPoints = [
   { width: 1200, itemsToShow: 4 },
 ];
 
-const FormSlider = ({
-  onClose,
-  id,
-}) => {
+const FormSlider = ({ onClose, id }) => {
   const [forms, setForms] = useState([]);
 
   useEffect(() => {
-    const getForm = async (id) => {
+    const getForm = async id => {
       const form = await getFormByPet(id);
       setForms(form.data);
     };
@@ -32,19 +29,14 @@ const FormSlider = ({
       <div className='fixed inset-0 z-30 overflow-y-scroll '>
         <div className='relative top-48 mx-auto w-9/12 p-6 bg-fourty rounded-2xl grid justify-items-center  '>
           <div>
-            <IoIosCloseCircle
-              className='text-primary absolute top-3 right-3 text-3xl hover:text-primaryLight cursor-pointer transition-all'
-              onClick={onClose}
-            />
+            <IoIosCloseCircle className='text-primary absolute top-3 right-3 text-3xl hover:text-primaryLight cursor-pointer transition-all' onClick={onClose} />
           </div>
           <span className='text-gray-200 text-3xl font-bold'>Solicitudes</span>
           {forms.length === 0 ? (
-            <span className='text-gray-200 text-2xl mt-8'>
-              No tienes solicitudes para esta mascota
-            </span>
+            <span className='text-gray-200 text-2xl mt-8'>No tienes solicitudes para esta mascota</span>
           ) : (
             <Carousel breakPoints={breakPoints} className='z-40 '>
-              {forms?.map((el) => {
+              {forms?.map(el => {
                 return (
                   <div key={el.id}>
                     <PopUpForms

@@ -61,7 +61,6 @@ const AppMap = () => {
   };
 
   useEffect(() => {
-    //setIsLoading(true);
     let currentLocation = location.pathname.split('/')[1];
     if (currentLocation === 'adopciones') {
       currentLocation = 'pets?adopted=false';
@@ -83,7 +82,6 @@ const AppMap = () => {
             ? setFilteredItems(
                 filterAux.reduce((acc, filtered) => {
                   if (filtered[1] !== '') {
-                    //let auxe = filtered[0]
                     acc = acc.filter(pet => filtered[1] === pet[filtered[0]]);
                     return acc;
                   } else {

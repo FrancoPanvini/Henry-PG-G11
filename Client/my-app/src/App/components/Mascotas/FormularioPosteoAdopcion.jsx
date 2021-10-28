@@ -67,7 +67,7 @@ function FormularioPosteo({ onClose, onPostPet }) {
     return errors;
   };
 
-  const handleChange = (e) => {
+  const handleChange = e => {
     e.preventDefault();
     const newMascota = {
       ...mascota,
@@ -84,7 +84,7 @@ function FormularioPosteo({ onClose, onPostPet }) {
     return true;
   };
 
-  const handlePublicar = async (e) => {
+  const handlePublicar = async e => {
     e.preventDefault();
     let city = await axios.post('/locations', location);
     let newMascota = {
@@ -113,13 +113,11 @@ function FormularioPosteo({ onClose, onPostPet }) {
         age: mascota.age,
         owner: mascota.userName,
       });
-      console.log('correo enviado');
     } catch (err) {
       console.log(err);
     }
     onClose();
   };
-
 
   const handleLocation = () => {
     let city = document.getElementById('administrative_area_level_2')?.innerHTML;
@@ -134,7 +132,7 @@ function FormularioPosteo({ onClose, onPostPet }) {
     });
     lat = parseFloat(lat);
     lng = parseFloat(lng);
-    setMascota((prevState) => {
+    setMascota(prevState => {
       return {
         ...prevState,
         lat: lat,
@@ -151,11 +149,7 @@ function FormularioPosteo({ onClose, onPostPet }) {
       <div className='fixed inset-0 z-50 flex justify-center items-center'>
         <form className='panel flex flex-col w-4/5 min-w-max mx-auto bg-gradient-to-r from-primaryDark to-primary relative'>
           {/* ↓ botón para cancelar y volver atrás */}
-          <IoIosCloseCircle
-            title='Cancelar y volver a Adopciones'
-            onClick={onClose}
-            className='text-thirty absolute top-3 right-3 text-3xl hover:text-thirtyLight cursor-pointer transition-all'
-          />
+          <IoIosCloseCircle title='Cancelar y volver a Adopciones' onClick={onClose} className='text-thirty absolute top-3 right-3 text-3xl hover:text-thirtyLight cursor-pointer transition-all' />
           <div className='flex justify-between h-full'>
             <div className='flex flex-col w-1/2'>
               {/* ↓ Nombre de la mascota */}
@@ -184,7 +178,9 @@ function FormularioPosteo({ onClose, onPostPet }) {
                 </div>
                 {/* ↓ Sexo de la mascota */}
                 <div className='text-center w-1/2 px-8 py-2 border-l-2 border-primaryLight'>
-                  <label>Sexo: <ErrorIconPulsing error={errors.sex} color='thirty' /></label>
+                  <label>
+                    Sexo: <ErrorIconPulsing error={errors.sex} color='thirty' />
+                  </label>
                   <div className='flex justify-evenly items-centert'>
                     <RadioSelectButtons
                       state={mascota}
@@ -202,12 +198,15 @@ function FormularioPosteo({ onClose, onPostPet }) {
               <div className='flex justify-evenly border-t-2 border-primaryLight mb-2'>
                 {/* ↓ Edad de la mascota */}
                 <div className='text-center w-2/5 p-4 border-r-2 border-primaryDark'>
-                  <label>Edad (en años):</label><br />
+                  <label>Edad (en años):</label>
+                  <br />
                   <input name='age' type='number' min='0' max='50' onChange={handleChange} className='rounded-md px-1' />
                 </div>
                 {/* ↓ Tamaño de la mascota */}
                 <div className='text-center w-3/5 px-8 py-4 border-l-2 border-primaryLight'>
-                  <label>Tamaño aproximado de la raza: <ErrorIconPulsing error={errors.size} color='thirty' /></label>
+                  <label>
+                    Tamaño aproximado de la raza: <ErrorIconPulsing error={errors.size} color='thirty' />
+                  </label>
                   <div className='flex justify-evenly items-center'>
                     <RadioSelectButtons
                       state={mascota}
@@ -224,12 +223,7 @@ function FormularioPosteo({ onClose, onPostPet }) {
 
               {/* ↓ Descripción */}
               <label>Descripción:</label>
-              <textarea
-                name='description'
-                placeholder='Ej.: Tiene 6 meses, se lleva bien con otras mascotas, tiene sus vacunas, etc...'
-                onChange={handleChange}
-                className='rounded-md px-1 mb-4'
-              />
+              <textarea name='description' placeholder='Ej.: Tiene 6 meses, se lleva bien con otras mascotas, tiene sus vacunas, etc...' onChange={handleChange} className='rounded-md px-1 mb-4' />
 
               {/* ↓ Fotos */}
               <div className='flex justify-between items-center bg-gradient-to-r from-primary to-primaryLight px-4 py-2'>
@@ -249,9 +243,11 @@ function FormularioPosteo({ onClose, onPostPet }) {
               <MapPost onLocationChange={handleLocation} className='h-full' />
               {/* ↓ botón Publicar */}
               <div className='w-full text-center mt-4 '>
-                <button disabled={handleDisabled()} onClick={handlePublicar} className={`${
-                handleDisabled() ? 'opacity-50 cursor-default border-b-2 border-thirty' : 'btn'
-              } btn-xl bg-fourty text-white border-thirty`}>
+                <button
+                  disabled={handleDisabled()}
+                  onClick={handlePublicar}
+                  className={`${handleDisabled() ? 'opacity-50 cursor-default border-b-2 border-thirty' : 'btn'} btn-xl bg-fourty text-white border-thirty`}
+                >
                   Publicar
                 </button>
               </div>

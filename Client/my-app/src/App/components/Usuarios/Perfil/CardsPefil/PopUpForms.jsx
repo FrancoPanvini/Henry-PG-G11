@@ -96,14 +96,12 @@ const PopUpForms = ({ UserId, adult, dedication, oldPets, oldPetsDesc, otherPets
                 rel='noreferrer'
                 className='btn bg-green-600 text-white text-2xl font-bold rounded-lg hover:bg-white hover:text-green-600 p-2 '
               >
-                <IoLogoWhatsapp />{' '}
-              </a>{' '}
+                <IoLogoWhatsapp />
+              </a>
             </>
           ) : (
             <span className=' font-bold'>Adopcion cerrada</span>
           )}
-
-          {/* <button>Rechazar</button> */}
         </div>
       </div>
     </>

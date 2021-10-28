@@ -1,15 +1,13 @@
 import React, { useState } from 'react';
 import { useSelector } from 'react-redux';
-// import Modal from '../pop-up/modal';
 
 //? Components
 import DetallePerdido from '../Mascotas/DetallePerdido';
 import ReactCardFlip from 'react-card-flip';
-import ContactoPerdido from '../pop-up/ContactoPerdido'
+import ContactoPerdido from '../pop-up/ContactoPerdido';
 
 //? Icons
 import { FaPaw } from 'react-icons/fa';
-
 
 function CardLost({ selected, refProp, photo, name, size, country, province, city, id, userId }) {
   const [isFlipped, setIsFlipped] = useState(false);
@@ -29,11 +27,7 @@ function CardLost({ selected, refProp, photo, name, size, country, province, cit
       <ReactCardFlip isFlipped={isFlipped} flipDirection='horizontal' className=''>
         <div onClick={handleClick} className='card card-size-lg'>
           <div className='w-full h-4/5 card-transparency-bottom relative object-cover'>
-            <img
-              src={photo ? photo : 'https://drpp-ny.org/wp-content/uploads/2014/07/sorry-image-not-available.png'}
-              alt=''
-              className='h-full w-full object-cover'
-            />
+            <img src={photo ? photo : 'https://drpp-ny.org/wp-content/uploads/2014/07/sorry-image-not-available.png'} alt='' className='h-full w-full object-cover' />
           </div>
           <div className='z-50 flex justify-center items-center pb-2 w-full h-1/5 text-white font-bold text-2xl capitalize'>{name}</div>
         </div>
@@ -77,10 +71,10 @@ function CardLost({ selected, refProp, photo, name, size, country, province, cit
                   NTACTATE
                 </h2>
               </button>
-
-            ) : (<></>)}
-              {isOpen && (<ContactoPerdido name={name} onClose={() => setIsOpen(false)} petId={id} userId={userId} />)}
-
+            ) : (
+              <></>
+            )}
+            {isOpen && <ContactoPerdido name={name} onClose={() => setIsOpen(false)} petId={id} userId={userId} />}
           </div>
         </div>
       </ReactCardFlip>

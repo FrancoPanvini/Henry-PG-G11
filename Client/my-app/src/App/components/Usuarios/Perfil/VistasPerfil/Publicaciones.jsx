@@ -16,38 +16,35 @@ function Publicaciones({ userId }) {
   const onPostPet = () => {
     setPetPosted(true);
   };
-  
+
   const compare = (a, b) => {
-    if (a < b ) {
+    if (a < b) {
       return 1;
     }
-    if (a > b ) {
+    if (a > b) {
       return -1;
     }
-    // a debe ser igual b
     return 0;
-  }
-  
-  pets.sort((a,b) => compare(a.createdAt, b.createdAt))
-  useEffect(  () => {
+  };
+
+  pets.sort((a, b) => compare(a.createdAt, b.createdAt));
+  useEffect(() => {
     if (petPosted) {
       setPetPosted(false);
-    };
+    }
 
-    const getPetsLost = async (id) => {
+    const getPetsLost = async id => {
       const rta = await getLostPetsByUser(id);
       setPets1(rta);
     };
-    const getPetsAdop = async (id) => {
+    const getPetsAdop = async id => {
       const rta = await getAdopPetsByUser(id);
       setPets2(rta);
     };
-      
-  getPetsLost(userId);
-  getPetsAdop(userId);
- 
-  }, [userId, petPosted]);
 
+    getPetsLost(userId);
+    getPetsAdop(userId);
+  }, [userId, petPosted]);
 
   return (
     <div className='container mx-auto  flex flex-col'>
@@ -61,7 +58,6 @@ function Publicaciones({ userId }) {
 
         {isOpen && <FormularioPosteoAdopcion onClose={() => setIsOpen(false)} onPostPet={onPostPet} />}
         {isOpen2 && <FormularioPosteoPerdido onClose={() => setIsOpen2(false)} onPostPet={onPostPet} />}
-
       </div>
       <div className='container mx-auto p-2'>
         {pets?.length === 0 ? (

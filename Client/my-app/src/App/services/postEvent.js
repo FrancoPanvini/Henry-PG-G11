@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-export const postEvent = async (event) => {
+export const postEvent = async event => {
   try {
     const rta = await axios.post('/events', event);
     return rta;

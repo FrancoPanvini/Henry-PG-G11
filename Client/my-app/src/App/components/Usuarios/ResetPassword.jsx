@@ -21,7 +21,7 @@ const Reset = () => {
     return errors;
   };
 
-  const handleOnChange = (e) => {
+  const handleOnChange = e => {
     e.preventDefault();
     const newInput = {
       ...input,
@@ -36,7 +36,7 @@ const Reset = () => {
     return true;
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = e => {
     e.preventDefault();
     resetPassword(input, url.slice(40).toString());
     swal({
@@ -49,9 +49,7 @@ const Reset = () => {
 
   return (
     <div className='h-screen82 flex items-center justify-around bg-gradient-to-r from-thirty to-fourty'>
-      <form
-        onSubmit={(e) => handleSubmit(e)}
-        className='px-8 py-12 w-1/4 flex flex-col bg-thirty rounded-lg min-w-min shadow-xl border-2 border-fourty border-opacity-50'>
+      <form onSubmit={e => handleSubmit(e)} className='px-8 py-12 w-1/4 flex flex-col bg-thirty rounded-lg min-w-min shadow-xl border-2 border-fourty border-opacity-50'>
         <label className='text-white'>
           Nueva contraseña: <ErrorIconPulsing error={errors.password} color='primary' />
         </label>
@@ -65,9 +63,8 @@ const Reset = () => {
         <button
           type='submit'
           disabled={handleDisabled()}
-          className={`${
-            handleDisabled() ? 'opacity-50 cursor-default border-b-2 border-transparent' : 'btn'
-          } mt-2 btn-lg bg-primary text-white border-yellow-600 flex justify-center items-center`}>
+          className={`${handleDisabled() ? 'opacity-50 cursor-default border-b-2 border-transparent' : 'btn'} mt-2 btn-lg bg-primary text-white border-yellow-600 flex justify-center items-center`}
+        >
           Cambiar contraseña
         </button>
       </form>
