@@ -113,7 +113,6 @@ function FormularioPosteo({ onClose, onPostPet }) {
         age: mascota.age,
         owner: mascota.userName,
       });
-      console.log('correo enviado');
     } catch (err) {
       console.log(err);
     }

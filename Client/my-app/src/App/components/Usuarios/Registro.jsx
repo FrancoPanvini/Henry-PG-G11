@@ -158,7 +158,6 @@ function Registro() {
         name: input.name,
         mail: input.mail,
       });
-      console.log('correo enviado');
     } catch (err) {
       console.log(err);
     }

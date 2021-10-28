@@ -124,7 +124,6 @@ function FormularioPosteoPerdido({ onClose, onPostPet }) {
         owner: mascota.userName,
         description: mascota.description,
       });
-      console.log('correo enviado');
     } catch (err) {
       console.log(err);
     }

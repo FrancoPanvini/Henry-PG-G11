@@ -153,7 +153,6 @@ function FormularioPosteoEvento({ onClose }) {
         endDate: evento.endDate,
         location: location.city,
       });
-      console.log('correo enviado');
     } catch (err) {
       console.log(err);
     }
