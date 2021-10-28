@@ -40,7 +40,7 @@ function Maps({ onLocationChange }) {
   }, []);
 
   const { isLoaded, loadError } = useLoadScript({
-    googleMapsApiKey: 'AIzaSyC9FtL0Nsz0ROcYVY7hOkp9JL2tU4ECjqY',
+    googleMapsApiKey: process.env.REACT_APP_MAPS_KEY,
     libraries,
   });
   if (loadError) return 'Error loading maps';
