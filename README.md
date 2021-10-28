@@ -36,13 +36,6 @@ en directorio /Client/my-app <br />
 - Express
 - PostgreSQL
 - Sequelize
-- ***MaterialUI ?***
-- ***Firebase ?***
-- ***Nodemailer ?***
-- ***JSONwebtoken ?***
-- ***Passport ?***
-- ***Google map react ?***
-- ***?***
 
 <hr />
 
