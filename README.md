@@ -1,11 +1,11 @@
 # ADOGTAME
 
-## Enunciado
+## Objetivo
 El objetivo de *Adogtame* es conectar **animales en adopción/perdidos/encontrados** con **personas que buscan adoptar o que extraviaron a su mascota.** Además la aplicación es una herramienta para que **refugios de animales** puedan publicar su ubicación y horarios de visita, listar sus mascotas disponibles, organizar eventos y hasta compartir un enlace en el cual puedan recibir donaciones y apoyo comunitario.
 
 La idea surge a partir de la falta de un sitio que nuclee estas necesidades: actualmente este tipo de información está esparcida en diferentes redes sociales, entonces una aplicación como *Adogtame* facilita el proceso de darle un hogar a una mascota que lo necesita, y a encontrar mascotas extraviadas que necesitan urgentemente volver a sus casas.
 
-Las publicaciones en *Adogtame* funcionan a base de geolocalización, por lo que la búsqueda y filtrado de mascotas se ve particularmente mejorada, especialmente en el caso de mascotas extraviadas, ya que un usuario al postear una mascota en esta sección debe proporcionar la zona en donde se perdió el animal.
+Las publicaciones en *Adogtame* funcionan a base de geolocalización, por lo que la búsqueda y filtrado de mascotas se ve particularmente mejorada, especialmente en el caso de mascotas extraviadas, ya que un usuario al postear una mascota en esta sección debe proporcionar la zona en donde se perdió el animal, facilitando la urgente búsqueda.
 
 > Vista de búsqueda por mapa, disponible para Mascotas en adopción, Mascotas extraviadas, y Refugios de animales.
 ![previewMapas](./Client/my-app/src/images/PreviewMapas.jpg)
