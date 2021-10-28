@@ -17,23 +17,18 @@ function CardAdopcion({ selected, refProp, photo, name, age, size, country, prov
 
   const userData = useSelector(state => state.userData);
 
-
   const handleClick = () => {
     setIsFlipped(!isFlipped);
   };
 
-  if (selected) refProp?.current?.scrollIntoView({ behavior: 'smooth' , block: 'end' });
+  if (selected) refProp?.current?.scrollIntoView({ behavior: 'smooth', block: 'end' });
 
   return (
     <div className='w-auto h-5/6'>
       <ReactCardFlip isFlipped={isFlipped} flipDirection='horizontal'>
         <div onClick={handleClick} className='card card-size-lg'>
           <div className='w-full h-4/5 card-transparency-bottom relative object-cover'>
-            <img
-              src={photo ? photo : 'https://drpp-ny.org/wp-content/uploads/2014/07/sorry-image-not-available.png'}
-              alt=''
-              className='h-full w-full object-cover'
-            />
+            <img src={photo ? photo : 'https://drpp-ny.org/wp-content/uploads/2014/07/sorry-image-not-available.png'} alt='' className='h-full w-full object-cover' />
           </div>
           <div className='z-50 flex justify-center items-center pb-2 w-full h-1/5 text-white font-bold text-2xl capitalize'>{name}</div>
         </div>
@@ -43,9 +38,9 @@ function CardAdopcion({ selected, refProp, photo, name, age, size, country, prov
             <div className='font-bold text-xl p-6 text-fourty capitalize flex items-start gap-3 '>{name}</div>
 
             <div className='text-center'>
-              {(typeof age === 'number') && (
+              {typeof age === 'number' && (
                 <h3 className='p-1 text-white font-bold'>
-                  Edad: <span className='text-fourty '>{age === 0 ? 'menos de 1 año' : age }</span>
+                  Edad: <span className='text-fourty '>{age === 0 ? 'menos de 1 año' : age}</span>
                 </h3>
               )}
               {size && (

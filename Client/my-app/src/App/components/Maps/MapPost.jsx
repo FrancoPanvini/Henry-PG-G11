@@ -119,7 +119,6 @@ function Maps({ onLocationChange }) {
       return;
     } else {
       renderAddress(place);
-      /* fillInAddress(place); */
     }
   });
 
@@ -206,7 +205,6 @@ function Maps({ onLocationChange }) {
               anchor: new window.google.maps.Point(15, 15),
             }}
             onClick={() => {
-              /* mapRef.current.setCenter({lgn: markers[0].lng, lat:markers[0].lat}); */
               setSelected(marker);
             }}
             onDragStart={e => {

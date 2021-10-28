@@ -6,16 +6,18 @@ import ContenedorVista from './VistasPerfil/ContenedorVista';
 
 function Perfil() {
   const userId = localStorage.getItem('userId');
-  const userData = useSelector((state) => state.userData)
+  const userData = useSelector(state => state.userData);
 
   return (
     <>
-    {userData.phone === null ? <FormEspecial /> :
-    <div className='flex h-screen82 bg-gradient-to-r from-thirty to-fourty '>
-      <SideBar className='w-1/4' />
-      <ContenedorVista userId={userId} className='w-3/4 h-full' />
-    </div>
-    }
+      {userData.phone === null ? (
+        <FormEspecial />
+      ) : (
+        <div className='flex h-screen82 bg-gradient-to-r from-thirty to-fourty '>
+          <SideBar className='w-1/4' />
+          <ContenedorVista userId={userId} className='w-3/4 h-full' />
+        </div>
+      )}
     </>
   );
 }

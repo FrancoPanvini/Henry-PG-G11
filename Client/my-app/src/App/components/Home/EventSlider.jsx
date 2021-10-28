@@ -4,14 +4,7 @@ import { Fade } from 'react-slideshow-image';
 import 'react-slideshow-image/dist/styles.css';
 
 function EventSlider() {
-  /*   const [index, setIndex] = useState(0);
-   */ const events = useSelector(state => state.events);
-  /*   let size = events.length - 1;
-
-  useEffect(() => {
-    if (index === size) setIndex(setIndex(0));
-    setTimeout(() => setIndex(index + 1), 2000);
-  }, [index, size]); */
+  const events = useSelector(state => state.events);
 
   return (
     <div className='w-full h-120 px-32 pt-32  text-left overflow-hidden bg-gray-200'>

@@ -9,7 +9,8 @@ function RadioSelectButtons({ state, name, options, values, colorsOn, colorsOff,
           key={index}
           value={values[index]}
           className={`px-4 mx-1 btn-nav text-white ${state[name] === values[index] ? `border-b-2 border-opacity-0 ${colorsOn}` : `btn ${colorsOff}`}`}
-          onClick={onSelection}>
+          onClick={onSelection}
+        >
           {option}
         </button>
       ))}

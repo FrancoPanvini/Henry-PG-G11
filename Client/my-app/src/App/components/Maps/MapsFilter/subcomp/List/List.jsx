@@ -40,36 +40,39 @@ const List = ({ items, childClicked, isLoading, type, setType, sex, setSex, size
       ) : (
         <div className='h-full'>
           <div>
-            {location.pathname.includes('adopciones') && (<>
-            <FormControl className={classes.formControl}>
-              <InputLabel>Tipo</InputLabel>
-              <Select defaultValue='all' value={prueba.type} onChange={e => handleChange(e.target.value, 'type')}>
-                <MenuItem onClick={e => filter('type', '')} value='all'>
-                  ALL
-                </MenuItem>
-                <MenuItem onClick={e => filter('type', e.target.dataset.value)} value='Perro'>
-                  Perros
-                </MenuItem>
-                <MenuItem onClick={e => filter('type', e.target.dataset.value)} value='Gato'>
-                  Gatos
-                </MenuItem>
-              </Select>
-            </FormControl>
-            <FormControl className={classes.formControl}>
-              <InputLabel>Sexo</InputLabel>
-              <Select defaultValue='all' value={prueba.sex} onChange={e => handleChange(e.target.value, 'sex')}>
-                <MenuItem onClick={e => filter('sex', '')} value='all'>
-                  ALL
-                </MenuItem>
-                <MenuItem onClick={e => filter('sex', e.target.dataset.value)} value='m'>
-                  Macho
-                </MenuItem>
-                <MenuItem onClick={e => filter('sex', e.target.dataset.value)} value='h'>
-                  Hembra
-                </MenuItem>
-              </Select>
-            </FormControl></>)}  
-            
+            {location.pathname.includes('adopciones') && (
+              <>
+                <FormControl className={classes.formControl}>
+                  <InputLabel>Tipo</InputLabel>
+                  <Select defaultValue='all' value={prueba.type} onChange={e => handleChange(e.target.value, 'type')}>
+                    <MenuItem onClick={e => filter('type', '')} value='all'>
+                      ALL
+                    </MenuItem>
+                    <MenuItem onClick={e => filter('type', e.target.dataset.value)} value='Perro'>
+                      Perros
+                    </MenuItem>
+                    <MenuItem onClick={e => filter('type', e.target.dataset.value)} value='Gato'>
+                      Gatos
+                    </MenuItem>
+                  </Select>
+                </FormControl>
+                <FormControl className={classes.formControl}>
+                  <InputLabel>Sexo</InputLabel>
+                  <Select defaultValue='all' value={prueba.sex} onChange={e => handleChange(e.target.value, 'sex')}>
+                    <MenuItem onClick={e => filter('sex', '')} value='all'>
+                      ALL
+                    </MenuItem>
+                    <MenuItem onClick={e => filter('sex', e.target.dataset.value)} value='m'>
+                      Macho
+                    </MenuItem>
+                    <MenuItem onClick={e => filter('sex', e.target.dataset.value)} value='h'>
+                      Hembra
+                    </MenuItem>
+                  </Select>
+                </FormControl>
+              </>
+            )}
+
             <FormControl className={classes.formControl}>
               <InputLabel>Tamaño</InputLabel>
               <Select defaultValue='all' value={prueba.size} onChange={e => handleChange(e.target.value, 'size')}>

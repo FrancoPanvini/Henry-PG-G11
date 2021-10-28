@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-export const updateEvent = async (id, dataEdit ) => {
+export const updateEvent = async (id, dataEdit) => {
   try {
     const rta = await axios.put(`/events/${id}`, dataEdit);
     return rta;

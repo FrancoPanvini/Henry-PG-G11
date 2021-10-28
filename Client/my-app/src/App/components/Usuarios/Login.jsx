@@ -38,7 +38,7 @@ function Login() {
   };
 
   // ↓ actualizo el input
-  const handleUsuario = (e) => {
+  const handleUsuario = e => {
     let nuevoInput = {
       ...usuario,
       [e.target.name]: e.target.value,
@@ -48,7 +48,7 @@ function Login() {
   };
 
   // ↓ log in handler
-  const handleSubmit = (e) => {
+  const handleSubmit = e => {
     e.preventDefault(e);
     dispatch(logInUsers(usuario));
   };
@@ -59,9 +59,7 @@ function Login() {
         <div className='ml-auto mr-12 bg-cachorroWeb bg-bottom bg-cover relative h-96 w-96 rounded-full shadow-similBorderWhite floorShadowCircle' />
       </div>
       <div className='flex justify-center items-center w-3/5 z-10'>
-        <form
-          onSubmit={(e) => handleSubmit(e)}
-          className='flex flex-col ml-12 mr-auto bg-thirty xl:py-8 2xl:py-12 px-8 rounded-lg w-2/5 min-w-sign shadow-xl border-2 border-fourty border-opacity-50'>
+        <form onSubmit={e => handleSubmit(e)} className='flex flex-col ml-12 mr-auto bg-thirty xl:py-8 2xl:py-12 px-8 rounded-lg w-2/5 min-w-sign shadow-xl border-2 border-fourty border-opacity-50'>
           <div className='mx-auto flex justify-center items-center bg-fourty w-20 h-20 rounded-full'>
             <FaPaw className='text-white text-3xl' />
           </div>
@@ -70,7 +68,8 @@ function Login() {
           <a
             href='https://adogtameapi.herokuapp.com/auth/google'
             title='Inicia sesión usando tu cuenta de Google'
-            className='btn btn-lg bg-white text-gray-600 border-gray-400 flex justify-center items-center'>
+            className='btn btn-lg bg-white text-gray-600 border-gray-400 flex justify-center items-center'
+          >
             <img src={logoGoogle} alt='Log in con Google' className='h-7 w-7 inline mr-4' />
             Log in
           </a>
@@ -83,20 +82,13 @@ function Login() {
           <label className='text-white'>
             Contraseña: <ErrorIconPulsing error={errors.password} color='primary' />
           </label>
-          <input
-            type='password'
-            name='password'
-            value={usuario.password} // ← creo que esto es innecesario.
-            onChange={handleUsuario}
-            className='rounded-md px-2 mb-4'
-          />
+          <input type='password' name='password' value={usuario.password} onChange={handleUsuario} className='rounded-md px-2 mb-4' />
           <br />
           <button
             disabled={handleDisabled()}
             type='submit'
-            className={`${
-              handleDisabled() ? 'opacity-50 cursor-default border-b-2 border-transparent' : 'btn'
-            } mt-2 btn-lg bg-primary text-white border-yellow-600 flex justify-center items-center`}>
+            className={`${handleDisabled() ? 'opacity-50 cursor-default border-b-2 border-transparent' : 'btn'} mt-2 btn-lg bg-primary text-white border-yellow-600 flex justify-center items-center`}
+          >
             <FaPaw className='text-3xl inline mr-4' /> Log in
           </button>
           <br />

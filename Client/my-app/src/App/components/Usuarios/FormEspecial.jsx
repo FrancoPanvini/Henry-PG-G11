@@ -3,7 +3,7 @@ import { useDispatch } from 'react-redux';
 import { useHistory } from 'react-router';
 import axios from 'axios';
 import parsePhoneNumber from 'libphonenumber-js';
-import swal from "sweetalert"
+import swal from 'sweetalert';
 
 //? Components
 import PhoneCodes from './phoneRegionInput';
@@ -170,9 +170,9 @@ const FormEspecial = () => {
     editUserData(userId, auxInput);
     swal({
       text: 'Se actualizaron los datos correctamente',
-      icon: "success",
-      timer: "3000",
-    })
+      icon: 'success',
+      timer: '3000',
+    });
     dispatch(initialUser(userId));
     history.push('/');
   };
@@ -211,14 +211,7 @@ const FormEspecial = () => {
                   <label className='text-white'>
                     Teléfono: <ErrorIconPulsing error={errors.phone} color='primary' />
                   </label>
-                  <input
-                    type='number'
-                    id='phone'
-                    name='phone'
-                    // value={input.phone}
-                    onChange={handleOnChange}
-                    className='rounded-md px-1 mb-2 w-full'
-                  />
+                  <input type='number' id='phone' name='phone' onChange={handleOnChange} className='rounded-md px-1 mb-2 w-full' />
                 </div>
               </div>
               {input.UsersTypeId === 'r' && (
@@ -260,7 +253,6 @@ const FormEspecial = () => {
               <input disabled type='text' id='direction' name='direction' value={displayDirection} onChange={handleOnChange} className='rounded-md px-1 text-white' />
               <div className='h-96 py-4'>
                 <MapPost onLocationChange={handleLocation} onChange={handleOnChange} />
-                {/* <button type="button" onClick={() => auxButtonClick()}>Confirm</button> */}
               </div>
             </div>
           </div>

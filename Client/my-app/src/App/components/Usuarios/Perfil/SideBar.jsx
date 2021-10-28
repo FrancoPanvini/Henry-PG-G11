@@ -6,9 +6,9 @@ import { BiLogOutCircle } from 'react-icons/bi';
 function SideBar() {
   let active = 'Mis Datos';
   const dispatch = useDispatch();
-  const userType = useSelector((state) => state.userData.type);
+  const userType = useSelector(state => state.userData.type);
 
-  const handleSetActive = (e) => {
+  const handleSetActive = e => {
     e.preventDefault();
     active = e.target.id;
     dispatch(setActive(active));
@@ -44,10 +44,7 @@ function SideBar() {
         </div>
 
         <div>
-          <button
-            title='Cerrar sesión'
-            onClick={handleLogOut}
-            className='text-3xl self-end transform hover:scale-125 hover:text-red-800 transition-all'>
+          <button title='Cerrar sesión' onClick={handleLogOut} className='text-3xl self-end transform hover:scale-125 hover:text-red-800 transition-all'>
             <BiLogOutCircle />
           </button>
         </div>

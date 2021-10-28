@@ -57,7 +57,7 @@ function FormularioPosteoPerdido({ onClose, onPostPet }) {
   };
 
   //* input change handler
-  const handleChange = (e) => {
+  const handleChange = e => {
     e.preventDefault();
     const newMascota = {
       ...mascota,
@@ -80,7 +80,7 @@ function FormularioPosteoPerdido({ onClose, onPostPet }) {
     });
     lat = parseFloat(lat);
     lng = parseFloat(lng);
-    setMascota((prevState) => {
+    setMascota(prevState => {
       return {
         ...prevState,
         lat: lat,
@@ -100,7 +100,7 @@ function FormularioPosteoPerdido({ onClose, onPostPet }) {
   };
 
   //* Una vez que el usuario clickee en Publicar
-  const handlePublicar = async (e) => {
+  const handlePublicar = async e => {
     e.preventDefault();
     let city = await axios.post('/locations', location);
     let newMascota = {
@@ -137,11 +137,7 @@ function FormularioPosteoPerdido({ onClose, onPostPet }) {
       <div className='fixed inset-0 z-50 flex justify-center items-center'>
         <form className='panel flex flex-col w-4/5 min-w-max mx-auto bg-gradient-to-r from-primaryDark to-primary relative'>
           {/* ↓ botón para cancelar y volver atrás */}
-          <IoIosCloseCircle
-            title='Cancelar y volver a Perdidos'
-            onClick={onClose}
-            className='text-thirty absolute top-3 right-3 text-3xl hover:text-thirtyLight cursor-pointer transition-all'
-          />
+          <IoIosCloseCircle title='Cancelar y volver a Perdidos' onClick={onClose} className='text-thirty absolute top-3 right-3 text-3xl hover:text-thirtyLight cursor-pointer transition-all' />
           <div className='flex justify-between h-full w-full'>
             <div className='flex flex-col w-1/2'>
               {/* ↓ Nombre de la mascota */}
@@ -215,9 +211,8 @@ function FormularioPosteoPerdido({ onClose, onPostPet }) {
                 <button
                   disabled={handleDisabled()}
                   onClick={handlePublicar}
-                  className={`${
-                    handleDisabled() ? 'opacity-50 cursor-default border-b-2 border-thirty' : 'btn'
-                  } btn-xl bg-fourty text-white border-thirty`}>
+                  className={`${handleDisabled() ? 'opacity-50 cursor-default border-b-2 border-thirty' : 'btn'} btn-xl bg-fourty text-white border-thirty`}
+                >
                   Publicar
                 </button>
               </div>

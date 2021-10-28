@@ -23,25 +23,7 @@ const options = {
   clickableIcons: false,
 };
 
-function DetalleRefugio({
-  onClose,
-  pets,
-  events,
-  photo,
-  name,
-  phone,
-  country,
-  province,
-  city,
-  web,
-  responsable,
-  description,
-  instagram,
-  facebook,
-  donaciones,
-  lat,
-  lng,
-}) {
+function DetalleRefugio({ onClose, pets, events, photo, name, phone, country, province, city, web, responsable, description, instagram, facebook, donaciones, lat, lng }) {
   //* Seteamos en el estado los datos de la pet con su id
   return ReactDom.createPortal(
     <>
@@ -49,11 +31,7 @@ function DetalleRefugio({
       <div className='fixed inset-0 z-50'>
         <div className='panel relative top-20 mx-auto w-9/12 h-screen82 p-6 bg-gradient-to-r from-fourtyLight to-fourtyDark overflow-y-scroll'>
           <div className='flex justify-center mx-16 border-b-2 border-fourtyDark border-opacity-25'>
-          <IoIosCloseCircle
-            className='text-primary top-24 right-1/7 fixed text-3xl hover:text-primaryLight cursor-pointer transition-all'
-            onClick={onClose}
-            title='Cerrar'
-          />
+            <IoIosCloseCircle className='text-primary top-24 right-1/7 fixed text-3xl hover:text-primaryLight cursor-pointer transition-all' onClick={onClose} title='Cerrar' />
             <div className='w-2/3 flex flex-col mr-8'>
               <span className='py-1 text-primary text-3xl font-bold capitalize text-center'>{name}</span>
 
@@ -78,45 +56,30 @@ function DetalleRefugio({
                       href={donaciones}
                       target='_blank'
                       rel='noreferrer'
-                      className='btn w-full h-full p-2 flex flex-col justify-center items-center bg-donations rounded-lg text-white border-gray-600 tracking-wider'>
+                      className='btn w-full h-full p-2 flex flex-col justify-center items-center bg-donations rounded-lg text-white border-gray-600 tracking-wider'
+                    >
                       <FaDonate title='Donaciones' className='mr-2 text-3xl' /> DONACIONES
                     </a>
                   </div>
                 )}
                 <div className='w-3/4 grid grid-cols-2 gap-2 p-2'>
                   {web && (
-                    <a
-                      href={web}
-                      target='_blank'
-                      rel='noreferrer'
-                      className='btn p-2 flex items-center justify-start bg-primary rounded-lg text-gray-700 border-gray-600'>
+                    <a href={web} target='_blank' rel='noreferrer' className='btn p-2 flex items-center justify-start bg-primary rounded-lg text-gray-700 border-gray-600'>
                       <BiWorld title='Web' className='inline mr-2' /> Sitio Web
                     </a>
                   )}
                   {phone && (
-                    <a
-                      href={`https://wa.me/${phone}`}
-                      target='_blank'
-                      rel='noreferrer'
-                      className='btn p-2 flex items-center justify-start bg-green-600 rounded-lg text-white border-gray-600'>
+                    <a href={`https://wa.me/${phone}`} target='_blank' rel='noreferrer' className='btn p-2 flex items-center justify-start bg-green-600 rounded-lg text-white border-gray-600'>
                       <FaWhatsapp title='WhatsApp' className='inline mr-2' /> {phone}
                     </a>
                   )}
                   {instagram && (
-                    <a
-                      href={instagram}
-                      target='_blank'
-                      rel='noreferrer'
-                      className='btn p-2 flex items-center justify-start bg-instagram2 rounded-lg text-white border-gray-600'>
+                    <a href={instagram} target='_blank' rel='noreferrer' className='btn p-2 flex items-center justify-start bg-instagram2 rounded-lg text-white border-gray-600'>
                       <GrInstagram title='Instagram' className='inline mr-2' /> Página de Instagram
                     </a>
                   )}
                   {facebook && (
-                    <a
-                      href={facebook}
-                      target='_blank'
-                      rel='noreferrer'
-                      className='btn p-2 flex items-center justify-start bg-facebook rounded-lg text-white border-gray-600'>
+                    <a href={facebook} target='_blank' rel='noreferrer' className='btn p-2 flex items-center justify-start bg-facebook rounded-lg text-white border-gray-600'>
                       <GrFacebook title='Facebook' className='inline mr-2' /> Página de Facebook
                     </a>
                   )}
@@ -125,11 +88,7 @@ function DetalleRefugio({
             </div>
             {photo && (
               <div className='w-1/3 p-4'>
-                <img
-                  src={photo}
-                  alt='foto de usuario'
-                  className='object-cover w-full max-w-md max-h-96 rounded-lg mx-auto ring ring-offset-4 ring-offset-gray-200'
-                />
+                <img src={photo} alt='foto de usuario' className='object-cover w-full max-w-md max-h-96 rounded-lg mx-auto ring ring-offset-4 ring-offset-gray-200' />
               </div>
             )}
           </div>
@@ -138,11 +97,7 @@ function DetalleRefugio({
             <div className={`${pets.length === 0 ? 'w-full' : 'w-1/2'} p-4 mx-auto border-r-2 border-fourtyDark border-opacity-25`}>
               <span className='py-4 text-white text-xl font-bold capitalize inline-block'>Ubicación: {`${city}, ${province}, ${country}`}</span>
               <div className='h-96 w-full'>
-                <GoogleMap
-                  mapContainerStyle={{ width: '100%', height: '100%', borderRadius: '10px' }}
-                  center={{ lat, lng }}
-                  zoom={15}
-                  options={options}>
+                <GoogleMap mapContainerStyle={{ width: '100%', height: '100%', borderRadius: '10px' }} center={{ lat, lng }} zoom={15} options={options}>
                   <div>
                     <Marker
                       position={{ lat, lng }}
@@ -162,7 +117,7 @@ function DetalleRefugio({
                 <span className='py-4 text-white text-2xl font-bold'>Nuestras Mascotas en Adopción</span>
 
                 <Carousel itemsToShow={1}>
-                  {pets?.map((p) => {
+                  {pets?.map(p => {
                     return (
                       <div key={p.id}>
                         <CardAdopcion

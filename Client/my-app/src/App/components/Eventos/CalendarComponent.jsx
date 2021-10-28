@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import { Calendar, Badge } from 'antd';
-// import 'antd/dist/antd.css';
 import styles from './CalendarComponent.modules.css';
 import EventPopUpDetail from './EventPopUpDetail';
 
@@ -15,11 +14,11 @@ function CalendarComponent({ eventos }) {
   };
 
   function getListData(value) {
-    const eventosByDay = eventos?.filter((evento) => {
+    const eventosByDay = eventos?.filter(evento => {
       return evento.initDate.substring(0, 10) === value.format('YYYY-MM-DD');
     });
 
-    let listData = eventosByDay.map((evento) => {
+    let listData = eventosByDay.map(evento => {
       return { type: 'success', content: evento.name, id: evento.id };
     });
 
@@ -30,14 +29,9 @@ function CalendarComponent({ eventos }) {
     const listData = getListData(value);
     return (
       <ul className={styles.events}>
-        {listData.map((item) => (
+        {listData.map(item => (
           <li key={item.content}>
-            <Badge
-              status={item.type}
-              text={item.content}
-              className='capitalize'
-              onClick={(e) => handleOpenDetail(e, item.id)}
-            />
+            <Badge status={item.type} text={item.content} className='capitalize' onClick={e => handleOpenDetail(e, item.id)} />
           </li>
         ))}
       </ul>
@@ -45,11 +39,11 @@ function CalendarComponent({ eventos }) {
   }
 
   function getMonthData(value) {
-    const eventosByMonth = eventos?.filter((evento) => {
+    const eventosByMonth = eventos?.filter(evento => {
       return evento.initDate.substring(0, 7) === value.format('YYYY-MM');
     });
 
-    let listData = eventosByMonth.map((evento) => {
+    let listData = eventosByMonth.map(evento => {
       return {
         type: 'success',
         day: evento.initDate.substring(8, 10),
@@ -75,11 +69,8 @@ function CalendarComponent({ eventos }) {
 
   return (
     <>
-    <Calendar
-      dateCellRender={dateCellRender}
-      monthCellRender={monthCellRender}
-    />
-    {isOpenDetail && <EventPopUpDetail onClose={() => setIsOpenDetail(false)} id={eventId} />}
+      <Calendar dateCellRender={dateCellRender} monthCellRender={monthCellRender} />
+      {isOpenDetail && <EventPopUpDetail onClose={() => setIsOpenDetail(false)} id={eventId} />}
     </>
   );
 }

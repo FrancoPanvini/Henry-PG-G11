@@ -9,7 +9,7 @@ const Forgot = () => {
   const [input, setInput] = useState({ mail: '' });
   const history = useHistory();
 
-  const handleOnChange = (e) => {
+  const handleOnChange = e => {
     e.preventDefault();
     const newInput = {
       ...input,
@@ -25,7 +25,7 @@ const Forgot = () => {
     return true;
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = e => {
     e.preventDefault();
     forgotPassword(input);
     swal({
@@ -42,29 +42,19 @@ const Forgot = () => {
         <div className='ml-auto mr-12 bg-cachorroWeb bg-bottom bg-cover relative h-96 w-96 rounded-full shadow-similBorderWhite floorShadowCircle' />
       </div>
       <div className='flex justify-center items-center w-3/5 z-10'>
-        <form
-          onSubmit={(e) => handleSubmit(e)}
-          className='px-8 py-12 w-2/5 ml-12 mr-auto flex flex-col bg-thirty rounded-lg min-w-min shadow-xl border-2 border-fourty border-opacity-50'>
+        <form onSubmit={e => handleSubmit(e)} className='px-8 py-12 w-2/5 ml-12 mr-auto flex flex-col bg-thirty rounded-lg min-w-min shadow-xl border-2 border-fourty border-opacity-50'>
           <div className='mx-auto flex justify-center items-center bg-fourty w-20 h-20 rounded-full'>
             <FaPaw className='text-white text-3xl' />
           </div>
           <br />
           <label className='text-white'>Email: </label>
-          <input
-            type='text'
-            id='mail'
-            name='mail'
-            // value={input.phone}
-            onChange={handleOnChange}
-            className='rounded-md px-1 mb-4'
-          />
+          <input type='text' id='mail' name='mail' onChange={handleOnChange} className='rounded-md px-1 mb-4' />
           <br />
           <button
             type='submit'
             disabled={handleDisabled()}
-            className={`${
-              handleDisabled() ? 'opacity-50 cursor-default border-b-2 border-transparent' : 'btn'
-            } btn-lg bg-primary text-white border-yellow-600 flex justify-center items-center`}>
+            className={`${handleDisabled() ? 'opacity-50 cursor-default border-b-2 border-transparent' : 'btn'} btn-lg bg-primary text-white border-yellow-600 flex justify-center items-center`}
+          >
             Solicitar nueva contraseña
           </button>
           <br />
