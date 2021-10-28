@@ -1,4 +1,3 @@
-const { where } = require('sequelize');
 const { Users, Cities, Provinces, Countries, UsersType } = require('../../../../db');
 
 const getUser = async (req, res) => {
@@ -6,7 +5,6 @@ const getUser = async (req, res) => {
 
   let query = {
     where: { id },
-    // attributes: ["id", "name", "mail", "phone", "direction", "password", "photo", "responsable", "dni", "description", "link_web", "link_instagram", "link_facebook", "link_donaciones"],
     include: [
       {
         model: Cities,

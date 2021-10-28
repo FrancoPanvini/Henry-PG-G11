@@ -1,21 +1,21 @@
-const { where, Op } = require("sequelize");
-const { Users, Events, Cities, Provinces, Countries } = require("../../../../db");
+const { where, Op } = require('sequelize');
+const { Users, Events, Cities, Provinces, Countries } = require('../../../../db');
 
 const getEvents = async (req, res) => {
   const { city, province, country, organizer, pending, paglimit, pagnumber } = req.query;
 
   const query = {
     where: {},
-    attributes: ["id", "name", "description", "initDate", "endDate", "direction","photo", "lat", "lng"],
-    order: ["initDate"],
+    attributes: ['id', 'name', 'description', 'initDate', 'endDate', 'direction', 'photo', 'lat', 'lng'],
+    order: ['initDate'],
     include: [
       {
         model: Cities,
-        attributes: ["name", "ProvinceId"],
+        attributes: ['name', 'ProvinceId'],
         required: true,
-        include: { model: Provinces, attributes: ["name", "CountryId"], required: true, where: {}, include: { model: Countries, required: true, attributes: ["name"] } },
+        include: { model: Provinces, attributes: ['name', 'CountryId'], required: true, where: {}, include: { model: Countries, required: true, attributes: ['name'] } },
       },
-      { model: Users, attributes: ["name"] },
+      { model: Users, attributes: ['name'] },
     ],
   };
 

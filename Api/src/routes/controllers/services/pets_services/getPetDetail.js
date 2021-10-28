@@ -1,23 +1,23 @@
-const { where } = require("sequelize");
-const { Pets, Users, PetsType, Cities, Provinces, Countries, PetsPics } = require("../../../../db");
+const { where } = require('sequelize');
+const { Pets, Users, PetsType, Cities, Provinces, Countries, PetsPics } = require('../../../../db');
 
 const getPetDetail = async (req, res) => {
   const { id } = req.params;
 
   let query = {
     where: { id },
-    attributes: ["id", "name", "size", "sex", "age", "createdAt", "adopted", "description","updatedAt"],
+    attributes: ['id', 'name', 'size', 'sex', 'age', 'createdAt', 'adopted', 'description', 'updatedAt'],
     include: [
       {
         model: Cities,
-        attributes: ["name", "ProvinceId"],
+        attributes: ['name', 'ProvinceId'],
         required: true,
-        include: { model: Provinces, attributes: ["name", "CountryId"], required: true, where: {}, include: { model: Countries, required: true, attributes: ["name"] } },
+        include: { model: Provinces, attributes: ['name', 'CountryId'], required: true, where: {}, include: { model: Countries, required: true, attributes: ['name'] } },
       },
-      { model: PetsType, attributes: ["type"] },
-      { model: Users, as: "Owner", attributes: ["name"] },
-      { model: Users, as: "Adopter", attributes: ["name"] },
-      { model: PetsPics, attributes: ["url"] },
+      { model: PetsType, attributes: ['type'] },
+      { model: Users, as: 'Owner', attributes: ['name'] },
+      { model: Users, as: 'Adopter', attributes: ['name'] },
+      { model: PetsPics, attributes: ['url'] },
     ],
   };
 

@@ -1,5 +1,4 @@
-const { Countries, Provinces } = require("../../../../db");
-const { Op } = require("sequelize");
+const { Provinces } = require('../../../../db');
 
 const getProvince = async (req, res) => {
   const { id } = req.params;

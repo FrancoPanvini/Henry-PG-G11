@@ -1,4 +1,4 @@
-const { Model, DataTypes } = require("sequelize");
+const { Model, DataTypes } = require('sequelize');
 
 module.exports = sequelize => {
   class LostPetsPics extends Model {}
@@ -6,6 +6,6 @@ module.exports = sequelize => {
     {
       url: { type: DataTypes.STRING, allowNull: false },
     },
-    { sequelize: sequelize, modelName: "LostPetsPics", timestamps: false }
+    { sequelize: sequelize, modelName: 'LostPetsPics', timestamps: false }
   );
 };

@@ -1,26 +1,22 @@
-const { Users, Countries, Provinces, Cities } = require("../../../../db");
-const { Op } = require("sequelize");
+const { Countries, Provinces } = require('../../../../db');
+const { Op } = require('sequelize');
 
-const axios = require('axios')
+const axios = require('axios');
 
-
-
-const getCountries = async(req, res) => {
-  const {name} = req.query
+const getCountries = async (req, res) => {
+  const { name } = req.query;
   const query = {
-    where: { name: {[Op.substring]: name}},
-    include: [
-      { model: Provinces },
-    ],
+    where: { name: { [Op.substring]: name } },
+    include: [{ model: Provinces }],
   };
   let countries;
-  if(name) {
-    countries = await Countries.findAll(query)}
-  else {
-    countries = await Countries.findAll()}
+  if (name) {
+    countries = await Countries.findAll(query);
+  } else {
+    countries = await Countries.findAll();
+  }
 
-  res.json(countries)
-}
-
+  res.json(countries);
+};
 
 module.exports = getCountries;

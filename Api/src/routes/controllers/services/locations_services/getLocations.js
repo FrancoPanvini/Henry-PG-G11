@@ -1,11 +1,11 @@
-const { Countries, Provinces, Cities } = require("../../../../db");
+const { Countries, Provinces, Cities } = require('../../../../db');
 
 const getLocations = async (req, res) => {
   const { country } = req.query;
 
   let query = {
-    attributes: ["name"],
-    include: [{ model: Provinces, attributes: ["name"], include: [{ model: Cities, attributes: ["name"] }] }],
+    attributes: ['name'],
+    include: [{ model: Provinces, attributes: ['name'], include: [{ model: Cities, attributes: ['name'] }] }],
   };
   if (country) {
     query = { ...query, where: { name: country.toLowerCase() } };

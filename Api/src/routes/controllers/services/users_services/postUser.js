@@ -1,7 +1,7 @@
-const bcrypt = require("bcrypt");
+const bcrypt = require('bcrypt');
 
-const { Users } = require("../../../../db");
-const { deleteUserDB } = require("./deleteUser");
+const { Users } = require('../../../../db');
+const { deleteUserDB } = require('./deleteUser');
 
 const postUser = async (req, res) => {
   const { name, mail, phone, direction, password, photo, responsable, dni, description, link_web, link_instagram, link_facebook, link_donaciones, Cityid, UsersTypeid, lng, lat } = req.body;
@@ -28,7 +28,7 @@ const postUser = async (req, res) => {
         link_facebook,
         link_donaciones,
         lat,
-        lng
+        lng,
       },
     });
     if (!created) throw new Error(`${mail} has allready been use to create a User`);
@@ -37,14 +37,14 @@ const postUser = async (req, res) => {
     try {
       await newUser.setUsersType(UsersTypeid);
     } catch (error) {
-      throw new Error("Problems setting type of user");
+      throw new Error('Problems setting type of user');
     }
 
     //* Set City
     try {
       await newUser.setCity(Cityid);
     } catch (error) {
-      throw new Error("Problems setting City of user");
+      throw new Error('Problems setting City of user');
     }
 
     res.status(200).json(newUser);
