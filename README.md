@@ -31,7 +31,7 @@ Las publicaciones en _Adogtame_ funcionan a base de geolocalización, por lo que
 
 ### Archivo .env en carpeta /Api
 
-`PORT=` Número de puerto en el que correr el back <br />
+`PORT=` Número de puerto en el que correrá la database <br />
 `DB_USER=` Nombre de usuario de Postgres <br />
 `DB_PASSWORD=` Contraseña del usuario de Postgres <br />
 `DB_HOST=` 'localhost' <br />
@@ -53,7 +53,7 @@ Google-map-react: ^2.1.10<br />
 Firebase: ^9.1.1<br />
 Axios: ^0.21.4<br />
 Dotenv: ^8.2.0<br />
-Jsonwebtoken": ^8.5.1<br />
+Jsonwebtoken: ^8.5.1<br />
 Libphonenumber-js: ^1.9.37<br />
 Sweetalert: ^2.1.2<br />
 
