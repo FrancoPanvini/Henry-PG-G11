@@ -1,4 +1,4 @@
-import axios from "axios";
+import axios from 'axios';
 
 export const getPetDetail = async id => {
   try {
@@ -8,4 +8,3 @@ export const getPetDetail = async id => {
     console.log(error);
   }
 };
-

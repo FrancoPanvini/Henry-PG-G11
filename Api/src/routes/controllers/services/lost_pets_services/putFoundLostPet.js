@@ -1,4 +1,4 @@
-const { LostPets } = require("../../../../db");
+const { LostPets } = require('../../../../db');
 
 const putFoundLostPet = async (req, res) => {
   const { id } = req.params;

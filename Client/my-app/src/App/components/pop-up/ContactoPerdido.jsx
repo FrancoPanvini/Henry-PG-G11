@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from 'react';
 import ReactDom from 'react-dom';
-//import swal from "sweetalert";
 import { getUserById } from '../../services/getUserById';
 //? Icons
 import { IoIosCloseCircle } from 'react-icons/io';

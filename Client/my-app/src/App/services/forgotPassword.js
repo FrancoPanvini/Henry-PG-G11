@@ -1,5 +1,5 @@
-import axios from 'axios'
+import axios from 'axios';
 
-export const forgotPassword = async (input) => {
-    return axios.post(`/login/forgot`, input);
-  };
+export const forgotPassword = async input => {
+  return axios.post(`/login/forgot`, input);
+};

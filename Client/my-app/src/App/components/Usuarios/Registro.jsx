@@ -133,10 +133,12 @@ function Registro() {
   //* Maneja el codigo de area del telefono
   const handlePhoneCodeChange = e => {
     setPhoneCode(e.target.value);
-    setErrors(validate({
-      ...input, 
-      phoneCode: e.target.value
-    }));
+    setErrors(
+      validate({
+        ...input,
+        phoneCode: e.target.value,
+      })
+    );
   };
 
   //* Maneja el submit del form registro
@@ -156,7 +158,6 @@ function Registro() {
         name: input.name,
         mail: input.mail,
       });
-      console.log('correo enviado');
     } catch (err) {
       console.log(err);
     }

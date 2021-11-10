@@ -1,5 +1,5 @@
-const { Countries, Provinces } = require("../../../../db");
-const { Op } = require("sequelize");
+const { Countries } = require('../../../../db');
+const { Op } = require('sequelize');
 
 const getCountry = async (req, res) => {
   const { id } = req.params;
@@ -8,7 +8,7 @@ const getCountry = async (req, res) => {
   };
   try {
     const country = await Countries.findAll(query);
-    res.json(...country)
+    res.json(...country);
   } catch (error) {
     res.status(409).send(error);
   }

@@ -10,7 +10,7 @@ const ListRefugios = ({ items, childClicked, isLoading }) => {
   const [shelterRef, setShelterRef] = useState([]);
 
   useEffect(() => {
-    setShelterRef((refs) =>
+    setShelterRef(refs =>
       Array(items?.length)
         .fill()
         .map((_, i) => refs[i] || createRef())

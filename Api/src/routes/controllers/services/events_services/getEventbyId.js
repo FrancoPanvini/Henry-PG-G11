@@ -1,20 +1,20 @@
-const { Events, Cities, Provinces, Countries, Users } = require("../../../../db");
+const { Events, Cities, Provinces, Countries, Users } = require('../../../../db');
 
 const getEventById = async (req, res) => {
   const { id } = req.params;
 
   const query = {
     where: { id },
-    attributes: ["id", "name", "description", "initDate", "endDate", "direction", "photo"],
-    order: ["initDate"],
+    attributes: ['id', 'name', 'description', 'initDate', 'endDate', 'direction', 'photo'],
+    order: ['initDate'],
     include: [
       {
         model: Cities,
-        attributes: ["name", "ProvinceId"],
+        attributes: ['name', 'ProvinceId'],
         required: true,
-        include: { model: Provinces, attributes: ["name", "CountryId"], required: true, where: {}, include: { model: Countries, required: true, attributes: ["name"] } },
+        include: { model: Provinces, attributes: ['name', 'CountryId'], required: true, where: {}, include: { model: Countries, required: true, attributes: ['name'] } },
       },
-      { model: Users, attributes: ["name"] },
+      { model: Users, attributes: ['name'] },
     ],
   };
 

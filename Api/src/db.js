@@ -1,14 +1,14 @@
-const { Sequelize } = require("sequelize");
-require("dotenv").config();
+const { Sequelize } = require('sequelize');
+require('dotenv').config();
 const { DB_USER, DB_PASSWORD, DB_HOST, DB_NAME } = process.env;
-const fs = require("fs");
-const path = require("path");
+const fs = require('fs');
+const path = require('path');
 
 let sequelize =
-  process.env.NODE_ENV === "production"
+  process.env.NODE_ENV === 'production'
     ? new Sequelize({
         database: DB_NAME,
-        dialect: "postgres",
+        dialect: 'postgres',
         host: DB_HOST,
         port: 5432,
         username: DB_USER,
@@ -21,7 +21,6 @@ let sequelize =
         dialectOptions: {
           ssl: {
             require: true,
-            // Ref.: https://github.com/brianc/node-postgres/issues/2009
             rejectUnauthorized: false,
           },
           keepAlive: true,
@@ -43,20 +42,20 @@ const basename = path.basename(__filename);
 
 const modelDefiners = [];
 
-// Leemos todos los archivos de la carpeta Models, los requerimos y agregamos al arreglo modelDefiners
-fs.readdirSync(path.join(__dirname, "/models"))
-  .filter(file => file.indexOf(".") !== 0 && file !== basename && file.slice(-3) === ".js")
+//* Leemos todos los archivos de la carpeta Models, los requerimos y agregamos al arreglo modelDefiners
+fs.readdirSync(path.join(__dirname, '/models'))
+  .filter(file => file.indexOf('.') !== 0 && file !== basename && file.slice(-3) === '.js')
   .forEach(file => {
-    modelDefiners.push(require(path.join(__dirname, "/models", file)));
+    modelDefiners.push(require(path.join(__dirname, '/models', file)));
   });
 
-// Injectamos la conexion (sequelize) a todos los modelos
+//* Injectamos la conexion (sequelize) a todos los modelos
 modelDefiners.forEach(model => model(sequelize));
 
-// En sequelize.models están todos los modelos importados como propiedades
+//* En sequelize.models están todos los modelos importados como propiedades
 const { Pets, Users, Events, Adoptions, Cities, Provinces, Countries, PetsType, UsersType, PetsPics, LostPets, LostPetsPics } = sequelize.models;
 
-//Relaciones
+//* Relaciones
 Pets.belongsTo(PetsType);
 PetsType.hasMany(Pets);
 
@@ -87,11 +86,11 @@ Cities.hasMany(Events);
 Events.belongsTo(Users);
 Users.hasMany(Events);
 
-Pets.belongsTo(Users, { as: "Adopter", foreignKey: "Adopterid" });
-Users.hasMany(Pets, { foreignKey: "Adopterid" });
+Pets.belongsTo(Users, { as: 'Adopter', foreignKey: 'Adopterid' });
+Users.hasMany(Pets, { foreignKey: 'Adopterid' });
 
-Pets.belongsTo(Users, { as: "Owner", foreignKey: "Ownerid" });
-Users.hasMany(Pets, { foreignKey: "Ownerid" });
+Pets.belongsTo(Users, { as: 'Owner', foreignKey: 'Ownerid' });
+Users.hasMany(Pets, { foreignKey: 'Ownerid' });
 
 Pets.belongsToMany(Users, { through: Adoptions });
 Users.belongsToMany(Pets, { through: Adoptions });

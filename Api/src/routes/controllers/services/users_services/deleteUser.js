@@ -1,4 +1,4 @@
-const { Users, Pets, Events } = require("../../../../db");
+const { Users, Pets, Events } = require('../../../../db');
 
 const deleteUserDB = async id => {
   const user = await Users.findOne({ where: { id } });
@@ -11,7 +11,6 @@ const deleteUserDB = async id => {
 
 const deleteUser = async (req, res) => {
   const { id } = req.params;
-  console.log(id);
   try {
     let response = await deleteUserDB(id);
     res.status(200).json(response);

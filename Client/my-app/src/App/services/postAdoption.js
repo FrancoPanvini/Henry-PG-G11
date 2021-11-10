@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-export const postAdoption = async (input) => {
+export const postAdoption = async input => {
   try {
     const rta = await axios.post('/adoptions', input);
     return rta;

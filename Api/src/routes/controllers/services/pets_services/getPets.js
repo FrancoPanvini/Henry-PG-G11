@@ -1,24 +1,24 @@
-const { where, Op } = require("sequelize");
-const { Pets, Users, PetsType, Cities, Provinces, Countries, PetsPics } = require("../../../../db");
+const { where, Op } = require('sequelize');
+const { Pets, Users, PetsType, Cities, Provinces, Countries, PetsPics } = require('../../../../db');
 
 const getPets = async (req, res) => {
   const { type, gender, size, agemin, agemax, city, province, country, owner, adopter, adopted, paglimit, pagnumber, latMax, latMin, lngMax, lngMin } = req.query;
 
   let query = {
     where: {},
-    attributes: ["id", "name", "size", "sex", "age", "lat", "lng", "createdAt", "updatedAt","adopted"],
-    order: [["createdAt","DESC"]],
+    attributes: ['id', 'name', 'size', 'sex', 'age', 'lat', 'lng', 'createdAt', 'updatedAt', 'adopted'],
+    order: [['createdAt', 'DESC']],
     include: [
       {
         model: Cities,
-        attributes: ["name", "ProvinceId"],
+        attributes: ['name', 'ProvinceId'],
         required: true,
-        include: { model: Provinces, attributes: ["name", "CountryId"], required: true, where: {}, include: { model: Countries, required: true, attributes: ["name"] } },
+        include: { model: Provinces, attributes: ['name', 'CountryId'], required: true, where: {}, include: { model: Countries, required: true, attributes: ['name'] } },
       },
-      { model: PetsType, attributes: ["type"] },
-      { model: Users, as: "Owner", attributes: [] },
-      { model: Users, as: "Adopter", attributes: [] },
-      { model: PetsPics, attributes: ["url"], limit: 1 },
+      { model: PetsType, attributes: ['type'] },
+      { model: Users, as: 'Owner', attributes: [] },
+      { model: Users, as: 'Adopter', attributes: [] },
+      { model: PetsPics, attributes: ['url'], limit: 1 },
     ],
   };
 
@@ -59,7 +59,7 @@ const getPets = async (req, res) => {
   if (adopted) query.where = { ...query.where, adopted: adopted };
 
   //*Add filter by coordinates
-  if(latMax && latMin && lngMax && lngMin) query.where = { ...query.where, lat:{[Op.between]: [latMin, latMax]}, lng:{[Op.between]: [lngMin, lngMax]}}
+  if (latMax && latMin && lngMax && lngMin) query.where = { ...query.where, lat: { [Op.between]: [latMin, latMax] }, lng: { [Op.between]: [lngMin, lngMax] } };
 
   //* Obtain number of rows without pagination
   let pets = await Pets.findAndCountAll(query);
@@ -79,7 +79,7 @@ const getPets = async (req, res) => {
       country: pet.dataValues.City.Province.Country.name,
       province: pet.dataValues.City.Province.name,
       city: pet.dataValues.City.name,
-      type: pet.PetsType?.type, // ← esto me tiraba error al hacer un GET a /pets, por eso agregué el signo de pregunta, pero segurísimo hay que revisar
+      type: pet.PetsType?.type,
       petPic: pet.PetsPics[0]?.url,
     };
     const { PetsType, City, Owner, Adopter, PetsPics, ...rest } = pet;

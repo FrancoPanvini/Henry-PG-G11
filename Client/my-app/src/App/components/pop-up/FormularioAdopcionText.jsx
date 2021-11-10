@@ -8,10 +8,10 @@ function FormularioAdopcionSelect({ label, name, setInput }) {
 
   return (
     <div>
-      <label htmlFor="" className=" text-white">
+      <label htmlFor='' className=' text-white'>
         {label}
       </label>
-      <input type="text" name={name} onChange={handleOnChange} className="rounded-md bg-primary text-left text-sm w-80 px-2" />
+      <input type='text' name={name} onChange={handleOnChange} className='rounded-md bg-primary text-left text-sm w-80 px-2' />
     </div>
   );
 }

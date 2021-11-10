@@ -40,7 +40,9 @@ function Maps({ onLocationChange }) {
   }, []);
 
   const { isLoaded, loadError } = useLoadScript({
-    googleMapsApiKey: 'AIzaSyBCHOQb5zeYrAF3LsFu546WV8YsbcS54r8',
+
+    googleMapsApiKey: process.env.REACT_APP_MAPS_KEY,
+
     libraries,
   });
   if (loadError) return 'Error loading maps';
@@ -119,7 +121,6 @@ function Maps({ onLocationChange }) {
       return;
     } else {
       renderAddress(place);
-      /* fillInAddress(place); */
     }
   });
 
@@ -206,7 +207,6 @@ function Maps({ onLocationChange }) {
               anchor: new window.google.maps.Point(15, 15),
             }}
             onClick={() => {
-              /* mapRef.current.setCenter({lgn: markers[0].lng, lat:markers[0].lat}); */
               setSelected(marker);
             }}
             onDragStart={e => {

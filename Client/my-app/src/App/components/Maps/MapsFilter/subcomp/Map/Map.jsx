@@ -12,7 +12,9 @@ const Map = ({ setCoordinates, setBounds, coordinates, items, setChildClicked })
   return (
     <div className={classes.mapContainer}>
       <GoogleMapReact
-        bootstrapURLKeys={{ key: 'AIzaSyBCHOQb5zeYrAF3LsFu546WV8YsbcS54r8' }}
+
+        bootstrapURLKeys={{ key: process.env.REACT_APP_MAPS_KEY }}
+
         center={coordinates}
         defaultZoom={15}
         margin={[50, 50, 50, 50]}
@@ -37,7 +39,11 @@ const Map = ({ setCoordinates, setBounds, coordinates, items, setChildClicked })
             ) : (
               <div className='w-20 h-32 absolute rounded-xl overflow-hidden bg-primary transition-all cursor-pointer'>
                 <div id={i} className='relative w-full h-4/5 object-cover card-transparency-bottom'>
-                  <img alt='not available' src={pet.photo? pet.photo : pet.petPic ? pet.petPic : 'https://drpp-ny.org/wp-content/uploads/2014/07/sorry-image-not-available.png'} className='h-full w-full object-cover' />
+                  <img
+                    alt='not available'
+                    src={pet.photo ? pet.photo : pet.petPic ? pet.petPic : 'https://drpp-ny.org/wp-content/uploads/2014/07/sorry-image-not-available.png'}
+                    className='h-full w-full object-cover'
+                  />
                 </div>
                 <p className=' w-full h-1/5 text-center leading-loose text-white text-sm font-bold capitalize'>{pet.name}</p>
               </div>

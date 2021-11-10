@@ -1,22 +1,19 @@
 //Axios desde el componente FormularioPosteo.jsx
 
-var nodemailer = require("nodemailer");
+var nodemailer = require('nodemailer');
 
 const postEvent = (req, res) => {
   let { mail, name, userName, initDate, endDate, location } = req.body;
   var transporter = nodemailer.createTransport({
-    //host: "smtp.ethereal.email",
-    service: "gmail",
-    //port: 587,
-    //secure: false,
+    service: 'gmail',
     auth: {
-      user: "adogtamehenry@gmail.com",
-      pass: "henryft16",
+      user: 'adogtamehenry@gmail.com',
+      pass: 'henryft16',
     },
   });
 
   var mailOptions = {
-    from: "adogtamehenry@gmail.com",
+    from: 'adogtamehenry@gmail.com',
     to: mail,
     subject: `Hola ${name}, has publicado un nuevo evento!`,
     html: `<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
@@ -326,33 +323,13 @@ const postEvent = (req, res) => {
     </html>`,
   };
 
-  /*   await transporter.sendMail({
-    from: "Remitente",
-    to: "davidmenlop@gmail.com",
-    subject: "Enviado desde nodeMailer",
-    html: `<div className="email" style="
-    border: 1px solid black;
-    padding: 20px;
-    font-family: sans-serif;
-    line-height: 2;
-    font-size: 20px; 
-    ">
-    <h2>Here is your email!</h2>
-    <p>${name}</p>
-    <p>All the best, Darwin</p>
-     </div>
-`,
-  }) */
-
   transporter.sendMail(mailOptions, (err, info) => {
     if (err) {
       res.status(500).send(err.message);
     } else {
-      //console.log("Email enviado.")
       res.status(200).jsonp(req.body);
     }
   });
-  console.log("Email Enviado");
 };
 
 module.exports = postEvent;

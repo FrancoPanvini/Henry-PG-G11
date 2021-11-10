@@ -1,4 +1,4 @@
-const { Events } = require("../../../../db");
+const { Events } = require('../../../../db');
 
 const deleteEventDB = async id => {
   const event = await Events.findOne({ where: { id } });

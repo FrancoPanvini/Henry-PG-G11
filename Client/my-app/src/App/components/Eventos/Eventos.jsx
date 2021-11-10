@@ -38,7 +38,7 @@ function Eventos() {
                 Publicar un evento
               </button>
             )}
-            {isOpen && <FormularioPosteoEvento onClose={() => setIsOpen(false)} /* onPostPet={onPostPet} */ />}
+            {isOpen && <FormularioPosteoEvento onClose={() => setIsOpen(false)} />}
           </div>
         )}
         <CalendarContainer />

@@ -1,13 +1,13 @@
-const { where } = require("sequelize");
-const { Adoptions } = require("../../../../db");
+const { where } = require('sequelize');
+const { Adoptions } = require('../../../../db');
 
 const getAdoptions = async (req, res) => {
   const { applicant, pet, state, count } = req.query;
 
   let query = {
     where: {},
-    attributes: ["id", "PetId", "UserId", "state", "residence", "residents", "adult", "dedication", "otherPets", "otherPetsDesc", "oldPets", "oldPetsDesc", "createdAt"],
-    order: [["createdAt", "ASC"]],
+    attributes: ['id', 'PetId', 'UserId', 'state', 'residence', 'residents', 'adult', 'dedication', 'otherPets', 'otherPetsDesc', 'oldPets', 'oldPetsDesc', 'createdAt'],
+    order: [['createdAt', 'ASC']],
   };
 
   //* Add filter by applicant

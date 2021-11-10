@@ -28,7 +28,7 @@ function CardPopUpPetDetail({ onClose, petId }) {
 
   //* Seteamos en el estado los datos de la pet con su id
   useEffect(() => {
-    const getPet = async (id) => {
+    const getPet = async id => {
       const pet = await getLostPetDetail(id);
       setPet(pet.data);
     };
@@ -40,11 +40,7 @@ function CardPopUpPetDetail({ onClose, petId }) {
       <div className='fixed inset-0 bg-gray-50 bg-opacity-70 z-40' />
       <div className='fixed inset-0 z-50 overflow-y-scroll '>
         <div className='panel relative top-32 mx-auto w-9/12 h-auto p-6 bg-gradient-to-r from-fourtyLight to-fourtyDark'>
-          <IoIosCloseCircle
-            className='text-primary absolute top-3 right-3 text-3xl hover:text-primaryLight cursor-pointer transition-all'
-            onClick={onClose}
-            title='Cerrar'
-          />
+          <IoIosCloseCircle className='text-primary absolute top-3 right-3 text-3xl hover:text-primaryLight cursor-pointer transition-all' onClick={onClose} title='Cerrar' />
 
           {/* ↓ mientras se carga la información en el estado */}
           {Object.keys(pet).length === 0 ? (
@@ -57,7 +53,6 @@ function CardPopUpPetDetail({ onClose, petId }) {
               </div>
               <div className='flex justify-center items-center h-full'>
                 <div className={pet.petPics ? 'w-1/2 pr-6' : 'w-full'}>
-
                   {/* ↓ mostramos la descripción (si tiene) */}
                   {pet.description && (
                     <p className=' text-lg p-6 text-justify text-white italic border-b-2 border-fourty border-opacity-25'>
@@ -65,15 +60,10 @@ function CardPopUpPetDetail({ onClose, petId }) {
                     </p>
                   )}
                   <p className='text-lg p-6 text-justify text-white italic'>
-                    <b>Zona en la que se perdió:</b> <span className='capitalize'>{`${pet.city}, ${pet.province}, ${pet.country} `}</span><br />
-                    {/* <span className='capitalize mb-4 pb-4'>{`${pet.city}, ${pet.province}, ${pet.country} `}</span> <br /> */}
+                    <b>Zona en la que se perdió:</b> <span className='capitalize'>{`${pet.city}, ${pet.province}, ${pet.country} `}</span>
+                    <br />
                     <div className='h-80 w-full'>
-                      <GoogleMap
-                        mapContainerStyle={{ width: '100%', height: '100%', borderRadius: '10px' }}
-                        center={{ lat: pet.lat, lng: pet.lng }}
-                        zoom={15}
-                        options={options}
-                      >
+                      <GoogleMap mapContainerStyle={{ width: '100%', height: '100%', borderRadius: '10px' }} center={{ lat: pet.lat, lng: pet.lng }} zoom={15} options={options}>
                         <div lat={pet.lat} lng={pet.lng}>
                           <Marker
                             position={{ lat: pet.lat, lng: pet.lng }}
@@ -86,7 +76,6 @@ function CardPopUpPetDetail({ onClose, petId }) {
                           />
                         </div>
                       </GoogleMap>
-
                     </div>
                   </p>
                 </div>

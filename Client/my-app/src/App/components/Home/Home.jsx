@@ -35,15 +35,9 @@ function Home() {
     <div className=''>
       <Onboarding />
       <IconosHome />
-      <SliderContainer
-        title='ADOPCION'
-        className=' bg-gradient-to-r from-thirty to-fourty text-white'
-      />
+      <SliderContainer title='ADOPCION' className=' bg-gradient-to-r from-thirty to-fourty text-white' />
       <SliderContainer title='PERDIDOS' className=' bg-gray-200 text-primary' />
-      <SliderContainer
-        title='REFUGIOS'
-        className=' bg-gradient-to-r from-thirty to-fourty text-white'
-      />
+      <SliderContainer title='REFUGIOS' className=' bg-gradient-to-r from-thirty to-fourty text-white' />
       <EventSlider />
     </div>
   );
