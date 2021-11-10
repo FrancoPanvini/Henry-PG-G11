@@ -12,9 +12,11 @@ function Footer() {
       </NavLink>
       <p className='text-left w-4/5 ml-4'> © 2021 Adogtame — Todos los derechos reservados</p>
       <div className='flex  text-center items-center '>
+
         <NavLink to='/nosotros' className='p-2 text-center hover:text-primary focus:text-primary'>
           NOSOTROS
         </NavLink>
+
         {/* <NavLink to="/faq" className="p-2  text-center hover:text-primary focus:text-primary">
           FAQ
         </NavLink> */}

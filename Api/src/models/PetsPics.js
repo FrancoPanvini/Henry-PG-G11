@@ -4,7 +4,7 @@ module.exports = sequelize => {
   class PetsPics extends Model {}
   PetsPics.init(
     {
-      url: { type: DataTypes.STRING, allowNull: false },
+      url: { type: DataTypes.TEXT, allowNull: false },
     },
     { sequelize: sequelize, modelName: 'PetsPics', timestamps: false }
   );
